@@ -26,3 +26,12 @@ export {
   type SequenceValidationResult,
   type FillBlankValidationResult,
 } from './exerciseValidation';
+
+export {
+  hexToRgb,
+  getRelativeLuminance,
+  calculateContrastRatio,
+  meetsWcagAA,
+  meetsWcagAALargeText,
+  meetsWcagAAA,
+} from './contrastUtils';

@@ -94,6 +94,27 @@ export interface StorageService {
   remove(key: string): void;
 }
 
+/**
+ * External resource type classification
+ */
+export type ExternalResourceType = 'video' | 'article' | 'tutorial' | 'interactive';
+
+/**
+ * External resource for curated third-party educational content
+ */
+export interface ExternalResource {
+  id: string;
+  title: string;
+  source: string;
+  type: ExternalResourceType;
+  url: string;
+  embedUrl?: string; // For embeddable content (e.g., YouTube embed URLs)
+  thumbnailUrl?: string;
+  description?: string;
+}
 
 // Re-export all exercise types
 export * from './exercises';
+
+// Re-export theme types
+export * from './theme';

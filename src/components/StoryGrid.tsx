@@ -1,28 +1,34 @@
 import React from 'react';
 import type { Story, Category } from '../types';
-import StoryCard from './StoryCard';
+import type { LayoutMode } from '../contexts/LayoutContext';
+import { CompactStoryCard } from './CompactStoryCard';
+import { StoryListItem } from './StoryListItem';
 
 interface StoryGridProps {
   stories: Story[];
   categories: Category[];
   completedStories: number[];
-  onToggleComplete: (storyId: number) => void;
+  onToggleComplete?: (storyId: number) => void;
   onViewStory: (story: Story) => void;
+  layout?: LayoutMode;
 }
 
 /**
- * StoryGrid component for displaying stories in a responsive grid
+ * StoryGrid component for displaying stories in grid or list layout
  * 
  * Requirements:
  * - 1.1: Display all available stories organized by category
+ * - 3.2: Display topics in single-column list format when list layout selected
+ * - 3.3: Display topics in multi-column grid format when grid layout selected
+ * - 4.1: Display at least 6 topic cards above the fold on desktop viewports
  * - 4.4: Display cards in a responsive grid layout with consistent styling
  */
 export const StoryGrid: React.FC<StoryGridProps> = ({
   stories,
   categories,
   completedStories,
-  onToggleComplete,
   onViewStory,
+  layout = 'grid',
 }) => {
   const getCategoryById = (categoryId: string): Category | undefined => {
     return categories.find((cat) => cat.id === categoryId);
@@ -56,15 +62,32 @@ export const StoryGrid: React.FC<StoryGridProps> = ({
     );
   }
 
+  // List layout - single column with horizontal cards
+  if (layout === 'list') {
+    return (
+      <div className="flex flex-col gap-3">
+        {stories.map((story) => (
+          <StoryListItem
+            key={story.id}
+            story={story}
+            category={getCategoryById(story.category)}
+            isCompleted={completedStories.includes(story.id)}
+            onViewStory={onViewStory}
+          />
+        ))}
+      </div>
+    );
+  }
+
+  // Masonry grid layout using CSS columns for variable height cards
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+    <div className="columns-1 sm:columns-2 lg:columns-3 xl:columns-4 gap-6">
       {stories.map((story) => (
-        <StoryCard
+        <CompactStoryCard
           key={story.id}
           story={story}
           category={getCategoryById(story.category)}
           isCompleted={completedStories.includes(story.id)}
-          onToggleComplete={onToggleComplete}
           onViewStory={onViewStory}
         />
       ))}
