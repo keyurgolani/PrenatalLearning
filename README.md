@@ -60,19 +60,54 @@ A beautiful, interactive web application designed to help expectant parents bond
 | `npm run test`       | Run tests once           |
 | `npm run test:watch` | Run tests in watch mode  |
 
-## Docker Support
+## Docker Deployment
 
-Build and run with Docker:
+### Quick Start (Recommended)
+
+Pull and run the pre-built image from Docker Hub or GitHub Container Registry:
 
 ```bash
-docker-compose up --build
+# From Docker Hub
+docker run -p 8080:80 keyurgolani/prenatal-learning:latest
+
+# From GitHub Container Registry
+docker run -p 8080:80 ghcr.io/keyurgolani/prenatallearning:latest
+```
+
+Then open [http://localhost:8080](http://localhost:8080) in your browser.
+
+### Using Docker Compose
+
+Create a `docker-compose.yml`:
+
+```yaml
+services:
+  prenatal-learning:
+    image: keyurgolani/prenatal-learning:latest
+    ports:
+      - "8080:80"
+    restart: unless-stopped
+```
+
+Then run:
+
+```bash
+docker-compose up -d
+```
+
+### Build from Source
+
+If you want to build the image yourself:
+
+```bash
+docker-compose -f docker-compose.dev.yml up --build
 ```
 
 Or manually:
 
 ```bash
 docker build -t prenatal-learning .
-docker run -p 80:80 prenatal-learning
+docker run -p 8080:80 prenatal-learning
 ```
 
 ## Project Structure

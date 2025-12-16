@@ -1,8 +1,6 @@
 services:
-  prenatal-learning-hub:
-    build:
-      context: .
-      dockerfile: Dockerfile
+  prenatal-learning:
+    image: keyurgolani/prenatal-learning:latest
     ports:
       - "${PORT:-8080}:80"
     restart: unless-stopped
