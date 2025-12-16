@@ -1,0 +1,234 @@
+/**
+ * Starlight Stories: How Stars Live and Die
+ * 
+ * A one-hour educational narrative for prenatal learning
+ * Category: Science & Universe
+ * Difficulty: Foundational
+ * Duration: 60 minutes
+ */
+
+import type { StoryContent } from './big-bang-story';
+
+export const starsStory: StoryContent = {
+  id: 4,
+  title: 'Starlight Stories: How Stars Live and Die',
+  category: 'science',
+  duration: 60,
+  difficulty: 'foundational',
+  description: 'Discover the magical journey of stars—from their birth in cosmic clouds to their spectacular endings—and learn how we are truly made of star stuff.',
+  
+  narrative: {
+    introduction: `Hello, little one. Tonight we're going to tell you a very special story—the story of the stars.
+
+Take a deep breath, dear mother. Place your hands gently on your belly and feel the warmth of your connection with your baby.
+
+Look up at the night sky in your imagination. See those twinkling points of light scattered across the darkness like diamonds on black velvet? Each one of those stars has a story to tell. Each one is a sun, burning bright, creating the very ingredients that make up you and me.
+
+Here's a secret, little one—a beautiful, wonderful secret: You are made of stars. The iron in your blood, the calcium in your tiny forming bones, the oxygen you'll breathe with your first cry—all of it was cooked inside ancient stars, billions of years ago.
+
+Tonight, we'll journey through the life of a star, from its gentle birth in a cosmic cloud to its spectacular ending. And along the way, we'll discover how the stars gave us the greatest gift of all: the building blocks of life.
+
+Are you ready, little one? Let's begin our starlight story...`,
+
+    coreContent: `**The Stellar Nursery: Where Stars Are Born**
+
+Imagine, sweet baby, a vast cloud floating in space—not a cloud of water like the ones in our sky, but a cloud made of gas and dust, stretching across light-years of darkness. Scientists call these clouds nebulae, and they are the nurseries where stars are born.
+
+These cosmic clouds are made mostly of hydrogen, the simplest and lightest element in the universe. Hydrogen is like the universe's favorite building block—it was created in the Big Bang, and it's the starting ingredient for everything that comes after.
+
+Now, here's where the magic begins. Gravity—that gentle, patient force—starts to pull the gas together. Slowly, over millions of years, parts of the cloud begin to clump together, like snowflakes gathering into a snowball. As more and more gas gathers, the clump grows heavier and heavier.
+
+**The Protostar: A Star Is Forming**
+
+As gravity pulls the gas tighter and tighter, something wonderful happens. The gas in the center starts to heat up. It's like when you rub your hands together really fast—the friction creates warmth. In the same way, as the gas particles bump into each other faster and faster, the center of the cloud gets hotter and hotter.
+
+This hot, glowing ball of gas is called a protostar—a baby star, not quite born yet. It's wrapped in a cocoon of dust and gas, hidden from view, quietly growing stronger.
+
+For millions of years, the protostar continues to gather gas and grow hotter. The temperature at its core rises to millions of degrees. And then, when it gets hot enough—about 10 million degrees—something magical happens.
+
+**Ignition: A Star Is Born**
+
+At these incredible temperatures, hydrogen atoms start to fuse together. They combine to form helium, and in doing so, they release enormous amounts of energy. This is nuclear fusion—the same process that powers our Sun and every star in the sky.
+
+When fusion begins, the star is truly born. It starts to shine with its own light, pushing back against gravity with the energy it creates. The star has found its balance—gravity pulling inward, fusion pushing outward—and it will shine steadily for millions or even billions of years.
+
+Our Sun, little one, is a star just like this. It's been shining for about 4.6 billion years, and it will continue to shine for another 5 billion years or so. Every day, it converts millions of tons of hydrogen into helium, releasing the light and warmth that makes life on Earth possible.
+
+**The Cosmic Kitchen: Cooking Up Elements**
+
+Here's where the story gets really exciting, little one. Stars aren't just balls of burning gas—they're cosmic kitchens, cooking up the ingredients for everything in the universe.
+
+In the core of a star, hydrogen fuses into helium. But that's just the beginning. As a star ages and uses up its hydrogen, it starts to fuse helium into heavier elements—carbon and oxygen. These are the elements that make up your tiny body, little one. The carbon in your cells, the oxygen you'll breathe—they were all cooked inside stars.
+
+Bigger stars can cook up even heavier elements. They fuse carbon into neon, neon into oxygen, oxygen into silicon, and silicon into iron. Layer by layer, like an onion, the star builds up shells of different elements, each one heavier than the last.
+
+But here's an important secret: iron is the end of the line. When a star tries to fuse iron, it doesn't release energy—it absorbs it. Iron is like a cosmic stop sign, telling the star that its cooking days are over.
+
+**The Life of Our Sun: A Gentle Giant**
+
+Let's talk about our own star, the Sun. Right now, it's in the prime of its life, steadily fusing hydrogen into helium in its core. It's a middle-aged star, about halfway through its life.
+
+But in about 5 billion years, the Sun will start to change. As it runs low on hydrogen in its core, it will begin to swell up, growing bigger and bigger. It will become what scientists call a red giant—a star so large that it could swallow Mercury, Venus, and maybe even Earth.
+
+Don't worry, little one—this is billions of years in the future, long after you and I are gone. But it's part of the beautiful cycle of stellar life.
+
+Eventually, the Sun will gently shed its outer layers, creating a beautiful glowing shell called a planetary nebula. What's left behind will be a small, dense core called a white dwarf—a tiny ember of what was once a mighty star, slowly cooling over billions of years.
+
+**Massive Stars: Living Fast, Dying Spectacularly**
+
+Now let's talk about the really big stars—the giants of the cosmos. These massive stars live fast and die young. While our Sun will shine for about 10 billion years, a star ten times more massive might only live for 20 million years.
+
+These giant stars burn through their fuel quickly, cooking up heavier and heavier elements in their cores. They build up layers of different elements—hydrogen on the outside, then helium, carbon, oxygen, silicon, and finally iron at the very center.
+
+When the iron core grows too heavy, something dramatic happens. The core collapses in on itself in less than a second. The outer layers of the star come crashing down, then bounce back in a tremendous explosion called a supernova.
+
+**Supernova: The Greatest Fireworks Show in the Universe**
+
+A supernova, little one, is one of the most powerful events in the universe. For a brief moment, a single exploding star can outshine an entire galaxy of billions of stars. It's like the universe's greatest fireworks show, visible across millions of light-years.
+
+But here's the truly magical part: in the intense heat and pressure of a supernova, new elements are created. Elements heavier than iron—gold, silver, platinum, uranium—are forged in these cosmic explosions. The gold in a wedding ring, the silver in a spoon—they were all created in the heart of an exploding star.
+
+And then, the supernova scatters all these elements across space. The star's ashes—rich with carbon, oxygen, iron, gold, and dozens of other elements—spread out into the cosmos like seeds in a garden.
+
+**We Are Made of Star Stuff**
+
+Here's the most beautiful truth of all, little one. Those scattered star ashes don't just float in space forever. Gravity gathers them together again, mixing them with hydrogen gas to form new clouds. And from those clouds, new stars are born—stars surrounded by disks of dust and gas that can form planets.
+
+Our solar system formed from such a cloud about 4.6 billion years ago. The Sun ignited at the center, and the leftover material formed the planets, including Earth. Every atom of carbon, oxygen, nitrogen, and iron on our planet came from stars that lived and died before our Sun was born.
+
+And that means you, little one, are made of star stuff. The calcium in your tiny forming bones was forged in a star. The iron in your blood was cooked in a stellar core. The oxygen you'll breathe was created in the heart of an ancient sun.
+
+As the great astronomer Carl Sagan said, "We are made of star stuff." We are not just observers of the universe—we are part of it, made from the same ingredients as the stars themselves.
+
+**The Cycle Continues**
+
+The story of the stars is a story of cycles. Stars are born from clouds of gas, they shine for millions or billions of years, and then they return their ingredients to space. Those ingredients become part of new clouds, new stars, new planets, and new life.
+
+Right now, somewhere in our galaxy, new stars are being born. Somewhere else, old stars are dying, scattering their gifts across the cosmos. The cycle continues, as it has for billions of years, as it will for billions more.
+
+And you, little one, are part of this grand cosmic cycle. You are made of atoms that have traveled across the universe, through the hearts of stars, across billions of years, to come together and create you.
+
+What a miracle you are. What a beautiful, starlit miracle.`,
+
+    interactiveSection: `**Breathing with Starlight**
+
+Dear mother, let's take a moment to breathe together with your baby. Imagine that with each breath, you're breathing in starlight—the same light that has traveled across the universe from distant suns.
+
+Breathe in slowly... feel the warmth spreading through your body, reaching your baby. Imagine the oxygen you breathe was once inside a star.
+
+Breathe out gently... imagine sending love and wonder to your little one.
+
+Let's do this three more times, slowly and peacefully.
+
+**Visualization: The Stellar Journey**
+
+Now, close your eyes and imagine you're floating in space, near a great cloud of gas and dust—a stellar nursery.
+
+Watch as gravity slowly gathers the gas together. See a protostar forming, glowing warm and red in its cocoon of dust.
+
+Now watch as the star ignites, bursting into brilliant light. See it shine steadily for millions of years, cooking elements in its core.
+
+Watch as the star ages, swelling into a red giant, then gently shedding its outer layers. Or, if it's a massive star, watch the spectacular explosion of a supernova, scattering stardust across the cosmos.
+
+Now see those scattered elements gathering again, forming a new cloud, a new star, a new planet. See life emerging on that planet—life made of star stuff.
+
+Feel the connection. You are part of this cycle. You are made of stars.
+
+**Gentle Touch Connection**
+
+Place both hands on your belly now. Feel the warmth of your skin, the gentle movements of your baby.
+
+As you hold your belly, whisper softly: "You are made of stars, little one. The atoms in your body have traveled across the universe to create you."
+
+Think about the iron in your baby's forming blood—iron that was forged in the core of an ancient star. Think about the calcium in their tiny bones—calcium cooked in a stellar furnace billions of years ago.
+
+Feel the wonder of this connection—your baby, made of the same stuff as the stars.
+
+**Counting Stellar Breaths**
+
+Let's count together, breathing slowly:
+
+One... a cloud of gas floats in space, waiting to become a star.
+Two... gravity gathers the gas, forming a protostar.
+Three... the star ignites, beginning its long life of shining.
+Four... elements are cooked in the stellar core—carbon, oxygen, iron.
+Five... the star ends its life, scattering its gifts across space.
+Six... new stars and planets form from the stardust.
+Seven... you are here, made of star stuff, a miracle of cosmic creation.
+
+Rest now in this peaceful moment, connected to your baby and to the stars themselves.`,
+
+    integration: `**Connecting to Your Baby's Future**
+
+Little one, as you grow and learn and explore the world, remember this story. Remember that you are made of stars—that the very atoms in your body have traveled across billions of years and billions of miles to come together and create you.
+
+When you look up at the night sky and see the stars twinkling, know that you are looking at your cosmic family. Those stars are your distant relatives, made of the same stuff as you, part of the same great cycle of creation.
+
+When you feel the warmth of the Sun on your face, remember that our Sun is a star too—a star that has been shining for billions of years, giving light and warmth to our little planet. And remember that one day, far in the future, our Sun will return its gifts to the cosmos, just as the stars before it did.
+
+When you hold something made of gold or silver, remember that those precious metals were forged in the heart of an exploding star. When you breathe, remember that the oxygen filling your lungs was cooked in a stellar core. You are connected to the stars in the most intimate way possible—you are made of them.
+
+**A Message of Wonder**
+
+Dear mother, as you share this story with your baby, you're giving them a gift—the gift of knowing their cosmic origins, the gift of understanding their connection to the universe.
+
+Your baby may not understand the words yet, but they can feel your voice, your love, your sense of awe. These feelings will stay with them, planting seeds of wonder that will bloom throughout their life.
+
+Every time they look up at the stars, they'll carry with them the knowledge that they are part of something vast and beautiful and ancient. They'll know that they are not separate from the universe—they are a piece of it, made from its very substance.
+
+**Closing Blessing**
+
+And so, little one, we come to the end of our starlight story. But remember, the story of the stars is still being written, and you are part of it.
+
+You are a child of the cosmos, born from the hearts of ancient stars. The iron in your blood, the calcium in your bones, the carbon in your cells—all of it was forged in stellar fires, scattered across space, and gathered together to create you.
+
+You are star stuff, little one. You are the universe knowing itself, experiencing itself, loving itself.
+
+Sleep now, little star. Dream of nebulae and supernovae, of stellar nurseries and cosmic cycles. Dream of the vast, beautiful universe that is your home and your family.
+
+And know that you are loved—by your mother, by your family, and by the stars themselves.
+
+Goodnight, little one. Goodnight, child of the stars.`
+  },
+
+  keyConcepts: [
+    'Stars are born in nebulae—vast clouds of gas and dust in space',
+    'Nuclear fusion powers stars, converting hydrogen into helium and releasing enormous energy',
+    'Stars are cosmic kitchens that cook up heavier elements like carbon, oxygen, and iron',
+    'Massive stars end their lives in spectacular explosions called supernovae',
+    'Elements heavier than iron (like gold and silver) are created in supernovae',
+    'We are literally made of star stuff—the atoms in our bodies were forged in ancient stars',
+    'The cycle of stellar birth, life, and death enriches the universe with new elements'
+  ],
+
+  analogies: [
+    {
+      concept: 'Stellar Nursery',
+      analogy: 'A vast cosmic cloud floating in space, like a nursery where baby stars are born and grow'
+    },
+    {
+      concept: 'Gravity Gathering Gas',
+      analogy: 'Like snowflakes gathering into a snowball, gravity slowly pulls gas together to form stars'
+    },
+    {
+      concept: 'Protostar Heating',
+      analogy: 'Like rubbing your hands together creates warmth, gas particles bumping together heat up the forming star'
+    },
+    {
+      concept: 'Stellar Layers',
+      analogy: 'Like an onion with many layers, massive stars build up shells of different elements from their core outward'
+    },
+    {
+      concept: 'Supernova',
+      analogy: 'The universe\'s greatest fireworks show—a single exploding star briefly outshining billions of stars'
+    },
+    {
+      concept: 'Stardust Scattering',
+      analogy: 'Like seeds scattered in a garden, the ashes of dead stars spread across space to create new worlds'
+    }
+  ],
+
+  exercises: [] // Exercises will be in a separate file
+};
+
+export default starsStory;

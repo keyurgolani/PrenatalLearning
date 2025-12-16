@@ -1,0 +1,342 @@
+/**
+ * Building Your Future: Wealth and Wisdom
+ * 
+ * A one-hour educational narrative for prenatal learning
+ * Category: Finance
+ * Difficulty: Intermediate
+ * Duration: 60 minutes
+ */
+
+import type { StoryContent } from './big-bang-story';
+
+export const wealthStory: StoryContent = {
+  id: 28,
+  title: 'Building Your Future: Wealth and Wisdom',
+  category: 'finance',
+  duration: 60,
+  difficulty: 'intermediate',
+  description: 'Discover the timeless principles of building wealth—from the magic of compound interest to the wisdom of patience and delayed gratification. Learn how small seeds of saving grow into mighty trees of financial freedom, and understand that true wealth encompasses far more than money alone.',
+  
+  narrative: {
+    introduction: `Hello, little one. Today we're going to share a beautiful story about growing—not just growing bigger, but growing something precious over time. We're going to learn about wealth and wisdom.
+
+Take a deep breath, dear mother. Place your hands gently on your belly. Feel the life growing within you—this is the most precious kind of growth there is.
+
+Now, imagine planting a tiny seed in rich soil. At first, nothing seems to happen. Days pass, weeks pass. But beneath the surface, roots are spreading, gathering strength. Then one day, a tiny green shoot appears. With patience and care, that seed becomes a mighty tree.
+
+Building wealth is just like growing a tree, little one. It starts small, requires patience, and rewards those who understand that the greatest things in life take time to grow.
+
+This isn't just a story about money. It's a story about patience, about making wise choices, about understanding that what we do today shapes our tomorrow. It's about the beautiful mathematics of growth and the wisdom of thinking ahead.
+
+Are you ready? Let's discover the secrets of building a future filled with possibility...`,
+
+    coreContent: `**The Seed and the Tree: Understanding Saving**
+
+Let's begin with the simplest and most powerful idea in all of wealth building, little one: saving.
+
+Imagine you have ten apples. You could eat all ten today—they're delicious, after all! But what if you ate only eight and saved two? Tomorrow, you'd still have apples when others might have none.
+
+This is saving: choosing to keep some of what you have for later. It sounds simple, but this simple choice is the foundation of all wealth.
+
+Here's something wonderful about saving, little one. When you save, you're not just keeping things—you're giving yourself choices. Saved money means you can handle surprises. It means you can wait for the right opportunity. It means you don't have to say yes to things you don't want just because you need money right now.
+
+Your great-grandparents understood this wisdom. They called it "putting something away for a rainy day." They knew that life brings unexpected storms, and those who had saved could weather them.
+
+**The Magic of Compound Interest: The Eighth Wonder**
+
+Now, little one, let me tell you about something truly magical—something so powerful that it's been called the eighth wonder of the world. It's called compound interest.
+
+Imagine you plant a single seed, and it grows into a tree. That tree drops seeds of its own, and those seeds grow into more trees. Those trees drop more seeds, and soon you have a forest—all from one tiny seed.
+
+Compound interest works the same way. When you save money and it earns interest, that interest becomes part of your savings. Then you earn interest on your original savings AND on the interest you already earned. Your money starts making money, and that money makes more money.
+
+Let me show you with numbers, because the numbers are astonishing:
+
+If you saved just one dollar a day starting when you're young, and that money grew at a reasonable rate, by the time you're ready to retire, you could have hundreds of thousands of dollars. Not because you saved that much, but because your money kept growing and growing, like a snowball rolling downhill, getting bigger with every turn.
+
+There's a simple rule called the "Rule of 72" that shows how powerful this is. Divide 72 by your interest rate, and you'll know roughly how many years it takes for your money to double. At 8% growth, your money doubles every 9 years. Double, then double again, then double again—this is how small amounts become large fortunes.
+
+The secret ingredient? Time. The earlier you start, the more time your money has to grow. A dollar saved at twenty is worth far more than a dollar saved at forty, because it has so many more years to multiply.
+
+**The Marshmallow Test: The Power of Waiting**
+
+Here's a famous story from science, little one. Researchers gave young children a choice: they could have one marshmallow right now, or if they waited fifteen minutes, they could have two marshmallows.
+
+Some children grabbed the marshmallow immediately. Others waited, sometimes covering their eyes or singing songs to distract themselves. They wanted that second marshmallow.
+
+Years later, the researchers found something remarkable. The children who had waited—who had chosen two marshmallows later over one marshmallow now—tended to do better in many areas of life. They did better in school, had better health, and yes, they tended to be better with money.
+
+This ability to wait for something better is called delayed gratification. It's one of the most important skills for building wealth.
+
+Think about it: every time you choose not to buy something you don't really need, you're choosing two marshmallows later instead of one now. Every time you save instead of spend, you're planting seeds for a bigger harvest.
+
+This doesn't mean never enjoying life! It means being thoughtful about the balance between today's pleasures and tomorrow's possibilities.
+
+**The Three Jars: A Simple System**
+
+Here's a beautiful way to think about money, little one. Imagine you have three jars.
+
+The first jar is for Spending—money for things you need and enjoy right now. Food, clothes, fun activities. Life is meant to be lived, and this jar helps you live it.
+
+The second jar is for Saving—money set aside for bigger goals. Maybe a bicycle, a trip, or something special you're working toward. This jar teaches patience and planning.
+
+The third jar is for Sharing—money to help others. Because true wealth isn't just about having; it's about giving. When we share, we become part of something larger than ourselves.
+
+Many wise families teach their children to divide any money they receive among these three jars. Spend some, save some, share some. This simple practice builds habits that last a lifetime.
+
+**Investing: Making Your Money Work**
+
+Saving is wonderful, but there's something even more powerful: investing. When you invest, you're not just keeping your money safe—you're putting it to work.
+
+Imagine you have a little money, and you use it to buy a share of a company that makes things people love. As that company grows and succeeds, your share becomes more valuable. You haven't done any extra work, but your money has been working for you.
+
+This is what investing means: using money to buy things that can grow in value or produce more money over time.
+
+People invest in many things: businesses (through stocks), loans to companies or governments (through bonds), buildings and land (real estate), or even their own education and skills.
+
+The key to investing wisely is understanding that it takes time. The stock market goes up and down day to day, but over many years, it has always grown. Patient investors who don't panic when prices drop have been rewarded.
+
+There's a saying: "Time in the market beats timing the market." This means that staying invested for a long time is more important than trying to guess when to buy and sell.
+
+**The Snowball Effect: Small Actions, Big Results**
+
+Here's something beautiful about building wealth, little one: small actions, repeated consistently, create enormous results.
+
+Imagine a snowball at the top of a hill. It's tiny—you could hold it in your hand. But as it rolls downhill, it picks up more snow. It gets bigger and bigger, rolling faster and faster, until it's enormous.
+
+Wealth building works the same way. Small, consistent savings—even amounts that seem insignificant—grow into something substantial over time.
+
+If you saved just the cost of one fancy coffee drink each day, over a lifetime that could grow into enough money to live on for years. Not because coffee is expensive, but because small amounts, saved consistently and allowed to grow, become large amounts.
+
+This is why the most important time to start saving is now—whatever "now" means for you. Not when you have more money, not when life is easier, but now. Because every day you wait is a day your snowball could have been growing.
+
+**Needs vs. Wants: The Wisdom of Enough**
+
+One of the most important skills in building wealth is knowing the difference between needs and wants.
+
+Needs are things you truly require: food, shelter, basic clothing, healthcare. Without these, life becomes very difficult.
+
+Wants are things you desire but could live without: the latest gadget, fancy clothes, expensive entertainment. These things can bring joy, but they're not essential.
+
+Here's the wisdom, little one: many people spend so much on wants that they can't take care of their needs or save for their future. They buy things to impress others, or to feel better temporarily, or simply because they can.
+
+Wealthy people—truly wealthy, not just high earners—often live below their means. They could afford more expensive things, but they choose not to. They find joy in experiences, relationships, and security rather than in possessions.
+
+There's a beautiful question to ask before any purchase: "Will this still matter to me in a year? In five years? In ten?" Most impulse purchases fail this test.
+
+**The True Cost of Things**
+
+Here's something fascinating to consider, little one. The true cost of something isn't just its price tag—it's what else that money could have become.
+
+Remember compound interest? When you spend money, you're not just spending that amount. You're spending everything that money could have grown into over time.
+
+A hundred dollars spent today might seem like just a hundred dollars. But if that hundred dollars had been invested and allowed to grow for thirty years, it could have become a thousand dollars or more.
+
+This doesn't mean never spending money! It means being aware of the true cost of our choices. Sometimes the joy something brings is worth more than what the money could have grown into. But often, when we really think about it, we realize we'd rather have the future wealth than the present purchase.
+
+**Debt: The Snowball in Reverse**
+
+We've talked about how compound interest can work for you. But there's a shadow side: when you borrow money, compound interest works against you.
+
+Debt is when you use money you don't have, promising to pay it back later with extra (interest). Sometimes debt makes sense—borrowing to buy a home or get an education can be wise investments. But debt for things that lose value or bring only temporary pleasure can trap you.
+
+Credit cards are particularly tricky. They make spending easy and painless in the moment. But if you don't pay the full balance, interest accumulates. That interest earns more interest. The snowball rolls, but now it's rolling toward you, getting bigger and more dangerous.
+
+The wisest approach to debt: avoid it when possible, pay it off quickly when necessary, and never borrow for things you don't truly need.
+
+**Financial Freedom: The Ultimate Goal**
+
+What is wealth really for, little one? Here's a beautiful answer: freedom.
+
+Financial freedom means having enough resources that you can make choices based on what you want, not what you're forced to do. It means being able to say no to work that makes you miserable. It means being able to help family members in need. It means being able to take time for what matters most.
+
+Financial freedom isn't about being rich enough to buy anything. It's about being secure enough to choose your own path.
+
+Some people achieve financial freedom with modest incomes by living simply and saving consistently. Others earn fortunes but never feel free because they always want more. The difference is wisdom—understanding what truly matters and aligning your money with your values.
+
+**The Wealth of Relationships**
+
+Here's a secret that money books often miss, little one: relationships are wealth too.
+
+Strong relationships provide support when times are hard. They provide opportunities when you're looking for work. They provide joy that no amount of money can buy.
+
+Investing in relationships—spending time with family, being a good friend, building a community—is one of the wisest investments you can make. These connections will enrich your life in ways that compound over time, just like money.
+
+And here's something beautiful: unlike money, love and friendship multiply when shared. The more you give, the more you have.
+
+**Generational Wealth: Planting Trees for Others**
+
+There's an old proverb: "A society grows great when old people plant trees whose shade they know they shall never sit in."
+
+Generational wealth is about planting trees for those who come after us. It's about building something that lasts beyond our own lifetime.
+
+This can mean leaving money or property to children and grandchildren. But it also means passing on wisdom, values, and habits. Teaching a child to save, to invest, to be patient—this is wealth that can multiply through generations.
+
+You, little one, are already part of this chain. The wisdom your parents share with you, you may someday share with your own children. Each generation can build on what came before.
+
+**True Wealth: Beyond Money**
+
+Let's end with the deepest truth about wealth, little one. Money is important—it provides security, options, and the ability to help others. But money is not the only form of wealth, and it's not the most important.
+
+True wealth includes:
+- Health: the energy and vitality to enjoy life
+- Relationships: people who love you and whom you love
+- Purpose: meaningful work and contribution
+- Time: the freedom to spend your days as you choose
+- Peace: freedom from worry and anxiety
+- Growth: the joy of learning and becoming
+
+The wisest people pursue all forms of wealth, keeping money in its proper place—as a tool for living well, not as the purpose of life itself.`,
+
+    interactiveSection: `**Breathing with Abundance**
+
+Dear mother, let's take a moment to breathe together with your baby, connecting with feelings of abundance and possibility.
+
+Breathe in slowly... imagine breathing in all the abundance of the universe—the countless stars, the infinite possibilities.
+Breathe out gently... release any feelings of scarcity or worry about "not enough."
+
+With each breath, feel yourself connected to the flow of giving and receiving that sustains all life.
+
+**Visualization: The Growing Tree**
+
+Close your eyes and imagine a tiny seed in your hands. This seed represents a small beginning—a first savings, a first wise choice.
+
+Now plant the seed in rich, dark soil. Watch as roots begin to spread beneath the surface, invisible but essential. These roots are your habits, your patience, your consistency.
+
+See a tiny green shoot emerge. It's small and fragile, but it's alive and growing. This is your wealth beginning to show.
+
+Watch as years pass like clouds across the sky. The shoot becomes a sapling, the sapling becomes a tree. Branches spread wide, leaves rustle in the breeze.
+
+Now see the tree fully grown—strong, beautiful, providing shade and shelter. Birds nest in its branches. Fruit hangs from its limbs. And look—seeds are falling, ready to grow into new trees.
+
+This is what patient wealth-building creates: not just security for yourself, but abundance that spreads to others.
+
+Take a deep breath and return, carrying with you the image of your growing tree.
+
+**Gentle Touch Connection**
+
+Place both hands on your belly now. Feel the warmth, the life, the potential within.
+
+Your baby is the most precious investment you will ever make. The time you spend, the love you give, the wisdom you share—these will compound throughout their lifetime and beyond.
+
+Whisper softly: "I am planting seeds of wisdom for you, little one. They will grow into a forest of possibility."
+
+**The Patience Practice**
+
+Think about something you're waiting for—something good that takes time. Perhaps it's meeting your baby. Perhaps it's a goal you're working toward.
+
+Notice how waiting feels. Is there impatience? Excitement? Trust?
+
+Now remind yourself: the best things in life take time. Your baby is growing at exactly the right pace. Your dreams are unfolding as they should. Patience isn't passive waiting—it's active trust in the process of growth.
+
+**Reflection on Your Values**
+
+Take a moment to consider:
+
+What does financial security mean to you? Not a number, but a feeling—what would it feel like to have "enough"?
+
+What would you do with your time if money weren't a concern? This reveals what you truly value.
+
+What do you want your child to understand about money and wealth? What wisdom do you hope to pass on?
+
+What forms of wealth do you already have in abundance? Relationships? Health? Purpose? Gratitude?
+
+**The Gratitude Inventory**
+
+Let's count our wealth in all its forms:
+
+Think of three people who love you. This is relationship wealth.
+Think of three things your body can do. This is health wealth.
+Think of three things you're looking forward to. This is hope wealth.
+Think of three things you've learned recently. This is wisdom wealth.
+Think of three moments of joy from this week. This is experience wealth.
+
+You are already wealthy, dear mother. Money is just one small part of a rich, abundant life.`,
+
+    integration: `**Connecting to Your Baby's Future**
+
+Little one, as you grow, you'll learn about money and wealth. You'll earn your first dollar, make your first purchase, face your first financial decision.
+
+Remember what we've shared today: start early, be patient, let small actions compound into great results. Understand the difference between needs and wants. Invest in relationships as well as accounts. And always remember that true wealth is about freedom and purpose, not just numbers.
+
+You'll make mistakes—everyone does. You might spend when you should have saved, or miss opportunities you'll wish you'd taken. That's okay. The path to wisdom includes wrong turns. What matters is learning and continuing forward.
+
+**A Message About Patience**
+
+Dear mother, building wealth is a lot like growing a baby. It happens slowly, day by day, in ways you can't always see. It requires patience, trust, and consistent care.
+
+Just as you're nourishing your baby now, you can nourish your family's financial future. Small, consistent actions. Patient waiting. Trust in the process.
+
+And just as your baby will be worth every moment of waiting, financial security will be worth every small sacrifice and patient choice.
+
+**The Legacy of Wisdom**
+
+Think about this, little one: the wisdom we've shared today has been passed down through generations. Your great-great-grandparents knew about saving for rainy days. Ancient merchants understood compound growth. Philosophers have always taught the value of patience.
+
+You are receiving this wisdom now, and someday you may pass it on. Each generation adds to the knowledge, refines the understanding, adapts to new circumstances. You are part of this chain of wisdom.
+
+**The Abundance Mindset**
+
+Here's a final gift, little one: the abundance mindset.
+
+Some people see the world as scarce—there's only so much to go around, and if someone else has more, they must have less. This mindset leads to fear, hoarding, and competition.
+
+Others see the world as abundant—there's enough for everyone, and by creating value, we can all have more. This mindset leads to generosity, creativity, and cooperation.
+
+The abundance mindset doesn't ignore reality. It acknowledges that resources are limited. But it focuses on growth, creation, and sharing rather than on scarcity and fear.
+
+Choose abundance, little one. Believe that through wisdom, patience, and effort, you can build a life of plenty—and help others do the same.
+
+**Closing Blessing**
+
+And so, little one, we come to the end of our journey through wealth and wisdom. We've learned about saving and compound interest, about patience and delayed gratification, about the many forms of wealth that make life rich.
+
+Remember: you are already wealthy beyond measure. You have a mother who loves you, who takes time to share wisdom with you, who dreams of your flourishing. This is the foundation upon which all other wealth is built.
+
+Sleep now, little one. Dream of growing trees and rolling snowballs, of patient waiting and abundant harvests. Dream of a future where you are free—free to choose your path, free to help others, free to live according to your deepest values.
+
+And know that every day, in ways seen and unseen, your wealth is growing.
+
+Goodnight, little one. Goodnight, precious seed of infinite possibility.`
+  },
+
+  keyConcepts: [
+    'Saving is the foundation of wealth—choosing to keep some of what you have for future use and future choices',
+    'Compound interest is exponential growth where your money earns returns, and those returns earn more returns over time',
+    'Delayed gratification—the ability to wait for greater rewards—is one of the strongest predictors of financial success',
+    'The Rule of 72: divide 72 by your interest rate to estimate how many years until your money doubles',
+    'Time is the most powerful factor in wealth building—starting early matters more than starting with more',
+    'True wealth includes health, relationships, purpose, time, and peace—not just money'
+  ],
+
+  analogies: [
+    {
+      concept: 'Compound Interest',
+      analogy: 'Like a snowball rolling downhill, gathering more snow with each rotation until it becomes enormous—your money gathers more money as it grows'
+    },
+    {
+      concept: 'Saving',
+      analogy: 'Like planting seeds in a garden—you give up eating them today so you can harvest a whole crop tomorrow'
+    },
+    {
+      concept: 'Delayed Gratification',
+      analogy: 'Like the marshmallow test—choosing two marshmallows later instead of one marshmallow now'
+    },
+    {
+      concept: 'Investing',
+      analogy: 'Like planting an orchard—you do the work once, and the trees keep producing fruit year after year'
+    },
+    {
+      concept: 'Debt',
+      analogy: 'Like a snowball rolling toward you instead of away—compound interest working against you, growing larger and more dangerous'
+    },
+    {
+      concept: 'Financial Freedom',
+      analogy: 'Like having wings—not about flying everywhere, but about having the choice to fly whenever you want'
+    }
+  ],
+
+  exercises: [] // Exercises will be in the separate exercises file
+};
+
+export default wealthStory;
