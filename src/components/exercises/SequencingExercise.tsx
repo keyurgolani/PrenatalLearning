@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import type { SequencingExercise as SequencingExerciseType, SequenceItem } from '../../types/exercises';
 import { validateSequence } from '../../utils/exerciseValidation';
+import { useTheme } from '../../contexts/ThemeContext';
 
 interface SequencingExerciseProps {
   exercise: SequencingExerciseType;
@@ -21,6 +22,9 @@ export const SequencingExercise: React.FC<SequencingExerciseProps> = ({
   onAnswer,
   onComplete,
 }) => {
+  const { currentTheme } = useTheme();
+  const isDark = currentTheme.isDark ?? false;
+  
   // Initialize with shuffled items
   const [items, setItems] = useState<SequenceItem[]>(() => {
     return [...exercise.items].sort(() => Math.random() - 0.5);
@@ -50,24 +54,39 @@ export const SequencingExercise: React.FC<SequencingExerciseProps> = ({
     onAnswer(userSequence, result.correct);
   };
 
-  const getItemStyle = (item: SequenceItem, index: number) => {
+  const getItemStyle = (item: SequenceItem, index: number): React.CSSProperties => {
     if (!showFeedback) {
-      return 'bg-white border-gray-200';
+      return isDark 
+        ? { backgroundColor: currentTheme.colors.surfaceHover, borderColor: currentTheme.colors.border }
+        : { backgroundColor: '#ffffff', borderColor: '#e5e7eb' };
     }
     
     const correctIndex = correctSequence.indexOf(item.id);
     if (index === correctIndex) {
-      return 'bg-green-100 border-green-400';
+      return isDark 
+        ? { backgroundColor: 'rgba(34, 197, 94, 0.15)', borderColor: 'rgba(34, 197, 94, 0.4)' }
+        : { backgroundColor: '#dcfce7', borderColor: '#4ade80' };
     }
-    return 'bg-red-100 border-red-400';
+    return isDark 
+      ? { backgroundColor: 'rgba(239, 68, 68, 0.15)', borderColor: 'rgba(239, 68, 68, 0.4)' }
+      : { backgroundColor: '#fee2e2', borderColor: '#f87171' };
   };
 
   return (
     <div className="space-y-6">
       {/* Instructions */}
-      <div className="bg-purple-50 rounded-xl p-4">
-        <p className="text-gray-700">{exercise.instructions}</p>
-        <p className="text-sm text-gray-500 mt-2">
+      <div 
+        className="rounded-xl p-4"
+        style={isDark 
+          ? { backgroundColor: 'rgba(168, 85, 247, 0.1)', border: '1px solid rgba(168, 85, 247, 0.2)' }
+          : { backgroundColor: '#faf5ff' }
+        }
+      >
+        <p style={{ color: isDark ? currentTheme.colors.textMuted : '#374151' }}>{exercise.instructions}</p>
+        <p 
+          className="text-sm mt-2"
+          style={{ color: isDark ? currentTheme.colors.textMuted : '#6b7280' }}
+        >
           Use the arrows to arrange items in the correct order.
         </p>
       </div>
@@ -77,15 +96,27 @@ export const SequencingExercise: React.FC<SequencingExerciseProps> = ({
         {items.map((item, index) => (
           <div
             key={item.id}
-            className={`flex items-center gap-3 p-4 rounded-lg border-2 transition-all ${getItemStyle(item, index)}`}
+            className="flex items-center gap-3 p-4 rounded-lg border-2 transition-all"
+            style={getItemStyle(item, index)}
           >
             {/* Position number */}
-            <span className="w-8 h-8 rounded-full bg-purple-100 text-purple-700 flex items-center justify-center font-medium text-sm">
+            <span 
+              className="w-8 h-8 rounded-full flex items-center justify-center font-medium text-sm"
+              style={isDark 
+                ? { backgroundColor: 'rgba(168, 85, 247, 0.2)', color: '#C084FC' }
+                : { backgroundColor: '#f3e8ff', color: '#7c3aed' }
+              }
+            >
               {index + 1}
             </span>
 
             {/* Content */}
-            <span className="flex-1 text-gray-700">{item.content}</span>
+            <span 
+              className="flex-1"
+              style={{ color: isDark ? currentTheme.colors.textMuted : '#374151' }}
+            >
+              {item.content}
+            </span>
 
             {/* Move buttons */}
             {!showFeedback && (
@@ -93,11 +124,11 @@ export const SequencingExercise: React.FC<SequencingExerciseProps> = ({
                 <button
                   onClick={() => moveItem(index, 'up')}
                   disabled={index === 0}
-                  className={`p-1 rounded transition-all ${
-                    index === 0
-                      ? 'text-gray-300 cursor-not-allowed'
-                      : 'text-gray-500 hover:text-purple-600 hover:bg-purple-50'
-                  }`}
+                  className="p-1 rounded transition-all"
+                  style={index === 0 
+                    ? { color: isDark ? 'rgba(156, 163, 175, 0.3)' : '#d1d5db', cursor: 'not-allowed' }
+                    : { color: isDark ? currentTheme.colors.textMuted : '#6b7280' }
+                  }
                   aria-label="Move up"
                 >
                   <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -107,11 +138,11 @@ export const SequencingExercise: React.FC<SequencingExerciseProps> = ({
                 <button
                   onClick={() => moveItem(index, 'down')}
                   disabled={index === items.length - 1}
-                  className={`p-1 rounded transition-all ${
-                    index === items.length - 1
-                      ? 'text-gray-300 cursor-not-allowed'
-                      : 'text-gray-500 hover:text-purple-600 hover:bg-purple-50'
-                  }`}
+                  className="p-1 rounded transition-all"
+                  style={index === items.length - 1 
+                    ? { color: isDark ? 'rgba(156, 163, 175, 0.3)' : '#d1d5db', cursor: 'not-allowed' }
+                    : { color: isDark ? currentTheme.colors.textMuted : '#6b7280' }
+                  }
                   aria-label="Move down"
                 >
                   <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -123,9 +154,12 @@ export const SequencingExercise: React.FC<SequencingExerciseProps> = ({
 
             {/* Feedback indicator */}
             {showFeedback && (
-              <span className={`text-lg ${
-                correctSequence.indexOf(item.id) === index ? 'text-green-600' : 'text-red-600'
-              }`}>
+              <span style={{ 
+                color: correctSequence.indexOf(item.id) === index 
+                  ? (isDark ? '#4ADE80' : '#16a34a') 
+                  : (isDark ? '#F87171' : '#dc2626'),
+                fontSize: '1.125rem'
+              }}>
                 {correctSequence.indexOf(item.id) === index ? '✓' : '✗'}
               </span>
             )}
@@ -135,15 +169,34 @@ export const SequencingExercise: React.FC<SequencingExerciseProps> = ({
 
       {/* Feedback */}
       {showFeedback && (
-        <div className={`rounded-xl p-4 ${isCorrect ? 'bg-green-50 border border-green-200' : 'bg-amber-50 border border-amber-200'}`}>
+        <div 
+          className="rounded-xl p-4"
+          style={isCorrect 
+            ? (isDark 
+                ? { backgroundColor: 'rgba(34, 197, 94, 0.1)', border: '1px solid rgba(34, 197, 94, 0.3)' }
+                : { backgroundColor: '#f0fdf4', border: '1px solid #bbf7d0' })
+            : (isDark 
+                ? { backgroundColor: 'rgba(251, 191, 36, 0.1)', border: '1px solid rgba(251, 191, 36, 0.3)' }
+                : { backgroundColor: '#fffbeb', border: '1px solid #fde68a' })
+          }
+        >
           <div className="flex items-start gap-3">
             <span className="text-2xl">{isCorrect ? '🎉' : '💡'}</span>
             <div>
-              <p className={`font-medium ${isCorrect ? 'text-green-800' : 'text-amber-800'}`}>
+              <p 
+                className="font-medium"
+                style={{ color: isCorrect 
+                  ? (isDark ? '#4ADE80' : '#166534')
+                  : (isDark ? '#FBBF24' : '#92400e')
+                }}
+              >
                 {isCorrect ? 'Perfect sequence!' : 'Not quite right'}
               </p>
               {!isCorrect && (
-                <p className="text-gray-600 mt-1">
+                <p 
+                  className="mt-1"
+                  style={{ color: isDark ? currentTheme.colors.textMuted : '#4b5563' }}
+                >
                   The items highlighted in red are in the wrong position. The correct order is shown by the position numbers.
                 </p>
               )}

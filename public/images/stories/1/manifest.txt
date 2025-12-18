@@ -1,0 +1,38 @@
+# Image Manifest for Story 1: The Story of Everything: From Big Bang to You
+# Format: sectionName|position|filename|altText|caption
+#
+# Instructions:
+# 1. Create images based on the suggested descriptions below
+# 2. Save image files with the suggested filenames (or update the filename field)
+# 3. Place image files in public/images/stories/1/
+# 4. Remove the # from lines you have created images for
+# 5. Position options: before, after, inline
+#
+
+# === SUGGESTED IMAGES FROM ANALOGIES ===
+# These images would help visualize the key analogies in the story
+
+coreContent|after|analogy-0.png|Illustration of Cosmic Inflation|A tiny soap bubble suddenly going "FOOMP" and puffing out into a huge, soft bubble in less than a blink
+coreContent|after|analogy-1.png|Illustration of Universe Expansion|A loaf of bread with chocolate chips rising in the oven—the chips (galaxies) drift apart as the dough (space) stretches
+coreContent|after|analogy-2.png|Illustration of Universe Cooling|A cup of hot cocoa cooling down from steaming and bubbling to warm and cozy
+coreContent|after|analogy-3.png|Illustration of Star Stuff|A giant campfire in the sky that bakes ingredients and then bursts, sprinkling glowing sparks that become dust, planets, and people
+coreContent|after|analogy-4.png|Illustration of Cosmic Microwave Background|The universe's first sunrise—ancient light still traveling today, a whisper from the beginning of time
+coreContent|after|analogy-5.png|Illustration of Gravity Gathering Gas|A gentle, patient force quietly gathering clouds together like a cosmic gardener
+
+# === SUGGESTED IMAGES FROM KEY CONCEPTS ===
+# These images would help illustrate the main concepts
+
+coreContent|inline|concept-0.png|Illustration of: The universe began about 13.8 billion years ago from an incredibly small, hot, dense state|The universe began about 13.8 billion years ago from an incredibly small, hot, dense state
+coreContent|inline|concept-1.png|Illustration of: The universe has been expanding and cooling ever since the Big Bang|The universe has been expanding and cooling ever since the Big Bang
+coreContent|inline|concept-2.png|Illustration of: The first stars formed about 200 million years after the Big Bang|The first stars formed about 200 million years after the Big Bang
+coreContent|inline|concept-3.png|Illustration of: Stars create heavier elements through nuclear fusion and spread them when they explode|Stars create heavier elements through nuclear fusion and spread them when they explode
+coreContent|inline|concept-4.png|Illustration of: We are literally made of star stuff—the atoms in our bodies were forged in ancient stars|We are literally made of star stuff—the atoms in our bodies were forged in ancient stars
+coreContent|inline|concept-5.png|Illustration of: Everything in the universe is connected, part of the same cosmic story|Everything in the universe is connected, part of the same cosmic story
+
+# === SECTION-SPECIFIC IMAGES ===
+# Add images for specific sections as needed
+
+# introduction|before|intro-img0.png|[Add alt text for introduction image]|[Optional caption for introduction image]
+# coreContent|before|core-img0.png|[Add alt text for coreContent image]|[Optional caption for coreContent image]
+# interactiveSection|before|interactive-img0.png|[Add alt text for interactiveSection image]|[Optional caption for interactiveSection image]
+# integration|before|integration-img0.png|[Add alt text for integration image]|[Optional caption for integration image]

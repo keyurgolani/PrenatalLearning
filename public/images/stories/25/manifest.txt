@@ -1,0 +1,38 @@
+# Image Manifest for Story 25: The Story of Money: From Shells to Bitcoin
+# Format: sectionName|position|filename|altText|caption
+#
+# Instructions:
+# 1. Create images based on the suggested descriptions below
+# 2. Save image files with the suggested filenames (or update the filename field)
+# 3. Place image files in public/images/stories/25/
+# 4. Remove the # from lines you have created images for
+# 5. Position options: before, after, inline
+#
+
+# === SUGGESTED IMAGES FROM ANALOGIES ===
+# These images would help visualize the key analogies in the story
+
+# coreContent|after|analogy-0.png|Illustration of Barter Problem|Like trying to trade puzzle pieces when you need to find someone whose missing piece is exactly what you have, and who has exactly the piece you need
+# coreContent|after|analogy-1.png|Illustration of Money as Medium of Exchange|Money is like a universal translator that lets any goods "speak" to any other goods—wheat can become shoes, paintings can become food
+# coreContent|after|analogy-2.png|Illustration of Trust in Money|Money is like a shared story we all tell together—it only works because we all believe in it at the same time
+# coreContent|after|analogy-3.png|Illustration of Gold Standard|Paper money backed by gold was like a coat check ticket—the paper itself wasn't valuable, but it represented something valuable you could claim
+# coreContent|after|analogy-4.png|Illustration of Fiat Money|Modern money is like the rules of a game—it works because everyone agrees to play by the same rules, not because the rules are written on valuable paper
+# coreContent|after|analogy-5.png|Illustration of Digital Money|Digital money is like the score in a video game—the numbers change, but no physical coins move; it's all about keeping track
+
+# === SUGGESTED IMAGES FROM KEY CONCEPTS ===
+# These images would help illustrate the main concepts
+
+# coreContent|inline|concept-0.png|Illustration of: Money evolved from barter to solve the "double coincidence of wants"—the problem of finding someo...|Money evolved from barter to solve the "double coincidence of wants"—the problem of finding someone who has what you want and wants what you have
+# coreContent|inline|concept-1.png|Illustration of: Early money included shells, beads, salt, and cattle—things people agreed were valuable|Early money included shells, beads, salt, and cattle—things people agreed were valuable
+# coreContent|inline|concept-2.png|Illustration of: Coins were invented about 2,600 years ago, with government stamps guaranteeing their value|Coins were invented about 2,600 years ago, with government stamps guaranteeing their value
+# coreContent|inline|concept-3.png|Illustration of: Paper money began as promises to pay gold or silver, eventually becoming valuable on its own thro...|Paper money began as promises to pay gold or silver, eventually becoming valuable on its own through trust
+# coreContent|inline|concept-4.png|Illustration of: Money serves three functions: medium of exchange, unit of account, and store of value|Money serves three functions: medium of exchange, unit of account, and store of value
+# coreContent|inline|concept-5.png|Illustration of: All money ultimately works because of trust—we accept it because we trust others will accept it too|All money ultimately works because of trust—we accept it because we trust others will accept it too
+
+# === SECTION-SPECIFIC IMAGES ===
+# Add images for specific sections as needed
+
+# introduction|before|intro-img0.png|[Add alt text for introduction image]|[Optional caption for introduction image]
+# coreContent|before|core-img0.png|[Add alt text for coreContent image]|[Optional caption for coreContent image]
+# interactiveSection|before|interactive-img0.png|[Add alt text for interactiveSection image]|[Optional caption for interactiveSection image]
+# integration|before|integration-img0.png|[Add alt text for integration image]|[Optional caption for integration image]

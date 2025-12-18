@@ -1,0 +1,38 @@
+# Image Manifest for Story 27: Digital Gold: Cryptocurrency Explained
+# Format: sectionName|position|filename|altText|caption
+#
+# Instructions:
+# 1. Create images based on the suggested descriptions below
+# 2. Save image files with the suggested filenames (or update the filename field)
+# 3. Place image files in public/images/stories/27/
+# 4. Remove the # from lines you have created images for
+# 5. Position options: before, after, inline
+#
+
+# === SUGGESTED IMAGES FROM ANALOGIES ===
+# These images would help visualize the key analogies in the story
+
+# coreContent|after|analogy-0.png|Illustration of Digital Scarcity|Bitcoin is like a gold mine with exactly 21 million nuggets—everyone knows exactly how much exists, and no one can create more
+# coreContent|after|analogy-1.png|Illustration of Mining|Bitcoin mining is like a global lottery where computers buy tickets by solving puzzles—winners get new coins, and the lottery gets harder over time
+# coreContent|after|analogy-2.png|Illustration of Private Keys|Your private key is like a combination to a transparent safe—everyone can see what's inside, but only you can open it
+# coreContent|after|analogy-3.png|Illustration of Blockchain Verification|Sending Bitcoin is like announcing a transaction in a stadium full of accountants—thousands of people verify and record it simultaneously
+# coreContent|after|analogy-4.png|Illustration of Halving|Bitcoin halving is like a gold mine that produces less gold every four years—making what remains increasingly precious
+# coreContent|after|analogy-5.png|Illustration of Decentralization|Cryptocurrency is like a language that belongs to everyone—no single person or company controls it, yet everyone can use it
+
+# === SUGGESTED IMAGES FROM KEY CONCEPTS ===
+# These images would help illustrate the main concepts
+
+# coreContent|inline|concept-0.png|Illustration of: Cryptocurrency is digital money secured by cryptography, operating without banks or central autho...|Cryptocurrency is digital money secured by cryptography, operating without banks or central authorities
+# coreContent|inline|concept-1.png|Illustration of: Bitcoin was created in 2009 by the mysterious Satoshi Nakamoto, solving the "double-spending prob...|Bitcoin was created in 2009 by the mysterious Satoshi Nakamoto, solving the "double-spending problem" for digital money
+# coreContent|inline|concept-2.png|Illustration of: Digital scarcity means only 21 million Bitcoins will ever exist—this fixed supply is what makes i...|Digital scarcity means only 21 million Bitcoins will ever exist—this fixed supply is what makes it like "digital gold"
+# coreContent|inline|concept-3.png|Illustration of: Mining is how new Bitcoins are created: computers solve puzzles and receive Bitcoin rewards that ...|Mining is how new Bitcoins are created: computers solve puzzles and receive Bitcoin rewards that halve every four years
+# coreContent|inline|concept-4.png|Illustration of: Private keys prove ownership of cryptocurrency—you control your own money, but also bear full res...|Private keys prove ownership of cryptocurrency—you control your own money, but also bear full responsibility for it
+# coreContent|inline|concept-5.png|Illustration of: Cryptocurrency represents trust in code and mathematics rather than trust in banks and governments|Cryptocurrency represents trust in code and mathematics rather than trust in banks and governments
+
+# === SECTION-SPECIFIC IMAGES ===
+# Add images for specific sections as needed
+
+# introduction|before|intro-img0.png|[Add alt text for introduction image]|[Optional caption for introduction image]
+# coreContent|before|core-img0.png|[Add alt text for coreContent image]|[Optional caption for coreContent image]
+# interactiveSection|before|interactive-img0.png|[Add alt text for interactiveSection image]|[Optional caption for interactiveSection image]
+# integration|before|integration-img0.png|[Add alt text for integration image]|[Optional caption for integration image]

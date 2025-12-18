@@ -1,0 +1,39 @@
+# Image Manifest for Story 8: The Web of All Things: How the Internet Connects Us
+# Format: sectionName|position|filename|altText|caption
+#
+# Instructions:
+# 1. Create images based on the suggested descriptions below
+# 2. Save image files with the suggested filenames (or update the filename field)
+# 3. Place image files in public/images/stories/8/
+# 4. Remove the # from lines you have created images for
+# 5. Position options: before, after, inline
+#
+
+# === SUGGESTED IMAGES FROM ANALOGIES ===
+# These images would help visualize the key analogies in the story
+
+# coreContent|after|analogy-0.png|Illustration of Packet Switching|Cutting a painting into a thousand pieces, sending each through different routes, and reassembling at the destination—faster and more reliable than one truck carrying the whole thing
+# coreContent|after|analogy-1.png|Illustration of TCP Protocol|A careful librarian who numbers every page, checks that all pages arrived, puts them in order, and asks for any missing pages to be sent again
+# coreContent|after|analogy-2.png|Illustration of IP Addresses|Street addresses for computers—unique numbers that tell packets exactly where to go, like house numbers on a global street
+# coreContent|after|analogy-3.png|Illustration of Routers|Traffic directors at every intersection who know all the roads and tell each car (packet) the best way to reach its destination
+# coreContent|after|analogy-4.png|Illustration of DNS|A giant phone book that translates friendly names (google.com) into computer numbers (172.217.14.206), shared by everyone and updated automatically
+# coreContent|after|analogy-5.png|Illustration of Undersea Cables|Rivers of light flowing across ocean floors, carrying 99% of international internet traffic through cables as wide as a garden hose
+# coreContent|after|analogy-6.png|Illustration of The Internet|A postal system made of light, where billions of tiny messages crisscross the globe every second, each finding its own path to the destination
+
+# === SUGGESTED IMAGES FROM KEY CONCEPTS ===
+# These images would help illustrate the main concepts
+
+# coreContent|inline|concept-0.png|Illustration of: The internet is a global network connecting billions of devices, using packets of data that trave...|The internet is a global network connecting billions of devices, using packets of data that travel through cables, satellites, and wireless signals
+# coreContent|inline|concept-1.png|Illustration of: Packet switching breaks messages into small pieces that travel independently and reassemble at th...|Packet switching breaks messages into small pieces that travel independently and reassemble at the destination—more reliable than sending everything through one path
+# coreContent|inline|concept-2.png|Illustration of: TCP/IP is the language of the internet: TCP ensures messages arrive complete and in order, IP pro...|TCP/IP is the language of the internet: TCP ensures messages arrive complete and in order, IP provides addresses so packets know where to go
+# coreContent|inline|concept-3.png|Illustration of: Routers are traffic directors that read packet addresses and choose the best path, constantly ada...|Routers are traffic directors that read packet addresses and choose the best path, constantly adapting to network conditions
+# coreContent|inline|concept-4.png|Illustration of: The physical internet includes undersea cables carrying 99% of international traffic, fiber optic...|The physical internet includes undersea cables carrying 99% of international traffic, fiber optic cables on land, and satellites in space
+# coreContent|inline|concept-5.png|Illustration of: The World Wide Web, created by Tim Berners-Lee in 1989, uses HTML, HTTP, and browsers to make inf...|The World Wide Web, created by Tim Berners-Lee in 1989, uses HTML, HTTP, and browsers to make information accessible and interconnected
+
+# === SECTION-SPECIFIC IMAGES ===
+# Add images for specific sections as needed
+
+# introduction|before|intro-img0.png|[Add alt text for introduction image]|[Optional caption for introduction image]
+# coreContent|before|core-img0.png|[Add alt text for coreContent image]|[Optional caption for coreContent image]
+# interactiveSection|before|interactive-img0.png|[Add alt text for interactiveSection image]|[Optional caption for interactiveSection image]
+# integration|before|integration-img0.png|[Add alt text for integration image]|[Optional caption for integration image]

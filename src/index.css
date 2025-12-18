@@ -1,4 +1,5 @@
 @import "tailwindcss";
+@import "./styles/accessibility.css";
 
 /* Base styles */
 :root {
@@ -9,6 +10,30 @@
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  
+  /* ============================================
+     Font Size Scaling System
+     Requirements: 7.5 - Scale all content text proportionally
+     ============================================ */
+  --font-scale: 1;
+  
+  /* Base font sizes that scale with --font-scale */
+  --font-size-xs: calc(0.75rem * var(--font-scale));
+  --font-size-sm: calc(0.875rem * var(--font-scale));
+  --font-size-base: calc(1rem * var(--font-scale));
+  --font-size-lg: calc(1.125rem * var(--font-scale));
+  --font-size-xl: calc(1.25rem * var(--font-scale));
+  --font-size-2xl: calc(1.5rem * var(--font-scale));
+  --font-size-3xl: calc(1.875rem * var(--font-scale));
+  --font-size-4xl: calc(2.25rem * var(--font-scale));
+  
+  /* Line heights that scale proportionally */
+  --line-height-tight: 1.25;
+  --line-height-normal: 1.5;
+  --line-height-relaxed: 1.625;
+  
+  /* Minimum touch target size - Requirements: 7.6 */
+  --min-touch-target: 44px;
 }
 
 body {
@@ -17,27 +42,832 @@ body {
   min-height: 100vh;
 }
 
+/* 
+ * Font scaling approach:
+ * - Root font-size stays at 16px for consistent UI chrome (header, buttons, etc.)
+ * - Content areas use .content-scalable class to scale text only
+ * - This prevents header/navigation from breaking at larger font sizes
+ */
+html {
+  font-size: 16px;
+}
+
+/* Scalable content wrapper - scales text within content areas */
+.content-scalable {
+  /* Set a local font-size that scales, affecting all em/rem text inside */
+  font-size: calc(1rem * var(--font-scale, 1));
+  line-height: 1.6;
+}
+
+/* Scale headings proportionally within content areas */
+.content-scalable h1 { font-size: calc(2.25rem * var(--font-scale, 1)); }
+.content-scalable h2 { font-size: calc(1.875rem * var(--font-scale, 1)); }
+.content-scalable h3 { font-size: calc(1.5rem * var(--font-scale, 1)); }
+.content-scalable h4 { font-size: calc(1.25rem * var(--font-scale, 1)); }
+.content-scalable p,
+.content-scalable li,
+.content-scalable span,
+.content-scalable div {
+  font-size: inherit;
+}
+
 /* Smooth scrolling */
 html {
   scroll-behavior: smooth;
 }
 
-/* Custom scrollbar for webkit browsers */
+/* Hide all scrollbars globally */
 ::-webkit-scrollbar {
-  width: 8px;
-  height: 8px;
+  display: none;
 }
 
-::-webkit-scrollbar-track {
-  background: #f1f1f1;
-  border-radius: 4px;
+html, body {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 }
 
-::-webkit-scrollbar-thumb {
-  background: #c4b5fd;
-  border-radius: 4px;
+/* Hidden scrollbar utility - still scrollable but no visible scrollbar */
+.scrollbar-hidden::-webkit-scrollbar {
+  display: none;
 }
 
-::-webkit-scrollbar-thumb:hover {
-  background: #a78bfa;
+.scrollbar-hidden {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* ============================================
+   Animation System - CSS Custom Properties
+   ============================================ */
+:root {
+  /* Glow effect colors - subtle */
+  --glow-color: rgba(139, 92, 246, 0.25);
+  --glow-color-intense: rgba(139, 92, 246, 0.4);
+  
+  /* Gradient border colors */
+  --gradient-start: #8b5cf6;
+  --gradient-mid: #ec4899;
+  --gradient-end: #06b6d4;
+  
+  /* Animation timing - professional, subtle */
+  --glow-duration: 0.8s;
+  --gradient-rotation-duration: 3s;
+  --scale-transition-duration: 300ms;
+  --theme-transition-duration: 300ms;
+  --hover-transition-duration: 250ms;
+  --click-feedback-duration: 120ms;
+  --focus-transition-duration: 350ms;
+}
+
+/* ============================================
+   Keyframe Animations
+   ============================================ */
+
+/* Subtle glow for hover effects - single pulse, not continuous */
+@keyframes glow-pulse {
+  0%, 100% {
+    box-shadow: 0 0 4px var(--glow-color);
+  }
+  50% {
+    box-shadow: 0 0 8px var(--glow-color);
+  }
+}
+
+/* Rainbow gradient border rotation */
+@keyframes gradient-rotate {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+/* Subtle scale bounce for button micro-interactions */
+@keyframes scale-bounce {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.02);
+  }
+}
+
+/* Gentle bounce for subtle hover effect - reduced movement */
+@keyframes gentle-bounce {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-1px);
+  }
+}
+
+/* Soft pulse for gentle attention-grabbing effect */
+@keyframes soft-pulse {
+  0%, 100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.85;
+    transform: scale(1.01);
+  }
+}
+
+/* Radiate animation for streak flame */
+@keyframes radiate {
+  0%, 100% {
+    transform: scale(1);
+    filter: drop-shadow(0 0 4px rgba(251, 146, 60, 0.6));
+  }
+  50% {
+    transform: scale(1.15);
+    filter: drop-shadow(0 0 8px rgba(251, 146, 60, 1)) drop-shadow(0 0 12px rgba(239, 68, 68, 0.5));
+  }
+}
+
+.animate-radiate {
+  animation: radiate 1.5s ease-in-out infinite;
+}
+
+/* Badge pop for entrance animation - subtle */
+@keyframes badge-pop {
+  0% {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Fade in animation for smooth appearance */
+@keyframes fade-in {
+  0% {
+    opacity: 0;
+    transform: translateY(-4px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in {
+  animation: fade-in 0.2s ease-out forwards;
+}
+
+/* Card enter animation - bouncy and professional */
+@keyframes card-enter {
+  0% {
+    opacity: 0;
+    transform: translateY(12px) scale(0.96);
+  }
+  60% {
+    opacity: 1;
+    transform: translateY(-2px) scale(1.01);
+  }
+  80% {
+    transform: translateY(1px) scale(0.995);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.animate-card-enter {
+  animation: card-enter 0.4s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+  opacity: 0;
+}
+
+/* Slide up animation for elements */
+@keyframes slide-up {
+  0% {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-slide-up {
+  animation: slide-up 0.3s ease-out forwards;
+}
+
+/* Scale in animation */
+@keyframes scale-in {
+  0% {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.animate-scale-in {
+  animation: scale-in 0.25s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+
+/* Bounce in animation - cute and professional */
+@keyframes bounce-in {
+  0% {
+    opacity: 0;
+    transform: scale(0.3);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.05);
+  }
+  70% {
+    transform: scale(0.9);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.animate-bounce-in {
+  animation: bounce-in 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55) forwards;
+}
+
+/* Fade out animation */
+@keyframes fade-out {
+  0% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+}
+
+.animate-fade-out {
+  animation: fade-out 0.2s ease-in forwards;
+}
+
+/* Slide in from right */
+@keyframes slide-in-right {
+  0% {
+    opacity: 0;
+    transform: translateX(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.animate-slide-in-right {
+  animation: slide-in-right 0.3s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+
+/* Slide in from left */
+@keyframes slide-in-left {
+  0% {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.animate-slide-in-left {
+  animation: slide-in-left 0.3s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+
+/* Pop in animation for modals/dialogs */
+@keyframes pop-in {
+  0% {
+    opacity: 0;
+    transform: scale(0.95) translateY(10px);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+.animate-pop-in {
+  animation: pop-in 0.25s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+
+/* Expand animation for dropdowns/accordions */
+@keyframes expand {
+  0% {
+    opacity: 0;
+    max-height: 0;
+    transform: scaleY(0.95);
+  }
+  100% {
+    opacity: 1;
+    max-height: 500px;
+    transform: scaleY(1);
+  }
+}
+
+.animate-expand {
+  animation: expand 0.3s ease-out forwards;
+  transform-origin: top;
+  overflow: hidden;
+}
+
+/* Collapse animation */
+@keyframes collapse {
+  0% {
+    opacity: 1;
+    max-height: 500px;
+    transform: scaleY(1);
+  }
+  100% {
+    opacity: 0;
+    max-height: 0;
+    transform: scaleY(0.95);
+  }
+}
+
+.animate-collapse {
+  animation: collapse 0.2s ease-in forwards;
+  transform-origin: top;
+  overflow: hidden;
+}
+
+/* Shake animation for errors/attention */
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  10%, 30%, 50%, 70%, 90% { transform: translateX(-4px); }
+  20%, 40%, 60%, 80% { transform: translateX(4px); }
+}
+
+.animate-shake {
+  animation: shake 0.5s ease-in-out;
+}
+
+/* Wiggle animation for playful elements */
+@keyframes wiggle {
+  0%, 100% { transform: rotate(0deg); }
+  25% { transform: rotate(-3deg); }
+  75% { transform: rotate(3deg); }
+}
+
+.animate-wiggle {
+  animation: wiggle 0.3s ease-in-out;
+}
+
+/* Shimmer animation for glossy/loading effects */
+@keyframes shimmer {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+.animate-shimmer {
+  animation: shimmer 2s infinite;
+}
+
+/* Stagger delay utilities for list animations */
+.stagger-1 { animation-delay: 0.05s; }
+.stagger-2 { animation-delay: 0.1s; }
+.stagger-3 { animation-delay: 0.15s; }
+.stagger-4 { animation-delay: 0.2s; }
+.stagger-5 { animation-delay: 0.25s; }
+.stagger-6 { animation-delay: 0.3s; }
+.stagger-7 { animation-delay: 0.35s; }
+.stagger-8 { animation-delay: 0.4s; }
+.stagger-9 { animation-delay: 0.45s; }
+.stagger-10 { animation-delay: 0.5s; }
+
+/* Click feedback for button press response - subtle */
+@keyframes click-feedback {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(0.98);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+/* ============================================
+   Animation Utility Classes
+   ============================================ */
+
+/* Subtle glow effect on hover - no continuous animation */
+.animate-glow {
+  transition: box-shadow 0.2s ease-in-out;
+}
+
+.animate-glow:hover {
+  box-shadow: 0 0 8px var(--glow-color);
+}
+
+/* Timeline node glow effect on hover */
+.timeline-node {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.timeline-node:hover {
+  transform: scale(1.15);
+  box-shadow: 0 0 20px var(--node-glow-color, rgba(139, 92, 246, 0.6)),
+              0 0 40px var(--node-glow-color, rgba(139, 92, 246, 0.3));
+}
+
+.timeline-node.node-completed {
+  --node-glow-color: rgba(34, 197, 94, 0.6);
+}
+
+.timeline-node.node-current {
+  --node-glow-color: rgba(139, 92, 246, 0.6);
+  animation: node-pulse 2s ease-in-out infinite;
+}
+
+.timeline-node.node-pending {
+  --node-glow-color: rgba(156, 163, 175, 0.4);
+}
+
+@keyframes node-pulse {
+  0%, 100% {
+    box-shadow: 0 0 0 0 rgba(139, 92, 246, 0.4);
+  }
+  50% {
+    box-shadow: 0 0 0 8px rgba(139, 92, 246, 0);
+  }
+}
+
+/* Animated gradient border */
+.animate-gradient-border {
+  position: relative;
+  background: linear-gradient(
+    90deg,
+    var(--gradient-start),
+    var(--gradient-mid),
+    var(--gradient-end),
+    var(--gradient-start)
+  );
+  background-size: 300% 100%;
+  animation: gradient-rotate var(--gradient-rotation-duration) linear infinite;
+}
+
+/* Gradient border wrapper - use on focus/selected states */
+.animate-gradient-border-wrapper {
+  position: relative;
+  border-radius: inherit;
+  outline: none;
+}
+
+.animate-gradient-border-wrapper::before {
+  content: '';
+  position: absolute;
+  inset: -2px;
+  border-radius: inherit;
+  background: linear-gradient(
+    90deg,
+    var(--gradient-start),
+    var(--gradient-mid),
+    var(--gradient-end)
+  );
+  z-index: -1;
+  opacity: 0;
+  transition: opacity var(--focus-transition-duration) ease-out;
+  pointer-events: none;
+}
+
+/* Focus state - visible gradient border for accessibility */
+.animate-gradient-border-wrapper:focus::before,
+.animate-gradient-border-wrapper:focus-within::before,
+.animate-gradient-border-wrapper:focus-visible::before,
+.animate-gradient-border-wrapper.active::before {
+  opacity: 1;
+}
+
+/* Ensure focus is visible for keyboard navigation */
+.animate-gradient-border-wrapper:focus-visible {
+  outline: none;
+}
+
+/* Scale hover effect for buttons - subtle and smooth */
+.animate-scale-hover {
+  transition: transform var(--scale-transition-duration) cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.animate-scale-hover:hover {
+  transform: scale(1.005);
+}
+
+/* Smooth theme transition for color-changing elements */
+.transition-theme {
+  transition: 
+    background-color var(--theme-transition-duration) ease-in-out,
+    color var(--theme-transition-duration) ease-in-out,
+    border-color var(--theme-transition-duration) ease-in-out,
+    box-shadow var(--theme-transition-duration) ease-in-out;
+}
+
+/* Gentle bounce on hover for buttons - smooth and subtle */
+.animate-gentle-bounce {
+  transition: transform var(--hover-transition-duration) ease-out;
+}
+
+.animate-gentle-bounce:hover {
+  transform: translateY(-1px);
+}
+
+/* Soft pulse for subtle attention effect */
+.animate-soft-pulse {
+  animation: soft-pulse 2s ease-in-out infinite;
+}
+
+/* Badge pop entrance animation - smooth fade in */
+.animate-badge-pop {
+  animation: badge-pop 0.4s ease-out forwards;
+}
+
+/* Click feedback animation */
+.animate-click:active {
+  animation: click-feedback var(--click-feedback-duration) ease-in-out;
+}
+
+/* ============================================
+   Accessibility - Reduced Motion
+   ============================================ */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+  
+  .animate-glow:hover {
+    animation: none;
+    box-shadow: 0 0 10px var(--glow-color);
+  }
+  
+  .animate-gradient-border,
+  .animate-gradient-border-wrapper::before {
+    animation: none;
+    background-position: 0% 50%;
+  }
+  
+  .animate-scale-hover:hover {
+    animation: none;
+    transform: scale(1.01);
+  }
+  
+  .animate-gentle-bounce:hover {
+    animation: none;
+  }
+  
+  .animate-soft-pulse {
+    animation: none;
+  }
+  
+  .animate-badge-pop {
+    animation: none;
+    opacity: 1;
+    transform: scale(1);
+  }
+  
+  .animate-click:active {
+    animation: none;
+  }
+}
+
+/* ============================================
+   Font Size Scaling Utility Classes
+   Requirements: 7.5 - Scale all content text proportionally
+   ============================================ */
+
+/* Scalable text classes */
+.text-scaled-xs {
+  font-size: var(--font-size-xs);
+}
+
+.text-scaled-sm {
+  font-size: var(--font-size-sm);
+}
+
+.text-scaled-base {
+  font-size: var(--font-size-base);
+}
+
+.text-scaled-lg {
+  font-size: var(--font-size-lg);
+}
+
+.text-scaled-xl {
+  font-size: var(--font-size-xl);
+}
+
+.text-scaled-2xl {
+  font-size: var(--font-size-2xl);
+}
+
+.text-scaled-3xl {
+  font-size: var(--font-size-3xl);
+}
+
+.text-scaled-4xl {
+  font-size: var(--font-size-4xl);
+}
+
+/* Content area that scales with font size */
+.content-scaled {
+  font-size: var(--font-size-base);
+  line-height: var(--line-height-relaxed);
+}
+
+.content-scaled h1 {
+  font-size: var(--font-size-4xl);
+  line-height: var(--line-height-tight);
+}
+
+.content-scaled h2 {
+  font-size: var(--font-size-3xl);
+  line-height: var(--line-height-tight);
+}
+
+.content-scaled h3 {
+  font-size: var(--font-size-2xl);
+  line-height: var(--line-height-tight);
+}
+
+.content-scaled h4 {
+  font-size: var(--font-size-xl);
+  line-height: var(--line-height-normal);
+}
+
+.content-scaled p,
+.content-scaled li {
+  font-size: var(--font-size-base);
+  line-height: var(--line-height-relaxed);
+}
+
+.content-scaled small {
+  font-size: var(--font-size-sm);
+}
+
+/* ============================================
+   Global Smooth Transitions
+   Apply subtle transitions to common elements
+   ============================================ */
+
+/* Smooth transitions for all interactive elements */
+button, 
+a, 
+[role="button"],
+input,
+select,
+textarea,
+.interactive {
+  transition: 
+    transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1),
+    opacity 0.2s ease-out,
+    background-color 0.2s ease-out,
+    border-color 0.2s ease-out,
+    box-shadow 0.2s ease-out,
+    color 0.15s ease-out;
+}
+
+/* Smooth transitions for layout changes */
+.transition-layout {
+  transition: 
+    max-height 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+    padding 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+    margin 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+    opacity 0.3s ease-out;
+}
+
+/* Smooth visibility transitions */
+.transition-visibility {
+  transition: 
+    opacity 0.25s ease-out,
+    visibility 0.25s ease-out,
+    transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+/* Hidden state for animated elements */
+.animate-hidden {
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(-8px);
+}
+
+/* Visible state for animated elements */
+.animate-visible {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateY(0);
+}
+
+/* ============================================
+   Touch Target Minimum Size
+   Requirements: 7.6 - Ensure minimum touch target sizes are maintained
+   ============================================ */
+
+/* Ensure all interactive elements meet minimum touch target size */
+.touch-target {
+  min-width: var(--min-touch-target);
+  min-height: var(--min-touch-target);
+}
+
+/* Apply touch target to form inputs only - buttons handle their own sizing */
+input[type="checkbox"],
+input[type="radio"],
+select {
+  min-height: var(--min-touch-target);
+}
+
+/* Ensure clickable areas are large enough */
+.touch-target-area {
+  position: relative;
+}
+
+.touch-target-area::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  min-width: var(--min-touch-target);
+  min-height: var(--min-touch-target);
+}
+
+
+/* ============================================
+   Page Transition Animations
+   Smooth transitions between pages/routes
+   ============================================ */
+
+/* Page enter animation */
+@keyframes page-enter {
+  0% {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Page exit animation */
+@keyframes page-exit {
+  0% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+}
+
+.animate-page-enter {
+  animation: page-enter 0.3s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+
+.animate-page-exit {
+  animation: page-exit 0.2s ease-in forwards;
+}
+
+/* Apply page transition to main content areas */
+main,
+[role="main"],
+.page-content {
+  animation: page-enter 0.35s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+/* Smooth content transitions for dynamic content */
+.content-transition {
+  transition: opacity 0.25s ease-out, transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.content-transition-enter {
+  opacity: 0;
+  transform: translateY(12px);
+}
+
+.content-transition-enter-active {
+  opacity: 1;
+  transform: translateY(0);
 }

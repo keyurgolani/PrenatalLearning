@@ -6,6 +6,7 @@ import type {
 } from '../../types/exercises';
 import { exerciseStorageService } from '../../services/exerciseStorageService';
 import { ExerciseEngine } from './ExerciseEngine';
+import { useTheme } from '../../contexts/ThemeContext';
 
 /**
  * Props for the ExerciseModal component
@@ -43,6 +44,8 @@ export const ExerciseModal: React.FC<ExerciseModalProps> = ({
   onClose,
   onComplete,
 }) => {
+  const { currentTheme } = useTheme();
+  const isDark = currentTheme.isDark ?? false;
   const [currentIndex, setCurrentIndex] = useState(0);
   const [responses, setResponses] = useState<Map<string, ExerciseResponse>>(() => {
     // Initialize state from storage
@@ -181,7 +184,10 @@ export const ExerciseModal: React.FC<ExerciseModalProps> = ({
 
       {/* Modal Content */}
       <div className="relative min-h-screen flex items-start justify-center p-4 pt-8 pb-20">
-        <div className="relative bg-white rounded-3xl shadow-2xl max-w-3xl w-full overflow-hidden">
+        <div 
+          className="relative rounded-3xl shadow-2xl max-w-3xl w-full overflow-hidden animate-pop-in"
+          style={{ backgroundColor: isDark ? currentTheme.colors.surface : '#ffffff' }}
+        >
           {/* Header with progress indicator */}
           <div className="bg-gradient-to-r from-purple-500 to-pink-500 px-6 py-4">
             <div className="flex items-center justify-between">
@@ -231,34 +237,49 @@ export const ExerciseModal: React.FC<ExerciseModalProps> = ({
                 <div className="w-24 h-24 mx-auto mb-6 rounded-full bg-gradient-to-r from-green-400 to-emerald-500 flex items-center justify-center">
                   <span className="text-5xl">🎉</span>
                 </div>
-                <h3 className="text-2xl font-bold text-gray-800 mb-2">
+                <h3 
+                  className="text-2xl font-bold mb-2"
+                  style={{ color: isDark ? currentTheme.colors.text : '#1f2937' }}
+                >
                   Congratulations!
                 </h3>
-                <p className="text-gray-600 mb-6">
+                <p 
+                  className="mb-6"
+                  style={{ color: isDark ? currentTheme.colors.textMuted : '#4b5563' }}
+                >
                   You've completed all the exercises for this topic.
                 </p>
                 
                 {/* Session Stats */}
-                <div className="bg-gradient-to-r from-purple-50 to-pink-50 rounded-xl p-6 mb-6">
+                <div 
+                  className="rounded-xl p-6 mb-6"
+                  style={isDark 
+                    ? { backgroundColor: 'rgba(168, 85, 247, 0.1)', border: '1px solid rgba(168, 85, 247, 0.2)' }
+                    : { background: 'linear-gradient(to right, #faf5ff, #fdf2f8)' }
+                  }
+                >
                   <div className="grid grid-cols-2 gap-4">
                     <div className="text-center">
-                      <p className="text-3xl font-bold text-purple-600">
+                      <p className="text-3xl font-bold" style={{ color: isDark ? '#C084FC' : '#9333ea' }}>
                         {sessionResult.exercisesCompleted}
                       </p>
-                      <p className="text-sm text-gray-600">Exercises Completed</p>
+                      <p className="text-sm" style={{ color: isDark ? currentTheme.colors.textMuted : '#4b5563' }}>Exercises Completed</p>
                     </div>
                     {sessionResult.averageScore !== undefined && (
                       <div className="text-center">
-                        <p className="text-3xl font-bold text-pink-600">
+                        <p className="text-3xl font-bold" style={{ color: isDark ? '#F472B6' : '#db2777' }}>
                           {sessionResult.averageScore}%
                         </p>
-                        <p className="text-sm text-gray-600">Average Score</p>
+                        <p className="text-sm" style={{ color: isDark ? currentTheme.colors.textMuted : '#4b5563' }}>Average Score</p>
                       </div>
                     )}
                   </div>
                 </div>
 
-                <p className="text-gray-600 mb-8">
+                <p 
+                  className="mb-8"
+                  style={{ color: isDark ? currentTheme.colors.textMuted : '#4b5563' }}
+                >
                   {sessionResult.averageScore !== undefined && sessionResult.averageScore >= 80
                     ? "Excellent work! You've shown great understanding of this topic. 🌟"
                     : sessionResult.averageScore !== undefined && sessionResult.averageScore >= 60
@@ -286,15 +307,18 @@ export const ExerciseModal: React.FC<ExerciseModalProps> = ({
                 />
 
                 {/* Navigation Buttons - Requirements 5.4 */}
-                <div className="flex justify-between items-center mt-6 pt-6 border-t border-gray-100">
+                <div 
+                  className="flex justify-between items-center mt-6 pt-6"
+                  style={{ borderTop: `1px solid ${isDark ? currentTheme.colors.border : '#f3f4f6'}` }}
+                >
                   <button
                     onClick={handlePrevious}
                     disabled={currentIndex === 0}
-                    className={`flex items-center gap-2 px-4 py-2 rounded-lg font-medium transition-all ${
-                      currentIndex === 0
-                        ? 'text-gray-400 cursor-not-allowed'
-                        : 'text-gray-600 hover:bg-gray-100'
-                    }`}
+                    className="flex items-center gap-2 px-4 py-2 rounded-lg font-medium transition-all"
+                    style={currentIndex === 0 
+                      ? { color: isDark ? 'rgba(156, 163, 175, 0.5)' : '#9ca3af', cursor: 'not-allowed' }
+                      : { color: isDark ? currentTheme.colors.textMuted : '#4b5563' }
+                    }
                   >
                     <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
@@ -328,21 +352,40 @@ export const ExerciseModal: React.FC<ExerciseModalProps> = ({
             className="absolute inset-0 bg-black/30"
             onClick={handleCancelExit}
           />
-          <div className="relative bg-white rounded-2xl shadow-xl max-w-sm w-full p-6">
+          <div 
+            className="relative rounded-2xl shadow-xl max-w-sm w-full p-6"
+            style={{ backgroundColor: isDark ? currentTheme.colors.surface : '#ffffff' }}
+          >
             <div className="text-center">
-              <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-amber-100 flex items-center justify-center">
+              <div 
+                className="w-16 h-16 mx-auto mb-4 rounded-full flex items-center justify-center"
+                style={isDark 
+                  ? { backgroundColor: 'rgba(251, 191, 36, 0.2)' }
+                  : { backgroundColor: '#fef3c7' }
+                }
+              >
                 <span className="text-3xl">💾</span>
               </div>
-              <h3 className="text-lg font-semibold text-gray-800 mb-2">
+              <h3 
+                className="text-lg font-semibold mb-2"
+                style={{ color: isDark ? currentTheme.colors.text : '#1f2937' }}
+              >
                 Save & Exit?
               </h3>
-              <p className="text-gray-600 mb-6">
+              <p 
+                className="mb-6"
+                style={{ color: isDark ? currentTheme.colors.textMuted : '#4b5563' }}
+              >
                 Your progress has been saved. You can continue where you left off later.
               </p>
               <div className="flex gap-3">
                 <button
                   onClick={handleCancelExit}
-                  className="flex-1 px-4 py-2 rounded-lg font-medium bg-gray-100 text-gray-600 hover:bg-gray-200 transition-all"
+                  className="flex-1 px-4 py-2 rounded-lg font-medium transition-all"
+                  style={isDark 
+                    ? { backgroundColor: currentTheme.colors.surfaceHover, color: currentTheme.colors.textMuted }
+                    : { backgroundColor: '#f3f4f6', color: '#4b5563' }
+                  }
                 >
                   Continue
                 </button>

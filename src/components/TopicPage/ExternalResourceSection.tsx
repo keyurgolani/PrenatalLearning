@@ -1,5 +1,6 @@
 import React, { useState, useCallback } from 'react';
 import type { ExternalResource } from '../../types';
+import { useTheme } from '../../contexts/ThemeContext';
 
 /**
  * ExternalResourceSection component - Displays curated external educational resources
@@ -71,21 +72,19 @@ const getResourceTypeLabel = (type: ExternalResource['type']): string => {
 };
 
 /**
- * Get color classes for resource type badge
+ * Get color styles for resource type badge
  */
-const getResourceTypeColor = (type: ExternalResource['type']): string => {
-  switch (type) {
-    case 'video':
-      return 'bg-red-100 text-red-700';
-    case 'article':
-      return 'bg-blue-100 text-blue-700';
-    case 'tutorial':
-      return 'bg-green-100 text-green-700';
-    case 'interactive':
-      return 'bg-purple-100 text-purple-700';
-    default:
-      return 'bg-gray-100 text-gray-700';
-  }
+const getResourceTypeColor = (type: ExternalResource['type'], isDark: boolean): { backgroundColor: string; color: string } => {
+  const colors: Record<string, { light: { bg: string; text: string }; dark: { bg: string; text: string } }> = {
+    video: { light: { bg: '#fee2e2', text: '#b91c1c' }, dark: { bg: 'rgba(239, 68, 68, 0.2)', text: '#F87171' } },
+    article: { light: { bg: '#dbeafe', text: '#1d4ed8' }, dark: { bg: 'rgba(59, 130, 246, 0.2)', text: '#60A5FA' } },
+    tutorial: { light: { bg: '#dcfce7', text: '#15803d' }, dark: { bg: 'rgba(34, 197, 94, 0.2)', text: '#4ADE80' } },
+    interactive: { light: { bg: '#f3e8ff', text: '#7c3aed' }, dark: { bg: 'rgba(168, 85, 247, 0.2)', text: '#C084FC' } },
+  };
+  const colorSet = colors[type] || colors.interactive;
+  return isDark 
+    ? { backgroundColor: colorSet.dark.bg, color: colorSet.dark.text }
+    : { backgroundColor: colorSet.light.bg, color: colorSet.light.text };
 };
 
 /**
@@ -96,6 +95,8 @@ interface ResourceCardProps {
 }
 
 const ResourceCard: React.FC<ResourceCardProps> = ({ resource }) => {
+  const { currentTheme } = useTheme();
+  const isDark = currentTheme.isDark ?? false;
   const [embedError, setEmbedError] = useState(false);
   const [isExpanded, setIsExpanded] = useState(false);
 
@@ -109,31 +110,50 @@ const ResourceCard: React.FC<ResourceCardProps> = ({ resource }) => {
 
   const hasEmbed = resource.embedUrl && !embedError;
   const canEmbed = resource.type === 'video' && hasEmbed;
+  const typeColors = getResourceTypeColor(resource.type, isDark);
 
   return (
-    <div className="bg-white rounded-xl border border-gray-200 overflow-hidden shadow-sm hover:shadow-md transition-shadow">
+    <div 
+      className="rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-shadow"
+      style={{ 
+        backgroundColor: isDark ? currentTheme.colors.surfaceHover : '#ffffff',
+        border: `1px solid ${isDark ? currentTheme.colors.border : '#e5e7eb'}`
+      }}
+    >
       {/* Resource Header */}
       <div className="p-4">
         <div className="flex items-start justify-between gap-3">
           <div className="flex-1 min-w-0">
             {/* Title and Source */}
-            <h4 className="font-semibold text-gray-800 mb-1 line-clamp-2">
+            <h4 
+              className="font-semibold mb-1 line-clamp-2"
+              style={{ color: isDark ? currentTheme.colors.text : '#1f2937' }}
+            >
               {resource.title}
             </h4>
-            <p className="text-sm text-gray-500 mb-2">
+            <p 
+              className="text-sm mb-2"
+              style={{ color: isDark ? currentTheme.colors.textMuted : '#6b7280' }}
+            >
               {resource.source}
             </p>
             
             {/* Description */}
             {resource.description && (
-              <p className="text-sm text-gray-600 line-clamp-2">
+              <p 
+                className="text-sm line-clamp-2"
+                style={{ color: isDark ? currentTheme.colors.textMuted : '#4b5563' }}
+              >
                 {resource.description}
               </p>
             )}
           </div>
 
           {/* Type Badge */}
-          <div className={`flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium ${getResourceTypeColor(resource.type)}`}>
+          <div 
+            className="flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium"
+            style={typeColors}
+          >
             {getResourceTypeIcon(resource.type)}
             <span>{getResourceTypeLabel(resource.type)}</span>
           </div>
@@ -142,7 +162,7 @@ const ResourceCard: React.FC<ResourceCardProps> = ({ resource }) => {
 
       {/* Embedded Content (for videos) - Requirements 6.4 */}
       {canEmbed && (
-        <div className="border-t border-gray-100">
+        <div style={{ borderTop: `1px solid ${isDark ? currentTheme.colors.border : '#f3f4f6'}` }}>
           {isExpanded ? (
             <div className="relative">
               <div className="aspect-video bg-gray-900">
@@ -168,7 +188,10 @@ const ResourceCard: React.FC<ResourceCardProps> = ({ resource }) => {
           ) : (
             <button
               onClick={toggleExpand}
-              className="w-full p-3 flex items-center justify-center gap-2 text-sm font-medium text-purple-600 hover:bg-purple-50 transition-colors"
+              className="w-full p-3 flex items-center justify-center gap-2 text-sm font-medium transition-colors"
+              style={{ 
+                color: isDark ? '#C084FC' : '#9333ea',
+              }}
             >
               <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
                 <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clipRule="evenodd" />
@@ -185,7 +208,8 @@ const ResourceCard: React.FC<ResourceCardProps> = ({ resource }) => {
           href={resource.url}
           target="_blank"
           rel="noopener noreferrer"
-          className="inline-flex items-center gap-1.5 text-sm font-medium text-purple-600 hover:text-purple-700 transition-colors"
+          className="inline-flex items-center gap-1.5 text-sm font-medium transition-colors"
+          style={{ color: isDark ? '#C084FC' : '#9333ea' }}
         >
           {embedError ? 'Video unavailable - ' : ''}
           Open in new tab
@@ -203,6 +227,9 @@ const ResourceCard: React.FC<ResourceCardProps> = ({ resource }) => {
  * Displays a section of curated external resources for a topic
  */
 export const ExternalResourceSection: React.FC<ExternalResourceSectionProps> = ({ resources }) => {
+  const { currentTheme } = useTheme();
+  const isDark = currentTheme.isDark ?? false;
+
   // Don't render if no resources - Requirements 6.1
   if (!resources || resources.length === 0) {
     return null;
@@ -212,17 +239,35 @@ export const ExternalResourceSection: React.FC<ExternalResourceSectionProps> = (
     <section className="mt-8" aria-labelledby="external-resources-heading">
       {/* Section Header */}
       <div className="flex items-center gap-3 mb-4">
-        <div className="p-2 rounded-lg bg-gradient-to-r from-purple-100 to-pink-100">
-          <svg className="w-5 h-5 text-purple-600" fill="currentColor" viewBox="0 0 20 20">
+        <div 
+          className="p-2 rounded-lg"
+          style={isDark 
+            ? { backgroundColor: 'rgba(168, 85, 247, 0.2)' }
+            : { background: 'linear-gradient(to right, #f3e8ff, #fce7f3)' }
+          }
+        >
+          <svg 
+            className="w-5 h-5" 
+            fill="currentColor" 
+            viewBox="0 0 20 20"
+            style={{ color: isDark ? '#C084FC' : '#9333ea' }}
+          >
             <path d="M11 3a1 1 0 100 2h2.586l-6.293 6.293a1 1 0 101.414 1.414L15 6.414V9a1 1 0 102 0V4a1 1 0 00-1-1h-5z" />
             <path d="M5 5a2 2 0 00-2 2v8a2 2 0 002 2h8a2 2 0 002-2v-3a1 1 0 10-2 0v3H5V7h3a1 1 0 000-2H5z" />
           </svg>
         </div>
         <div>
-          <h3 id="external-resources-heading" className="text-lg font-semibold text-gray-800">
+          <h3 
+            id="external-resources-heading" 
+            className="text-lg font-semibold"
+            style={{ color: isDark ? currentTheme.colors.text : '#1f2937' }}
+          >
             External Resources
           </h3>
-          <p className="text-sm text-gray-500">
+          <p 
+            className="text-sm"
+            style={{ color: isDark ? currentTheme.colors.textMuted : '#6b7280' }}
+          >
             Curated content to deepen your understanding
           </p>
         </div>

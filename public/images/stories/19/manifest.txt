@@ -1,0 +1,39 @@
+# Image Manifest for Story 19: The Library of Memory: How We Remember
+# Format: sectionName|position|filename|altText|caption
+#
+# Instructions:
+# 1. Create images based on the suggested descriptions below
+# 2. Save image files with the suggested filenames (or update the filename field)
+# 3. Place image files in public/images/stories/19/
+# 4. Remove the # from lines you have created images for
+# 5. Position options: before, after, inline
+#
+
+# === SUGGESTED IMAGES FROM ANALOGIES ===
+# These images would help visualize the key analogies in the story
+
+# coreContent|after|analogy-0.png|Illustration of Memory|A magnificent library with endless shelves, where every experience becomes a book that can be revisited
+# coreContent|after|analogy-1.png|Illustration of Hippocampus|A master librarian who creates the index linking all parts of a memory together, conducting the orchestra of recall
+# coreContent|after|analogy-2.png|Illustration of Working Memory|The librarian's desk—a temporary workspace where new information is examined before being shelved
+# coreContent|after|analogy-3.png|Illustration of Memory Consolidation|The night shift librarian, working while you sleep to file away the day's new books and strengthen important memories
+# coreContent|after|analogy-4.png|Illustration of Emotional Memory|A highlighter that marks certain passages in the book of your life, making them easier to find later
+# coreContent|after|analogy-5.png|Illustration of Memory Retrieval|Following paths through the library—cues like smells, songs, or images that lead you back to stored memories
+
+# === SUGGESTED IMAGES FROM KEY CONCEPTS ===
+# These images would help illustrate the main concepts
+
+# coreContent|inline|concept-0.png|Illustration of: Memory is like a vast library where experiences, facts, and skills are stored and can be retrieve...|Memory is like a vast library where experiences, facts, and skills are stored and can be retrieved when needed
+# coreContent|inline|concept-1.png|Illustration of: The hippocampus acts as a master librarian, creating an index that links together different parts...|The hippocampus acts as a master librarian, creating an index that links together different parts of memories stored across the brain
+# coreContent|inline|concept-2.png|Illustration of: There are different types of memory: sensory (brief snapshots), short-term/working (temporary hol...|There are different types of memory: sensory (brief snapshots), short-term/working (temporary holding), and long-term (lasting storage)
+# coreContent|inline|concept-3.png|Illustration of: Long-term memory includes episodic (personal experiences), semantic (facts and knowledge), and pr...|Long-term memory includes episodic (personal experiences), semantic (facts and knowledge), and procedural (skills and how-to)
+# coreContent|inline|concept-4.png|Illustration of: Sleep is essential for memory consolidation—the process of strengthening and permanently storing ...|Sleep is essential for memory consolidation—the process of strengthening and permanently storing memories
+# coreContent|inline|concept-5.png|Illustration of: Emotions enhance memory through the amygdala, which highlights important experiences for better e...|Emotions enhance memory through the amygdala, which highlights important experiences for better encoding
+# coreContent|inline|concept-6.png|Illustration of: Neuroplasticity means the brain can always learn and change—the library is always growing|Neuroplasticity means the brain can always learn and change—the library is always growing
+
+# === SECTION-SPECIFIC IMAGES ===
+# Add images for specific sections as needed
+
+# introduction|before|intro-img0.png|[Add alt text for introduction image]|[Optional caption for introduction image]
+# coreContent|before|core-img0.png|[Add alt text for coreContent image]|[Optional caption for coreContent image]
+# interactiveSection|before|interactive-img0.png|[Add alt text for interactiveSection image]|[Optional caption for interactiveSection image]
+# integration|before|integration-img0.png|[Add alt text for integration image]|[Optional caption for integration image]

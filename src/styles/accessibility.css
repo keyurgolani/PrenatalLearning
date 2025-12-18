@@ -1,0 +1,313 @@
+/**
+ * Accessibility Styles
+ * Requirements: 12.1 - WCAG 2.1 AA compliance for color contrast
+ * Requirements: 12.5 - Respect user's system preference for reduced motion
+ * Requirements: 12.6 - Provide visible focus indicators for all interactive elements
+ */
+
+/* ============================================
+   Focus Indicators - Requirements 12.6
+   Consistent, visible focus ring styling
+   ============================================ */
+
+/* Default focus ring for all focusable elements */
+:focus-visible {
+  outline: 2px solid #8b5cf6;
+  outline-offset: 2px;
+}
+
+/* Remove default outline when using focus-visible */
+:focus:not(:focus-visible) {
+  outline: none;
+}
+
+/* Custom focus ring class for consistent styling */
+.focus-ring {
+  transition: box-shadow 0.15s ease-in-out, outline 0.15s ease-in-out;
+}
+
+.focus-ring:focus-visible {
+  outline: 2px solid #8b5cf6;
+  outline-offset: 2px;
+  box-shadow: 0 0 0 4px rgba(139, 92, 246, 0.2);
+}
+
+/* High contrast focus for dark backgrounds */
+.focus-ring-light:focus-visible {
+  outline: 2px solid #ffffff;
+  outline-offset: 2px;
+  box-shadow: 0 0 0 4px rgba(255, 255, 255, 0.3);
+}
+
+/* Focus ring for buttons */
+button:focus-visible,
+[role="button"]:focus-visible {
+  outline: 2px solid #8b5cf6;
+  outline-offset: 2px;
+  box-shadow: 0 0 0 4px rgba(139, 92, 246, 0.2);
+}
+
+/* Focus ring for links */
+a:focus-visible {
+  outline: 2px solid #8b5cf6;
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+/* Focus ring for inputs */
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible {
+  outline: 2px solid #8b5cf6;
+  outline-offset: 0;
+  border-color: #8b5cf6;
+}
+
+/* Focus ring for cards and interactive containers */
+[tabindex="0"]:focus-visible,
+article:focus-visible {
+  outline: 2px solid #8b5cf6;
+  outline-offset: 2px;
+  box-shadow: 0 0 0 4px rgba(139, 92, 246, 0.2);
+}
+
+/* ============================================
+   Reduced Motion - Requirements 12.5
+   Disable or reduce animations when preferred
+   Supports both system preference and programmatic toggle
+   ============================================ */
+
+/* System preference for reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  
+  /* Disable specific animation classes */
+  .animate-fade-in,
+  .animate-slide-up,
+  .animate-scale-in,
+  .animate-card-enter,
+  .animate-glow,
+  .animate-gradient-border,
+  .animate-scale-hover,
+  .animate-gentle-bounce,
+  .animate-soft-pulse,
+  .animate-badge-pop,
+  .animate-click {
+    animation: none !important;
+    transition: none !important;
+    opacity: 1 !important;
+  }
+  
+  /* Keep essential state changes visible */
+  .transition-theme {
+    transition: none !important;
+  }
+  
+  /* Ensure hover states still work without animation */
+  .animate-scale-hover:hover {
+    transform: none;
+  }
+  
+  .animate-gentle-bounce:hover {
+    transform: none;
+  }
+}
+
+/* Programmatic reduced motion toggle via data attribute */
+[data-reduced-motion="true"] *,
+[data-reduced-motion="true"] *::before,
+[data-reduced-motion="true"] *::after {
+  animation-duration: 0.01ms !important;
+  animation-iteration-count: 1 !important;
+  transition-duration: 0.01ms !important;
+  scroll-behavior: auto !important;
+}
+
+[data-reduced-motion="true"] .animate-fade-in,
+[data-reduced-motion="true"] .animate-slide-up,
+[data-reduced-motion="true"] .animate-scale-in,
+[data-reduced-motion="true"] .animate-card-enter,
+[data-reduced-motion="true"] .animate-glow,
+[data-reduced-motion="true"] .animate-gradient-border,
+[data-reduced-motion="true"] .animate-scale-hover,
+[data-reduced-motion="true"] .animate-gentle-bounce,
+[data-reduced-motion="true"] .animate-soft-pulse,
+[data-reduced-motion="true"] .animate-badge-pop,
+[data-reduced-motion="true"] .animate-click {
+  animation: none !important;
+  transition: none !important;
+}
+
+[data-reduced-motion="true"] .transition-theme {
+  transition: none !important;
+}
+
+[data-reduced-motion="true"] .animate-scale-hover:hover {
+  transform: none;
+}
+
+[data-reduced-motion="true"] .animate-gentle-bounce:hover {
+  transform: none;
+}
+
+/* ============================================
+   Color Contrast Improvements - Requirements 12.1
+   WCAG 2.1 AA compliant color combinations
+   ============================================ */
+
+/* Ensure text has sufficient contrast */
+.text-contrast-high {
+  color: #1f2937; /* gray-800 - 12.63:1 on white */
+}
+
+.text-contrast-medium {
+  color: #374151; /* gray-700 - 9.18:1 on white */
+}
+
+.text-contrast-muted {
+  color: #4b5563; /* gray-600 - 5.91:1 on white - meets AA for normal text */
+}
+
+/* Dark mode contrast colors */
+.dark .text-contrast-high {
+  color: #f9fafb; /* gray-50 */
+}
+
+.dark .text-contrast-medium {
+  color: #e5e7eb; /* gray-200 */
+}
+
+.dark .text-contrast-muted {
+  color: #9ca3af; /* gray-400 - meets AA on dark backgrounds */
+}
+
+/* Badge colors with sufficient contrast */
+.badge-success {
+  background-color: #059669; /* emerald-600 */
+  color: #ffffff;
+}
+
+.badge-warning {
+  background-color: #d97706; /* amber-600 */
+  color: #ffffff;
+}
+
+.badge-error {
+  background-color: #dc2626; /* red-600 */
+  color: #ffffff;
+}
+
+.badge-info {
+  background-color: #2563eb; /* blue-600 */
+  color: #ffffff;
+}
+
+/* Improved muted text colors for better contrast */
+.text-muted-accessible {
+  color: #6b7280; /* gray-500 - 4.63:1 on white, meets AA for large text */
+}
+
+/* For small text, use darker color */
+.text-small-accessible {
+  color: #4b5563; /* gray-600 - 5.91:1 on white, meets AA for normal text */
+}
+
+/* ============================================
+   Skip Link for Keyboard Navigation
+   ============================================ */
+
+.skip-link {
+  position: absolute;
+  top: -40px;
+  left: 0;
+  background: #8b5cf6;
+  color: white;
+  padding: 8px 16px;
+  z-index: 100;
+  text-decoration: none;
+  font-weight: 500;
+  border-radius: 0 0 4px 0;
+  transition: top 0.2s ease-in-out;
+}
+
+.skip-link:focus {
+  top: 0;
+}
+
+/* ============================================
+   Screen Reader Only Content
+   ============================================ */
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
+/* Make sr-only content visible on focus (for skip links) */
+.sr-only-focusable:focus {
+  position: static;
+  width: auto;
+  height: auto;
+  padding: inherit;
+  margin: inherit;
+  overflow: visible;
+  clip: auto;
+  white-space: normal;
+}
+
+/* ============================================
+   Interactive Element States
+   ============================================ */
+
+/* Ensure disabled states are visually distinct */
+button:disabled,
+[role="button"]:disabled,
+input:disabled,
+select:disabled,
+textarea:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Hover states with sufficient contrast */
+.hover-accessible:hover {
+  background-color: rgba(139, 92, 246, 0.1);
+}
+
+/* Active/pressed states */
+.active-accessible:active {
+  background-color: rgba(139, 92, 246, 0.2);
+}
+
+/* ============================================
+   Link Styles for Accessibility
+   ============================================ */
+
+/* Ensure links are distinguishable from regular text */
+a:not([class]) {
+  color: #7c3aed;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+a:not([class]):hover {
+  color: #6d28d9;
+}
+
+a:not([class]):visited {
+  color: #5b21b6;
+}

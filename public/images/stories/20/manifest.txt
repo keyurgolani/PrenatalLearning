@@ -1,0 +1,39 @@
+# Image Manifest for Story 20: Growing Your Mind: The Power of Learning
+# Format: sectionName|position|filename|altText|caption
+#
+# Instructions:
+# 1. Create images based on the suggested descriptions below
+# 2. Save image files with the suggested filenames (or update the filename field)
+# 3. Place image files in public/images/stories/20/
+# 4. Remove the # from lines you have created images for
+# 5. Position options: before, after, inline
+#
+
+# === SUGGESTED IMAGES FROM ANALOGIES ===
+# These images would help visualize the key analogies in the story
+
+# coreContent|after|analogy-0.png|Illustration of Neuroplasticity|The brain as a garden—rich soil with unlimited potential that grows more beautiful with every seed of effort planted
+# coreContent|after|analogy-1.png|Illustration of Neural Connections|Trees in a forest growing branches that intertwine—the more you practice, the stronger the connections become
+# coreContent|after|analogy-2.png|Illustration of Myelin and Practice|Adding insulation to electrical wires—practice wraps nerve fibers in myelin, making signals travel faster
+# coreContent|after|analogy-3.png|Illustration of Cognitive Reserve|A savings account for your brain—the more you learn throughout life, the more reserve you build
+# coreContent|after|analogy-4.png|Illustration of The Struggle of Learning|The burn you feel when exercising muscles—it means something is happening, growth is occurring
+# coreContent|after|analogy-5.png|Illustration of Fixed vs Growth Mindset|Seeing a dead end versus seeing a path forward—the same challenge looks different depending on your beliefs
+
+# === SUGGESTED IMAGES FROM KEY CONCEPTS ===
+# These images would help illustrate the main concepts
+
+# coreContent|inline|concept-0.png|Illustration of: Neuroplasticity is the brain's ability to grow, change, and rewire itself throughout life—you are...|Neuroplasticity is the brain's ability to grow, change, and rewire itself throughout life—you are never "stuck" with your current abilities
+# coreContent|inline|concept-1.png|Illustration of: A growth mindset is the belief that abilities can be developed through effort, good strategies, a...|A growth mindset is the belief that abilities can be developed through effort, good strategies, and help from others
+# coreContent|inline|concept-2.png|Illustration of: The word "yet" transforms limitations into possibilities—"I can't do this" becomes "I can't do th...|The word "yet" transforms limitations into possibilities—"I can't do this" becomes "I can't do this yet"
+# coreContent|inline|concept-3.png|Illustration of: Mistakes are not failures but teachers—the brain learns more from errors than from easy successes|Mistakes are not failures but teachers—the brain learns more from errors than from easy successes
+# coreContent|inline|concept-4.png|Illustration of: Struggle and challenge are signs of growth, not signs of inability—the brain grows most when work...|Struggle and challenge are signs of growth, not signs of inability—the brain grows most when working on difficult tasks
+# coreContent|inline|concept-5.png|Illustration of: Neurons that fire together wire together—practice physically strengthens neural connections|Neurons that fire together wire together—practice physically strengthens neural connections
+# coreContent|inline|concept-6.png|Illustration of: Learning is a lifelong gift that builds cognitive reserve and keeps the brain healthy at any age|Learning is a lifelong gift that builds cognitive reserve and keeps the brain healthy at any age
+
+# === SECTION-SPECIFIC IMAGES ===
+# Add images for specific sections as needed
+
+# introduction|before|intro-img0.png|[Add alt text for introduction image]|[Optional caption for introduction image]
+# coreContent|before|core-img0.png|[Add alt text for coreContent image]|[Optional caption for coreContent image]
+# interactiveSection|before|interactive-img0.png|[Add alt text for interactiveSection image]|[Optional caption for interactiveSection image]
+# integration|before|integration-img0.png|[Add alt text for integration image]|[Optional caption for integration image]

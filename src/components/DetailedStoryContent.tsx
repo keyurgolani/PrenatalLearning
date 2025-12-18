@@ -138,7 +138,7 @@ export const DetailedStoryContent: React.FC<DetailedStoryContentProps> = ({ stor
                 </svg>
               </button>
               {expandedSection === section.key && (
-                <div className="px-5 py-4 bg-white border-t border-gray-100 max-h-96 overflow-y-auto">
+                <div className="px-5 py-4 bg-white border-t border-gray-100 max-h-96 overflow-y-auto animate-expand">
                   {renderNarrativeContent(storyContent.narrative[section.key])}
                 </div>
               )}

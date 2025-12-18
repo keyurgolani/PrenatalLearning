@@ -1,3 +1,5 @@
+import type { Trimester } from './trimester';
+
 /**
  * Category identifier type for story categorization
  */
@@ -67,7 +69,21 @@ export interface Story {
   description: string;
   difficulty: DifficultyLevel;
   content: StoryContent;
+  recommendedTrimester: Trimester;
 }
+
+/**
+ * Duration filter categories for story filtering
+ * - short: < 55 minutes
+ * - medium: 55-60 minutes
+ * - long: > 60 minutes
+ */
+export type DurationFilter = 'all' | 'short' | 'medium' | 'long';
+
+/**
+ * Completion status filter for story filtering
+ */
+export type CompletionStatus = 'all' | 'completed' | 'in-progress' | 'not-started';
 
 /**
  * Filter state for story library
@@ -76,6 +92,16 @@ export interface FilterState {
   selectedCategory: CategoryId;
   searchTerm: string;
   selectedDifficulty: DifficultyLevel | 'all';
+}
+
+/**
+ * Advanced filter state with additional filtering options
+ * Requirements: 1.2, 1.3, 3.1, 3.2, 3.4
+ */
+export interface AdvancedFilterState extends FilterState {
+  selectedDuration: DurationFilter;
+  selectedCompletionStatus: CompletionStatus;
+  selectedTrimester: Trimester | 'all';
 }
 
 /**
@@ -118,3 +144,21 @@ export * from './exercises';
 
 // Re-export theme types
 export * from './theme';
+
+// Re-export trimester types
+export * from './trimester';
+
+// Re-export streak types
+export * from './streak';
+
+// Re-export kick types
+export * from './kick';
+
+// Re-export journal types
+export * from './journal';
+
+// Re-export dashboard types
+export * from './dashboard';
+
+// Re-export media types
+export * from './media';

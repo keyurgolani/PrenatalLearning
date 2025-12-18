@@ -1,0 +1,38 @@
+# Image Manifest for Story 28: Building Your Future: Wealth and Wisdom
+# Format: sectionName|position|filename|altText|caption
+#
+# Instructions:
+# 1. Create images based on the suggested descriptions below
+# 2. Save image files with the suggested filenames (or update the filename field)
+# 3. Place image files in public/images/stories/28/
+# 4. Remove the # from lines you have created images for
+# 5. Position options: before, after, inline
+#
+
+# === SUGGESTED IMAGES FROM ANALOGIES ===
+# These images would help visualize the key analogies in the story
+
+# coreContent|after|analogy-0.png|Illustration of Compound Interest|Like a snowball rolling downhill, gathering more snow with each rotation until it becomes enormous—your money gathers more money as it grows
+# coreContent|after|analogy-1.png|Illustration of Saving|Like planting seeds in a garden—you give up eating them today so you can harvest a whole crop tomorrow
+# coreContent|after|analogy-2.png|Illustration of Delayed Gratification|Like the marshmallow test—choosing two marshmallows later instead of one marshmallow now
+# coreContent|after|analogy-3.png|Illustration of Investing|Like planting an orchard—you do the work once, and the trees keep producing fruit year after year
+# coreContent|after|analogy-4.png|Illustration of Debt|Like a snowball rolling toward you instead of away—compound interest working against you, growing larger and more dangerous
+# coreContent|after|analogy-5.png|Illustration of Financial Freedom|Like having wings—not about flying everywhere, but about having the choice to fly whenever you want
+
+# === SUGGESTED IMAGES FROM KEY CONCEPTS ===
+# These images would help illustrate the main concepts
+
+# coreContent|inline|concept-0.png|Illustration of: Saving is the foundation of wealth—choosing to keep some of what you have for future use and futu...|Saving is the foundation of wealth—choosing to keep some of what you have for future use and future choices
+# coreContent|inline|concept-1.png|Illustration of: Compound interest is exponential growth where your money earns returns, and those returns earn mo...|Compound interest is exponential growth where your money earns returns, and those returns earn more returns over time
+# coreContent|inline|concept-2.png|Illustration of: Delayed gratification—the ability to wait for greater rewards—is one of the strongest predictors ...|Delayed gratification—the ability to wait for greater rewards—is one of the strongest predictors of financial success
+# coreContent|inline|concept-3.png|Illustration of: The Rule of 72: divide 72 by your interest rate to estimate how many years until your money doubles|The Rule of 72: divide 72 by your interest rate to estimate how many years until your money doubles
+# coreContent|inline|concept-4.png|Illustration of: Time is the most powerful factor in wealth building—starting early matters more than starting wit...|Time is the most powerful factor in wealth building—starting early matters more than starting with more
+# coreContent|inline|concept-5.png|Illustration of: True wealth includes health, relationships, purpose, time, and peace—not just money|True wealth includes health, relationships, purpose, time, and peace—not just money
+
+# === SECTION-SPECIFIC IMAGES ===
+# Add images for specific sections as needed
+
+# introduction|before|intro-img0.png|[Add alt text for introduction image]|[Optional caption for introduction image]
+# coreContent|before|core-img0.png|[Add alt text for coreContent image]|[Optional caption for coreContent image]
+# interactiveSection|before|interactive-img0.png|[Add alt text for interactiveSection image]|[Optional caption for interactiveSection image]
+# integration|before|integration-img0.png|[Add alt text for integration image]|[Optional caption for integration image]

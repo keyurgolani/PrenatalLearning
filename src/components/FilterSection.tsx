@@ -1,9 +1,16 @@
-import React, { useRef, useEffect } from 'react';
+import React, { useRef, useEffect, useState, useCallback } from 'react';
 import type { Category, CategoryId, DifficultyLevel } from '../types';
-import { ViewModeToggle } from './ViewModeToggle';
 import { LayoutToggle } from './LayoutToggle';
-import { useViewMode } from '../contexts/ViewModeContext';
-import { learningPaths, type LearningPath } from '../data/learningPaths';
+import type { LearningPath } from '../data/learningPaths';
+import { useTheme } from '../contexts/ThemeContext';
+import { SearchSuggestions } from './SearchSuggestions';
+import {
+  getSuggestions,
+  getRecentSearches,
+  addRecentSearch,
+  clearRecentSearches,
+  type SearchSuggestion,
+} from '../services/searchService';
 
 interface FilterSectionProps {
   categories: Category[];
@@ -13,26 +20,15 @@ interface FilterSectionProps {
   onCategoryChange: (category: CategoryId) => void;
   onDifficultyChange: (difficulty: DifficultyLevel | 'all') => void;
   onSearchChange: (term: string) => void;
-  /** Optional: Auto-focus search input when entering Explore Mode */
   autoFocusSearch?: boolean;
-  /** Selected learning path for Learning Path mode */
   selectedPath?: LearningPath;
-  /** Callback when learning path changes */
   onPathChange?: (path: LearningPath) => void;
+  isJourneyMode?: boolean;
 }
 
 /**
  * FilterSection component for filtering stories
- * 
- * Requirements:
- * - 1.2: Category filter buttons
- * - 1.3: Search input for keyword filtering
- * - 4.3: Distinct, harmonious colors for each category
- * - 5.1: Auto-focus search input on Explore Mode entry
- * - 5.2: Auto-focus search input when switching from Learning Path to Explore Mode
- * - 5.3: Visual focus indicator on search input
- * - 2.1: ViewModeToggle integration
- * - 3.1: LayoutToggle integration
+ * Full-width search bar with view toggle on the right
  */
 export const FilterSection: React.FC<FilterSectionProps> = ({
   categories,
@@ -43,28 +39,183 @@ export const FilterSection: React.FC<FilterSectionProps> = ({
   onDifficultyChange,
   onSearchChange,
   autoFocusSearch = true,
-  selectedPath = learningPaths[0],
-  onPathChange,
+  // selectedPath and onPathChange are kept for API compatibility but not used in Explore mode
+  isJourneyMode = false,
 }) => {
   const searchInputRef = useRef<HTMLInputElement>(null);
-  const { viewMode } = useViewMode();
-  const previousViewModeRef = useRef(viewMode);
+  const searchContainerRef = useRef<HTMLDivElement>(null);
+  const { currentTheme } = useTheme();
+  const isDark = currentTheme.isDark ?? false;
 
-  // Auto-focus search input when entering Explore Mode
-  // Requirements: 5.1, 5.2
+  // Search suggestions state
+  const [localSearchTerm, setLocalSearchTerm] = useState(searchTerm);
+  const [suggestions, setSuggestions] = useState<SearchSuggestion[]>([]);
+  const [recentSearches, setRecentSearches] = useState<string[]>([]);
+  const [showSuggestions, setShowSuggestions] = useState(false);
+  const [selectedIndex, setSelectedIndex] = useState(-1);
+  const debounceRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  // Sync local search term with prop
   useEffect(() => {
-    if (autoFocusSearch && viewMode === 'explore') {
-      // Focus on initial load in Explore Mode or when switching from Learning Path to Explore
-      if (previousViewModeRef.current === 'learning-path' || previousViewModeRef.current === viewMode) {
-        // Small delay to ensure DOM is ready
-        const timeoutId = setTimeout(() => {
-          searchInputRef.current?.focus();
-        }, 100);
-        return () => clearTimeout(timeoutId);
-      }
+    setLocalSearchTerm(searchTerm);
+  }, [searchTerm]);
+
+  // Load recent searches on mount
+  useEffect(() => {
+    setRecentSearches(getRecentSearches());
+  }, []);
+
+  // Debounced search - 300ms delay (Requirement 1.4)
+  useEffect(() => {
+    if (debounceRef.current) {
+      clearTimeout(debounceRef.current);
     }
-    previousViewModeRef.current = viewMode;
-  }, [viewMode, autoFocusSearch]);
+
+    debounceRef.current = setTimeout(() => {
+      onSearchChange(localSearchTerm);
+      
+      // Update suggestions
+      if (localSearchTerm.trim()) {
+        const newSuggestions = getSuggestions(localSearchTerm);
+        setSuggestions(newSuggestions);
+      } else {
+        setSuggestions([]);
+      }
+    }, 300);
+
+    return () => {
+      if (debounceRef.current) {
+        clearTimeout(debounceRef.current);
+      }
+    };
+  }, [localSearchTerm, onSearchChange]);
+
+  // Handle click outside to close suggestions
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (
+        searchContainerRef.current &&
+        !searchContainerRef.current.contains(event.target as Node)
+      ) {
+        setShowSuggestions(false);
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, []);
+
+  // Calculate total items for keyboard navigation
+  const getTotalItems = useCallback(() => {
+    if (suggestions.length > 0) {
+      return suggestions.length;
+    }
+    if (localSearchTerm.trim() === '' && recentSearches.length > 0) {
+      return recentSearches.length;
+    }
+    return 0;
+  }, [suggestions.length, recentSearches.length, localSearchTerm]);
+
+  // Handle suggestion selection (Requirement 2.4)
+  const handleSelectSuggestion = useCallback(
+    (suggestion: SearchSuggestion) => {
+      setLocalSearchTerm(suggestion.text);
+      onSearchChange(suggestion.text);
+      addRecentSearch(suggestion.text);
+      setRecentSearches(getRecentSearches());
+      setShowSuggestions(false);
+      setSelectedIndex(-1);
+      setSuggestions([]);
+
+      // If it's a category, also update the category filter
+      if (suggestion.type === 'category' && suggestion.categoryId) {
+        onCategoryChange(suggestion.categoryId as CategoryId);
+      }
+    },
+    [onSearchChange, onCategoryChange]
+  );
+
+  // Handle recent search selection
+  const handleSelectRecent = useCallback(
+    (search: string) => {
+      setLocalSearchTerm(search);
+      onSearchChange(search);
+      setShowSuggestions(false);
+      setSelectedIndex(-1);
+    },
+    [onSearchChange]
+  );
+
+  // Handle keyboard navigation (Requirement 2.3)
+  const handleKeyDown = useCallback(
+    (e: React.KeyboardEvent<HTMLInputElement>) => {
+      const totalItems = getTotalItems();
+
+      switch (e.key) {
+        case 'ArrowDown':
+          e.preventDefault();
+          setSelectedIndex((prev) => (prev < totalItems - 1 ? prev + 1 : 0));
+          setShowSuggestions(true);
+          break;
+        case 'ArrowUp':
+          e.preventDefault();
+          setSelectedIndex((prev) => (prev > 0 ? prev - 1 : totalItems - 1));
+          setShowSuggestions(true);
+          break;
+        case 'Enter':
+          e.preventDefault();
+          if (selectedIndex >= 0 && showSuggestions) {
+            if (suggestions.length > 0) {
+              handleSelectSuggestion(suggestions[selectedIndex]);
+            } else if (recentSearches.length > 0) {
+              handleSelectRecent(recentSearches[selectedIndex]);
+            }
+          } else if (localSearchTerm.trim()) {
+            // Add to recent searches when pressing Enter
+            addRecentSearch(localSearchTerm);
+            setRecentSearches(getRecentSearches());
+            setShowSuggestions(false);
+          }
+          break;
+        case 'Escape':
+          setShowSuggestions(false);
+          setSelectedIndex(-1);
+          break;
+      }
+    },
+    [getTotalItems, selectedIndex, showSuggestions, suggestions, recentSearches, localSearchTerm, handleSelectSuggestion, handleSelectRecent]
+  );
+
+  // Handle clear recent searches
+  const handleClearRecent = useCallback(() => {
+    clearRecentSearches();
+    setRecentSearches([]);
+  }, []);
+
+  // Handle input focus
+  const handleFocus = useCallback(() => {
+    setShowSuggestions(true);
+    setRecentSearches(getRecentSearches());
+  }, []);
+
+  // Handle input change
+  const handleInputChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value;
+    setLocalSearchTerm(value);
+    setSelectedIndex(-1);
+    setShowSuggestions(true);
+  }, []);
+
+  // Auto-focus search input (only in Explore mode when search bar is visible)
+  useEffect(() => {
+    if (autoFocusSearch && !isJourneyMode) {
+      const timeoutId = setTimeout(() => {
+        searchInputRef.current?.focus();
+      }, 100);
+      return () => clearTimeout(timeoutId);
+    }
+  }, [autoFocusSearch, isJourneyMode]);
+
   const difficulties: { value: DifficultyLevel | 'all'; label: string }[] = [
     { value: 'all', label: 'All Levels' },
     { value: 'foundational', label: 'Foundational' },
@@ -72,19 +223,27 @@ export const FilterSection: React.FC<FilterSectionProps> = ({
     { value: 'advanced', label: 'Advanced' },
   ];
 
-  return (
-    <section className="bg-white/80 backdrop-blur-sm py-6 px-6 shadow-sm sticky top-0 z-10">
-      <div className="max-w-6xl mx-auto space-y-4">
-        {/* Top Row: View Mode Toggle, Search Input, Layout Toggle */}
-        <div className="flex items-center gap-4">
-          {/* View Mode Toggle - Requirements: 2.1 */}
-          <ViewModeToggle />
+  // In Journey mode, don't render the filter section (view toggle is in header, paths in sidebar)
+  if (isJourneyMode) {
+    return null;
+  }
 
-          {/* Search Input - Requirements: 5.1, 5.2, 5.3 */}
-          <div className="relative flex-1">
-            <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+  return (
+    <section 
+      className="backdrop-blur-sm py-4 px-4 lg:px-6 xl:px-8 shadow-sm sticky top-0 z-10 transition-theme"
+      style={{ backgroundColor: isDark ? currentTheme.colors.surface : 'rgba(255, 255, 255, 0.8)' }}
+      role="search"
+      aria-label="Filter and search stories"
+    >
+      <div className="w-full space-y-4">
+        {/* Top Row: Search Input and Layout Toggle */}
+        <div className="flex items-center gap-3">
+          {/* Search Input - Full width with suggestions */}
+          <div className="relative flex-1" ref={searchContainerRef}>
+            <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
               <svg
-                className="h-5 w-5 text-gray-400"
+                className="h-5 w-5"
+                style={{ color: isDark ? currentTheme.colors.textMuted : '#9ca3af' }}
                 fill="none"
                 stroke="currentColor"
                 viewBox="0 0 24 24"
@@ -101,111 +260,141 @@ export const FilterSection: React.FC<FilterSectionProps> = ({
             <input
               ref={searchInputRef}
               type="text"
-              placeholder="Search stories by title or description..."
-              value={searchTerm}
-              onChange={(e) => onSearchChange(e.target.value)}
-              className="w-full pl-10 pr-4 py-3 border border-purple-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-400 focus:ring-offset-1 focus:border-transparent focus:shadow-lg focus:shadow-purple-100 transition-all duration-200 bg-white/90"
+              placeholder="Search all topics..."
+              value={localSearchTerm}
+              onChange={handleInputChange}
+              onFocus={handleFocus}
+              onKeyDown={handleKeyDown}
+              className="w-full pl-12 pr-4 py-2.5 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-400 focus:ring-offset-1 focus:border-transparent focus:shadow-lg focus:shadow-purple-100 transition-all duration-200 text-sm"
+              style={{ 
+                backgroundColor: isDark ? currentTheme.colors.surface : 'rgba(255, 255, 255, 0.9)',
+                borderColor: isDark ? currentTheme.colors.border : '#e9d5ff',
+                borderWidth: '1px',
+                borderStyle: 'solid',
+                color: isDark ? currentTheme.colors.text : 'inherit'
+              }}
               aria-label="Search stories"
+              aria-expanded={showSuggestions}
+              aria-haspopup="listbox"
+              aria-autocomplete="list"
+              role="combobox"
+            />
+            
+            {/* Search Suggestions Dropdown */}
+            <SearchSuggestions
+              suggestions={suggestions}
+              recentSearches={recentSearches}
+              isVisible={showSuggestions}
+              selectedIndex={selectedIndex}
+              onSelect={handleSelectSuggestion}
+              onSelectRecent={handleSelectRecent}
+              onClearRecent={handleClearRecent}
+              showRecent={localSearchTerm.trim() === ''}
             />
           </div>
 
-          {/* Layout Toggle - Only show in Explore Mode - Requirements: 3.1 */}
-          {viewMode === 'explore' && <LayoutToggle />}
+          {/* Layout Toggle */}
+          <LayoutToggle />
         </div>
 
-        {/* Learning Path Selector - Only show in Learning Path mode */}
-        {viewMode === 'learning-path' && (
-          <div className="space-y-2">
-            <label className="text-sm font-medium text-gray-600">
-              Choose Your Learning Path
-            </label>
-            <div className="flex flex-wrap gap-2">
-              {learningPaths.map((path) => (
+        {/* Category Filters - Hide on XL screens (shown in sidebar) */}
+        <div className="xl:hidden space-y-2">
+          <span 
+            id="category-filter-label"
+            className="text-sm font-medium block"
+            style={{ color: isDark ? currentTheme.colors.textMuted : '#4b5563' }}
+          >
+            Categories
+          </span>
+          <div 
+            className="flex flex-wrap gap-2" 
+            role="group" 
+            aria-labelledby="category-filter-label"
+          >
+            {categories.map((category) => {
+              const isActive = selectedCategory === category.id;
+              return (
                 <button
-                  key={path.id}
-                  onClick={() => onPathChange?.(path)}
+                  key={category.id}
+                  onClick={() => onCategoryChange(category.id)}
                   className={`
-                    px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200
+                    px-3 py-1.5 rounded-full text-sm font-medium transition-all duration-200 animate-gentle-bounce animate-click focus-ring
                     ${
-                      selectedPath.id === path.id
-                        ? 'bg-purple-600 text-white shadow-md'
-                        : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                      isActive
+                        ? `${category.color} text-white shadow-md scale-105`
+                        : ''
                     }
                   `}
+                  style={
+                    !isActive
+                      ? { 
+                          backgroundColor: isDark ? currentTheme.colors.surface : '#f3f4f6',
+                          color: isDark ? currentTheme.colors.text : '#4b5563'
+                        }
+                      : undefined
+                  }
+                  aria-pressed={isActive}
+                  aria-label={`Filter by ${category.name} category`}
                 >
-                  {path.name}
+                  {category.name}
                 </button>
-              ))}
-            </div>
+              );
+            })}
           </div>
-        )}
+        </div>
 
-        {/* Category Filters - Only show in Explore mode */}
-        {viewMode === 'explore' && (
-          <div className="space-y-2">
-            <label className="text-sm font-medium text-gray-600">Categories</label>
-            <div className="flex flex-wrap gap-2">
-              {categories.map((category) => {
-                const isActive = selectedCategory === category.id;
-                return (
-                  <button
-                    key={category.id}
-                    onClick={() => onCategoryChange(category.id)}
-                    className={`
-                      px-4 py-2 rounded-full text-sm font-medium transition-all duration-200
-                      ${
-                        isActive
-                          ? `${category.color} text-white shadow-md scale-105`
-                          : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
-                      }
-                    `}
-                    aria-pressed={isActive}
-                  >
-                    {category.name}
-                  </button>
-                );
-              })}
-            </div>
+        {/* Difficulty Filters - Hide on XL screens (shown in sidebar) */}
+        <div className="xl:hidden space-y-2">
+          <span 
+            id="difficulty-filter-label"
+            className="text-sm font-medium block"
+            style={{ color: isDark ? currentTheme.colors.textMuted : '#4b5563' }}
+          >
+            Difficulty Level
+          </span>
+          <div 
+            className="flex flex-wrap gap-2" 
+            role="group" 
+            aria-labelledby="difficulty-filter-label"
+          >
+            {difficulties.map(({ value, label }) => {
+              const isActive = selectedDifficulty === value;
+              const colorClass = {
+                all: 'bg-gray-500',
+                foundational: 'bg-green-500',
+                intermediate: 'bg-yellow-500',
+                advanced: 'bg-red-500',
+              }[value];
+
+              return (
+                <button
+                  key={value}
+                  onClick={() => onDifficultyChange(value)}
+                  className={`
+                    px-3 py-1.5 rounded-full text-sm font-medium transition-all duration-200 animate-gentle-bounce animate-click focus-ring
+                    ${
+                      isActive
+                        ? `${colorClass} text-white shadow-md scale-105`
+                        : ''
+                    }
+                  `}
+                  style={
+                    !isActive
+                      ? { 
+                          backgroundColor: isDark ? currentTheme.colors.surface : '#f3f4f6',
+                          color: isDark ? currentTheme.colors.text : '#4b5563'
+                        }
+                      : undefined
+                  }
+                  aria-pressed={isActive}
+                  aria-label={`Filter by ${label} difficulty`}
+                >
+                  {label}
+                </button>
+              );
+            })}
           </div>
-        )}
-
-        {/* Difficulty Filters - Only show in Explore mode */}
-        {viewMode === 'explore' && (
-          <div className="space-y-2">
-            <label className="text-sm font-medium text-gray-600">
-              Difficulty Level
-            </label>
-            <div className="flex flex-wrap gap-2">
-              {difficulties.map(({ value, label }) => {
-                const isActive = selectedDifficulty === value;
-                const colorClass = {
-                  all: 'bg-gray-500',
-                  foundational: 'bg-green-500',
-                  intermediate: 'bg-yellow-500',
-                  advanced: 'bg-red-500',
-                }[value];
-
-                return (
-                  <button
-                    key={value}
-                    onClick={() => onDifficultyChange(value)}
-                    className={`
-                      px-4 py-2 rounded-full text-sm font-medium transition-all duration-200
-                      ${
-                        isActive
-                          ? `${colorClass} text-white shadow-md scale-105`
-                          : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
-                      }
-                    `}
-                    aria-pressed={isActive}
-                  >
-                    {label}
-                  </button>
-                );
-              })}
-            </div>
-          </div>
-        )}
+        </div>
       </div>
     </section>
   );

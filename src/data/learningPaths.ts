@@ -42,8 +42,8 @@ export interface LearningPathItem {
  */
 export const defaultLearningPath: LearningPath = {
   id: 'default',
-  name: 'Recommended Journey',
-  description: 'A curated sequence from foundational to advanced topics, designed for expectant mothers to explore knowledge at a comfortable pace.',
+  name: 'All In One Journey',
+  description: 'A comprehensive sequence covering all topics from foundational to advanced, designed for expectant mothers who want to explore everything.',
   storyOrder: [
     // === FOUNDATIONAL TOPICS (12 stories) ===
     // Science & Universe - Foundational
@@ -257,9 +257,25 @@ export const advancedPath: LearningPath = {
 };
 
 /**
+ * Trimester-specific Learning Paths
+ * 
+ * Requirements:
+ * - 2.1: THE System SHALL provide three trimester-specific learning paths
+ * - 2.2: EACH trimester learning path SHALL contain 8-12 stories appropriate for that stage
+ * - 2.3: THE System SHALL order stories within trimester paths from foundational to more complex topics
+ */
+import { firstTrimesterPath, secondTrimesterPath, thirdTrimesterPath } from './trimesterPaths';
+
+/**
  * All available learning paths
+ * Trimester paths are listed first for prominence (Requirements 2.4)
  */
 export const learningPaths: LearningPath[] = [
+  // Trimester-specific paths (prominent placement)
+  firstTrimesterPath,
+  secondTrimesterPath,
+  thirdTrimesterPath,
+  // General paths
   defaultLearningPath,
   beginnerPath,
   scienceTechPath,

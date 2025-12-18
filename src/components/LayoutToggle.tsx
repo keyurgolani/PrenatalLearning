@@ -1,5 +1,6 @@
 import React from 'react';
 import { useLayout, type LayoutMode } from '../contexts/LayoutContext';
+import { useTheme } from '../contexts/ThemeContext';
 
 /**
  * LayoutToggle component for switching between grid and list layouts
@@ -8,6 +9,8 @@ import { useLayout, type LayoutMode } from '../contexts/LayoutContext';
  */
 export const LayoutToggle: React.FC = () => {
   const { layout, setLayout } = useLayout();
+  const { currentTheme } = useTheme();
+  const isDark = currentTheme.isDark ?? false;
 
   const layouts: { value: LayoutMode; label: string; icon: React.ReactNode }[] = [
     {
@@ -54,7 +57,8 @@ export const LayoutToggle: React.FC = () => {
 
   return (
     <div
-      className="inline-flex rounded-lg bg-gray-100 p-1"
+      className="inline-flex rounded-lg p-1"
+      style={{ backgroundColor: isDark ? currentTheme.colors.surface : '#f3f4f6' }}
       role="group"
       aria-label="Layout selection"
     >
@@ -65,12 +69,19 @@ export const LayoutToggle: React.FC = () => {
             key={value}
             onClick={() => setLayout(value)}
             className={`
-              p-2 rounded-md transition-all duration-200
-              ${isActive
-                ? 'bg-white text-purple-700 shadow-sm'
-                : 'text-gray-600 hover:text-gray-900 hover:bg-gray-50'
-              }
+              p-2 rounded-md transition-all duration-200 animate-gentle-bounce animate-click focus-ring
+              ${isActive ? 'shadow-sm' : ''}
             `}
+            style={
+              isActive
+                ? { 
+                    backgroundColor: isDark ? currentTheme.colors.surfaceHover : '#ffffff',
+                    color: isDark ? currentTheme.colors.primary : '#7c3aed'
+                  }
+                : { 
+                    color: isDark ? currentTheme.colors.textMuted : '#4b5563'
+                  }
+            }
             aria-label={label}
             aria-pressed={isActive}
           >

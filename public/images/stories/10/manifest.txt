@@ -1,0 +1,42 @@
+# Image Manifest for Story 10: The Symphony Inside: Your Body as an Orchestra
+# Format: sectionName|position|filename|altText|caption
+#
+# Instructions:
+# 1. Create images based on the suggested descriptions below
+# 2. Save image files with the suggested filenames (or update the filename field)
+# 3. Place image files in public/images/stories/10/
+# 4. Remove the # from lines you have created images for
+# 5. Position options: before, after, inline
+#
+
+# === SUGGESTED IMAGES FROM ANALOGIES ===
+# These images would help visualize the key analogies in the story
+
+# coreContent|after|analogy-0.png|Illustration of Body Systems|A grand orchestra with trillions of musicians, each system playing its own instrument section
+# coreContent|after|analogy-1.png|Illustration of Muscular System|The string section—providing movement and flow, able to play softly or loudly, quickly or slowly
+# coreContent|after|analogy-2.png|Illustration of Skeletal System|The percussion section—providing structure and rhythm, with bone marrow drumming out new blood cells
+# coreContent|after|analogy-3.png|Illustration of Respiratory System|The brass section—all about breath, transforming air into the music of life
+# coreContent|after|analogy-4.png|Illustration of Digestive System|The woodwind section—transforming food into energy, adding color and texture to the body's performance
+# coreContent|after|analogy-5.png|Illustration of Nervous System|The conductor—coordinating all musicians, sending messages at speeds up to 270 miles per hour
+# coreContent|after|analogy-6.png|Illustration of Cardiovascular System|The rhythm section—the heart keeping time for all other systems, blood vessels like delivery routes
+# coreContent|after|analogy-7.png|Illustration of Endocrine System|Long-distance calls between orchestra sections, hormones carrying messages throughout the body
+# coreContent|after|analogy-8.png|Illustration of Immune System|The security team—vigilant guards watching for intruders, remembering troublemakers' faces
+# coreContent|after|analogy-9.png|Illustration of Homeostasis|The orchestra adjusting its performance to keep everything in harmony—the perfect balance of life
+
+# === SUGGESTED IMAGES FROM KEY CONCEPTS ===
+# These images would help illustrate the main concepts
+
+# coreContent|inline|concept-0.png|Illustration of: The human body contains about 37 trillion cells, all working together like musicians in an orchestra|The human body contains about 37 trillion cells, all working together like musicians in an orchestra
+# coreContent|inline|concept-1.png|Illustration of: Major organ systems include muscular, skeletal, respiratory, digestive, nervous, cardiovascular, ...|Major organ systems include muscular, skeletal, respiratory, digestive, nervous, cardiovascular, endocrine, and immune systems
+# coreContent|inline|concept-2.png|Illustration of: The nervous system acts as the conductor, coordinating all other systems through electrical and c...|The nervous system acts as the conductor, coordinating all other systems through electrical and chemical signals
+# coreContent|inline|concept-3.png|Illustration of: The cardiovascular system provides the rhythm, with the heart beating about 100,000 times per day|The cardiovascular system provides the rhythm, with the heart beating about 100,000 times per day
+# coreContent|inline|concept-4.png|Illustration of: Homeostasis is the body's way of maintaining internal balance—the harmony of the orchestra|Homeostasis is the body's way of maintaining internal balance—the harmony of the orchestra
+# coreContent|inline|concept-5.png|Illustration of: All body systems communicate and cooperate constantly, creating the symphony of life|All body systems communicate and cooperate constantly, creating the symphony of life
+
+# === SECTION-SPECIFIC IMAGES ===
+# Add images for specific sections as needed
+
+# introduction|before|intro-img0.png|[Add alt text for introduction image]|[Optional caption for introduction image]
+# coreContent|before|core-img0.png|[Add alt text for coreContent image]|[Optional caption for coreContent image]
+# interactiveSection|before|interactive-img0.png|[Add alt text for interactiveSection image]|[Optional caption for interactiveSection image]
+# integration|before|integration-img0.png|[Add alt text for integration image]|[Optional caption for integration image]

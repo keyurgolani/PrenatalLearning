@@ -8,12 +8,15 @@ export interface Theme {
   id: string;
   name: string;
   description: string;
+  isDark?: boolean; // Whether this is a dark theme
   colors: {
     primary: string;      // Main accent color (hex)
     secondary: string;    // Secondary accent (hex)
+    tertiary?: string;    // Third accent color (hex)
     background: string;   // Page background gradient (Tailwind classes)
     headerGradient: string; // Header gradient (CSS)
     surface: string;      // Card/modal backgrounds (hex)
+    surfaceHover?: string; // Card hover state (hex)
     text: string;         // Primary text (hex)
     textMuted: string;    // Secondary text (hex)
     border: string;       // Border colors (hex)

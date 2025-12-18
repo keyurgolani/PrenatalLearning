@@ -1,0 +1,38 @@
+# Image Manifest for Story 14: Infinity and Beyond: The Endless Mystery
+# Format: sectionName|position|filename|altText|caption
+#
+# Instructions:
+# 1. Create images based on the suggested descriptions below
+# 2. Save image files with the suggested filenames (or update the filename field)
+# 3. Place image files in public/images/stories/14/
+# 4. Remove the # from lines you have created images for
+# 5. Position options: before, after, inline
+#
+
+# === SUGGESTED IMAGES FROM ANALOGIES ===
+# These images would help visualize the key analogies in the story
+
+# coreContent|after|analogy-0.png|Illustration of Infinity|Infinity is like a road that goes on forever—no matter how far you travel, there's always more road ahead, always another horizon to reach
+# coreContent|after|analogy-1.png|Illustration of Countable vs Uncountable Infinity|Countable infinity is like stars you can point to one by one; uncountable infinity is like trying to point to every grain of sand on every beach—there are simply too many to ever list
+# coreContent|after|analogy-2.png|Illustration of Hilbert's Hotel|Hilbert's Hotel is like a magical accordion that can always stretch to make room for more, no matter how full it seems
+# coreContent|after|analogy-3.png|Illustration of Infinity Symbol|The infinity symbol (∞) is like a figure-eight racetrack where you can drive forever without ever reaching a finish line
+# coreContent|after|analogy-4.png|Illustration of Fractals and Infinite Detail|A fractal is like a Russian nesting doll that never ends—open one and there's another inside, forever and ever
+# coreContent|after|analogy-5.png|Illustration of Infinite Divisibility|Space is like a magical cake that can always be cut in half again—no matter how small the slice, you can always make it smaller
+
+# === SUGGESTED IMAGES FROM KEY CONCEPTS ===
+# These images would help illustrate the main concepts
+
+# coreContent|inline|concept-0.png|Illustration of: Infinity (∞) is not a number but the concept of something without end or limit|Infinity (∞) is not a number but the concept of something without end or limit
+# coreContent|inline|concept-1.png|Illustration of: The counting numbers (1, 2, 3...) form a "countable infinity" that can be listed one by one|The counting numbers (1, 2, 3...) form a "countable infinity" that can be listed one by one
+# coreContent|inline|concept-2.png|Illustration of: Georg Cantor proved that some infinities are larger than others—the real numbers are "uncountably...|Georg Cantor proved that some infinities are larger than others—the real numbers are "uncountably infinite"
+# coreContent|inline|concept-3.png|Illustration of: Hilbert's Hotel paradox shows that infinite sets behave differently than finite ones—a full infin...|Hilbert's Hotel paradox shows that infinite sets behave differently than finite ones—a full infinite hotel can still accommodate more guests
+# coreContent|inline|concept-4.png|Illustration of: Infinity appears in nature through fractals, the coastline paradox, and the infinite divisibility...|Infinity appears in nature through fractals, the coastline paradox, and the infinite divisibility of space and time
+# coreContent|inline|concept-5.png|Illustration of: There is a hierarchy of infinities (ℵ₀, ℵ₁, ℵ₂...), each larger than the last, with no largest in...|There is a hierarchy of infinities (ℵ₀, ℵ₁, ℵ₂...), each larger than the last, with no largest infinity
+
+# === SECTION-SPECIFIC IMAGES ===
+# Add images for specific sections as needed
+
+# introduction|before|intro-img0.png|[Add alt text for introduction image]|[Optional caption for introduction image]
+# coreContent|before|core-img0.png|[Add alt text for coreContent image]|[Optional caption for coreContent image]
+# interactiveSection|before|interactive-img0.png|[Add alt text for interactiveSection image]|[Optional caption for interactiveSection image]
+# integration|before|integration-img0.png|[Add alt text for integration image]|[Optional caption for integration image]

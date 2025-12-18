@@ -125,6 +125,19 @@ src/
 └── utils/           # Helper utilities
 ```
 
+## Contributing
+
+We welcome contributions! See [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines.
+
+### Community Contributions Needed
+
+We're actively seeking community help with:
+
+- **Illustration Images**: Better quality illustrations for story content. Current placeholder images need professional artwork that's warm, educational, and pregnancy-appropriate.
+- **Audio Narration**: High-quality audio narration generated with professional TTS software or voice actors. Current audio manifests contain transcripts ready for recording.
+
+See the `public/images/stories/` and `public/audio/stories/` directories for manifest files that describe what's needed for each story.
+
 ## License
 
 This project is open source and available under the [MIT License](LICENSE).

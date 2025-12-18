@@ -1,0 +1,38 @@
+# Image Manifest for Story 31: Together We Decide: Democracy and Governance
+# Format: sectionName|position|filename|altText|caption
+#
+# Instructions:
+# 1. Create images based on the suggested descriptions below
+# 2. Save image files with the suggested filenames (or update the filename field)
+# 3. Place image files in public/images/stories/31/
+# 4. Remove the # from lines you have created images for
+# 5. Position options: before, after, inline
+#
+
+# === SUGGESTED IMAGES FROM ANALOGIES ===
+# These images would help visualize the key analogies in the story
+
+# coreContent|after|analogy-0.png|Illustration of Democracy|Like a family where everyone gets a say in important decisions—parents listen to children, siblings consider each other, and choices are made together with care for everyone
+# coreContent|after|analogy-1.png|Illustration of Voting|Like raising your hand in class to share your opinion—each person gets one hand, one voice, and together the class decides
+# coreContent|after|analogy-2.png|Illustration of Rule of Law|Like the rules of a game that apply to everyone equally—even the best player must follow the same rules as everyone else
+# coreContent|after|analogy-3.png|Illustration of Separation of Powers|Like a three-legged stool—each leg (making laws, enforcing laws, interpreting laws) supports the others, and if one is removed, the whole thing falls
+# coreContent|after|analogy-4.png|Illustration of Civic Participation|Like being part of a team—everyone has a role to play, and the team works best when everyone contributes
+# coreContent|after|analogy-5.png|Illustration of Rights and Freedoms|Like a protective shield that belongs to every person—it guards your ability to speak, believe, and live freely, even when others disagree
+
+# === SUGGESTED IMAGES FROM KEY CONCEPTS ===
+# These images would help illustrate the main concepts
+
+# coreContent|inline|concept-0.png|Illustration of: Democracy means "rule by the people"—a system where citizens participate in making decisions that...|Democracy means "rule by the people"—a system where citizens participate in making decisions that affect their lives
+# coreContent|inline|concept-1.png|Illustration of: Core democratic principles include rule of law, individual rights, separation of powers, and acco...|Core democratic principles include rule of law, individual rights, separation of powers, and accountability of leaders to the people
+# coreContent|inline|concept-2.png|Illustration of: Democracy began in ancient Athens around 2,500 years ago and has evolved through different forms:...|Democracy began in ancient Athens around 2,500 years ago and has evolved through different forms: direct democracy, representative democracy, parliamentary and presidential systems
+# coreContent|inline|concept-3.png|Illustration of: The history of democracy is a story of expanding participation—from only some citizens to univers...|The history of democracy is a story of expanding participation—from only some citizens to universal suffrage including women and all races
+# coreContent|inline|concept-4.png|Illustration of: Civic participation goes beyond voting to include staying informed, speaking up, listening to oth...|Civic participation goes beyond voting to include staying informed, speaking up, listening to others, serving the community, and respecting fellow citizens
+# coreContent|inline|concept-5.png|Illustration of: Democracy requires ongoing effort and vigilance from ordinary citizens to protect rights, ensure ...|Democracy requires ongoing effort and vigilance from ordinary citizens to protect rights, ensure fair elections, and hold leaders accountable
+
+# === SECTION-SPECIFIC IMAGES ===
+# Add images for specific sections as needed
+
+# introduction|before|intro-img0.png|[Add alt text for introduction image]|[Optional caption for introduction image]
+# coreContent|before|core-img0.png|[Add alt text for coreContent image]|[Optional caption for coreContent image]
+# interactiveSection|before|interactive-img0.png|[Add alt text for interactiveSection image]|[Optional caption for interactiveSection image]
+# integration|before|integration-img0.png|[Add alt text for integration image]|[Optional caption for integration image]

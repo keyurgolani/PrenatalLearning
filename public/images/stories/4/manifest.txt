@@ -1,0 +1,39 @@
+# Image Manifest for Story 4: Starlight Stories: How Stars Live and Die
+# Format: sectionName|position|filename|altText|caption
+#
+# Instructions:
+# 1. Create images based on the suggested descriptions below
+# 2. Save image files with the suggested filenames (or update the filename field)
+# 3. Place image files in public/images/stories/4/
+# 4. Remove the # from lines you have created images for
+# 5. Position options: before, after, inline
+#
+
+# === SUGGESTED IMAGES FROM ANALOGIES ===
+# These images would help visualize the key analogies in the story
+
+# coreContent|after|analogy-0.png|Illustration of Stellar Nursery|A vast cosmic cloud floating in space, like a nursery where baby stars are born and grow
+# coreContent|after|analogy-1.png|Illustration of Gravity Gathering Gas|Like snowflakes gathering into a snowball, gravity slowly pulls gas together to form stars
+# coreContent|after|analogy-2.png|Illustration of Protostar Heating|Like rubbing your hands together creates warmth, gas particles bumping together heat up the forming star
+# coreContent|after|analogy-3.png|Illustration of Stellar Layers|Like an onion with many layers, massive stars build up shells of different elements from their core outward
+# coreContent|after|analogy-4.png|Illustration of Supernova|The universe's greatest fireworks show—a single exploding star briefly outshining billions of stars
+# coreContent|after|analogy-5.png|Illustration of Stardust Scattering|Like seeds scattered in a garden, the ashes of dead stars spread across space to create new worlds
+
+# === SUGGESTED IMAGES FROM KEY CONCEPTS ===
+# These images would help illustrate the main concepts
+
+# coreContent|inline|concept-0.png|Illustration of: Stars are born in nebulae—vast clouds of gas and dust in space|Stars are born in nebulae—vast clouds of gas and dust in space
+# coreContent|inline|concept-1.png|Illustration of: Nuclear fusion powers stars, converting hydrogen into helium and releasing enormous energy|Nuclear fusion powers stars, converting hydrogen into helium and releasing enormous energy
+# coreContent|inline|concept-2.png|Illustration of: Stars are cosmic kitchens that cook up heavier elements like carbon, oxygen, and iron|Stars are cosmic kitchens that cook up heavier elements like carbon, oxygen, and iron
+# coreContent|inline|concept-3.png|Illustration of: Massive stars end their lives in spectacular explosions called supernovae|Massive stars end their lives in spectacular explosions called supernovae
+# coreContent|inline|concept-4.png|Illustration of: Elements heavier than iron (like gold and silver) are created in supernovae|Elements heavier than iron (like gold and silver) are created in supernovae
+# coreContent|inline|concept-5.png|Illustration of: We are literally made of star stuff—the atoms in our bodies were forged in ancient stars|We are literally made of star stuff—the atoms in our bodies were forged in ancient stars
+# coreContent|inline|concept-6.png|Illustration of: The cycle of stellar birth, life, and death enriches the universe with new elements|The cycle of stellar birth, life, and death enriches the universe with new elements
+
+# === SECTION-SPECIFIC IMAGES ===
+# Add images for specific sections as needed
+
+# introduction|before|intro-img0.png|[Add alt text for introduction image]|[Optional caption for introduction image]
+# coreContent|before|core-img0.png|[Add alt text for coreContent image]|[Optional caption for coreContent image]
+# interactiveSection|before|interactive-img0.png|[Add alt text for interactiveSection image]|[Optional caption for interactiveSection image]
+# integration|before|integration-img0.png|[Add alt text for integration image]|[Optional caption for integration image]

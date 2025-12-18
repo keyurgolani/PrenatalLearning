@@ -1,7 +1,7 @@
 {
   "name": "prenatal-learning-hub",
   "private": true,
-  "version": "1.1.0",
+  "version": "1.2.0",
   "type": "module",
   "scripts": {
     "dev": "vite",
@@ -9,7 +9,8 @@
     "lint": "eslint .",
     "preview": "vite preview",
     "test": "vitest --run",
-    "test:watch": "vitest"
+    "test:watch": "vitest",
+    "generate:manifests": "npx tsx scripts/generateManifests.ts"
   },
   "dependencies": {
     "react": "^19.2.0",

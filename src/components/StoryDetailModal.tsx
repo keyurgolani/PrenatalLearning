@@ -148,7 +148,7 @@ export const StoryDetailModal: React.FC<StoryDetailModalProps> = ({
 
       {/* Modal Content */}
       <div className="relative min-h-screen flex items-start justify-center p-4 pt-8 pb-20">
-        <div className="relative bg-white rounded-3xl shadow-2xl max-w-4xl w-full overflow-hidden">
+        <div className="relative bg-white rounded-3xl shadow-2xl max-w-4xl w-full overflow-hidden animate-pop-in">
           {/* Category Color Header */}
           <div className={`h-3 ${category?.color || 'bg-gray-400'}`} />
 
@@ -220,7 +220,8 @@ export const StoryDetailModal: React.FC<StoryDetailModalProps> = ({
               {topicHasExercises && (
                 <button
                   onClick={handleStartExercises}
-                  className="inline-flex items-center px-4 py-2.5 rounded-xl font-medium bg-gradient-to-r from-amber-400 to-orange-500 text-white hover:from-amber-500 hover:to-orange-600 shadow-md hover:shadow-lg transition-all duration-200"
+                  className="inline-flex items-center px-4 py-2.5 rounded-xl font-medium bg-gradient-to-r from-amber-400 to-orange-500 text-white hover:from-amber-500 hover:to-orange-600 shadow-md hover:shadow-lg transition-all duration-200 animate-scale-hover animate-glow"
+                  style={{ '--glow-color': 'rgba(251, 146, 60, 0.5)' } as React.CSSProperties}
                 >
                   <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z" />
@@ -239,11 +240,12 @@ export const StoryDetailModal: React.FC<StoryDetailModalProps> = ({
               {hasDetailedContent && (
                 <button
                   onClick={() => setShowDetailedContent(!showDetailedContent)}
-                  className={`inline-flex items-center px-4 py-2.5 rounded-xl font-medium transition-all duration-200 ${
+                  className={`inline-flex items-center px-4 py-2.5 rounded-xl font-medium transition-all duration-200 animate-scale-hover animate-glow ${
                     showDetailedContent
                       ? 'bg-purple-600 text-white shadow-md'
                       : 'bg-gradient-to-r from-purple-500 to-indigo-500 text-white hover:from-purple-600 hover:to-indigo-600 shadow-md hover:shadow-lg'
                   }`}
+                  style={{ '--glow-color': 'rgba(139, 92, 246, 0.5)' } as React.CSSProperties}
                 >
                   <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
@@ -389,17 +391,18 @@ export const StoryDetailModal: React.FC<StoryDetailModalProps> = ({
           <div className="sticky bottom-0 bg-white border-t border-gray-100 p-6 flex gap-4">
             <button
               onClick={() => onToggleComplete(story.id)}
-              className={`flex-1 py-3 px-6 rounded-xl font-medium transition-all duration-200 ${
+              className={`flex-1 py-3 px-6 rounded-xl font-medium transition-all duration-200 animate-scale-hover ${
                 isCompleted
                   ? 'bg-green-100 text-green-700 hover:bg-green-200'
-                  : 'bg-gradient-to-r from-purple-500 to-pink-500 text-white hover:from-purple-600 hover:to-pink-600 shadow-md hover:shadow-lg'
+                  : 'bg-gradient-to-r from-purple-500 to-pink-500 text-white hover:from-purple-600 hover:to-pink-600 shadow-md hover:shadow-lg animate-glow'
               }`}
+              style={!isCompleted ? { '--glow-color': 'rgba(168, 85, 247, 0.5)' } as React.CSSProperties : {}}
             >
               {isCompleted ? '✓ Completed - Click to Unmark' : 'Mark as Complete'}
             </button>
             <button
               onClick={onClose}
-              className="px-6 py-3 rounded-xl font-medium bg-gray-100 text-gray-600 hover:bg-gray-200 transition-all duration-200"
+              className="px-6 py-3 rounded-xl font-medium bg-gray-100 text-gray-600 hover:bg-gray-200 transition-all duration-200 animate-scale-hover"
             >
               Close
             </button>

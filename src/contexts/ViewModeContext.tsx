@@ -1,10 +1,11 @@
 /* eslint-disable react-refresh/only-export-components */
-import React, { createContext, useContext, useState, useCallback, useMemo } from 'react';
+import React, { createContext, useContext, useMemo, useCallback } from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 /**
- * ViewModeContext for managing application view mode state
- * Requirements: 2.1 - Default to Learning Path Mode
- * Requirements: 2.6 - Preserve filter and search state when switching modes
+ * ViewModeContext for managing application view mode state via routes
+ * /explore - Explore mode
+ * /journey or / - Learning Path (Journey) mode
  */
 
 export type ViewMode = 'explore' | 'learning-path';
@@ -14,55 +15,35 @@ export interface ViewModeContextValue {
   setViewMode: (mode: ViewMode) => void;
 }
 
-const VIEW_MODE_STORAGE_KEY = 'prenatal-learning-hub:view-mode';
-const DEFAULT_VIEW_MODE: ViewMode = 'learning-path';
-
 const ViewModeContext = createContext<ViewModeContextValue | undefined>(undefined);
-
-/**
- * Load view mode preference from localStorage
- */
-function loadViewModePreference(): ViewMode {
-  try {
-    const stored = localStorage.getItem(VIEW_MODE_STORAGE_KEY);
-    if (stored === 'explore' || stored === 'learning-path') {
-      return stored;
-    }
-    return DEFAULT_VIEW_MODE;
-  } catch {
-    return DEFAULT_VIEW_MODE;
-  }
-}
-
-/**
- * Save view mode preference to localStorage
- */
-function saveViewModePreference(mode: ViewMode): void {
-  try {
-    localStorage.setItem(VIEW_MODE_STORAGE_KEY, mode);
-  } catch {
-    console.warn('Unable to save view mode preference to localStorage');
-  }
-}
 
 interface ViewModeProviderProps {
   children: React.ReactNode;
 }
 
 /**
- * ViewModeProvider component that manages view mode state and persistence
- * Requirements: 2.1 - Display Learning Path Mode as default
- * Requirements: 2.6 - Preserve filter state when switching modes
+ * ViewModeProvider component that derives view mode from current route
  */
 export function ViewModeProvider({ children }: ViewModeProviderProps): React.ReactElement {
-  const [viewMode, setViewModeState] = useState<ViewMode>(() => {
-    return loadViewModePreference();
-  });
+  const location = useLocation();
+  const navigate = useNavigate();
+  
+  // Derive view mode from current path
+  const viewMode: ViewMode = useMemo(() => {
+    if (location.pathname.startsWith('/explore')) {
+      return 'explore';
+    }
+    return 'learning-path';
+  }, [location.pathname]);
 
+  // Navigate to appropriate route when view mode changes
   const setViewMode = useCallback((mode: ViewMode) => {
-    setViewModeState(mode);
-    saveViewModePreference(mode);
-  }, []);
+    if (mode === 'explore') {
+      navigate('/explore');
+    } else {
+      navigate('/journey');
+    }
+  }, [navigate]);
 
   const contextValue = useMemo<ViewModeContextValue>(() => ({
     viewMode,

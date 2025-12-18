@@ -4,9 +4,34 @@ Thank you for your interest in contributing! This project aims to help expectant
 
 ## Ways to Contribute
 
+### Media Contributions (High Priority!)
+
+We especially need help with visual and audio content:
+
+#### Illustration Images
+
+We need warm, educational illustrations for all 32 stories. Requirements:
+
+- Family-friendly, pregnancy-appropriate imagery
+- Consistent art style across stories
+- PNG or WebP format, optimized for web
+- Include alt text for accessibility
+
+Each story has a `manifest.txt` file in `public/images/stories/{storyId}/` describing suggested images based on story analogies and concepts.
+
+#### Audio Narration
+
+We need high-quality audio narration for all stories. Options:
+
+- Professional TTS software (e.g., ElevenLabs, Amazon Polly, Google Cloud TTS)
+- Voice actor recordings
+- MP3 format, clear and calming tone
+
+Each story has a `manifest.txt` file in `public/audio/stories/{storyId}/` with full transcripts ready for recording.
+
 ### Content Contributions
 
-- **New Stories**: Add educational stories in categories like alphabet, numbers, colors, shapes, animals, nature, music, and emotions
+- **New Stories**: Add educational stories in categories like science, technology, biology, mathematics, psychology, language, finance, and society
 - **Interactive Exercises**: Create engaging prenatal learning activities
 - **Translations**: Help translate content to other languages
 
