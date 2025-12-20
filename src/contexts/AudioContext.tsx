@@ -97,22 +97,37 @@ export const AudioProvider: React.FC<{ children: React.ReactNode }> = ({ childre
 
   // Clean up audio element properly
   const cleanupAudio = useCallback(() => {
-    if (audioRef.current) {
-      // Remove all event listeners
-      if (handlersRef.current.canplay) {
-        audioRef.current.removeEventListener('canplaythrough', handlersRef.current.canplay);
+    const audio = audioRef.current;
+    if (!audio) return;
+    
+    try {
+      // Remove all event listeners first
+      const handlers = handlersRef.current;
+      if (handlers.canplay) {
+        audio.removeEventListener('canplaythrough', handlers.canplay);
       }
-      if (handlersRef.current.error) {
-        audioRef.current.removeEventListener('error', handlersRef.current.error);
+      if (handlers.error) {
+        audio.removeEventListener('error', handlers.error);
       }
-      if (handlersRef.current.ended) {
-        audioRef.current.removeEventListener('ended', handlersRef.current.ended);
+      if (handlers.ended) {
+        audio.removeEventListener('ended', handlers.ended);
       }
       handlersRef.current = {};
-      
-      audioRef.current.pause();
-      audioRef.current.src = '';
-      audioRef.current.load();
+    } catch {
+      // Ignore listener removal errors
+    }
+    
+    try {
+      audio.pause();
+    } catch {
+      // Ignore pause errors - audio may already be paused or in invalid state
+    }
+    
+    try {
+      audio.src = '';
+      audio.load();
+    } catch {
+      // Ignore src/load errors - audio element may be in invalid state
     }
   }, []);
 

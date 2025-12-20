@@ -32,13 +32,22 @@ interface JournalListProps {
   refreshTrigger?: number;
 }
 
+/**
+ * Mood emoji mapping for display
+ * Requirements: 11.1, 11.2 - Pregnancy-appropriate mood options
+ * Requirements: 11.9 - Mood is optional and can be null/undefined
+ */
 const MOOD_EMOJI: Record<MoodType, string> = {
   happy: '😊',
   calm: '😌',
-  reflective: '🤔',
+  anxious: '😰',
+  tired: '😴',
+  excited: '🤩',
+  emotional: '🥹',
   grateful: '🙏',
   hopeful: '✨',
-  tired: '😴',
+  uncomfortable: '😣',
+  nesting: '🏠',
 };
 
 /**
@@ -214,8 +223,10 @@ export const JournalList: React.FC<JournalListProps> = ({
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
             {/* Story filter */}
             <div>
-              <label className="block text-xs font-medium text-gray-500 mb-1">Story</label>
+              <label htmlFor="journal-story-filter" className="block text-xs font-medium text-gray-500 mb-1">Story</label>
               <select
+                id="journal-story-filter"
+                name="journal-story-filter"
                 value={filters.storyId?.toString() || ''}
                 onChange={(e) => handleStoryFilter(e.target.value)}
                 className="w-full px-3 py-2 text-sm border border-gray-200 rounded-lg focus:ring-2 focus:ring-purple-500"
@@ -231,8 +242,10 @@ export const JournalList: React.FC<JournalListProps> = ({
 
             {/* Category filter */}
             <div>
-              <label className="block text-xs font-medium text-gray-500 mb-1">Category</label>
+              <label htmlFor="journal-category-filter" className="block text-xs font-medium text-gray-500 mb-1">Category</label>
               <select
+                id="journal-category-filter"
+                name="journal-category-filter"
                 value={filters.category || ''}
                 onChange={(e) => handleCategoryFilter(e.target.value)}
                 className="w-full px-3 py-2 text-sm border border-gray-200 rounded-lg focus:ring-2 focus:ring-purple-500"
@@ -248,8 +261,10 @@ export const JournalList: React.FC<JournalListProps> = ({
 
             {/* Date from filter */}
             <div>
-              <label className="block text-xs font-medium text-gray-500 mb-1">From</label>
+              <label htmlFor="journal-date-from" className="block text-xs font-medium text-gray-500 mb-1">From</label>
               <input
+                id="journal-date-from"
+                name="journal-date-from"
                 type="date"
                 value={filters.dateFrom || ''}
                 onChange={(e) => handleDateFromFilter(e.target.value)}
@@ -259,8 +274,10 @@ export const JournalList: React.FC<JournalListProps> = ({
 
             {/* Date to filter */}
             <div>
-              <label className="block text-xs font-medium text-gray-500 mb-1">To</label>
+              <label htmlFor="journal-date-to" className="block text-xs font-medium text-gray-500 mb-1">To</label>
               <input
+                id="journal-date-to"
+                name="journal-date-to"
                 type="date"
                 value={filters.dateTo || ''}
                 onChange={(e) => handleDateToFilter(e.target.value)}
@@ -325,10 +342,16 @@ export const JournalList: React.FC<JournalListProps> = ({
                     {truncateForPreview(entry.content)}
                   </p>
 
-                  {/* Metadata */}
+                  {/* Metadata - Requirements: 10.10 - Display timestamps */}
                   <div className="flex items-center gap-3 mt-2 text-xs text-gray-400">
                     <span>{formatDate(entry.createdAt)}</span>
                     <span>{formatTime(entry.createdAt)}</span>
+                    {/* Show edited indicator if updatedAt differs from createdAt by more than 1 second */}
+                    {Math.abs(entry.updatedAt - entry.createdAt) > 1000 && (
+                      <span className="text-gray-500">
+                        • edited {formatTime(entry.updatedAt)}
+                      </span>
+                    )}
                     {entry.storyId && (
                       <span className="flex items-center gap-1 text-purple-500">
                         <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">

@@ -85,9 +85,15 @@ export const StoryListItem: React.FC<StoryListItemProps> = ({
         flex items-stretch rounded-3xl shadow-sm overflow-hidden transition-all duration-200
         hover:shadow-md cursor-pointer focus-ring
         ${isDark ? '' : 'bg-white'}
-        ${isCompleted ? 'ring-2 ring-green-400' : ''}
+        ${isCompleted ? 'border-2 border-green-400' : 'border-2 border-transparent'}
       `}
-      style={isDark ? { backgroundColor: currentTheme.colors.surface } : {}}
+      style={{
+        ...(isDark ? { backgroundColor: currentTheme.colors.surface } : {}),
+        ...(isCompleted ? {
+          backgroundColor: isDark ? 'rgba(34, 197, 94, 0.08)' : 'rgba(34, 197, 94, 0.05)',
+          boxShadow: '0 0 20px rgba(34, 197, 94, 0.15), 0 4px 6px -1px rgba(0, 0, 0, 0.1)',
+        } : {})
+      }}
       onClick={() => onViewStory(story)}
       onKeyDown={(e) => {
         if (e.key === 'Enter' || e.key === ' ') {

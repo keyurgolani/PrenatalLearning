@@ -162,3 +162,6 @@ export * from './dashboard';
 
 // Re-export media types
 export * from './media';
+
+// Re-export auth types
+export * from './auth';

@@ -2,6 +2,12 @@
  * Journal service for reflection and memory journaling
  * 
  * Requirements:
+ * - 10.3: Display journal entries in a calendar view organized by date
+ * - 10.4: Allow users to add new journal entries to the current date
+ * - 10.5: Allow users to view and edit past journal entries by selecting a date
+ * - 11.7: Display mood trends over time in a visual summary
+ * 
+ * Legacy Requirements (localStorage-based):
  * - 8.4: Save journal entries to server for logged-in users
  * - 8.5: Auto-save drafts every 30 seconds to prevent data loss
  * - 8.6: Support entries up to 5000 characters
@@ -26,12 +32,116 @@ import type {
   JournalDraft,
   JournalFilters,
   JournalRecord,
+  MoodType,
 } from '../types/journal';
 import { JOURNAL_CONSTANTS } from '../types/journal';
 import { storageService } from './storageService';
 import { stories } from '../data/stories';
+import { get, post, put, del } from './apiClient';
 
 const JOURNAL_STORAGE_KEY = 'prenatal-learning-hub:journal-data';
+
+/**
+ * Types for API-based journal operations
+ * Requirements: 10.3, 10.4, 10.5, 11.7
+ */
+
+/**
+ * Calendar data showing which dates have entries
+ * Requirements: 10.3 - Display journal entries in a calendar view
+ */
+export interface CalendarData {
+  month: number;
+  year: number;
+  datesWithEntries: string[]; // Array of ISO date strings (YYYY-MM-DD)
+  entryCountByDate: Record<string, number>;
+}
+
+/**
+ * Mood statistics for visualization
+ * Requirements: 11.7 - Display mood trends over time
+ */
+export interface MoodStats {
+  totalEntries: number;
+  moodCounts: Record<MoodType, number>;
+  moodPercentages: Record<MoodType, number>;
+  recentMoods: Array<{
+    date: string;
+    mood: MoodType;
+  }>;
+  dominantMood: MoodType | null;
+}
+
+/**
+ * Data for creating a new journal entry via API
+ * Requirements: 10.4 - Add new journal entries
+ */
+export interface CreateJournalEntryData {
+  journalDate: string; // ISO date string - logical date for the entry
+  content?: string;
+  mood?: MoodType | null;
+  entryType?: 'text' | 'voice';
+  topicReferences?: Array<{ topicId: number; title: string }>;
+  journeyReferences?: Array<{ journeyId: string; title: string }>;
+}
+
+/**
+ * Data for updating a journal entry via API
+ * Requirements: 10.5 - Edit past journal entries
+ */
+/**
+ * Data for updating a journal entry via API
+ * Requirements: 10.5 - Edit past journal entries
+ * Requirements: 11.1, 11.8, 11.9 - Mood is optional and nullable (can be cleared)
+ */
+export interface UpdateJournalEntryData {
+  content?: string;
+  mood?: MoodType | null;
+  kickCount?: number;
+  topicReferences?: Array<{ topicId: number; title: string }>;
+  journeyReferences?: Array<{ journeyId: string; title: string }>;
+}
+
+/**
+ * API response types
+ */
+interface ApiJournalEntry {
+  id: string;
+  profileId: string;
+  journalDate: string; // Logical date for the entry
+  content: string;
+  mood?: MoodType | null;
+  entryType?: 'text' | 'voice';
+  topicReferences?: Array<{ topicId: number; title: string }>;
+  journeyReferences?: Array<{ journeyId: string; title: string }>;
+  voiceNoteIds?: string[];
+  kickCount?: number;
+  createdAt: string;
+  updatedAt: string;
+}
+
+interface JournalEntriesResponse {
+  entries: ApiJournalEntry[];
+}
+
+interface JournalEntryResponse {
+  entry: ApiJournalEntry;
+}
+
+interface CalendarDataResponse {
+  month: number;
+  year: number;
+  datesWithEntries: string[];
+  entryCountByDate: Record<string, number>;
+}
+
+interface MoodStatsResponse {
+  totalEntries: number;
+  moodCounts: Record<string, number>;
+  moodPercentages: Record<string, number>;
+  recentMoods: Array<{ date: string; mood: string }>;
+  dominantMood: string | null;
+}
 
 /**
  * Generate a unique ID for journal entries
@@ -49,6 +159,38 @@ export function getDateFromTimestamp(timestamp: number): string {
   const month = String(date.getMonth() + 1).padStart(2, '0');
   const day = String(date.getDate()).padStart(2, '0');
   return `${year}-${month}-${day}`;
+}
+
+/**
+ * Get the effective journal date, accounting for late-night journaling.
+ * If the current time is between midnight and 4AM, returns the previous day's date.
+ * This allows late-night journaling to count towards the previous day.
+ * 
+ * Requirements: 10.8 - Entries created between midnight and 4AM belong to previous day
+ * Requirements: 10.11 - Default selected date to effective date
+ * 
+ * Property 13: Journal entry date assignment
+ * For any journal entry created between midnight and 4AM, the journalDate field 
+ * should be set to the previous day's date (normalized to midnight).
+ * 
+ * @param date - Optional date to calculate effective date for (defaults to current time)
+ * @returns Date object normalized to midnight of the effective journal date
+ */
+export function getEffectiveJournalDate(date?: Date): Date {
+  const now = date || new Date();
+  const hour = now.getHours();
+  
+  // Create a new date object to avoid mutating the input
+  const effectiveDate = new Date(now);
+  
+  // If before 4AM, use previous day
+  if (hour < 4) {
+    effectiveDate.setDate(effectiveDate.getDate() - 1);
+  }
+  
+  // Normalize to midnight
+  effectiveDate.setHours(0, 0, 0, 0);
+  return effectiveDate;
 }
 
 
@@ -94,11 +236,11 @@ function getStoryCategory(storyId: number): string | undefined {
 }
 
 /**
- * Create empty journal record for a profile
+ * Create empty journal record for a user
  */
-function createEmptyJournalRecord(profileId: string): JournalRecord {
+function createEmptyJournalRecord(userId: string): JournalRecord {
   return {
-    profileId,
+    userId,
     entries: [],
     draft: null,
   };
@@ -107,17 +249,17 @@ function createEmptyJournalRecord(profileId: string): JournalRecord {
 /**
  * Load journal record from storage
  */
-function loadJournalRecord(profileId: string): JournalRecord {
+function loadJournalRecord(userId: string): JournalRecord {
   const data = storageService.get(JOURNAL_STORAGE_KEY);
   if (!data) {
-    return createEmptyJournalRecord(profileId);
+    return createEmptyJournalRecord(userId);
   }
   
   try {
     const records: Record<string, JournalRecord> = JSON.parse(data);
-    return records[profileId] || createEmptyJournalRecord(profileId);
+    return records[userId] || createEmptyJournalRecord(userId);
   } catch {
-    return createEmptyJournalRecord(profileId);
+    return createEmptyJournalRecord(userId);
   }
 }
 
@@ -136,7 +278,7 @@ function saveJournalRecord(record: JournalRecord): void {
     }
   }
   
-  records[record.profileId] = record;
+  records[record.userId] = record;
   storageService.set(JOURNAL_STORAGE_KEY, JSON.stringify(records));
 }
 
@@ -253,7 +395,7 @@ export function createJournalService(): IJournalService {
       
       const entry: JournalEntry = {
         id: generateJournalId(),
-        profileId,
+        userId: profileId,
         title: data.title,
         content: data.content,
         mood: data.mood,
@@ -360,7 +502,7 @@ export function createJournalService(): IJournalService {
       const record = loadJournalRecord(profileId);
       
       const draft: JournalDraft = {
-        profileId,
+        userId: profileId,
         data,
         lastSaved: Date.now(),
       };
@@ -400,5 +542,225 @@ export function createJournalService(): IJournalService {
 
 // Default journal service instance
 export const journalService = createJournalService();
+
+// ============================================================================
+// API-based Journal Service Functions
+// These functions communicate with the backend API for authenticated users
+// Requirements: 10.3, 10.4, 10.5, 11.7
+// ============================================================================
+
+/**
+ * Convert API journal entry to local JournalEntry format
+ */
+function convertApiEntry(apiEntry: ApiJournalEntry): JournalEntry {
+  return {
+    id: apiEntry.id,
+    userId: apiEntry.profileId, // API still returns profileId for backward compatibility
+    title: '', // API entries don't have title, use empty string
+    content: apiEntry.content,
+    mood: apiEntry.mood || undefined,
+    journalDate: apiEntry.journalDate, // Logical date for the entry
+    entryType: apiEntry.entryType || 'text',
+    voiceNoteIds: apiEntry.voiceNoteIds,
+    kickCount: apiEntry.kickCount,
+    createdAt: new Date(apiEntry.createdAt).getTime(),
+    updatedAt: new Date(apiEntry.updatedAt).getTime(),
+  };
+}
+
+/**
+ * Get journal entries from the API with optional date range filter
+ * Requirements: 10.3 - Display journal entries in a calendar view organized by date
+ * 
+ * @param startDate - Optional start date for filtering entries
+ * @param endDate - Optional end date for filtering entries
+ * @returns Promise resolving to array of journal entries
+ */
+export async function getEntries(
+  startDate?: Date,
+  endDate?: Date
+): Promise<JournalEntry[]> {
+  const params = new URLSearchParams();
+  
+  if (startDate) {
+    params.append('startDate', startDate.toISOString());
+  }
+  if (endDate) {
+    params.append('endDate', endDate.toISOString());
+  }
+  
+  const queryString = params.toString();
+  const endpoint = queryString ? `/journal?${queryString}` : '/journal';
+  
+  const response = await get<JournalEntriesResponse>(endpoint);
+  return response.entries.map(convertApiEntry);
+}
+
+/**
+ * Response type for getEntriesForDate API call
+ */
+interface EntriesForDateResponse {
+  date: string;
+  entries: ApiJournalEntry[];
+  count: number;
+}
+
+/**
+ * Get all journal entries for a specific date
+ * Requirements: 10.9 - Multiple entries per date allowed
+ * 
+ * @param date - The date to get entries for (YYYY-MM-DD format or Date object)
+ * @returns Promise resolving to array of journal entries for that date
+ */
+export async function getEntriesForDate(date: Date | string): Promise<JournalEntry[]> {
+  // Format date as YYYY-MM-DD
+  const dateString = typeof date === 'string' 
+    ? date 
+    : date.toISOString().split('T')[0];
+  
+  const response = await get<EntriesForDateResponse>(`/journal/date/${dateString}`);
+  return response.entries.map(convertApiEntry);
+}
+
+/**
+ * Get calendar data showing which dates have journal entries
+ * Requirements: 10.3 - Display journal entries in a calendar view organized by date
+ * Requirements: 10.7 - Display a visual indicator showing days with journal entries
+ * 
+ * @param month - Month (1-12)
+ * @param year - Year (e.g., 2024)
+ * @returns Promise resolving to calendar data with dates that have entries
+ */
+export async function getCalendarData(
+  month: number,
+  year: number
+): Promise<CalendarData> {
+  const response = await get<CalendarDataResponse>(
+    `/journal/calendar?month=${month}&year=${year}`
+  );
+  
+  return {
+    month: response.month,
+    year: response.year,
+    datesWithEntries: response.datesWithEntries,
+    entryCountByDate: response.entryCountByDate,
+  };
+}
+
+/**
+ * Create a new journal entry via API
+ * Requirements: 10.4 - Allow users to add new journal entries to the current date
+ * Requirements: 11.1, 11.8, 11.9 - Mood is optional, entries can have mood only (no content required)
+ * 
+ * @param data - Journal entry data including date, content, mood, and references
+ * @returns Promise resolving to the created journal entry
+ */
+export async function createEntry(
+  data: CreateJournalEntryData
+): Promise<JournalEntry> {
+  // Validate content length before sending to API (only if content is provided)
+  if (data.content && !validateContentLength(data.content)) {
+    throw new Error(`Content exceeds maximum length of ${JOURNAL_CONSTANTS.MAX_CONTENT_LENGTH} characters`);
+  }
+  
+  const response = await post<JournalEntryResponse>('/journal', data);
+  return convertApiEntry(response.entry);
+}
+
+/**
+ * Update an existing journal entry via API
+ * Requirements: 10.5 - Allow users to view and edit past journal entries
+ * Requirements: 11.1, 11.8, 11.9 - Mood is optional, entries can have mood only (no content required)
+ * 
+ * @param id - Journal entry ID
+ * @param data - Partial journal entry data to update
+ * @returns Promise resolving to the updated journal entry
+ */
+export async function updateEntry(
+  id: string,
+  data: UpdateJournalEntryData
+): Promise<JournalEntry> {
+  // Validate content length if content is being updated (only if content is provided and non-empty)
+  if (data.content && !validateContentLength(data.content)) {
+    throw new Error(`Content exceeds maximum length of ${JOURNAL_CONSTANTS.MAX_CONTENT_LENGTH} characters`);
+  }
+  
+  const response = await put<JournalEntryResponse>(`/journal/${id}`, data);
+  return convertApiEntry(response.entry);
+}
+
+/**
+ * Delete a journal entry via API
+ * Requirements: 10.5 - Allow users to view and edit past journal entries
+ * 
+ * @param id - Journal entry ID to delete
+ * @returns Promise resolving when deletion is complete
+ */
+export async function deleteEntry(id: string): Promise<void> {
+  await del(`/journal/${id}`);
+}
+
+/**
+ * Get mood statistics for visualization
+ * Requirements: 11.7 - Display mood trends over time in a visual summary
+ * 
+ * @param days - Number of days to include in statistics (default: 30)
+ * @returns Promise resolving to mood statistics
+ */
+export async function getMoodStats(days: number = 30): Promise<MoodStats> {
+  const response = await get<MoodStatsResponse>(`/journal/moods?days=${days}`);
+  
+  // Convert string keys to MoodType
+  const moodCounts: Record<MoodType, number> = {} as Record<MoodType, number>;
+  const moodPercentages: Record<MoodType, number> = {} as Record<MoodType, number>;
+  
+  for (const [mood, count] of Object.entries(response.moodCounts)) {
+    moodCounts[mood as MoodType] = count;
+  }
+  
+  for (const [mood, percentage] of Object.entries(response.moodPercentages)) {
+    moodPercentages[mood as MoodType] = percentage;
+  }
+  
+  return {
+    totalEntries: response.totalEntries,
+    moodCounts,
+    moodPercentages,
+    recentMoods: response.recentMoods.map(item => ({
+      date: item.date,
+      mood: item.mood as MoodType,
+    })),
+    dominantMood: response.dominantMood as MoodType | null,
+  };
+}
+
+/**
+ * API-based journal service interface
+ * Requirements: 10.3, 10.4, 10.5, 10.9, 11.7
+ */
+export interface IApiJournalService {
+  getEntries(startDate?: Date, endDate?: Date): Promise<JournalEntry[]>;
+  getEntriesForDate(date: Date | string): Promise<JournalEntry[]>;
+  getCalendarData(month: number, year: number): Promise<CalendarData>;
+  createEntry(data: CreateJournalEntryData): Promise<JournalEntry>;
+  updateEntry(id: string, data: UpdateJournalEntryData): Promise<JournalEntry>;
+  deleteEntry(id: string): Promise<void>;
+  getMoodStats(days?: number): Promise<MoodStats>;
+}
+
+/**
+ * API-based journal service object
+ * Use this for authenticated users to communicate with the backend
+ * Requirements: 10.3, 10.4, 10.5, 10.9, 11.7
+ */
+export const apiJournalService: IApiJournalService = {
+  getEntries,
+  getEntriesForDate,
+  getCalendarData,
+  createEntry,
+  updateEntry,
+  deleteEntry,
+  getMoodStats,
+};
 
 export default journalService;

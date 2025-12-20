@@ -8,11 +8,17 @@
  * - 7.3: Show kick activity over time in a simple chart
  * - 7.4: Display total kicks logged across all sessions
  * - 7.5: Allow filtering kick history by date range
+ * - 13.2: Allow users to log kicks directly from the journal interface
+ * - 13.5: Timestamp each kick event with the exact time
+ * - 13.6: Allow users to add notes to individual kick events
+ * - 14.1: Display a daily kick count graph showing kicks over the past 7 days
+ * - 14.6: Display kick patterns by time of day
  * 
  * Design Properties:
  * - Property 8: Kick event data completeness
  * - Property 9: Session kick counter accuracy
  * - Property 10: Kick aggregation by story
+ * - Property 16: Kick timestamp accuracy
  */
 
 import type {
@@ -26,6 +32,7 @@ import type {
 } from '../types/kick';
 import { storageService } from './storageService';
 import { stories } from '../data/stories';
+import { get, post, put, del } from './apiClient';
 
 const KICK_STORAGE_KEY = 'prenatal-learning-hub:kick-data';
 
@@ -59,14 +66,16 @@ export function getDateFromTimestamp(timestamp: number): string {
  * Validate kick event data completeness
  * Property 8: Kick event data completeness
  * For any logged kick event, the record should contain valid profileId, storyId, sectionName, and timestamp
- * Requirements: 6.2
+ * Requirements: 6.2, 13.4 (quick kick from journal bar)
+ * 
+ * Note: storyId >= 0 allows for quick kicks (storyId: 0) that aren't associated with a specific story
  */
 export function validateKickEvent(kick: KickEvent): boolean {
   return (
     typeof kick.profileId === 'string' &&
     kick.profileId.length > 0 &&
     typeof kick.storyId === 'number' &&
-    kick.storyId > 0 &&
+    kick.storyId >= 0 && // Allow 0 for quick kicks not associated with a story
     typeof kick.sectionName === 'string' &&
     kick.sectionName.length > 0 &&
     typeof kick.timestamp === 'number' &&
@@ -388,5 +397,279 @@ export function createKickService(): IKickService {
 
 // Default kick service instance
 export const kickService = createKickService();
+
+// ============================================================================
+// API-based Kick Service Functions
+// These functions communicate with the backend API for authenticated users
+// Requirements: 13.2, 13.5, 13.6, 14.1, 14.6
+// ============================================================================
+
+/**
+ * API response types for kick operations
+ */
+
+/**
+ * Kick event from the API
+ * Requirements: 13.5 - Timestamp each kick event with the exact time
+ */
+export interface KickEventApi {
+  id: string;
+  timestamp: string;
+  note: string | null;
+  createdAt: string;
+  updatedAt: string;
+}
+
+/**
+ * Daily kick stats for graph
+ * Requirements: 14.1 - Display daily kick count graph
+ */
+export interface DailyKickStats {
+  date: string;
+  count: number;
+  firstKick: string | null;
+  lastKick: string | null;
+}
+
+/**
+ * Time period stats
+ * Requirements: 14.6 - Display kick patterns by time of day
+ */
+export interface PeriodStats {
+  period: string;
+  label: string;
+  count: number;
+  percentage: number;
+}
+
+/**
+ * Time patterns response
+ * Requirements: 14.6 - Display kick patterns by time of day
+ */
+export interface TimePatterns {
+  hourlyDistribution: Array<{ hour: number; count: number; label: string }>;
+  periodStats: PeriodStats[];
+  peakPeriod: { period: string; count: number; percentage: number } | null;
+  peakHour: { hour: number; count: number; label: string } | null;
+  totalKicks: number;
+}
+
+/**
+ * Kick statistics from API
+ * Requirements: 14.1, 14.6, 14.7
+ */
+export interface KickStatsApi {
+  totalKicks: number;
+  daysTracking: number;
+  averagePerDay: number;
+  weeklyKicks: number;
+  weeklyAverage: number;
+  firstKickDate: string | null;
+  lastKickDate: string | null;
+  milestones: {
+    achieved: Array<{ count: number; label: string }>;
+    next: { count: number; label: string } | null;
+    progressToNext: number;
+  };
+}
+
+/**
+ * API response types
+ */
+interface KicksResponse {
+  kicks: KickEventApi[];
+  pagination: {
+    total: number;
+    limit: number;
+    offset: number;
+    hasMore: boolean;
+  };
+}
+
+interface LogKickResponse {
+  message: string;
+  kick: KickEventApi;
+}
+
+interface UpdateKickResponse {
+  message: string;
+  kick: KickEventApi;
+}
+
+interface DeleteKickResponse {
+  message: string;
+}
+
+interface DailyStatsResponse {
+  days: DailyKickStats[];
+  summary: {
+    totalKicks: number;
+    averagePerDay: number;
+    peakDay: { date: string; count: number } | null;
+    daysWithKicks: number;
+    daysWithoutKicks: number;
+  };
+}
+
+/**
+ * Log a kick event via API
+ * Requirements: 13.2 - Allow users to log kicks directly from the journal interface
+ * Requirements: 13.5 - Timestamp each kick event with the exact time
+ * 
+ * @param note - Optional note for the kick event
+ * @param timestamp - Optional timestamp (defaults to current time)
+ * @returns Promise resolving to the created kick event
+ */
+export async function logKick(
+  note?: string,
+  timestamp?: Date
+): Promise<KickEventApi> {
+  const body: { timestamp: string; note?: string } = {
+    timestamp: (timestamp || new Date()).toISOString(),
+  };
+  
+  if (note) {
+    body.note = note;
+  }
+  
+  const response = await post<LogKickResponse>('/kicks', body);
+  return response.kick;
+}
+
+/**
+ * Get kick events from the API with optional date range filter
+ * Requirements: 13.5 - Timestamp each kick event with the exact time
+ * 
+ * @param startDate - Optional start date for filtering kicks
+ * @param endDate - Optional end date for filtering kicks
+ * @param limit - Maximum number of kicks to return (default: 100)
+ * @param offset - Offset for pagination (default: 0)
+ * @returns Promise resolving to array of kick events with pagination info
+ */
+export async function getKicks(
+  startDate?: Date,
+  endDate?: Date,
+  limit: number = 100,
+  offset: number = 0
+): Promise<{ kicks: KickEventApi[]; pagination: KicksResponse['pagination'] }> {
+  const params = new URLSearchParams();
+  
+  if (startDate) {
+    params.append('startDate', startDate.toISOString());
+  }
+  if (endDate) {
+    params.append('endDate', endDate.toISOString());
+  }
+  params.append('limit', limit.toString());
+  params.append('offset', offset.toString());
+  
+  const queryString = params.toString();
+  const endpoint = `/kicks?${queryString}`;
+  
+  const response = await get<KicksResponse>(endpoint);
+  return {
+    kicks: response.kicks,
+    pagination: response.pagination,
+  };
+}
+
+/**
+ * Update a kick event (add/update note)
+ * Requirements: 13.6 - Allow users to add notes to individual kick events
+ * 
+ * @param id - Kick event ID
+ * @param note - Note to add or update
+ * @returns Promise resolving to the updated kick event
+ */
+export async function updateKick(
+  id: string,
+  note: string
+): Promise<KickEventApi> {
+  const response = await put<UpdateKickResponse>(`/kicks/${id}`, { note });
+  return response.kick;
+}
+
+/**
+ * Delete a kick event
+ * 
+ * @param id - Kick event ID to delete
+ * @returns Promise resolving when deletion is complete
+ */
+export async function deleteKick(id: string): Promise<void> {
+  await del<DeleteKickResponse>(`/kicks/${id}`);
+}
+
+/**
+ * Get daily kick statistics for graph
+ * Requirements: 14.1 - Display a daily kick count graph showing kicks over the past 7 days
+ * 
+ * @param days - Number of days to include (default: 7)
+ * @returns Promise resolving to daily kick stats with summary
+ */
+export async function getDailyStats(
+  days: number = 7
+): Promise<{ days: DailyKickStats[]; summary: DailyStatsResponse['summary'] }> {
+  const response = await get<DailyStatsResponse>(`/kicks/daily?days=${days}`);
+  return {
+    days: response.days,
+    summary: response.summary,
+  };
+}
+
+/**
+ * Get time-of-day kick patterns
+ * Requirements: 14.6 - Display kick patterns by time of day (morning, afternoon, evening, night)
+ * 
+ * @returns Promise resolving to time patterns data
+ */
+export async function getTimePatterns(): Promise<TimePatterns> {
+  const response = await get<TimePatterns>('/kicks/patterns');
+  return response;
+}
+
+/**
+ * Get overall kick statistics
+ * Requirements: 14.1, 14.7 - Display statistics and milestone markers
+ * 
+ * @returns Promise resolving to kick statistics
+ */
+export async function getStats(): Promise<KickStatsApi> {
+  const response = await get<KickStatsApi>('/kicks/stats');
+  return response;
+}
+
+/**
+ * API-based kick service interface
+ * Requirements: 13.2, 13.5, 13.6, 14.1, 14.6
+ */
+export interface IApiKickService {
+  logKick(note?: string, timestamp?: Date): Promise<KickEventApi>;
+  getKicks(
+    startDate?: Date,
+    endDate?: Date,
+    limit?: number,
+    offset?: number
+  ): Promise<{ kicks: KickEventApi[]; pagination: KicksResponse['pagination'] }>;
+  updateKick(id: string, note: string): Promise<KickEventApi>;
+  deleteKick(id: string): Promise<void>;
+  getDailyStats(days?: number): Promise<{ days: DailyKickStats[]; summary: DailyStatsResponse['summary'] }>;
+  getTimePatterns(): Promise<TimePatterns>;
+  getStats(): Promise<KickStatsApi>;
+}
+
+/**
+ * API-based kick service object
+ * Use this for authenticated users to communicate with the backend
+ * Requirements: 13.2, 13.5, 13.6, 14.1, 14.6
+ */
+export const apiKickService: IApiKickService = {
+  logKick,
+  getKicks,
+  updateKick,
+  deleteKick,
+  getDailyStats,
+  getTimePatterns,
+  getStats,
+};
 
 export default kickService;

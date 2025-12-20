@@ -278,18 +278,15 @@ html, body {
   animation: scale-in 0.25s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
 }
 
-/* Bounce in animation - cute and professional */
+/* Bounce in animation - professional and subtle */
 @keyframes bounce-in {
   0% {
     opacity: 0;
-    transform: scale(0.3);
+    transform: scale(0.95);
   }
-  50% {
+  60% {
     opacity: 1;
-    transform: scale(1.05);
-  }
-  70% {
-    transform: scale(0.9);
+    transform: scale(1.02);
   }
   100% {
     opacity: 1;
@@ -298,7 +295,7 @@ html, body {
 }
 
 .animate-bounce-in {
-  animation: bounce-in 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55) forwards;
+  animation: bounce-in 0.25s cubic-bezier(0.34, 1.2, 0.64, 1) forwards;
 }
 
 /* Fade out animation */
@@ -425,6 +422,82 @@ html, body {
 
 .animate-wiggle {
   animation: wiggle 0.3s ease-in-out;
+}
+
+/* Kick bounce animation - bounces like it's been kicked */
+@keyframes kick-bounce {
+  0% { transform: scale(1) translateY(0); }
+  15% { transform: scale(0.9) translateY(2px); }
+  30% { transform: scale(1.15) translateY(-8px); }
+  45% { transform: scale(0.95) translateY(0); }
+  60% { transform: scale(1.05) translateY(-3px); }
+  75% { transform: scale(0.98) translateY(0); }
+  100% { transform: scale(1) translateY(0); }
+}
+
+.animate-kick-bounce {
+  animation: kick-bounce 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+/* Journal modal morph animation - professional and smooth */
+@keyframes modal-morph-in {
+  0% {
+    opacity: 0;
+    transform: scale(0.9);
+    border-radius: 24px;
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+    border-radius: 16px;
+  }
+}
+
+.animate-modal-morph {
+  animation: modal-morph-in 0.3s cubic-bezier(0.34, 1.1, 0.64, 1) forwards;
+}
+
+/* Bouncy button press for journal interactions - subtle */
+@keyframes bouncy-press {
+  0% { transform: scale(1); }
+  50% { transform: scale(0.95); }
+  100% { transform: scale(1); }
+}
+
+.animate-bouncy-press {
+  animation: bouncy-press 0.2s ease-out;
+}
+
+/* Cute entry appear animation */
+@keyframes entry-appear {
+  0% {
+    opacity: 0;
+    transform: translateY(20px) scale(0.9);
+  }
+  60% {
+    opacity: 1;
+    transform: translateY(-5px) scale(1.02);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.animate-entry-appear {
+  animation: entry-appear 0.4s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+
+/* Mood button bounce */
+@keyframes mood-select {
+  0% { transform: scale(1); }
+  30% { transform: scale(1.2); }
+  60% { transform: scale(0.9); }
+  100% { transform: scale(1); }
+}
+
+.animate-mood-select {
+  animation: mood-select 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
 /* Shimmer animation for glossy/loading effects */

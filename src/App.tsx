@@ -9,7 +9,9 @@ import {
   AdvancedFilters,
   RecommendedForYou,
   FloatingStatusBar,
+  SecondaryHeader,
 } from './components';
+import { JournalModal } from './components/journal';
 import { TopicPage } from './components/TopicPage';
 import { JournalPage } from './pages';
 import { stories, categories, getCategoryById } from './data';
@@ -27,51 +29,18 @@ import {
   TrimesterProvider,
   StreakProvider,
   AudioProvider,
+  AuthProvider,
+  ProfileProvider,
+  JournalProvider,
+  KickProvider,
+  CompletedStoriesProvider,
   useLayout,
   useTheme,
   useTopicProgress,
   useTrimester,
+  useCompletedStories,
 } from './contexts';
 import './index.css';
-
-const STORAGE_KEY = 'prenatal-learning-completed-stories';
-
-/**
- * Hook to manage completed stories state with localStorage persistence
- */
-function useCompletedStories() {
-  const [completedStories, setCompletedStories] = useState<number[]>(() => {
-    const saved = localStorage.getItem(STORAGE_KEY);
-    if (saved) {
-      try {
-        return JSON.parse(saved);
-      } catch {
-        return [];
-      }
-    }
-    return [];
-  });
-
-  useEffect(() => {
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(completedStories));
-  }, [completedStories]);
-
-  const handleToggleComplete = useCallback((storyId: number) => {
-    setCompletedStories((prev) =>
-      prev.includes(storyId)
-        ? prev.filter((id) => id !== storyId)
-        : [...prev, storyId]
-    );
-  }, []);
-
-  const handleCompleteTopic = useCallback((storyId: number) => {
-    setCompletedStories((prev) => 
-      prev.includes(storyId) ? prev : [...prev, storyId]
-    );
-  }, []);
-
-  return { completedStories, handleToggleComplete, handleCompleteTopic };
-}
 
 /**
  * Topic Page Route Component
@@ -146,6 +115,11 @@ function TopicPageRoute({
   return (
     <div className="h-screen flex flex-col overflow-hidden">
       <Header
+        completedCount={completedStories.length}
+        totalCount={stories.length}
+        progressPercentage={progressPercentage}
+      />
+      <SecondaryHeader
         completedCount={completedStories.length}
         totalCount={stories.length}
         progressPercentage={progressPercentage}
@@ -482,6 +456,8 @@ function FilterSidebar({
                 <div className="space-y-2 animate-fade-in">
                   <input
                     type="text"
+                    id="preset-name"
+                    name="preset-name"
                     value={presetName}
                     onChange={(e) => setPresetName(e.target.value)}
                     placeholder="Preset name..."
@@ -729,6 +705,11 @@ function ExplorePage({
         totalCount={stories.length}
         progressPercentage={progressPercentage}
       />
+      <SecondaryHeader
+        completedCount={completedStories.length}
+        totalCount={stories.length}
+        progressPercentage={progressPercentage}
+      />
 
       <FilterSection
         categories={categories}
@@ -891,6 +872,11 @@ function JourneyPage({
         totalCount={stories.length}
         progressPercentage={progressPercentage}
       />
+      <SecondaryHeader
+        completedCount={completedStories.length}
+        totalCount={stories.length}
+        progressPercentage={progressPercentage}
+      />
 
       <FilterSection
         categories={categories}
@@ -1005,19 +991,33 @@ function AppContent() {
       />
     </Routes>
       
-      {/* Single persistent FloatingStatusBar that morphs based on route */}
+      {/* Single persistent FloatingStatusBar that morphs based on route
+          For logged-in users, this bar includes journal and kick buttons
+          Requirements: 17.1 - Journal and kick buttons integrated into floating status bar
+          Requirements: 17.2 - Journal/kick buttons only shown to authenticated users */}
       <FloatingStatusBar
         completedCount={completedStories.length}
         totalCount={stories.length}
         progressPercentage={progressPercentage}
         compact={isTopicPage}
       />
+      
+      {/* Journal Modal - opens when journal button is clicked
+          Requirements: 10.2 - Open journal popup/modal
+          Requirements: 10.3 - Calendar view organized by date
+          Requirements: 10.7 - Visual indicator for days with entries
+          Requirements: 11.1, 11.3, 11.4, 11.5 - Mood, content, topic/journey mentions */}
+      <JournalModal />
     </>
   );
 }
 
 /**
  * Main App component wrapped with all context providers
+ * AuthProvider and ProfileProvider added for user authentication and baby profile management
+ * JournalProvider added for journal state management
+ * Requirements: 15.1, 15.2, 7.5 - Auth state in header and profile display
+ * Requirements: 10.1 - Floating journal button accessible from any page
  */
 function App() {
   return (
@@ -1026,15 +1026,25 @@ function App() {
         <ReadingModeProvider>
           <ViewModeProvider>
             <LayoutProvider>
-              <TopicProgressProvider>
-                <TrimesterProvider>
-                  <StreakProvider>
-                    <AudioProvider>
-                      <AppContent />
-                    </AudioProvider>
-                  </StreakProvider>
-                </TrimesterProvider>
-              </TopicProgressProvider>
+              <AuthProvider>
+                <ProfileProvider>
+                  <JournalProvider>
+                    <KickProvider>
+                      <CompletedStoriesProvider>
+                        <TopicProgressProvider>
+                          <TrimesterProvider>
+                            <StreakProvider>
+                              <AudioProvider>
+                                <AppContent />
+                              </AudioProvider>
+                            </StreakProvider>
+                          </TrimesterProvider>
+                        </TopicProgressProvider>
+                      </CompletedStoriesProvider>
+                    </KickProvider>
+                  </JournalProvider>
+                </ProfileProvider>
+              </AuthProvider>
             </LayoutProvider>
           </ViewModeProvider>
         </ReadingModeProvider>

@@ -1,8 +1,56 @@
-import React, { useMemo } from 'react';
+import React, { useMemo, useEffect, useState } from 'react';
 import type { Story, Category } from '../types';
 import type { LayoutMode } from '../contexts/LayoutContext';
 import { CompactStoryCard } from './CompactStoryCard';
 import { StoryListItem } from './StoryListItem';
+
+/**
+ * Hook to get the current number of columns based on screen width
+ */
+function useColumnCount(): number {
+  const [columnCount, setColumnCount] = useState(() => {
+    if (typeof window === 'undefined') return 3;
+    const width = window.innerWidth;
+    if (width >= 1536) return 4; // 2xl
+    if (width >= 1024) return 3; // lg
+    if (width >= 640) return 2;  // sm
+    return 1;
+  });
+
+  useEffect(() => {
+    const updateColumns = () => {
+      const width = window.innerWidth;
+      if (width >= 1536) setColumnCount(4);
+      else if (width >= 1024) setColumnCount(3);
+      else if (width >= 640) setColumnCount(2);
+      else setColumnCount(1);
+    };
+
+    window.addEventListener('resize', updateColumns);
+    return () => window.removeEventListener('resize', updateColumns);
+  }, []);
+
+  return columnCount;
+}
+
+/**
+ * Distribute stories into columns for row-first animation ordering
+ * This reorders stories so that when CSS columns fill top-to-bottom,
+ * the animation delays create a row-by-row appearance effect
+ */
+function distributeToColumns<T>(items: T[], columnCount: number): T[] {
+  if (columnCount <= 1) return items;
+  
+  const columns: T[][] = Array.from({ length: columnCount }, () => []);
+  
+  // Distribute items round-robin across columns
+  items.forEach((item, index) => {
+    columns[index % columnCount].push(item);
+  });
+  
+  // Flatten back: all items from col1, then col2, etc.
+  return columns.flat();
+}
 
 interface StoryGridProps {
   stories: Story[];
@@ -31,6 +79,22 @@ export const StoryGrid: React.FC<StoryGridProps> = ({
 
   // Create a stable key based on story IDs to detect filter changes
   const storiesKey = useMemo(() => stories.map(s => s.id).join('-'), [stories]);
+  
+  // Get column count for masonry distribution (must be called before any returns)
+  const columnCount = useColumnCount();
+  
+  // Distribute stories for row-first animation ordering
+  const distributedStories = useMemo(
+    () => distributeToColumns(stories, columnCount),
+    [stories, columnCount]
+  );
+  
+  // Create a map of original index for animation delay calculation
+  const originalIndexMap = useMemo(() => {
+    const map = new Map<number, number>();
+    stories.forEach((story, index) => map.set(story.id, index));
+    return map;
+  }, [stories]);
 
   if (stories.length === 0) {
     return (
@@ -82,26 +146,30 @@ export const StoryGrid: React.FC<StoryGridProps> = ({
     );
   }
 
-  // Grid layout - responsive columns with staggered animation
+  // Masonry layout using CSS columns for natural flow of variable-height cards
+  // Stories are reordered so animation delays create row-by-row appearance
   return (
     <div 
-      className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 2xl:grid-cols-4 gap-5"
+      className="columns-1 sm:columns-2 lg:columns-3 2xl:columns-4 gap-5"
       key={storiesKey}
     >
-      {stories.map((story, index) => (
-        <div 
-          key={story.id} 
-          className="animate-card-enter"
-          style={{ animationDelay: `${Math.min(index * 40, 400)}ms` }}
-        >
-          <CompactStoryCard
-            story={story}
-            category={getCategoryById(story.category)}
-            isCompleted={completedStories.includes(story.id)}
-            onViewStory={onViewStory}
-          />
-        </div>
-      ))}
+      {distributedStories.map((story) => {
+        const originalIndex = originalIndexMap.get(story.id) ?? 0;
+        return (
+          <div 
+            key={story.id} 
+            className="animate-card-enter break-inside-avoid"
+            style={{ animationDelay: `${Math.min(originalIndex * 40, 400)}ms` }}
+          >
+            <CompactStoryCard
+              story={story}
+              category={getCategoryById(story.category)}
+              isCompleted={completedStories.includes(story.id)}
+              onViewStory={onViewStory}
+            />
+          </div>
+        );
+      })}
     </div>
   );
 };

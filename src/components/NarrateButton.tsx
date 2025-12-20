@@ -85,8 +85,12 @@ export const NarrateButton: React.FC<NarrateButtonProps> = ({
             const cleanup = () => {
               if (!resolved) {
                 resolved = true;
-                audio.removeEventListener('loadedmetadata', handleMeta);
-                audio.removeEventListener('error', handleError);
+                try {
+                  audio.removeEventListener('loadedmetadata', handleMeta);
+                  audio.removeEventListener('error', handleError);
+                } catch {
+                  // Ignore cleanup errors
+                }
               }
             };
             
@@ -112,8 +116,12 @@ export const NarrateButton: React.FC<NarrateButtonProps> = ({
           });
           
           // Immediately release the audio element
-          audio.src = '';
-          audio.load();
+          try {
+            audio.src = '';
+            audio.load();
+          } catch {
+            // Ignore cleanup errors
+          }
           
           durations.push(result.duration);
           if (result.exists) {
@@ -135,10 +143,15 @@ export const NarrateButton: React.FC<NarrateButtonProps> = ({
 
     return () => {
       cancelled = true;
-      // Clean up all audio elements
+      // Clean up all audio elements safely
       audioElements.forEach(audio => {
-        audio.src = '';
-        audio.load();
+        try {
+          audio.pause();
+          audio.src = '';
+          audio.load();
+        } catch {
+          // Ignore cleanup errors
+        }
       });
     };
   // eslint-disable-next-line react-hooks/exhaustive-deps

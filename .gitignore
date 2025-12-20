@@ -48,3 +48,7 @@ Thumbs.db
 
 # Kiro IDE
 .kiro/
+
+# Server specific
+server/dist/
+server/.env

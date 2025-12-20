@@ -14,7 +14,7 @@ export const Footer: React.FC = () => {
 
   return (
     <footer 
-      className="py-8 px-6 mt-auto transition-theme"
+      className="py-6 px-4 lg:px-6 xl:px-8 2xl:px-12 mt-auto transition-theme"
       role="contentinfo"
       aria-label="Site footer"
       style={{ 

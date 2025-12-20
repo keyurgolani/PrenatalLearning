@@ -22,38 +22,67 @@
  */
 
 /**
- * Mood types for journal entries
- * Requirements: 8.2
+ * Mood types for journal entries - pregnancy-appropriate options
+ * Requirements: 8.2, 11.2
  */
 export type MoodType = 
   | 'happy' 
   | 'calm' 
-  | 'reflective' 
+  | 'anxious'
+  | 'tired'
+  | 'excited'
+  | 'emotional'
   | 'grateful' 
-  | 'hopeful' 
-  | 'tired';
+  | 'hopeful'
+  | 'uncomfortable'
+  | 'nesting';
 
 /**
  * Journal entry data for creating/updating entries
  * Requirements: 8.1, 8.2, 8.3
+ * Requirements: 11.1, 11.8, 11.9 - Mood is optional and nullable
  */
 export interface JournalEntryData {
   title: string;
   content: string;
-  mood?: MoodType;
+  mood?: MoodType | null;
   storyId?: number;
   promptUsed?: string;
 }
 
 /**
  * Full journal entry with metadata
- * Requirements: 8.3, 8.4
+ * Requirements: 8.3, 8.4, 10.9, 10.10
+ * 
+ * Timestamp fields (Requirements: 10.10):
+ * - journalDate: The logical date this entry belongs to (ISO string, normalized to midnight UTC).
+ *   For late-night entries (created between midnight and 4AM), this may be the previous day.
+ *   Used for calendar organization and date-based queries.
+ * 
+ * - createdAt: The actual timestamp when this entry was first created (Unix timestamp in ms).
+ *   This reflects the real creation time regardless of journalDate.
+ * 
+ * - updatedAt: The actual timestamp when this entry was last modified (Unix timestamp in ms).
+ *   Updated every time the entry content, mood, or references are changed.
+ *   If equal to createdAt (within 1 second), the entry has not been edited.
  */
 export interface JournalEntry extends JournalEntryData {
   id: string;
-  profileId: string;
-  createdAt: number; // timestamp
-  updatedAt: number; // timestamp
+  /** @deprecated Use userId instead - kept for backward compatibility */
+  profileId?: string;
+  userId?: string;
+  /** Logical date for the entry (ISO string). May differ from createdAt for late-night entries. */
+  journalDate?: string;
+  /** Type of entry: 'text' for written entries, 'voice' for voice note entries */
+  entryType?: 'text' | 'voice';
+  /** Voice note IDs associated with this entry (Requirements: 12.4, 12.9) */
+  voiceNoteIds?: string[];
+  /** Number of baby kicks logged with this entry */
+  kickCount?: number;
+  /** Actual creation timestamp in milliseconds - when this entry was first created (Requirements: 10.10) */
+  createdAt: number;
+  /** Actual update timestamp in milliseconds - when this entry was last modified (Requirements: 10.10) */
+  updatedAt: number;
 }
 
 /**
@@ -61,7 +90,7 @@ export interface JournalEntry extends JournalEntryData {
  * Requirements: 8.5
  */
 export interface JournalDraft {
-  profileId: string;
+  userId: string;
   data: JournalEntryData;
   lastSaved: number; // timestamp
 }
@@ -69,20 +98,21 @@ export interface JournalDraft {
 /**
  * Filters for journal entry queries
  * Requirements: 9.2
+ * Requirements: 11.9 - Mood filter can be null/undefined
  */
 export interface JournalFilters {
   storyId?: number;
   category?: string;
   dateFrom?: string; // ISO date string YYYY-MM-DD
   dateTo?: string;   // ISO date string YYYY-MM-DD
-  mood?: MoodType;
+  mood?: MoodType | null;
 }
 
 /**
- * Journal record stored per profile
+ * Journal record stored per user
  */
 export interface JournalRecord {
-  profileId: string;
+  userId: string;
   entries: JournalEntry[];
   draft: JournalDraft | null;
 }

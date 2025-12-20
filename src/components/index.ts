@@ -53,8 +53,14 @@ export { StreakStats } from './StreakStats';
 export { KickCounter } from './KickCounter';
 export { KickStats } from './KickStats';
 
+// Kicks
+export * from './kicks';
+
 // Journal
 export * from './journal';
+
+// Auth
+export * from './auth';
 
 // Progress Dashboard
 export { ProgressDashboard } from './ProgressDashboard';
@@ -70,3 +76,9 @@ export { AudioNarrationBadge } from './AudioNarrationBadge';
 
 // Floating Status Bar
 export { FloatingStatusBar } from './FloatingStatusBar';
+
+// Secondary Header
+export { SecondaryHeader } from './SecondaryHeader';
+
+// Reading Mode Bar
+export { ReadingModeBar } from './ReadingModeBar';

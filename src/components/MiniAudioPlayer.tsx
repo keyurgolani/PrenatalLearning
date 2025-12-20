@@ -98,7 +98,7 @@ export const MiniAudioPlayer: React.FC = () => {
     <div
       className={`
         mini-audio-player
-        flex items-center gap-2 h-10 px-3 rounded-xl
+        flex items-center gap-2 h-11 px-3 rounded-xl
         backdrop-blur-md border
         transition-all ease-out cursor-default
         ${isExiting ? 'mini-player-exit' : 'mini-player-enter'}

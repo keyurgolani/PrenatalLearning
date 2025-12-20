@@ -1,8 +1,171 @@
-import React from 'react';
+import React, { useState, useCallback, useRef, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { ViewModeToggle } from './ViewModeToggle';
 import { MiniAudioPlayer } from './MiniAudioPlayer';
 import { useTheme } from '../contexts/ThemeContext';
+import { useAuth } from '../contexts/AuthContext';
+import { useTrimester } from '../contexts/TrimesterContext';
+import { LoginModal, RegisterModal, AccountSettings } from './auth';
+
+/**
+ * Calendar Popup Component for date selection in user menu - matches SecondaryHeader calendar
+ */
+interface UserMenuCalendarPopupProps {
+  selectedDate: Date | null;
+  onSelectDate: (date: Date) => void;
+  onClear: () => void;
+  onClose: () => void;
+}
+
+const UserMenuCalendarPopup: React.FC<UserMenuCalendarPopupProps> = ({ selectedDate, onSelectDate, onClear, onClose }) => {
+  const { currentTheme } = useTheme();
+  const popupRef = useRef<HTMLDivElement>(null);
+  
+  // Start with selected date's month or current month
+  const [viewDate, setViewDate] = useState(() => {
+    const base = selectedDate || new Date();
+    return new Date(base.getFullYear(), base.getMonth(), 1);
+  });
+
+  // Close on escape
+  useEffect(() => {
+    const handleEscape = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') onClose();
+    };
+    document.addEventListener('keydown', handleEscape);
+    return () => document.removeEventListener('keydown', handleEscape);
+  }, [onClose]);
+
+  const daysInMonth = new Date(viewDate.getFullYear(), viewDate.getMonth() + 1, 0).getDate();
+  const firstDayOfMonth = new Date(viewDate.getFullYear(), viewDate.getMonth(), 1).getDay();
+  const monthName = viewDate.toLocaleDateString('en-US', { month: 'long', year: 'numeric' });
+
+  const prevMonth = () => setViewDate(new Date(viewDate.getFullYear(), viewDate.getMonth() - 1, 1));
+  const nextMonth = () => setViewDate(new Date(viewDate.getFullYear(), viewDate.getMonth() + 1, 1));
+
+  const isSelected = (day: number) => {
+    if (!selectedDate) return false;
+    return selectedDate.getDate() === day && 
+           selectedDate.getMonth() === viewDate.getMonth() && 
+           selectedDate.getFullYear() === viewDate.getFullYear();
+  };
+
+  const isToday = (day: number) => {
+    const today = new Date();
+    return today.getDate() === day && 
+           today.getMonth() === viewDate.getMonth() && 
+           today.getFullYear() === viewDate.getFullYear();
+  };
+
+  const handleDayClick = (day: number) => {
+    const newDate = new Date(viewDate.getFullYear(), viewDate.getMonth(), day);
+    onSelectDate(newDate);
+    onClose();
+  };
+
+  const days = [];
+  // Empty cells for days before the first day of month
+  for (let i = 0; i < firstDayOfMonth; i++) {
+    days.push(<div key={`empty-${i}`} className="w-8 h-8" />);
+  }
+  // Days of the month
+  for (let day = 1; day <= daysInMonth; day++) {
+    const selected = isSelected(day);
+    const today = isToday(day);
+    days.push(
+      <button
+        key={day}
+        onClick={() => handleDayClick(day)}
+        className={`w-8 h-8 rounded-full text-xs font-medium transition-all ${
+          selected 
+            ? 'text-white shadow-md' 
+            : today
+              ? 'font-bold'
+              : 'hover:bg-gray-100'
+        }`}
+        style={{
+          backgroundColor: selected ? currentTheme.colors.primary : today ? `${currentTheme.colors.primary}20` : 'transparent',
+          color: selected ? '#ffffff' : '#374151',
+        }}
+      >
+        {day}
+      </button>
+    );
+  }
+
+  return (
+    <div
+      ref={popupRef}
+      className="rounded-xl shadow-lg border overflow-hidden animate-pop-in"
+      style={{
+        backgroundColor: '#ffffff',
+        borderColor: '#e5e7eb',
+      }}
+      onClick={(e) => e.stopPropagation()}
+    >
+      {/* Header */}
+      <div 
+        className="flex items-center justify-between px-3 py-2 border-b"
+        style={{ 
+          background: `linear-gradient(135deg, ${currentTheme.colors.primary}, ${currentTheme.colors.secondary})`,
+          borderColor: '#f3f4f6',
+        }}
+      >
+        <button
+          onClick={prevMonth}
+          className="p-1 rounded-full hover:bg-white/20 transition-colors text-white"
+          aria-label="Previous month"
+        >
+          <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+          </svg>
+        </button>
+        <span className="text-sm font-semibold text-white">{monthName}</span>
+        <button
+          onClick={nextMonth}
+          className="p-1 rounded-full hover:bg-white/20 transition-colors text-white"
+          aria-label="Next month"
+        >
+          <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+          </svg>
+        </button>
+      </div>
+
+      {/* Day names */}
+      <div className="grid grid-cols-7 gap-0.5 px-2 pt-2">
+        {['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa'].map(d => (
+          <div 
+            key={d} 
+            className="w-8 h-6 flex items-center justify-center text-[10px] font-semibold uppercase text-gray-400"
+          >
+            {d}
+          </div>
+        ))}
+      </div>
+
+      {/* Days grid */}
+      <div className="grid grid-cols-7 gap-0.5 p-2">
+        {days}
+      </div>
+
+      {/* Footer with clear button */}
+      {selectedDate && (
+        <div className="px-2 py-2 border-t border-gray-100">
+          <button
+            onClick={() => { onClear(); onClose(); }}
+            className="w-full flex items-center justify-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium transition-colors hover:opacity-90 bg-red-50 text-red-600"
+          >
+            <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+            </svg>
+            Clear Due Date
+          </button>
+        </div>
+      )}
+    </div>
+  );
+};
 
 interface HeaderProps {
   // Props kept for backwards compatibility but no longer used in header
@@ -88,13 +251,268 @@ const BrandLogo: React.FC<{ primaryColor?: string; secondaryColor?: string }> = 
 );
 
 /**
+ * User menu dropdown component for authenticated users
+ * Requirements: 15.2 - Display user's name and profile menu when logged in
+ * Requirements: 17.4 - Display due date in user dropdown menu when user is logged in
+ * Requirements: 5.8 - Display account settings content properly without blank pages
+ */
+interface UserMenuProps {
+  onLogout: () => void;
+  onOpenAccountSettings: () => void;
+}
+
+const UserMenu: React.FC<UserMenuProps> = ({ onLogout, onOpenAccountSettings }) => {
+  const { user } = useAuth();
+  const { hasDueDate, currentTrimester, currentWeek, dueDate, setDueDate, clearDueDate } = useTrimester();
+  const [isOpen, setIsOpen] = useState(false);
+  const [showCalendar, setShowCalendar] = useState(false);
+  const menuRef = useRef<HTMLDivElement>(null);
+
+  // Close menu when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (e: MouseEvent) => {
+      if (menuRef.current && !menuRef.current.contains(e.target as Node)) {
+        setIsOpen(false);
+      }
+    };
+
+    if (isOpen) {
+      document.addEventListener('mousedown', handleClickOutside);
+      return () => document.removeEventListener('mousedown', handleClickOutside);
+    }
+  }, [isOpen]);
+
+  // Close menu on escape key
+  useEffect(() => {
+    const handleEscape = (e: KeyboardEvent) => {
+      if (e.key === 'Escape' && isOpen) {
+        setIsOpen(false);
+      }
+    };
+
+    document.addEventListener('keydown', handleEscape);
+    return () => document.removeEventListener('keydown', handleEscape);
+  }, [isOpen]);
+
+  const handleLogout = useCallback(() => {
+    setIsOpen(false);
+    onLogout();
+  }, [onLogout]);
+
+  const handleOpenAccountSettings = useCallback(() => {
+    setIsOpen(false);
+    onOpenAccountSettings();
+  }, [onOpenAccountSettings]);
+
+  if (!user) return null;
+
+  return (
+    <div ref={menuRef} className="relative">
+      {/* User Button */}
+      <button
+        onClick={() => setIsOpen(!isOpen)}
+        className="flex items-center gap-2 px-3 py-1.5 rounded-lg bg-white/10 hover:bg-white/20 transition-colors text-white text-sm"
+        aria-expanded={isOpen}
+        aria-haspopup="true"
+        aria-label="User menu"
+      >
+        {/* User Avatar */}
+        <div className="w-7 h-7 rounded-full bg-white/20 flex items-center justify-center text-xs font-semibold">
+          {user.name.charAt(0).toUpperCase()}
+        </div>
+        
+        {/* User Name */}
+        <span className="hidden sm:inline font-medium leading-tight">{user.name}</span>
+
+        {/* Dropdown Arrow */}
+        <svg 
+          className={`w-4 h-4 transition-transform ${isOpen ? 'rotate-180' : ''}`} 
+          fill="none" 
+          stroke="currentColor" 
+          viewBox="0 0 24 24"
+        >
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+        </svg>
+      </button>
+
+      {/* Dropdown Menu */}
+      {isOpen && (
+        <div 
+          className="absolute right-0 top-full mt-2 w-56 bg-white rounded-xl shadow-xl border border-gray-200 overflow-hidden z-50 animate-pop-in"
+          role="menu"
+        >
+          {/* User Info Header */}
+          <div className="px-4 py-3 bg-gray-50 border-b border-gray-100">
+            <p className="font-medium text-gray-900 truncate">{user.name}</p>
+            <p className="text-sm text-gray-500 truncate">{user.email}</p>
+          </div>
+
+          {/* Due Date Section - Requirements: 17.4 - Display due date in user dropdown menu */}
+          <div className="px-4 py-2 border-b border-gray-100">
+            <p className="text-xs text-gray-400 uppercase tracking-wide mb-1">Due Date</p>
+            {hasDueDate ? (
+              <div className="space-y-2">
+                {/* Current trimester and week display */}
+                <button
+                  onClick={() => setShowCalendar(!showCalendar)}
+                  className="w-full flex items-center gap-2 p-1.5 -mx-1.5 rounded-lg bg-purple-50 hover:bg-purple-100 transition-colors"
+                >
+                  <div className={`w-8 h-8 rounded-full flex items-center justify-center ${
+                    currentTrimester === 'first' ? 'bg-pink-500' :
+                    currentTrimester === 'second' ? 'bg-purple-500' : 'bg-indigo-500'
+                  }`}>
+                    <svg className="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                    </svg>
+                  </div>
+                  <div className="flex-1 min-w-0 text-left">
+                    <p className="font-medium text-gray-900 text-sm">
+                      {currentTrimester === 'first' ? '1st' : currentTrimester === 'second' ? '2nd' : '3rd'} Trimester
+                    </p>
+                    <p className="text-xs text-gray-500">Week {currentWeek} • Due {dueDate?.toLocaleDateString()}</p>
+                  </div>
+                  <svg className="w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
+                  </svg>
+                </button>
+                
+                {/* Calendar popup */}
+                {showCalendar && (
+                  <UserMenuCalendarPopup
+                    selectedDate={dueDate}
+                    onSelectDate={(date) => {
+                      setDueDate(date);
+                      setShowCalendar(false);
+                    }}
+                    onClear={() => {
+                      clearDueDate();
+                      setShowCalendar(false);
+                    }}
+                    onClose={() => setShowCalendar(false)}
+                  />
+                )}
+              </div>
+            ) : (
+              /* No due date set - show set button */
+              <div className="space-y-2">
+                <button
+                  onClick={() => setShowCalendar(!showCalendar)}
+                  className="w-full flex items-center gap-2 text-left hover:bg-gray-50 rounded-lg p-1.5 -mx-1.5 transition-colors"
+                  role="menuitem"
+                >
+                  <div className="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center">
+                    <svg className="w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                    </svg>
+                  </div>
+                  <div className="flex-1 min-w-0">
+                    <p className="font-medium text-gray-900 text-sm">Set due date</p>
+                    <p className="text-xs text-gray-500">For personalized content</p>
+                  </div>
+                  <svg className="w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
+                  </svg>
+                </button>
+                
+                {/* Calendar popup */}
+                {showCalendar && (
+                  <UserMenuCalendarPopup
+                    selectedDate={null}
+                    onSelectDate={(date) => {
+                      setDueDate(date);
+                      setShowCalendar(false);
+                    }}
+                    onClear={() => setShowCalendar(false)}
+                    onClose={() => setShowCalendar(false)}
+                  />
+                )}
+              </div>
+            )}
+          </div>
+
+          {/* Menu Items */}
+          <div className="py-1">
+            <button
+              onClick={handleOpenAccountSettings}
+              className="w-full px-4 py-2.5 text-left text-sm text-gray-700 hover:bg-gray-50 flex items-center gap-3 transition-colors"
+              role="menuitem"
+            >
+              <svg className="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+              </svg>
+              Account Settings
+            </button>
+          </div>
+
+          {/* Logout */}
+          <div className="border-t border-gray-100 py-1">
+            <button
+              onClick={handleLogout}
+              className="w-full px-4 py-2.5 text-left text-sm text-red-600 hover:bg-red-50 flex items-center gap-3 transition-colors"
+              role="menuitem"
+            >
+              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
+              </svg>
+              Sign Out
+            </button>
+          </div>
+        </div>
+      )}
+    </div>
+  );
+};
+
+/**
  * Header component - clean, uniform design
+ * Requirements: 15.1 - Display login/register button when no user is logged in
+ * Requirements: 15.2 - Display user's name and profile menu when logged in
+ * Requirements: 7.5 - Display active baby profile name in header
  */
 export const Header: React.FC<HeaderProps> = () => {
   const { currentTheme } = useTheme();
+  const { isAuthenticated, isLoading: authLoading, logout } = useAuth();
+  
+  // Modal states
+  const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
+  const [isRegisterModalOpen, setIsRegisterModalOpen] = useState(false);
+  const [isAccountSettingsOpen, setIsAccountSettingsOpen] = useState(false);
+
+  /**
+   * Handle switching from login to register modal
+   */
+  const handleSwitchToRegister = useCallback(() => {
+    setIsLoginModalOpen(false);
+    setIsRegisterModalOpen(true);
+  }, []);
+
+  /**
+   * Handle switching from register to login modal
+   */
+  const handleSwitchToLogin = useCallback(() => {
+    setIsRegisterModalOpen(false);
+    setIsLoginModalOpen(true);
+  }, []);
+
+  /**
+   * Handle logout
+   * Requirements: 4.3 - Redirect to home page in guest mode
+   */
+  const handleLogout = useCallback(async () => {
+    await logout();
+  }, [logout]);
+
+  /**
+   * Open account settings modal
+   * Requirements: 5.8 - Display account settings content properly without blank pages
+   */
+  const handleOpenAccountSettings = useCallback(() => {
+    setIsAccountSettingsOpen(true);
+  }, []);
 
   return (
-    <header className="relative z-20 flex-shrink-0" role="banner">
+    <header className="relative z-50 flex-shrink-0" role="banner">
       <a href="#main-content" className="skip-link">
         Skip to main content
       </a>
@@ -116,8 +534,8 @@ export const Header: React.FC<HeaderProps> = () => {
       {/* Content */}
       <div className="relative text-white py-3 px-4 lg:px-6 xl:px-8 2xl:px-12">
         <div className="w-full">
-          {/* Main header row: Logo left, MiniPlayer center, ViewToggle right */}
-          <div className="grid grid-cols-[auto_1fr_auto] items-center gap-3">
+          {/* Main header row: Logo left, ViewToggle right, MiniPlayer absolutely centered */}
+          <div className="relative flex items-center justify-between gap-3">
             {/* Left: Logo and Title */}
             <Link 
               to="/"
@@ -133,16 +551,72 @@ export const Header: React.FC<HeaderProps> = () => {
               </span>
             </Link>
 
-            {/* Center: Mini Audio Player (appears when audio is playing) */}
-            <div className="flex items-center justify-center">
-              <MiniAudioPlayer />
+            {/* Center: Mini Audio Player (absolutely centered, appears when audio is playing) */}
+            <div className="absolute left-1/2 -translate-x-1/2 flex items-center justify-center pointer-events-none">
+              <div className="pointer-events-auto">
+                <MiniAudioPlayer />
+              </div>
             </div>
 
-            {/* Right: View Toggle only */}
-            <ViewModeToggle variant="header" />
+            {/* Right: View Toggle and Auth */}
+            <div className="flex items-center gap-2">
+              <ViewModeToggle variant="header" />
+              
+              {/* Auth Section */}
+              {authLoading ? (
+                // Loading state
+                <div className="w-8 h-8 rounded-full bg-white/10 animate-pulse" />
+              ) : isAuthenticated ? (
+                // Authenticated: Show user menu
+                // Requirements: 15.2 - Display user's name and profile menu when logged in
+                <UserMenu 
+                  onLogout={handleLogout} 
+                  onOpenAccountSettings={handleOpenAccountSettings}
+                />
+              ) : (
+                // Not authenticated: Show login/register buttons
+                // Requirements: 15.1 - Display login/register button when no user is logged in
+                <div className="flex items-center gap-2">
+                  <button
+                    onClick={() => setIsLoginModalOpen(true)}
+                    className="px-3 py-1.5 text-sm font-medium text-white hover:bg-white/10 rounded-lg transition-colors"
+                    aria-label="Sign in to your account"
+                  >
+                    Sign In
+                  </button>
+                  <button
+                    onClick={() => setIsRegisterModalOpen(true)}
+                    className="px-3 py-1.5 text-sm font-medium bg-white text-purple-600 hover:bg-white/90 rounded-lg transition-colors"
+                    aria-label="Create a new account"
+                  >
+                    Sign Up
+                  </button>
+                </div>
+              )}
+            </div>
           </div>
         </div>
       </div>
+
+      {/* Login Modal */}
+      <LoginModal
+        isOpen={isLoginModalOpen}
+        onClose={() => setIsLoginModalOpen(false)}
+        onSwitchToRegister={handleSwitchToRegister}
+      />
+
+      {/* Register Modal */}
+      <RegisterModal
+        isOpen={isRegisterModalOpen}
+        onClose={() => setIsRegisterModalOpen(false)}
+        onSwitchToLogin={handleSwitchToLogin}
+      />
+
+      {/* Account Settings Modal - Requirements: 5.8 - Display account settings content properly */}
+      <AccountSettings
+        isOpen={isAccountSettingsOpen}
+        onClose={() => setIsAccountSettingsOpen(false)}
+      />
     </header>
   );
 };

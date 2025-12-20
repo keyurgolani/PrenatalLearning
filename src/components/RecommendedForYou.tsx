@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef, useEffect, useState, useCallback } from 'react';
 import { useTrimester } from '../contexts/TrimesterContext';
 import { useTheme } from '../contexts/ThemeContext';
 import { filterStoriesByTrimester } from '../utils/trimesterUtils';
@@ -11,6 +11,169 @@ interface RecommendedForYouProps {
   onSelectStory: (story: Story) => void;
   maxStories?: number;
 }
+
+/**
+ * Calendar Popup Component for date selection - matches SecondaryHeader calendar
+ */
+interface CalendarPopupProps {
+  selectedDate: Date | null;
+  onSelectDate: (date: Date) => void;
+  onClose: () => void;
+  triggerRef?: React.RefObject<HTMLButtonElement | null>;
+}
+
+const CalendarPopup: React.FC<CalendarPopupProps> = ({ selectedDate, onSelectDate, onClose, triggerRef }) => {
+  const { currentTheme } = useTheme();
+  const popupRef = useRef<HTMLDivElement>(null);
+  
+  // Start with selected date's month or current month
+  const [viewDate, setViewDate] = useState(() => {
+    const base = selectedDate || new Date();
+    return new Date(base.getFullYear(), base.getMonth(), 1);
+  });
+
+  // Close on click outside (but not when clicking the trigger button)
+  useEffect(() => {
+    const handleClickOutside = (e: MouseEvent) => {
+      const target = e.target as Node;
+      // Don't close if clicking the trigger button (let the button's onClick handle toggle)
+      if (triggerRef?.current && triggerRef.current.contains(target)) {
+        return;
+      }
+      if (popupRef.current && !popupRef.current.contains(target)) {
+        onClose();
+      }
+    };
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, [onClose, triggerRef]);
+
+  // Close on escape
+  useEffect(() => {
+    const handleEscape = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') onClose();
+    };
+    document.addEventListener('keydown', handleEscape);
+    return () => document.removeEventListener('keydown', handleEscape);
+  }, [onClose]);
+
+  const daysInMonth = new Date(viewDate.getFullYear(), viewDate.getMonth() + 1, 0).getDate();
+  const firstDayOfMonth = new Date(viewDate.getFullYear(), viewDate.getMonth(), 1).getDay();
+  const monthName = viewDate.toLocaleDateString('en-US', { month: 'long', year: 'numeric' });
+
+  const prevMonth = () => setViewDate(new Date(viewDate.getFullYear(), viewDate.getMonth() - 1, 1));
+  const nextMonth = () => setViewDate(new Date(viewDate.getFullYear(), viewDate.getMonth() + 1, 1));
+
+  const isSelected = (day: number) => {
+    if (!selectedDate) return false;
+    return selectedDate.getDate() === day && 
+           selectedDate.getMonth() === viewDate.getMonth() && 
+           selectedDate.getFullYear() === viewDate.getFullYear();
+  };
+
+  const isToday = (day: number) => {
+    const today = new Date();
+    return today.getDate() === day && 
+           today.getMonth() === viewDate.getMonth() && 
+           today.getFullYear() === viewDate.getFullYear();
+  };
+
+  const handleDayClick = (day: number) => {
+    const newDate = new Date(viewDate.getFullYear(), viewDate.getMonth(), day);
+    onSelectDate(newDate);
+    onClose();
+  };
+
+  const days = [];
+  // Empty cells for days before the first day of month
+  for (let i = 0; i < firstDayOfMonth; i++) {
+    days.push(<div key={`empty-${i}`} className="w-10 h-10" />);
+  }
+  // Days of the month
+  for (let day = 1; day <= daysInMonth; day++) {
+    const selected = isSelected(day);
+    const today = isToday(day);
+    days.push(
+      <button
+        key={day}
+        onClick={() => handleDayClick(day)}
+        className={`w-10 h-10 rounded-full text-sm font-medium transition-all ${
+          selected 
+            ? 'text-white shadow-md' 
+            : today
+              ? 'font-bold'
+              : 'hover:bg-opacity-20'
+        }`}
+        style={{
+          backgroundColor: selected ? currentTheme.colors.primary : today ? `${currentTheme.colors.primary}20` : 'transparent',
+          color: selected ? '#ffffff' : currentTheme.isDark ? currentTheme.colors.text : '#374151',
+        }}
+      >
+        {day}
+      </button>
+    );
+  }
+
+  return (
+    <div
+      ref={popupRef}
+      className="absolute right-0 top-full mt-2 rounded-xl shadow-xl border overflow-hidden animate-pop-in"
+      style={{
+        backgroundColor: currentTheme.isDark ? currentTheme.colors.surface : '#ffffff',
+        borderColor: currentTheme.isDark ? currentTheme.colors.border : '#e5e7eb',
+        minWidth: '320px',
+        zIndex: 9999,
+      }}
+    >
+      {/* Header */}
+      <div 
+        className="flex items-center justify-between px-4 py-3 border-b"
+        style={{ 
+          background: `linear-gradient(135deg, ${currentTheme.colors.primary}, ${currentTheme.colors.secondary})`,
+          borderColor: currentTheme.isDark ? currentTheme.colors.border : '#f3f4f6',
+        }}
+      >
+        <button
+          onClick={prevMonth}
+          className="p-1.5 rounded-full hover:bg-white/20 transition-colors text-white"
+          aria-label="Previous month"
+        >
+          <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+          </svg>
+        </button>
+        <span className="text-base font-semibold text-white">{monthName}</span>
+        <button
+          onClick={nextMonth}
+          className="p-1.5 rounded-full hover:bg-white/20 transition-colors text-white"
+          aria-label="Next month"
+        >
+          <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+          </svg>
+        </button>
+      </div>
+
+      {/* Day names */}
+      <div className="grid grid-cols-7 gap-1 px-3 pt-3">
+        {['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa'].map(d => (
+          <div 
+            key={d} 
+            className="w-10 h-8 flex items-center justify-center text-xs font-semibold uppercase"
+            style={{ color: currentTheme.isDark ? currentTheme.colors.textMuted : '#9ca3af' }}
+          >
+            {d}
+          </div>
+        ))}
+      </div>
+
+      {/* Days grid */}
+      <div className="grid grid-cols-7 gap-1 p-3">
+        {days}
+      </div>
+    </div>
+  );
+};
 
 /**
  * RecommendedForYou component displays stories recommended for the user's current trimester
@@ -29,8 +192,7 @@ export const RecommendedForYou: React.FC<RecommendedForYouProps> = ({
   const { currentTrimester, hasDueDate, setDueDate } = useTrimester();
   const { currentTheme } = useTheme();
   const isDark = currentTheme.isDark ?? false;
-  const [showDatePicker, setShowDatePicker] = React.useState(false);
-  const [dateInput, setDateInput] = React.useState('');
+  const [showDatePicker, setShowDatePicker] = useState(false);
 
   const trimesterLabels: Record<string, string> = {
     first: 'First Trimester',
@@ -42,16 +204,11 @@ export const RecommendedForYou: React.FC<RecommendedForYouProps> = ({
     return categories.find((cat) => cat.id === categoryId);
   };
 
-  const handleSetDueDate = () => {
-    if (dateInput) {
-      const date = new Date(dateInput);
-      if (!isNaN(date.getTime())) {
-        setDueDate(date);
-        setShowDatePicker(false);
-        setDateInput('');
-      }
-    }
-  };
+  const buttonRef = useRef<HTMLButtonElement>(null);
+
+  const handleSelectDate = useCallback((date: Date) => {
+    setDueDate(date);
+  }, [setDueDate]);
 
   // If no due date, show prompt to set one - subtle inline banner
   if (!hasDueDate) {
@@ -59,12 +216,12 @@ export const RecommendedForYou: React.FC<RecommendedForYouProps> = ({
       <div 
         className="rounded-xl px-4 py-3 mb-6"
         style={{ 
-          backgroundColor: isDark ? `${currentTheme.colors.primary}10` : '#faf5ff',
-          border: `1px solid ${isDark ? `${currentTheme.colors.primary}20` : '#ede9fe'}`
+          backgroundColor: isDark ? `${currentTheme.colors.primary}10` : `${currentTheme.colors.primary}08`,
+          border: `1px solid ${isDark ? `${currentTheme.colors.primary}20` : `${currentTheme.colors.primary}15`}`
         }}
       >
         <div className="flex items-center gap-3">
-          <svg className="w-4 h-4 text-purple-500 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <svg className="w-4 h-4 flex-shrink-0" style={{ color: currentTheme.colors.primary }} fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
           </svg>
           <p 
@@ -75,60 +232,28 @@ export const RecommendedForYou: React.FC<RecommendedForYouProps> = ({
           </p>
           <div className="relative">
             <button
+              ref={buttonRef}
               onClick={() => setShowDatePicker(!showDatePicker)}
-              className="px-3 py-1.5 text-purple-600 text-xs font-medium rounded-lg hover:bg-purple-100 transition-colors"
+              className="flex items-center gap-2 px-3 py-1.5 rounded-lg border transition-all hover:shadow-md text-sm font-medium"
               style={{ 
-                backgroundColor: isDark ? `${currentTheme.colors.primary}15` : 'transparent',
-                color: currentTheme.colors.primary 
+                backgroundColor: isDark ? currentTheme.colors.surface : `${currentTheme.colors.primary}10`,
+                borderColor: isDark ? currentTheme.colors.border : `${currentTheme.colors.primary}25`,
+                color: isDark ? currentTheme.colors.textMuted : currentTheme.colors.primary,
               }}
             >
-              Set Date
+              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+              </svg>
+              Set Due Date
             </button>
             
             {showDatePicker && (
-              <div 
-                className="absolute top-full right-0 mt-2 p-4 rounded-xl shadow-xl z-50 min-w-[240px] animate-pop-in"
-                style={{ 
-                  backgroundColor: isDark ? currentTheme.colors.surface : '#ffffff',
-                  border: `1px solid ${isDark ? currentTheme.colors.border : '#e5e7eb'}`
-                }}
-              >
-                <label 
-                  className="block text-sm font-medium mb-2"
-                  style={{ color: isDark ? currentTheme.colors.text : '#374151' }}
-                >
-                  Expected Due Date
-                </label>
-                <input
-                  type="date"
-                  value={dateInput}
-                  onChange={(e) => setDateInput(e.target.value)}
-                  className="w-full px-3 py-2 rounded-lg border text-sm"
-                  style={{ 
-                    backgroundColor: isDark ? currentTheme.colors.surfaceHover : '#f9fafb',
-                    borderColor: isDark ? currentTheme.colors.border : '#d1d5db',
-                    color: isDark ? currentTheme.colors.text : '#1f2937'
-                  }}
-                />
-                <div className="flex gap-2 mt-3">
-                  <button
-                    onClick={() => setShowDatePicker(false)}
-                    className="flex-1 px-3 py-1.5 text-sm rounded-lg"
-                    style={{ 
-                      backgroundColor: isDark ? currentTheme.colors.surfaceHover : '#f3f4f6',
-                      color: isDark ? currentTheme.colors.textMuted : '#6b7280'
-                    }}
-                  >
-                    Cancel
-                  </button>
-                  <button
-                    onClick={handleSetDueDate}
-                    className="flex-1 px-3 py-1.5 text-sm rounded-lg bg-purple-600 text-white hover:bg-purple-700 transition-colors"
-                  >
-                    Save
-                  </button>
-                </div>
-              </div>
+              <CalendarPopup
+                selectedDate={null}
+                onSelectDate={handleSelectDate}
+                onClose={() => setShowDatePicker(false)}
+                triggerRef={buttonRef}
+              />
             )}
           </div>
         </div>

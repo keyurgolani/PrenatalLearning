@@ -59,6 +59,7 @@ Each story has a `manifest.txt` file in `public/audio/stories/{storyId}/` with f
 3. **Install** dependencies:
    ```bash
    npm install
+   cd server && npm install
    ```
 4. **Create a branch**:
    ```bash
@@ -67,20 +68,84 @@ Each story has a `manifest.txt` file in `public/audio/stories/{storyId}/` with f
 
 ## Development Workflow
 
-1. Make your changes
-2. Run linting:
+### Using Docker (Recommended)
+
+The easiest way to run the full stack locally:
+
+```bash
+# Copy environment template
+cp .env.example .env
+# Edit .env and set secure values for JWT_SECRET and MONGO_INITDB_ROOT_PASSWORD
+
+# Start all services (frontend, backend, MongoDB)
+npm run docker:dev
+
+# Or start in background
+npm run docker:dev:detach
+
+# Check container status
+npm run docker:status
+
+# View logs
+npm run docker:logs
+
+# View specific service logs
+npm run docker:logs:backend
+npm run docker:logs:frontend
+npm run docker:logs:db
+
+# Rebuild after code changes
+npm run docker:dev:rebuild              # Rebuild frontend + backend
+npm run docker:dev:rebuild:frontend     # Rebuild frontend only
+npm run docker:dev:rebuild:backend      # Rebuild backend only
+
+# Restart services (without rebuild)
+npm run docker:restart
+npm run docker:restart:backend
+npm run docker:restart:frontend
+
+# Access MongoDB shell
+npm run docker:shell:db
+
+# Stop services
+npm run docker:dev:down
+
+# Clean up (remove volumes and images)
+npm run docker:clean
+npm run docker:clean:all    # Remove everything including all images
+```
+
+### Manual Setup
+
+If you prefer running services individually:
+
+1. Start MongoDB locally or use a cloud instance
+2. Configure `server/.env` with your MongoDB URI
+3. Start the backend:
+   ```bash
+   npm run server:dev
+   # Or: cd server && npm run dev
+   ```
+4. Start the frontend:
+   ```bash
+   npm run dev
+   ```
+
+### Before Submitting
+
+1. Run linting:
    ```bash
    npm run lint
    ```
-3. Run tests:
+2. Run tests:
    ```bash
    npm run test
    ```
-4. Commit with a clear message:
+3. Commit with a clear message:
    ```bash
    git commit -m "Add: description of your change"
    ```
-5. Push and create a Pull Request
+4. Push and create a Pull Request
 
 ## Adding New Stories
 

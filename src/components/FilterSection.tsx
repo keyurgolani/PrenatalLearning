@@ -230,7 +230,7 @@ export const FilterSection: React.FC<FilterSectionProps> = ({
 
   return (
     <section 
-      className="backdrop-blur-sm py-4 px-4 lg:px-6 xl:px-8 shadow-sm sticky top-0 z-10 transition-theme"
+      className="backdrop-blur-sm py-3 px-4 lg:px-6 xl:px-8 2xl:px-12 shadow-sm sticky top-0 z-10 transition-theme"
       style={{ backgroundColor: isDark ? currentTheme.colors.surface : 'rgba(255, 255, 255, 0.8)' }}
       role="search"
       aria-label="Filter and search stories"
@@ -260,6 +260,8 @@ export const FilterSection: React.FC<FilterSectionProps> = ({
             <input
               ref={searchInputRef}
               type="text"
+              id="story-search"
+              name="story-search"
               placeholder="Search all topics..."
               value={localSearchTerm}
               onChange={handleInputChange}

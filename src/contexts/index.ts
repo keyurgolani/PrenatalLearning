@@ -15,3 +15,30 @@ export { StreakProvider, useStreak } from './StreakContext';
 export type { StreakContextValue } from './StreakContext';
 export { AudioProvider, useAudio } from './AudioContext';
 export type { AudioState } from './AudioContext';
+export { AuthProvider, useAuth } from './AuthContext';
+export type { AuthContextValue } from '../types/auth';
+export { ProfileProvider, useProfile } from './ProfileContext';
+export type { ProfileContextValue, BabyProfile, CreateProfileData, UpdateProfileData } from '../types/auth';
+export { PreferencesProvider, usePreferences } from './PreferencesContext';
+export type { 
+  PreferencesContextValue, 
+  UserPreferences, 
+  ThemePreference, 
+  FontSizePreference, 
+  ReadingModePreference,
+  NotificationPreferences,
+  AccessibilityPreferences,
+} from '../types/auth';
+export { JournalProvider, useJournal } from './JournalContext';
+export type { JournalContextValue, CreateJournalEntry, UpdateJournalEntry } from './JournalContext';
+export { KickProvider, useKick } from './KickContext';
+export type { 
+  KickContextValue, 
+  KickEventApi, 
+  DailyKickStats, 
+  TimePatterns, 
+  PeriodStats,
+  KickStats,
+} from './KickContext';
+export { CompletedStoriesProvider, useCompletedStories } from './CompletedStoriesContext';
+export type { CompletedStoriesContextValue } from './CompletedStoriesContext';

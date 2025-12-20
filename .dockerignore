@@ -7,3 +7,6 @@ dist
 .idea
 *.log
 .env*
+
+# Server directory (has its own Dockerfile)
+server

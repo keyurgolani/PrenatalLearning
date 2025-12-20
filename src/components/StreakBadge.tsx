@@ -155,7 +155,7 @@ export const StreakBadge: React.FC<StreakBadgeProps> = ({
     return (
       <>
         <div
-          className={`flex items-center gap-1 ${className}`}
+          className={`flex items-center gap-1.5 ${className}`}
           title={`${currentStreak} day streak${!hasActiveStreak ? ' (inactive)' : ''}`}
           aria-label={`Current streak: ${currentStreak} days${!hasActiveStreak ? ', inactive' : ''}`}
         >
@@ -168,13 +168,13 @@ export const StreakBadge: React.FC<StreakBadgeProps> = ({
             🔥
           </span>
           <span 
-            className="text-xs font-semibold"
+            className="text-sm font-semibold"
             style={{ color: currentTheme.isDark ? currentTheme.colors.text : '#374151' }}
           >
             {currentStreak}d
           </span>
           <span 
-            className="text-xs"
+            className="text-sm"
             style={{ color: currentTheme.isDark ? currentTheme.colors.textMuted : '#6b7280' }}
           >
             streak

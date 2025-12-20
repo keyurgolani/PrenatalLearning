@@ -113,7 +113,7 @@ export const JournalPage: React.FC<JournalPageProps> = ({
         progressPercentage={progressPercentage}
       />
 
-      <main className="flex-1 w-full px-4 lg:px-6 xl:px-8 py-8">
+      <main className="flex-1 w-full px-4 lg:px-6 xl:px-8 2xl:px-12 py-6">
         <div className="max-w-4xl mx-auto">
           {/* Page header */}
           <div className="flex items-center justify-between mb-6">

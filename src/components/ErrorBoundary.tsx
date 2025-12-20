@@ -4,12 +4,15 @@ import type { ErrorInfo, ReactNode } from 'react';
 interface Props {
   children: ReactNode;
   fallback?: ReactNode;
+  /** Optional key that resets the error state when changed */
+  resetKey?: string | number;
 }
 
 interface State {
   hasError: boolean;
   error: Error | null;
   errorInfo: ErrorInfo | null;
+  resetKey?: string | number;
 }
 
 /**
@@ -20,10 +23,24 @@ export class ErrorBoundary extends Component<Props, State> {
     hasError: false,
     error: null,
     errorInfo: null,
+    resetKey: undefined,
   };
 
-  public static getDerivedStateFromError(error: Error): State {
+  public static getDerivedStateFromError(error: Error): Partial<State> {
     return { hasError: true, error, errorInfo: null };
+  }
+
+  public static getDerivedStateFromProps(props: Props, state: State): Partial<State> | null {
+    // Reset error state when resetKey changes
+    if (props.resetKey !== undefined && props.resetKey !== state.resetKey) {
+      return {
+        hasError: false,
+        error: null,
+        errorInfo: null,
+        resetKey: props.resetKey,
+      };
+    }
+    return null;
   }
 
   public componentDidCatch(error: Error, errorInfo: ErrorInfo) {

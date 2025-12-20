@@ -32,13 +32,22 @@ interface JournalEntryFormProps {
   className?: string;
 }
 
+/**
+ * Mood options for pregnancy-appropriate mood selection
+ * Requirements: 11.1, 11.2 - Pregnancy-appropriate mood options
+ * Requirements: 11.9 - Mood is optional and can be null/undefined
+ */
 const MOOD_OPTIONS: { value: MoodType; label: string; emoji: string }[] = [
   { value: 'happy', label: 'Happy', emoji: '😊' },
   { value: 'calm', label: 'Calm', emoji: '😌' },
-  { value: 'reflective', label: 'Reflective', emoji: '🤔' },
+  { value: 'anxious', label: 'Anxious', emoji: '😰' },
+  { value: 'tired', label: 'Tired', emoji: '😴' },
+  { value: 'excited', label: 'Excited', emoji: '🤩' },
+  { value: 'emotional', label: 'Emotional', emoji: '🥹' },
   { value: 'grateful', label: 'Grateful', emoji: '🙏' },
   { value: 'hopeful', label: 'Hopeful', emoji: '✨' },
-  { value: 'tired', label: 'Tired', emoji: '😴' },
+  { value: 'uncomfortable', label: 'Uncomfortable', emoji: '😣' },
+  { value: 'nesting', label: 'Nesting', emoji: '🏠' },
 ];
 
 
@@ -59,7 +68,7 @@ export const JournalEntryForm: React.FC<JournalEntryFormProps> = ({
   const [content, setContent] = useState(
     existingEntry?.content || initialPrompt || ''
   );
-  const [mood, setMood] = useState<MoodType | undefined>(existingEntry?.mood);
+  const [mood, setMood] = useState<MoodType | undefined>(existingEntry?.mood ?? undefined);
   
   // UI state
   const [isSaving, setIsSaving] = useState(false);
@@ -87,7 +96,7 @@ export const JournalEntryForm: React.FC<JournalEntryFormProps> = ({
           if (!storyId || draft.data.storyId === storyId) {
             setTitle(draft.data.title || '');
             setContent(draft.data.content || '');
-            setMood(draft.data.mood);
+            setMood(draft.data.mood ?? undefined);
             setLastSaved(new Date(draft.lastSaved));
           }
         }

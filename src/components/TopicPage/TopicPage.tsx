@@ -16,9 +16,10 @@ import { RelatedTopics } from '../RelatedTopics';
 import { ReadingMode, ReadingModeToggle } from '../ReadingMode';
 import { FixedReadingProgressBar } from '../ReadingProgressBar';
 import { useReadingProgress } from '../../hooks/useReadingProgress';
-import { KickCounter } from '../KickCounter';
+// KickCounter removed - kick logging is now in SecondaryHeader/ReadingModeBar
 import { useAudio } from '../../contexts/AudioContext';
 import { StepTransition } from '../StepTransition';
+import { ErrorBoundary } from '../ErrorBoundary';
 
 /**
  * TopicPage component - Unified guided learning experience
@@ -80,6 +81,8 @@ const TopicPageInner: React.FC<TopicPageInnerProps> = ({
   // Ref for the scrollable content container (for auto-scroll feature)
   // Requirements: 10.1 - Provide an auto-scroll toggle in the reading view
   const contentContainerRef = React.useRef<HTMLDivElement>(null);
+  // Ref for the reading mode scroll container (used when reading mode is enabled)
+  const readingModeScrollRef = React.useRef<HTMLDivElement>(null);
 
   // Reading progress tracking
   // Requirements: 11.1, 11.2, 11.3, 11.5 - Display and update reading progress
@@ -104,6 +107,15 @@ const TopicPageInner: React.FC<TopicPageInnerProps> = ({
     return () => setCurrentPageStoryId(null);
   }, [story.id, setCurrentPageStoryId]);
 
+  // Exit reading mode when navigating away from topic page
+  useEffect(() => {
+    return () => {
+      if (readingSettings.readingModeEnabled) {
+        exitReadingMode();
+      }
+    };
+  }, [exitReadingMode, readingSettings.readingModeEnabled]);
+
   // Track current section for mini player visibility
   useEffect(() => {
     setCurrentSection(currentStep);
@@ -120,11 +132,18 @@ const TopicPageInner: React.FC<TopicPageInnerProps> = ({
     setCurrentStep(story.id, step);
     // Update URL for section-level routing
     onSectionChange(step);
-    // Scroll content container to top for smooth transition
-    if (contentContainerRef.current) {
-      contentContainerRef.current.scrollTo({ top: 0, behavior: 'smooth' });
-    }
-  }, [story.id, setCurrentStep, pauseAutoScroll, onSectionChange]);
+    // Scroll the appropriate container to top for smooth transition
+    // When reading mode is enabled, use the reading mode scroll container
+    // Otherwise, use the content container
+    // Use requestAnimationFrame to ensure DOM has updated before scrolling
+    requestAnimationFrame(() => {
+      if (readingSettings.readingModeEnabled && readingModeScrollRef.current) {
+        readingModeScrollRef.current.scrollTo({ top: 0, behavior: 'smooth' });
+      } else if (contentContainerRef.current) {
+        contentContainerRef.current.scrollTo({ top: 0, behavior: 'smooth' });
+      }
+    });
+  }, [story.id, setCurrentStep, pauseAutoScroll, onSectionChange, readingSettings.readingModeEnabled]);
 
   // Handle Continue button - complete current step and move to next
   const handleContinue = useCallback(() => {
@@ -147,12 +166,17 @@ const TopicPageInner: React.FC<TopicPageInnerProps> = ({
       setCurrentStep(story.id, nextStep);
       // Update URL for section-level routing
       onSectionChange(nextStep);
-      // Scroll content container to top for smooth transition
-      if (contentContainerRef.current) {
-        contentContainerRef.current.scrollTo({ top: 0, behavior: 'smooth' });
-      }
+      // Scroll the appropriate container to top for smooth transition
+      // Use requestAnimationFrame to ensure DOM has updated before scrolling
+      requestAnimationFrame(() => {
+        if (readingSettings.readingModeEnabled && readingModeScrollRef.current) {
+          readingModeScrollRef.current.scrollTo({ top: 0, behavior: 'smooth' });
+        } else if (contentContainerRef.current) {
+          contentContainerRef.current.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+      });
     }
-  }, [currentStep, currentStepIndex, isLastStep, completedSteps, story.id, completeStep, setCurrentStep, pauseAutoScroll, onSectionChange]);
+  }, [currentStep, currentStepIndex, isLastStep, completedSteps, story.id, completeStep, setCurrentStep, pauseAutoScroll, onSectionChange, readingSettings.readingModeEnabled]);
 
   // Handle Complete Topic button
   const handleCompleteTopic = useCallback(() => {
@@ -217,7 +241,7 @@ const TopicPageInner: React.FC<TopicPageInnerProps> = ({
       {/* Main content container with responsive max-width */}
       {/* Requirements 6.1: max-width 1400px for viewports > 1280px */}
       {/* Requirements 6.3: single-column for viewports < 1024px */}
-      <div className="flex-1 px-4 lg:px-6 xl:px-8 py-4 w-full flex flex-col min-h-0 transition-all duration-300">
+      <div className="flex-1 px-4 lg:px-6 xl:px-8 2xl:px-12 py-4 w-full flex flex-col min-h-0 transition-all duration-300">
         {/* Back button, focus mode toggle, and completion badge in content area */}
         <div className="flex items-center justify-between mb-4 animate-fade-in">
           <button
@@ -270,7 +294,7 @@ const TopicPageInner: React.FC<TopicPageInnerProps> = ({
 
               {showCompletionSummary ? (
                 /* Completion Summary - Requirements 7.9 */
-                <div className="p-8 animate-fade-in">
+                <div className="p-8 animate-fade-in flex-1 overflow-y-auto">
                   <div className="text-center py-8">
                     <div className="w-24 h-24 mx-auto mb-6 rounded-full bg-gradient-to-r from-green-400 to-emerald-500 flex items-center justify-center animate-bounce-in">
                       <span className="text-5xl">🎉</span>
@@ -352,28 +376,36 @@ const TopicPageInner: React.FC<TopicPageInnerProps> = ({
 
                   {/* Step Content - Requirements 7.3 */}
                   {/* Reading Mode wrapper - Requirements 8.2, 8.3, 8.4, 8.5, 8.7 */}
+                  {/* Note: Kick logging is now in the SecondaryHeader/ReadingModeBar */}
                   <ReadingMode
                     isEnabled={readingSettings.readingModeEnabled}
                     onExit={exitReadingMode}
-                    bottomBarSlot={
-                      <KickCounter
-                        storyId={story.id}
-                        sectionName={currentStep}
-                        isAuthenticated={true}
-                        profileId="default-profile"
-                        compact={true}
-                      />
-                    }
+                    scrollContainerRef={readingModeScrollRef}
                   >
                     <div 
                       ref={contentContainerRef}
-                      className={`${readingSettings.readingModeEnabled ? '' : 'p-6 md:p-8'} flex-1 overflow-y-auto scrollbar-hidden content-scalable`}
+                      className={`${readingSettings.readingModeEnabled ? 'min-h-[50vh]' : 'p-6 md:p-8 flex-1 overflow-y-auto scrollbar-hidden'} content-scalable`}
                       style={{ scrollBehavior: 'smooth' }}
                     >
                       <h2 id="topic-page-title" className="sr-only">{story.title}</h2>
-                      <StepTransition stepKey={currentStep} duration={400}>
-                        {renderStepContent()}
-                      </StepTransition>
+                      <ErrorBoundary
+                        resetKey={currentStep}
+                        fallback={
+                          <div className="p-8 text-center">
+                            <p className="text-red-500 mb-4">Something went wrong loading this section.</p>
+                            <button
+                              onClick={() => window.location.reload()}
+                              className="px-4 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700"
+                            >
+                              Reload Page
+                            </button>
+                          </div>
+                        }
+                      >
+                        <StepTransition stepKey={currentStep} duration={450}>
+                          {renderStepContent()}
+                        </StepTransition>
+                      </ErrorBoundary>
                     </div>
                   </ReadingMode>
 
@@ -408,13 +440,7 @@ const TopicPageInner: React.FC<TopicPageInnerProps> = ({
                       Previous
                     </button>
 
-                    {/* Kick Counter - Requirements 6.1: Display "Log Kick" button for logged-in users */}
-                    <KickCounter
-                      storyId={story.id}
-                      sectionName={currentStep}
-                      isAuthenticated={true}
-                      profileId="default-profile"
-                    />
+                    {/* Note: Kick logging moved to SecondaryHeader for consistent access */}
 
                     {/* Continue / Complete button */}
                     {isLastStep ? (
@@ -569,10 +595,11 @@ export const TopicPage: React.FC<TopicPageProps> = (props) => {
   // Default handler for section change (can be overridden via props)
   const handleSectionChange = props.onSectionChange || (() => {});
   
-  // Key by story.id and initialSection to reset state when either changes
+  // Key by story.id only to reset state when story changes
+  // Don't include initialSection in key - section changes within the same story should not remount
   return (
     <TopicPageInner
-      key={`${props.story.id}-${props.initialSection || 'default'}`}
+      key={props.story.id}
       {...props}
       initialStep={initialValues.initialStep}
       initialCompletedSteps={initialValues.initialCompletedSteps}

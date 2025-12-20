@@ -149,10 +149,16 @@ export const StoryCard: React.FC<StoryCardProps> = ({
         hover:shadow-xl hover:scale-[1.005] animate-glow transition-theme
         animate-gradient-border-wrapper focus-ring
         ${isDark ? '' : 'bg-white'}
-        ${isCompleted ? 'ring-2 ring-green-400' : ''}
+        ${isCompleted ? 'border-2 border-green-400' : 'border-2 border-transparent'}
         ${isFocused ? 'active' : ''}
       `}
-      style={isHovered ? { ...cardStyle, ...cardHoverStyle } : cardStyle}
+      style={{
+        ...(isHovered ? { ...cardStyle, ...cardHoverStyle } : cardStyle),
+        ...(isCompleted ? {
+          backgroundColor: isDark ? 'rgba(34, 197, 94, 0.08)' : 'rgba(34, 197, 94, 0.05)',
+          boxShadow: '0 0 20px rgba(34, 197, 94, 0.15), 0 4px 6px -1px rgba(0, 0, 0, 0.1)',
+        } : {})
+      }}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
       onFocus={() => setIsFocused(true)}

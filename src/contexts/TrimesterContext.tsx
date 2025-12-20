@@ -1,11 +1,15 @@
 /* eslint-disable react-refresh/only-export-components */
-import React, { createContext, useContext, useState, useCallback, useMemo, useEffect } from 'react';
+import React, { createContext, useContext, useState, useCallback, useMemo, useEffect, useRef } from 'react';
 import type { Trimester, TrimesterInfo } from '../types/trimester';
 import { calculateTrimester } from '../utils/trimesterUtils';
+import { useAuth } from './AuthContext';
 
 /**
  * TrimesterContext for managing pregnancy trimester state
  * Requirements: 3.1, 3.2 - Calculate and display current trimester from due date
+ * 
+ * For logged-in users: Due date is persisted to the server
+ * For guests: Due date is stored in localStorage
  */
 
 const DUE_DATE_STORAGE_KEY = 'prenatal-learning-due-date';
@@ -30,9 +34,9 @@ export interface TrimesterContextValue {
 const TrimesterContext = createContext<TrimesterContextValue | undefined>(undefined);
 
 /**
- * Load due date from localStorage
+ * Load due date from localStorage (for guests)
  */
-function loadDueDate(): Date | null {
+function loadDueDateFromStorage(): Date | null {
   try {
     const stored = localStorage.getItem(DUE_DATE_STORAGE_KEY);
     if (stored) {
@@ -50,9 +54,9 @@ function loadDueDate(): Date | null {
 }
 
 /**
- * Save due date to localStorage
+ * Save due date to localStorage (for guests)
  */
-function saveDueDate(date: Date | null): void {
+function saveDueDateToStorage(date: Date | null): void {
   try {
     if (date) {
       localStorage.setItem(DUE_DATE_STORAGE_KEY, date.toISOString());
@@ -64,6 +68,56 @@ function saveDueDate(date: Date | null): void {
   }
 }
 
+/**
+ * Save due date to server (for logged-in users)
+ */
+async function saveDueDateToServer(date: Date | null): Promise<void> {
+  try {
+    const response = await fetch(`${import.meta.env.VITE_API_URL || '/api'}/preferences`, {
+      method: 'PUT',
+      credentials: 'include',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        dueDate: date ? date.toISOString() : null,
+      }),
+    });
+    
+    if (!response.ok) {
+      console.warn('Failed to save due date to server');
+    }
+  } catch (err) {
+    console.warn('Failed to save due date to server:', err);
+  }
+}
+
+/**
+ * Load due date from server (for logged-in users)
+ */
+async function loadDueDateFromServer(): Promise<Date | null> {
+  try {
+    const response = await fetch(`${import.meta.env.VITE_API_URL || '/api'}/preferences`, {
+      method: 'GET',
+      credentials: 'include',
+    });
+    
+    if (response.ok) {
+      const data = await response.json();
+      if (data.preferences?.dueDate) {
+        const date = new Date(data.preferences.dueDate);
+        if (!isNaN(date.getTime())) {
+          return date;
+        }
+      }
+    }
+    return null;
+  } catch (err) {
+    console.warn('Failed to load due date from server:', err);
+    return null;
+  }
+}
+
 interface TrimesterProviderProps {
   children: React.ReactNode;
 }
@@ -72,22 +126,65 @@ interface TrimesterProviderProps {
  * TrimesterProvider component that manages trimester state and persistence
  * Requirements: 3.1 - Calculate current trimester from due date
  * Requirements: 3.2 - Display current trimester and week number
+ * 
+ * For logged-in users: Syncs due date with server
+ * For guests: Uses localStorage
  */
 export function TrimesterProvider({ children }: TrimesterProviderProps): React.ReactElement {
-  const [dueDate, setDueDateState] = useState<Date | null>(() => loadDueDate());
+  const { isAuthenticated } = useAuth();
+  const [dueDate, setDueDateState] = useState<Date | null>(() => loadDueDateFromStorage());
+  const [, setIsLoadingFromServer] = useState(false);
+  const hasLoadedFromServer = useRef(false);
+  const previousAuthState = useRef(isAuthenticated);
 
-  // Persist to localStorage whenever due date changes
+  // Load due date from server when user logs in
   useEffect(() => {
-    saveDueDate(dueDate);
-  }, [dueDate]);
+    // Only load from server when auth state changes to authenticated
+    if (isAuthenticated && !hasLoadedFromServer.current) {
+      setIsLoadingFromServer(true);
+      loadDueDateFromServer().then((serverDueDate) => {
+        if (serverDueDate) {
+          setDueDateState(serverDueDate);
+          // Also update localStorage for offline access
+          saveDueDateToStorage(serverDueDate);
+        }
+        hasLoadedFromServer.current = true;
+        setIsLoadingFromServer(false);
+      });
+    }
+    
+    // Reset the flag when user logs out
+    if (!isAuthenticated && previousAuthState.current) {
+      hasLoadedFromServer.current = false;
+    }
+    
+    previousAuthState.current = isAuthenticated;
+  }, [isAuthenticated]);
 
+  // Set due date - saves to server for logged-in users, localStorage for guests
   const setDueDate = useCallback((date: Date | null) => {
     setDueDateState(date);
-  }, []);
+    
+    // Always save to localStorage for offline access
+    saveDueDateToStorage(date);
+    
+    // If logged in, also save to server
+    if (isAuthenticated) {
+      saveDueDateToServer(date);
+    }
+  }, [isAuthenticated]);
 
   const clearDueDate = useCallback(() => {
     setDueDateState(null);
-  }, []);
+    
+    // Clear from localStorage
+    saveDueDateToStorage(null);
+    
+    // If logged in, also clear on server
+    if (isAuthenticated) {
+      saveDueDateToServer(null);
+    }
+  }, [isAuthenticated]);
 
   // Calculate trimester info from due date
   const trimesterInfo = useMemo<TrimesterInfo | null>(() => {
