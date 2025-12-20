@@ -144,10 +144,12 @@ export const StoryCard: React.FC<StoryCardProps> = ({
 
   return (
     <article
+      onClick={() => onViewStory(story)}
+      onKeyDown={handleKeyDown}
+      role="button"
+      tabIndex={0}
       className={`
-        rounded-2xl shadow-md overflow-hidden transition-all duration-300 ease-out
-        hover:shadow-xl hover:scale-[1.005] animate-glow transition-theme
-        animate-gradient-border-wrapper focus-ring
+        rounded-2xl shadow-md overflow-hidden card-interactive theme-colors
         ${isDark ? '' : 'bg-white'}
         ${isCompleted ? 'border-2 border-green-400' : 'border-2 border-transparent'}
         ${isFocused ? 'active' : ''}
@@ -163,10 +165,9 @@ export const StoryCard: React.FC<StoryCardProps> = ({
       onMouseLeave={() => setIsHovered(false)}
       onFocus={() => setIsFocused(true)}
       onBlur={() => setIsFocused(false)}
-      onKeyDown={handleKeyDown}
-      tabIndex={0}
-      role="article"
+
       aria-label={`${story.title}${isCompleted ? ', completed' : ''}`}
+      data-testid="story-card"
     >
       {/* Category Color Bar */}
       <div
@@ -263,7 +264,7 @@ export const StoryCard: React.FC<StoryCardProps> = ({
         <div className="flex gap-2" role="group" aria-label="Story actions">
           <button
             onClick={() => onViewStory(story)}
-            className="flex-1 bg-gradient-to-r from-purple-500 to-pink-500 text-white py-2.5 px-4 rounded-xl font-medium text-sm hover:from-purple-600 hover:to-pink-600 transition-all duration-200 shadow-sm hover:shadow-md animate-gentle-bounce animate-click animate-glow focus-ring"
+            className="flex-1 bg-gradient-to-r from-purple-500 to-pink-500 text-white py-2.5 px-4 rounded-xl font-medium text-sm hover:from-purple-600 hover:to-pink-600 button-interactive hover-glow focus-ring shadow-sm hover:shadow-md"
             style={{ '--glow-color': 'rgba(168, 85, 247, 0.5)' } as React.CSSProperties}
             aria-label={`Begin reading ${story.title}`}
           >
@@ -272,7 +273,7 @@ export const StoryCard: React.FC<StoryCardProps> = ({
           <button
             onClick={() => onToggleComplete(story.id)}
             className={`
-              px-4 py-2.5 rounded-xl font-medium text-sm transition-all duration-200 animate-gentle-bounce animate-click focus-ring
+              px-4 py-2.5 rounded-xl font-medium text-sm button-interactive focus-ring
               ${!isDark && (isCompleted
                 ? 'bg-green-100 text-green-700 hover:bg-green-200'
                 : 'bg-gray-100 text-gray-600 hover:bg-gray-200')

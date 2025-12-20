@@ -239,7 +239,7 @@ export const StoryImage: React.FC<StoryImageProps> = ({
               loading="lazy"
               onError={handleError}
               onLoad={handleLoad}
-              className="w-full h-auto object-contain transition-transform duration-300 group-hover:scale-105"
+              className="w-full h-auto object-contain hover-grow"
               style={{ display: 'block' }}
               data-testid="story-image"
             />

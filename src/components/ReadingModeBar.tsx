@@ -241,7 +241,7 @@ export const ReadingModeBar: React.FC<ReadingModeBarProps> = ({
         <button
           onClick={handleKick}
           disabled={isLogging}
-          className="flex items-center gap-1.5 px-4 py-1.5 rounded-full font-medium transition-all hover:scale-105 disabled:opacity-70"
+          className="flex items-center gap-1.5 px-4 py-1.5 rounded-full font-medium button-interactive disabled:opacity-70"
           style={{
             background: `linear-gradient(135deg, ${currentTheme.colors.primary}, #ec4899)`,
             color: '#ffffff',
@@ -272,7 +272,7 @@ export const ReadingModeBar: React.FC<ReadingModeBarProps> = ({
             />
             <button
               onClick={() => openJournal()}
-              className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg font-medium transition-all hover:scale-105"
+              className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg font-medium button-interactive"
               style={{
                 background: `linear-gradient(135deg, ${currentTheme.colors.secondary}, ${currentTheme.colors.primary})`,
                 color: '#ffffff',

@@ -421,7 +421,7 @@ const KickButton: React.FC = () => {
         ref={buttonRef}
         onClick={handleKick}
         disabled={isLogging}
-        className={`flex items-center gap-1.5 px-4 py-1.5 rounded-full font-medium transition-all disabled:opacity-70 ${isKicked ? 'animate-kick-bounce' : 'hover:scale-105'}`}
+        className={`flex items-center gap-1.5 px-4 py-1.5 rounded-full font-medium button-interactive disabled:opacity-70 ${isKicked ? 'animate-kick-bounce' : ''}`}
         style={{
           background: `linear-gradient(135deg, ${currentTheme.colors.primary}, #ec4899)`,
           color: '#ffffff',
@@ -518,7 +518,7 @@ const ProgressIndicator: React.FC<{ completed: number; total: number; percentage
         style={{ backgroundColor: currentTheme.isDark ? currentTheme.colors.border : '#e5e7eb' }}
       >
         <div
-          className="h-full rounded-full transition-all duration-500"
+          className="p-2 rounded-lg button-interactive"
           style={{ 
             width: `${percentage}%`,
             background: `linear-gradient(90deg, ${currentTheme.colors.primary}, ${currentTheme.colors.secondary})`,

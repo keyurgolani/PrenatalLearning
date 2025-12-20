@@ -86,7 +86,7 @@ export async function requireAuthWithUser(
   try {
     // First run the basic auth check
     await new Promise<void>((resolve, reject) => {
-      requireAuth(req, res, (err?: any) => {
+      requireAuth(req, res, (err?: unknown) => {
         if (err) reject(err);
         else if (!req.userId) reject(new Error('Auth failed'));
         else resolve();

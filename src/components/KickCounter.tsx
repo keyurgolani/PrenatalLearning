@@ -129,7 +129,7 @@ export const KickCounter: React.FC<KickCounterProps> = ({
             flex items-center gap-1 px-2 py-1 rounded-lg text-xs font-medium
             bg-gradient-to-r from-pink-400 to-rose-400
             hover:from-pink-500 hover:to-rose-500
-            text-white transition-all duration-200
+            text-white icon-interactive
             ${isAnimating ? 'scale-110' : 'scale-100'}
           `}
           aria-label={`Log baby kick. ${sessionKicks} kicks logged this session.`}

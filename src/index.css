@@ -3,20 +3,21 @@
 
 /* Base styles */
 :root {
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    Oxygen, Ubuntu, Cantarell, sans-serif;
   line-height: 1.5;
   font-weight: 400;
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  
+
   /* ============================================
      Font Size Scaling System
      Requirements: 7.5 - Scale all content text proportionally
      ============================================ */
   --font-scale: 1;
-  
+
   /* Base font sizes that scale with --font-scale */
   --font-size-xs: calc(0.75rem * var(--font-scale));
   --font-size-sm: calc(0.875rem * var(--font-scale));
@@ -26,12 +27,12 @@
   --font-size-2xl: calc(1.5rem * var(--font-scale));
   --font-size-3xl: calc(1.875rem * var(--font-scale));
   --font-size-4xl: calc(2.25rem * var(--font-scale));
-  
+
   /* Line heights that scale proportionally */
   --line-height-tight: 1.25;
   --line-height-normal: 1.5;
   --line-height-relaxed: 1.625;
-  
+
   /* Minimum touch target size - Requirements: 7.6 */
   --min-touch-target: 44px;
 }
@@ -60,10 +61,18 @@ html {
 }
 
 /* Scale headings proportionally within content areas */
-.content-scalable h1 { font-size: calc(2.25rem * var(--font-scale, 1)); }
-.content-scalable h2 { font-size: calc(1.875rem * var(--font-scale, 1)); }
-.content-scalable h3 { font-size: calc(1.5rem * var(--font-scale, 1)); }
-.content-scalable h4 { font-size: calc(1.25rem * var(--font-scale, 1)); }
+.content-scalable h1 {
+  font-size: calc(2.25rem * var(--font-scale, 1));
+}
+.content-scalable h2 {
+  font-size: calc(1.875rem * var(--font-scale, 1));
+}
+.content-scalable h3 {
+  font-size: calc(1.5rem * var(--font-scale, 1));
+}
+.content-scalable h4 {
+  font-size: calc(1.25rem * var(--font-scale, 1));
+}
 .content-scalable p,
 .content-scalable li,
 .content-scalable span,
@@ -81,7 +90,8 @@ html {
   display: none;
 }
 
-html, body {
+html,
+body {
   -ms-overflow-style: none;
   scrollbar-width: none;
 }
@@ -103,20 +113,58 @@ html, body {
   /* Glow effect colors - subtle */
   --glow-color: rgba(139, 92, 246, 0.25);
   --glow-color-intense: rgba(139, 92, 246, 0.4);
-  
+
   /* Gradient border colors */
   --gradient-start: #8b5cf6;
   --gradient-mid: #ec4899;
   --gradient-end: #06b6d4;
-  
-  /* Animation timing - professional, subtle */
-  --glow-duration: 0.8s;
+
+  /* ============================================
+     Microinteraction Timing System
+     Standardized durations for consistent UX
+     ============================================ */
+
+  /* Core transition speeds */
+  --duration-instant: 120ms; /* Click feedback, immediate response */
+  --duration-quick: 200ms; /* Quick interactions, hover effects */
+  --duration-standard: 300ms; /* Standard transitions, theme changes */
+  --duration-deliberate: 500ms; /* Deliberate animations, layout changes */
+  --duration-slow: 800ms; /* Slow, emphasis animations */
+
+  /* Legacy animation timing - mapped to new system */
+  --glow-duration: var(--duration-slow);
   --gradient-rotation-duration: 3s;
-  --scale-transition-duration: 300ms;
-  --theme-transition-duration: 300ms;
-  --hover-transition-duration: 250ms;
-  --click-feedback-duration: 120ms;
-  --focus-transition-duration: 350ms;
+  --scale-transition-duration: var(--duration-standard);
+  --theme-transition-duration: var(--duration-standard);
+  --hover-transition-duration: var(--duration-quick);
+  --click-feedback-duration: var(--duration-instant);
+  --focus-transition-duration: var(--duration-standard);
+
+  /* ============================================
+     Microinteraction Scale Values
+     Consistent scaling for interactive elements
+     ============================================ */
+
+  /* Hover scale values */
+  --scale-hover-subtle: 1.005; /* Cards, large elements */
+  --scale-hover-minimal: 1.02; /* Medium elements */
+  --scale-hover-moderate: 1.05; /* Buttons, controls */
+  --scale-hover-pronounced: 1.1; /* Icons, small buttons */
+
+  /* Active/pressed scale values */
+  --scale-active-subtle: 0.98; /* Gentle press feedback */
+  --scale-active-moderate: 0.95; /* Standard press feedback */
+
+  /* ============================================
+     Easing Functions
+     Smooth, natural motion curves
+     ============================================ */
+
+  --ease-out-smooth: cubic-bezier(0.34, 1.56, 0.64, 1); /* Bouncy, playful */
+  --ease-out-standard: cubic-bezier(0.4, 0, 0.2, 1); /* Material Design */
+  --ease-in-out-smooth: cubic-bezier(0.22, 1, 0.36, 1); /* Smooth both ways */
+  --ease-out-quick: ease-out; /* Simple, fast */
+  --ease-in-quick: ease-in; /* Simple, fast */
 }
 
 /* ============================================
@@ -125,7 +173,8 @@ html, body {
 
 /* Subtle glow for hover effects - single pulse, not continuous */
 @keyframes glow-pulse {
-  0%, 100% {
+  0%,
+  100% {
     box-shadow: 0 0 4px var(--glow-color);
   }
   50% {
@@ -148,7 +197,8 @@ html, body {
 
 /* Subtle scale bounce for button micro-interactions */
 @keyframes scale-bounce {
-  0%, 100% {
+  0%,
+  100% {
     transform: scale(1);
   }
   50% {
@@ -158,7 +208,8 @@ html, body {
 
 /* Gentle bounce for subtle hover effect - reduced movement */
 @keyframes gentle-bounce {
-  0%, 100% {
+  0%,
+  100% {
     transform: translateY(0);
   }
   50% {
@@ -168,7 +219,8 @@ html, body {
 
 /* Soft pulse for gentle attention-grabbing effect */
 @keyframes soft-pulse {
-  0%, 100% {
+  0%,
+  100% {
     opacity: 1;
     transform: scale(1);
   }
@@ -180,13 +232,15 @@ html, body {
 
 /* Radiate animation for streak flame */
 @keyframes radiate {
-  0%, 100% {
+  0%,
+  100% {
     transform: scale(1);
     filter: drop-shadow(0 0 4px rgba(251, 146, 60, 0.6));
   }
   50% {
     transform: scale(1.15);
-    filter: drop-shadow(0 0 8px rgba(251, 146, 60, 1)) drop-shadow(0 0 12px rgba(239, 68, 68, 0.5));
+    filter: drop-shadow(0 0 8px rgba(251, 146, 60, 1))
+      drop-shadow(0 0 12px rgba(239, 68, 68, 0.5));
   }
 }
 
@@ -404,9 +458,23 @@ html, body {
 
 /* Shake animation for errors/attention */
 @keyframes shake {
-  0%, 100% { transform: translateX(0); }
-  10%, 30%, 50%, 70%, 90% { transform: translateX(-4px); }
-  20%, 40%, 60%, 80% { transform: translateX(4px); }
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+  10%,
+  30%,
+  50%,
+  70%,
+  90% {
+    transform: translateX(-4px);
+  }
+  20%,
+  40%,
+  60%,
+  80% {
+    transform: translateX(4px);
+  }
 }
 
 .animate-shake {
@@ -415,9 +483,16 @@ html, body {
 
 /* Wiggle animation for playful elements */
 @keyframes wiggle {
-  0%, 100% { transform: rotate(0deg); }
-  25% { transform: rotate(-3deg); }
-  75% { transform: rotate(3deg); }
+  0%,
+  100% {
+    transform: rotate(0deg);
+  }
+  25% {
+    transform: rotate(-3deg);
+  }
+  75% {
+    transform: rotate(3deg);
+  }
 }
 
 .animate-wiggle {
@@ -426,13 +501,27 @@ html, body {
 
 /* Kick bounce animation - bounces like it's been kicked */
 @keyframes kick-bounce {
-  0% { transform: scale(1) translateY(0); }
-  15% { transform: scale(0.9) translateY(2px); }
-  30% { transform: scale(1.15) translateY(-8px); }
-  45% { transform: scale(0.95) translateY(0); }
-  60% { transform: scale(1.05) translateY(-3px); }
-  75% { transform: scale(0.98) translateY(0); }
-  100% { transform: scale(1) translateY(0); }
+  0% {
+    transform: scale(1) translateY(0);
+  }
+  15% {
+    transform: scale(0.9) translateY(2px);
+  }
+  30% {
+    transform: scale(1.15) translateY(-8px);
+  }
+  45% {
+    transform: scale(0.95) translateY(0);
+  }
+  60% {
+    transform: scale(1.05) translateY(-3px);
+  }
+  75% {
+    transform: scale(0.98) translateY(0);
+  }
+  100% {
+    transform: scale(1) translateY(0);
+  }
 }
 
 .animate-kick-bounce {
@@ -459,9 +548,15 @@ html, body {
 
 /* Bouncy button press for journal interactions - subtle */
 @keyframes bouncy-press {
-  0% { transform: scale(1); }
-  50% { transform: scale(0.95); }
-  100% { transform: scale(1); }
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(0.95);
+  }
+  100% {
+    transform: scale(1);
+  }
 }
 
 .animate-bouncy-press {
@@ -490,10 +585,18 @@ html, body {
 
 /* Mood button bounce */
 @keyframes mood-select {
-  0% { transform: scale(1); }
-  30% { transform: scale(1.2); }
-  60% { transform: scale(0.9); }
-  100% { transform: scale(1); }
+  0% {
+    transform: scale(1);
+  }
+  30% {
+    transform: scale(1.2);
+  }
+  60% {
+    transform: scale(0.9);
+  }
+  100% {
+    transform: scale(1);
+  }
 }
 
 .animate-mood-select {
@@ -515,16 +618,36 @@ html, body {
 }
 
 /* Stagger delay utilities for list animations */
-.stagger-1 { animation-delay: 0.05s; }
-.stagger-2 { animation-delay: 0.1s; }
-.stagger-3 { animation-delay: 0.15s; }
-.stagger-4 { animation-delay: 0.2s; }
-.stagger-5 { animation-delay: 0.25s; }
-.stagger-6 { animation-delay: 0.3s; }
-.stagger-7 { animation-delay: 0.35s; }
-.stagger-8 { animation-delay: 0.4s; }
-.stagger-9 { animation-delay: 0.45s; }
-.stagger-10 { animation-delay: 0.5s; }
+.stagger-1 {
+  animation-delay: 0.05s;
+}
+.stagger-2 {
+  animation-delay: 0.1s;
+}
+.stagger-3 {
+  animation-delay: 0.15s;
+}
+.stagger-4 {
+  animation-delay: 0.2s;
+}
+.stagger-5 {
+  animation-delay: 0.25s;
+}
+.stagger-6 {
+  animation-delay: 0.3s;
+}
+.stagger-7 {
+  animation-delay: 0.35s;
+}
+.stagger-8 {
+  animation-delay: 0.4s;
+}
+.stagger-9 {
+  animation-delay: 0.45s;
+}
+.stagger-10 {
+  animation-delay: 0.5s;
+}
 
 /* Click feedback for button press response - subtle */
 @keyframes click-feedback {
@@ -560,7 +683,7 @@ html, body {
 .timeline-node:hover {
   transform: scale(1.15);
   box-shadow: 0 0 20px var(--node-glow-color, rgba(139, 92, 246, 0.6)),
-              0 0 40px var(--node-glow-color, rgba(139, 92, 246, 0.3));
+    0 0 40px var(--node-glow-color, rgba(139, 92, 246, 0.3));
 }
 
 .timeline-node.node-completed {
@@ -577,7 +700,8 @@ html, body {
 }
 
 @keyframes node-pulse {
-  0%, 100% {
+  0%,
+  100% {
     box-shadow: 0 0 0 0 rgba(139, 92, 246, 0.4);
   }
   50% {
@@ -607,7 +731,7 @@ html, body {
 }
 
 .animate-gradient-border-wrapper::before {
-  content: '';
+  content: "";
   position: absolute;
   inset: -2px;
   border-radius: inherit;
@@ -638,7 +762,8 @@ html, body {
 
 /* Scale hover effect for buttons - subtle and smooth */
 .animate-scale-hover {
-  transition: transform var(--scale-transition-duration) cubic-bezier(0.4, 0, 0.2, 1);
+  transition: transform var(--scale-transition-duration)
+    cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .animate-scale-hover:hover {
@@ -647,8 +772,7 @@ html, body {
 
 /* Smooth theme transition for color-changing elements */
 .transition-theme {
-  transition: 
-    background-color var(--theme-transition-duration) ease-in-out,
+  transition: background-color var(--theme-transition-duration) ease-in-out,
     color var(--theme-transition-duration) ease-in-out,
     border-color var(--theme-transition-duration) ease-in-out,
     box-shadow var(--theme-transition-duration) ease-in-out;
@@ -689,37 +813,37 @@ html, body {
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
   }
-  
+
   .animate-glow:hover {
     animation: none;
     box-shadow: 0 0 10px var(--glow-color);
   }
-  
+
   .animate-gradient-border,
   .animate-gradient-border-wrapper::before {
     animation: none;
     background-position: 0% 50%;
   }
-  
+
   .animate-scale-hover:hover {
     animation: none;
     transform: scale(1.01);
   }
-  
+
   .animate-gentle-bounce:hover {
     animation: none;
   }
-  
+
   .animate-soft-pulse {
     animation: none;
   }
-  
+
   .animate-badge-pop {
     animation: none;
     opacity: 1;
     transform: scale(1);
   }
-  
+
   .animate-click:active {
     animation: none;
   }
@@ -805,36 +929,28 @@ html, body {
    ============================================ */
 
 /* Smooth transitions for all interactive elements */
-button, 
-a, 
+button,
+a,
 [role="button"],
 input,
 select,
 textarea,
 .interactive {
-  transition: 
-    transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1),
-    opacity 0.2s ease-out,
-    background-color 0.2s ease-out,
-    border-color 0.2s ease-out,
-    box-shadow 0.2s ease-out,
-    color 0.15s ease-out;
+  transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1),
+    opacity 0.2s ease-out, background-color 0.2s ease-out,
+    border-color 0.2s ease-out, box-shadow 0.2s ease-out, color 0.15s ease-out;
 }
 
 /* Smooth transitions for layout changes */
 .transition-layout {
-  transition: 
-    max-height 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+  transition: max-height 0.3s cubic-bezier(0.4, 0, 0.2, 1),
     padding 0.3s cubic-bezier(0.4, 0, 0.2, 1),
-    margin 0.3s cubic-bezier(0.4, 0, 0.2, 1),
-    opacity 0.3s ease-out;
+    margin 0.3s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.3s ease-out;
 }
 
 /* Smooth visibility transitions */
 .transition-visibility {
-  transition: 
-    opacity 0.25s ease-out,
-    visibility 0.25s ease-out,
+  transition: opacity 0.25s ease-out, visibility 0.25s ease-out,
     transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
@@ -876,7 +992,7 @@ select {
 }
 
 .touch-target-area::before {
-  content: '';
+  content: "";
   position: absolute;
   top: 50%;
   left: 50%;
@@ -884,7 +1000,6 @@ select {
   min-width: var(--min-touch-target);
   min-height: var(--min-touch-target);
 }
-
 
 /* ============================================
    Page Transition Animations
@@ -932,7 +1047,8 @@ main,
 
 /* Smooth content transitions for dynamic content */
 .content-transition {
-  transition: opacity 0.25s ease-out, transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+  transition: opacity 0.25s ease-out,
+    transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
 .content-transition-enter {
@@ -944,3 +1060,283 @@ main,
   opacity: 1;
   transform: translateY(0);
 }
+
+/* ============================================
+   Microinteraction Utility Classes
+   Consistent interactive behaviors
+   ============================================ */
+
+/* Interactive Card - Standard card hover behavior */
+.interactive-card {
+  transition: 
+    transform var(--duration-standard) var(--ease-out-standard),
+    box-shadow var(--duration-standard) var(--ease-out-standard),
+    border-color var(--duration-quick) var(--ease-out-quick);
+}
+
+.interactive-card:hover {
+  transform: scale(var(--scale-hover-subtle));
+  box-shadow: 
+    0 10px 25px -5px rgba(0, 0, 0, 0.1),
+    0 10px 10px -5px rgba(0, 0, 0, 0.04);
+}
+
+.interactive-card:active {
+  transform: scale(var(--scale-active-subtle));
+}
+
+/* Interactive Button - Standard button microinteractions */
+.interactive-button {
+  transition: 
+    transform var(--duration-quick) var(--ease-out-smooth),
+    box-shadow var(--duration-quick) var(--ease-out-quick),
+    background-color var(--duration-quick) var(--ease-out-quick),
+    opacity var(--duration-quick) var(--ease-out-quick);
+}
+
+.interactive-button:hover:not(:disabled) {
+  transform: scale(var(--scale-hover-moderate));
+  box-shadow: 
+    0 4px 12px -2px rgba(0, 0, 0, 0.1),
+    0 0 8px var(--glow-color);
+}
+
+.interactive-button:active:not(:disabled) {
+  transform: scale(var(--scale-active-moderate));
+  transition-duration: var(--duration-instant);
+}
+
+.interactive-button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Interactive Icon Button - For small icon-only buttons */
+.interactive-icon {
+  transition: 
+    transform var(--duration-quick) var(--ease-out-smooth),
+    background-color var(--duration-quick) var(--ease-out-quick),
+    color var(--duration-quick) var(--ease-out-quick);
+}
+
+.interactive-icon:hover:not(:disabled) {
+  transform: scale(var(--scale-hover-pronounced));
+}
+
+.interactive-icon:active:not(:disabled) {
+  transform: scale(var(--scale-active-moderate));
+  transition-duration: var(--duration-instant);
+}
+
+/* Interactive Input - Standard input focus behavior */
+.interactive-input {
+  transition: 
+    border-color var(--duration-standard) var(--ease-out-standard),
+    box-shadow var(--duration-standard) var(--ease-out-standard),
+    background-color var(--duration-quick) var(--ease-out-quick);
+}
+
+.interactive-input:focus {
+  outline: none;
+  border-color: var(--theme-primary, #8b5cf6);
+  box-shadow: 
+    0 0 0 3px rgba(139, 92, 246, 0.1),
+    0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.interactive-input:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  background-color: rgba(0, 0, 0, 0.02);
+}
+
+/* Interactive Link - Consistent link behavior */
+.interactive-link {
+  transition: 
+    color var(--duration-quick) var(--ease-out-quick),
+    opacity var(--duration-quick) var(--ease-out-quick),
+    transform var(--duration-quick) var(--ease-out-quick);
+  display: inline-block;
+}
+
+.interactive-link:hover {
+  opacity: 0.8;
+  transform: translateY(-1px);
+}
+
+.interactive-link:active {
+  transform: translateY(0);
+  transition-duration: var(--duration-instant);
+}
+
+/* Hover Lift - Simple element lift on hover */
+.hover-lift {
+  transition: transform var(--duration-quick) var(--ease-out-quick);
+}
+
+.hover-lift:hover {
+  transform: translateY(-2px);
+}
+
+/* Hover Grow - Subtle scale on hover */
+.hover-grow {
+  transition: transform var(--duration-quick) var(--ease-out-quick);
+}
+
+.hover-grow:hover {
+  transform: scale(var(--scale-hover-minimal));
+}
+
+/* Hover Glow - Add glow effect on hover */
+.hover-glow {
+  transition: box-shadow var(--duration-quick) var(--ease-out-quick);
+}
+
+.hover-glow:hover {
+  box-shadow: 0 0 12px var(--glow-color);
+}
+
+/* Active Press - Click feedback with scale down */
+.active-press:active {
+  transform: scale(var(--scale-active-moderate));
+  transition-duration: var(--duration-instant);
+}
+
+/* Focus Ring - Accessible focus indicator */
+.focus-ring:focus-visible {
+  outline: none;
+  box-shadow: 
+    0 0 0 3px var(--theme-primary, #8b5cf6),
+    0 0 0 6px rgba(139, 92, 246, 0.2);
+  transition: box-shadow var(--duration-standard) var(--ease-out-standard);
+}
+
+/* Focus Ring Light - For use on dark backgrounds */
+.focus-ring-light:focus-visible {
+  outline: none;
+  box-shadow: 
+    0 0 0 3px rgba(255, 255, 255, 0.8),
+    0 0 0 6px rgba(255, 255, 255, 0.3);
+  transition: box-shadow var(--duration-standard) var(--ease-out-standard);
+}
+
+/* Theme-aware disabled state */
+.disabled-state {
+  opacity: 0.5;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+/* Smooth theme color transitions */
+.theme-colors {
+  transition: 
+    background-color var(--duration-standard) var(--ease-out-standard),
+    color var(--duration-standard) var(--ease-out-standard),
+    border-color var(--duration-standard) var(--ease-out-standard);
+}
+
+/* List item stagger animation helper */
+.stagger-fade-in {
+  animation: fade-in var(--duration-standard) var(--ease-out-smooth) backwards;
+}
+
+/* Microinteraction combinations for common patterns */
+
+/* Interactive Card + Hover Glow */
+.card-interactive {
+  transition: 
+    transform var(--duration-standard) var(--ease-out-standard),
+    box-shadow var(--duration-standard) var(--ease-out-standard);
+}
+
+.card-interactive:hover {
+  transform: scale(var(--scale-hover-subtle));
+  box-shadow: 
+    0 10px 25px -5px rgba(0, 0, 0, 0.1),
+    0 0 12px var(--glow-color);
+}
+
+.card-interactive:focus-visible {
+  outline: none;
+  box-shadow: 
+    0 10px 25px -5px rgba(0, 0, 0, 0.1),
+    0 0 0 3px var(--theme-primary, #8b5cf6),
+    0 0 0 6px rgba(139, 92, 246, 0.2);
+}
+
+/* Button with full microinteractions */
+.button-interactive {
+  transition: 
+    transform var(--duration-quick) var(--ease-out-smooth),
+    box-shadow var(--duration-quick) var(--ease-out-quick),
+    background-color var(--duration-quick) var(--ease-out-quick);
+}
+
+.button-interactive:hover:not(:disabled) {
+  transform: scale(var(--scale-hover-moderate));
+  box-shadow: 
+    0 4px 12px -2px rgba(0, 0, 0, 0.15),
+    0 0 8px var(--glow-color);
+}
+
+.button-interactive:active:not(:disabled) {
+  transform: scale(var(--scale-active-moderate));
+  transition-duration: var(--duration-instant);
+}
+
+.button-interactive:focus-visible {
+  outline: none;
+  box-shadow: 
+    0 4px 12px -2px rgba(0, 0, 0, 0.15),
+    0 0 0 3px var(--theme-primary, #8b5cf6),
+    0 0 0 6px rgba(139, 92, 246, 0.2);
+}
+
+.button-interactive:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* Icon button with pronounced hover */
+.icon-interactive {
+  transition: 
+    transform var(--duration-quick) var(--ease-out-smooth),
+    background-color var(--duration-quick) var(--ease-out-quick),
+    color var(--duration-quick) var(--ease-out-quick);
+}
+
+.icon-interactive:hover:not(:disabled) {
+  transform: scale(var(--scale-hover-pronounced));
+}
+
+.icon-interactive:active:not(:disabled) {
+  transform: scale(var(--scale-active-moderate));
+  transition-duration: var(--duration-instant);
+}
+
+/* ============================================
+   Reduced Motion Support
+   Respect user preferences
+   ============================================ */
+@media (prefers-reduced-motion: reduce) {
+  .interactive-card:hover,
+  .interactive-button:hover,
+  .interactive-icon:hover,
+  .hover-lift:hover,
+  .hover-grow:hover,
+  .card-interactive:hover,
+  .button-interactive:hover,
+  .icon-interactive:hover {
+    transform: none;
+  }
+  
+  .interactive-card:active,
+  .interactive-button:active,
+  .interactive-icon:active,
+  .button-interactive:active,
+  .icon-interactive:active {
+    transform: none;
+  }
+}
+

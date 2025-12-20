@@ -81,4 +81,8 @@ export { FloatingStatusBar } from './FloatingStatusBar';
 export { SecondaryHeader } from './SecondaryHeader';
 
 // Reading Mode Bar
+// Reading Mode Bar
 export { ReadingModeBar } from './ReadingModeBar';
+
+// Offline Support
+export { OfflineBanner } from './OfflineBanner';

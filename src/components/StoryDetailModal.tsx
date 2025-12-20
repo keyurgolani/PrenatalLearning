@@ -1,4 +1,9 @@
 import React, { useState, useCallback } from 'react';
+import { 
+  X, Clock, Check, BookOpen, Lightbulb, Sparkles, Book, Baby, 
+  Heart, Wind, PenTool, Target, User, MessageCircle, MessageSquare, 
+  Palette, ArrowRight 
+} from 'lucide-react';
 import type { Story, Category, TopicExercise, ExerciseSessionResult } from '../types';
 import { getInteractiveExercises, hasInteractiveExercises } from '../data/interactiveExercises';
 import { getStoryContent } from '../data';
@@ -13,6 +18,29 @@ interface StoryDetailModalProps {
   onClose: () => void;
   onToggleComplete: (storyId: number) => void;
 }
+
+const sectionLabels = {
+  introduction: 'Introduction',
+  coreContent: 'Core Concept',
+  interactiveSection: 'Interactive Elements',
+  integration: 'Integration'
+};
+
+const sectionDurations = {
+  introduction: '~5 min',
+  coreContent: '~30 min',
+  interactiveSection: '~15 min',
+  integration: '~10 min'
+};
+
+const exerciseTypeColors: Record<TopicExercise['type'], string> = {
+  reflection: 'border-purple-200 bg-purple-50',
+  'thought-experiment': 'border-blue-200 bg-blue-50',
+  discussion: 'border-green-200 bg-green-50',
+  creative: 'border-orange-200 bg-orange-50',
+  visualization: 'border-indigo-200 bg-indigo-50',
+  breathing: 'border-teal-200 bg-teal-50',
+};
 
 /**
  * StoryDetailModal component for displaying full story content
@@ -100,37 +128,27 @@ export const StoryDetailModal: React.FC<StoryDetailModalProps> = ({
     setShowExerciseModal(false);
   }, []);
 
+
+
   const exerciseTypeLabels: Record<TopicExercise['type'], string> = {
-    reflection: '🪞 Reflection',
-    'thought-experiment': '💭 Thought Experiment',
-    discussion: '💬 Discussion',
-    creative: '🎨 Creative Activity',
-    visualization: '✨ Visualization',
-    breathing: '🌬️ Breathing',
+    reflection: 'Reflection',
+    'thought-experiment': 'Thought Experiment',
+    discussion: 'Discussion',
+    creative: 'Creative Activity',
+    visualization: 'Visualization',
+    breathing: 'Breathing',
   };
 
-  const exerciseTypeColors: Record<TopicExercise['type'], string> = {
-    reflection: 'bg-purple-50 border-purple-200',
-    'thought-experiment': 'bg-blue-50 border-blue-200',
-    discussion: 'bg-green-50 border-green-200',
-    creative: 'bg-orange-50 border-orange-200',
-    visualization: 'bg-indigo-50 border-indigo-200',
-    breathing: 'bg-teal-50 border-teal-200',
+  const exerciseTypeIcons: Record<TopicExercise['type'], React.ReactNode> = {
+    reflection: <User className="w-4 h-4" />,
+    'thought-experiment': <MessageCircle className="w-4 h-4" />,
+    discussion: <MessageSquare className="w-4 h-4" />,
+    creative: <Palette className="w-4 h-4" />,
+    visualization: <Sparkles className="w-4 h-4" />,
+    breathing: <Wind className="w-4 h-4" />,
   };
 
-  const sectionDurations = {
-    introduction: '~5 minutes',
-    coreContent: '~30 minutes',
-    interactiveSection: '~15 minutes',
-    integration: '~10 minutes',
-  };
-
-  const sectionLabels = {
-    introduction: 'Introduction',
-    coreContent: 'Core Concept',
-    interactiveSection: 'Interactive Elements',
-    integration: 'Integration',
-  };
+  // ... existing code
 
   return (
     <div
@@ -139,13 +157,8 @@ export const StoryDetailModal: React.FC<StoryDetailModalProps> = ({
       aria-modal="true"
       aria-labelledby="modal-title"
     >
-      {/* Backdrop */}
-      <div
-        className="fixed inset-0 bg-black/50 backdrop-blur-sm transition-opacity"
-        onClick={onClose}
-        aria-hidden="true"
-      />
-
+      {/* ... Backdrop ... */}
+      
       {/* Modal Content */}
       <div className="relative min-h-screen flex items-start justify-center p-4 pt-8 pb-20">
         <div className="relative bg-white rounded-3xl shadow-2xl max-w-4xl w-full overflow-hidden animate-pop-in">
@@ -158,9 +171,7 @@ export const StoryDetailModal: React.FC<StoryDetailModalProps> = ({
             className="absolute top-6 right-6 p-2 rounded-full bg-white/80 hover:bg-white shadow-md transition-all z-10"
             aria-label="Close modal"
           >
-            <svg className="w-6 h-6 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-            </svg>
+            <X className="w-6 h-6 text-gray-600" />
           </button>
 
           {/* Header Section */}
@@ -180,9 +191,7 @@ export const StoryDetailModal: React.FC<StoryDetailModalProps> = ({
             {/* Metadata */}
             <div className="flex flex-wrap gap-3 mt-4">
               <span className="inline-flex items-center px-3 py-1.5 rounded-full text-sm font-medium bg-purple-100 text-purple-700">
-                <svg className="w-4 h-4 mr-1.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-                </svg>
+                <Clock className="w-4 h-4 mr-1.5" />
                 {story.duration} minutes
               </span>
               <span className={`inline-flex items-center px-3 py-1.5 rounded-full text-sm font-medium ${
@@ -194,18 +203,14 @@ export const StoryDetailModal: React.FC<StoryDetailModalProps> = ({
               </span>
               {isCompleted && (
                 <span className="inline-flex items-center px-3 py-1.5 rounded-full text-sm font-medium bg-green-100 text-green-700">
-                  <svg className="w-4 h-4 mr-1.5" fill="currentColor" viewBox="0 0 20 20">
-                    <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
-                  </svg>
+                  <Check className="w-4 h-4 mr-1.5" />
                   Completed
                 </span>
               )}
               {/* Exercise Completion Badge - Requirements 4.8 */}
               {exerciseCompletionStatus?.completed && (
                 <span className="inline-flex items-center px-3 py-1.5 rounded-full text-sm font-medium bg-amber-100 text-amber-700">
-                  <svg className="w-4 h-4 mr-1.5" fill="currentColor" viewBox="0 0 20 20">
-                    <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                  </svg>
+                  <Check className="w-4 h-4 mr-1.5" />
                   Exercises Done
                   {exerciseCompletionStatus.score !== undefined && (
                     <span className="ml-1">({exerciseCompletionStatus.score}%)</span>
@@ -216,17 +221,14 @@ export const StoryDetailModal: React.FC<StoryDetailModalProps> = ({
 
             {/* Action Buttons */}
             <div className="mt-4 flex flex-wrap gap-3">
-              {/* Start Exercises Button - Requirements 5.1 */}
+              {/* Start Exercises Button */}
               {topicHasExercises && (
                 <button
                   onClick={handleStartExercises}
-                  className="inline-flex items-center px-4 py-2.5 rounded-xl font-medium bg-gradient-to-r from-amber-400 to-orange-500 text-white hover:from-amber-500 hover:to-orange-600 shadow-md hover:shadow-lg transition-all duration-200 animate-scale-hover animate-glow"
+                  className="inline-flex items-center px-4 py-2.5 rounded-xl font-medium bg-gradient-to-r from-amber-400 to-orange-500 text-white hover:from-amber-500 hover:to-orange-600 shadow-md hover:shadow-lg button-interactive hover-glow"
                   style={{ '--glow-color': 'rgba(251, 146, 60, 0.5)' } as React.CSSProperties}
                 >
-                  <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z" />
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                  </svg>
+                  <Target className="w-5 h-5 mr-2" />
                   {exerciseCompletionStatus?.completed 
                     ? 'Review Exercises' 
                     : exerciseCompletionStatus?.exercisesCompleted 
@@ -240,28 +242,27 @@ export const StoryDetailModal: React.FC<StoryDetailModalProps> = ({
               {hasDetailedContent && (
                 <button
                   onClick={() => setShowDetailedContent(!showDetailedContent)}
-                  className={`inline-flex items-center px-4 py-2.5 rounded-xl font-medium transition-all duration-200 animate-scale-hover animate-glow ${
+                  className={`inline-flex items-center px-4 py-2.5 rounded-xl font-medium button-interactive hover-glow ${
                     showDetailedContent
                       ? 'bg-purple-600 text-white shadow-md'
                       : 'bg-gradient-to-r from-purple-500 to-indigo-500 text-white hover:from-purple-600 hover:to-indigo-600 shadow-md hover:shadow-lg'
                   }`}
                   style={{ '--glow-color': 'rgba(139, 92, 246, 0.5)' } as React.CSSProperties}
                 >
-                  <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
-                  </svg>
+                  <BookOpen className="w-5 h-5 mr-2" />
                   {showDetailedContent ? 'Hide Full Content' : 'Explore Full Story Content'}
                 </button>
               )}
             </div>
           </div>
 
-          {/* Detailed Story Content - Full narratives and exercises */}
+          {/* Detailed Story Content */}
           {showDetailedContent && hasDetailedContent && (
             <div className="p-8 pt-4 border-b border-gray-200 bg-gradient-to-b from-indigo-50/50 to-white">
               <div className="flex items-center justify-between mb-4">
                 <h3 className="text-xl font-bold text-gray-800 flex items-center gap-2">
-                  <span>📚</span> Full Story Content
+                  <BookOpen className="w-6 h-6 text-purple-600" /> 
+                  <span>Full Story Content</span>
                 </h3>
                 <span className="text-sm text-gray-500 bg-white px-3 py-1 rounded-full border">
                   Detailed narratives for reading aloud
@@ -276,7 +277,8 @@ export const StoryDetailModal: React.FC<StoryDetailModalProps> = ({
             {/* Key Concepts */}
             <section>
               <h3 className="text-lg font-semibold text-gray-800 mb-3 flex items-center">
-                <span className="mr-2">💡</span> Key Concepts
+                <Lightbulb className="w-5 h-5 mr-2 text-yellow-500" />
+                Key Concepts
               </h3>
               <ul className="space-y-2">
                 {story.content.keyConcepts.map((concept, index) => (
@@ -292,7 +294,8 @@ export const StoryDetailModal: React.FC<StoryDetailModalProps> = ({
             {story.content.analogies.length > 0 && (
               <section>
                 <h3 className="text-lg font-semibold text-gray-800 mb-3 flex items-center">
-                  <span className="mr-2">🌈</span> Helpful Analogies
+                  <Sparkles className="w-5 h-5 mr-2 text-purple-500" />
+                  Helpful Analogies
                 </h3>
                 <div className="bg-gradient-to-r from-purple-50 to-pink-50 rounded-xl p-4">
                   <ul className="space-y-2">
@@ -309,10 +312,11 @@ export const StoryDetailModal: React.FC<StoryDetailModalProps> = ({
             {/* Story Structure - Four Sections */}
             <section>
               <h3 className="text-lg font-semibold text-gray-800 mb-4 flex items-center">
-                <span className="mr-2">📖</span> Story Structure
+                <Book className="w-5 h-5 mr-2 text-blue-500" />
+                Story Structure
               </h3>
               <div className="space-y-4">
-                {(Object.keys(sectionLabels) as Array<keyof typeof sectionLabels>).map((key) => (
+                {(Object.keys(sectionLabels) as (keyof typeof sectionLabels)[]).map((key) => (
                   <div key={key} className="border border-gray-200 rounded-xl overflow-hidden">
                     <div className="bg-gray-50 px-4 py-3 flex items-center justify-between">
                       <h4 className="font-medium text-gray-800">{sectionLabels[key]}</h4>
@@ -331,23 +335,32 @@ export const StoryDetailModal: React.FC<StoryDetailModalProps> = ({
             {/* Mother Activities */}
             <section>
               <h3 className="text-lg font-semibold text-gray-800 mb-3 flex items-center">
-                <span className="mr-2">🤰</span> Recommended Mother Activities
+                <Baby className="w-5 h-5 mr-2 text-pink-500" />
+                Recommended Mother Activities
               </h3>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
                 <div className="bg-pink-50 rounded-xl p-4 border border-pink-100">
-                  <h4 className="font-medium text-pink-800 mb-1">💕 Gentle Touch</h4>
+                  <h4 className="font-medium text-pink-800 mb-1 flex items-center gap-2">
+                    <Heart className="w-4 h-4" /> Gentle Touch
+                  </h4>
                   <p className="text-sm text-pink-700">Place hands on belly, sending loving thoughts to your baby</p>
                 </div>
                 <div className="bg-blue-50 rounded-xl p-4 border border-blue-100">
-                  <h4 className="font-medium text-blue-800 mb-1">🌬️ Breathing Exercise</h4>
+                  <h4 className="font-medium text-blue-800 mb-1 flex items-center gap-2">
+                    <Wind className="w-4 h-4" /> Breathing Exercise
+                  </h4>
                   <p className="text-sm text-blue-700">Deep, rhythmic breathing to relax and connect</p>
                 </div>
                 <div className="bg-purple-50 rounded-xl p-4 border border-purple-100">
-                  <h4 className="font-medium text-purple-800 mb-1">✨ Visualization</h4>
+                  <h4 className="font-medium text-purple-800 mb-1 flex items-center gap-2">
+                    <Sparkles className="w-4 h-4" /> Visualization
+                  </h4>
                   <p className="text-sm text-purple-700">Imagine concepts as colors and feelings flowing to baby</p>
                 </div>
                 <div className="bg-amber-50 rounded-xl p-4 border border-amber-100">
-                  <h4 className="font-medium text-amber-800 mb-1">📝 Journaling</h4>
+                  <h4 className="font-medium text-amber-800 mb-1 flex items-center gap-2">
+                    <PenTool className="w-4 h-4" /> Journaling
+                  </h4>
                   <p className="text-sm text-amber-700">Record your thoughts and feelings after each session</p>
                 </div>
               </div>
@@ -357,7 +370,8 @@ export const StoryDetailModal: React.FC<StoryDetailModalProps> = ({
             {story.content.exercises.length > 0 && (
               <section>
                 <h3 className="text-lg font-semibold text-gray-800 mb-4 flex items-center">
-                  <span className="mr-2">🎯</span> Topic-Specific Exercises
+                  <Target className="w-5 h-5 mr-2 text-red-500" />
+                  Topic-Specific Exercises
                 </h3>
                 <div className="space-y-4">
                   {story.content.exercises.map((exercise, index) => (
@@ -366,6 +380,7 @@ export const StoryDetailModal: React.FC<StoryDetailModalProps> = ({
                       className={`rounded-xl p-5 border ${exerciseTypeColors[exercise.type]}`}
                     >
                       <div className="flex items-center gap-2 mb-2">
+                        {exerciseTypeIcons[exercise.type]}
                         <span className="text-sm font-medium text-gray-500">
                           {exerciseTypeLabels[exercise.type]}
                         </span>
@@ -375,7 +390,7 @@ export const StoryDetailModal: React.FC<StoryDetailModalProps> = ({
                       <div className="space-y-2">
                         {exercise.prompts.map((prompt, promptIndex) => (
                           <div key={promptIndex} className="flex items-start gap-2">
-                            <span className="text-purple-500 font-bold">→</span>
+                            <ArrowRight className="w-4 h-4 text-purple-500 mt-1 flex-shrink-0" />
                             <p className="text-gray-700 text-sm">{prompt}</p>
                           </div>
                         ))}
@@ -391,18 +406,18 @@ export const StoryDetailModal: React.FC<StoryDetailModalProps> = ({
           <div className="sticky bottom-0 bg-white border-t border-gray-100 p-6 flex gap-4">
             <button
               onClick={() => onToggleComplete(story.id)}
-              className={`flex-1 py-3 px-6 rounded-xl font-medium transition-all duration-200 animate-scale-hover ${
+              className={`flex-1 py-3 px-6 rounded-xl font-medium transition-all duration-200 animate-scale-hover flex items-center justify-center gap-2 ${
                 isCompleted
                   ? 'bg-green-100 text-green-700 hover:bg-green-200'
                   : 'bg-gradient-to-r from-purple-500 to-pink-500 text-white hover:from-purple-600 hover:to-pink-600 shadow-md hover:shadow-lg animate-glow'
               }`}
               style={!isCompleted ? { '--glow-color': 'rgba(168, 85, 247, 0.5)' } as React.CSSProperties : {}}
             >
-              {isCompleted ? '✓ Completed - Click to Unmark' : 'Mark as Complete'}
+              {isCompleted ? <><Check className="w-5 h-5" /> Completed - Click to Unmark</> : 'Mark as Complete'}
             </button>
             <button
               onClick={onClose}
-              className="px-6 py-3 rounded-xl font-medium bg-gray-100 text-gray-600 hover:bg-gray-200 transition-all duration-200 animate-scale-hover"
+              className="px-6 py-3 rounded-xl font-medium bg-gray-100 text-gray-600 hover:bg-gray-200 button-interactive"
             >
               Close
             </button>

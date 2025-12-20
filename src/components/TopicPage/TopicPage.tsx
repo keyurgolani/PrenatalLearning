@@ -20,6 +20,7 @@ import { useReadingProgress } from '../../hooks/useReadingProgress';
 import { useAudio } from '../../contexts/AudioContext';
 import { StepTransition } from '../StepTransition';
 import { ErrorBoundary } from '../ErrorBoundary';
+import { ScrollIndicators } from '../ScrollIndicators';
 
 /**
  * TopicPage component - Unified guided learning experience
@@ -83,6 +84,8 @@ const TopicPageInner: React.FC<TopicPageInnerProps> = ({
   const contentContainerRef = React.useRef<HTMLDivElement>(null);
   // Ref for the reading mode scroll container (used when reading mode is enabled)
   const readingModeScrollRef = React.useRef<HTMLDivElement>(null);
+  // Ref for completion summary scroll
+  const completionScrollRef = React.useRef<HTMLDivElement>(null);
 
   // Reading progress tracking
   // Requirements: 11.1, 11.2, 11.3, 11.5 - Display and update reading progress
@@ -246,7 +249,7 @@ const TopicPageInner: React.FC<TopicPageInnerProps> = ({
         <div className="flex items-center justify-between mb-4 animate-fade-in">
           <button
             onClick={onClose}
-            className="flex items-center gap-2 px-3 py-2 rounded-lg transition-all backdrop-blur-sm animate-gentle-bounce"
+            className="flex items-center gap-2 px-3 py-2 rounded-lg button-interactive backdrop-blur-sm animate-gentle-bounce"
             style={{ 
               backgroundColor: currentTheme.isDark ? `${currentTheme.colors.surface}cc` : 'rgba(255,255,255,0.8)',
               color: currentTheme.isDark ? currentTheme.colors.text : '#4b5563'
@@ -294,10 +297,13 @@ const TopicPageInner: React.FC<TopicPageInnerProps> = ({
 
               {showCompletionSummary ? (
                 /* Completion Summary - Requirements 7.9 */
-                <div className="p-8 animate-fade-in flex-1 overflow-y-auto">
+                <div className="p-8 animate-fade-in flex-1 overflow-y-auto relative" ref={completionScrollRef}>
+                  <ScrollIndicators containerRef={completionScrollRef} />
                   <div className="text-center py-8">
                     <div className="w-24 h-24 mx-auto mb-6 rounded-full bg-gradient-to-r from-green-400 to-emerald-500 flex items-center justify-center animate-bounce-in">
-                      <span className="text-5xl">🎉</span>
+                      <svg className="w-12 h-12 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z" />
+                      </svg>
                     </div>
                     <h2 id="topic-page-title" className="text-2xl font-bold text-gray-800 mb-2">
                       Congratulations!
@@ -311,9 +317,12 @@ const TopicPageInner: React.FC<TopicPageInnerProps> = ({
                     
                     {/* Encouragement message */}
                     <div className="bg-gradient-to-r from-purple-50 to-pink-50 rounded-xl p-6 mb-8 max-w-md mx-auto">
-                      <p className="text-gray-700">
-                        🌟 Great job on completing this learning journey! Your dedication to learning is inspiring. Take a moment to reflect on what you've learned.
-                      </p>
+                      <div className="flex items-center gap-2 mb-2">
+                        <svg className="w-5 h-5 text-purple-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z" />
+                        </svg>
+                        Great job on completing this learning journey! Your dedication to learning is inspiring. Take a moment to reflect on what you've learned.
+                      </div>
                     </div>
 
                     {/* Related Topics - Requirements 6.1, 6.4 */}
@@ -338,7 +347,7 @@ const TopicPageInner: React.FC<TopicPageInnerProps> = ({
                           <button
                             key={step}
                             onClick={() => handleReviewSection(step)}
-                            className={`px-4 py-2 rounded-lg text-sm font-medium bg-gray-100 text-gray-700 hover:bg-gray-200 transition-all animate-scale-in stagger-${index + 1} animate-gentle-bounce`}
+                            className={`px-4 py-2 rounded-lg text-sm font-medium bg-gray-100 text-gray-700 hover:bg-gray-200 button-interactive animate-scale-in stagger-${index + 1} animate-gentle-bounce`}
                           >
                             {STEP_LABELS[step]}
                           </button>
@@ -349,7 +358,7 @@ const TopicPageInner: React.FC<TopicPageInnerProps> = ({
                     {/* Close button */}
                     <button
                       onClick={onClose}
-                      className="px-8 py-3 rounded-xl font-medium bg-gradient-to-r from-purple-500 to-pink-500 text-white hover:from-purple-600 hover:to-pink-600 shadow-md hover:shadow-lg transition-all animate-scale-hover animate-glow"
+                      className="px-8 py-3 rounded-xl font-medium bg-gradient-to-r from-purple-500 to-pink-500 text-white hover:from-purple-600 hover:to-pink-600 shadow-md hover:shadow-lg button-interactive animate-scale-hover animate-glow"
                       style={{ '--glow-color': 'rgba(168, 85, 247, 0.5)' } as React.CSSProperties}
                     >
                       Back to Topics
@@ -384,9 +393,10 @@ const TopicPageInner: React.FC<TopicPageInnerProps> = ({
                   >
                     <div 
                       ref={contentContainerRef}
-                      className={`${readingSettings.readingModeEnabled ? 'min-h-[50vh]' : 'p-6 md:p-8 flex-1 overflow-y-auto scrollbar-hidden'} content-scalable`}
+                      className={`${readingSettings.readingModeEnabled ? 'min-h-[50vh]' : 'p-6 md:p-8 flex-1 overflow-y-auto scrollbar-hidden'} content-scalable relative`}
                       style={{ scrollBehavior: 'smooth' }}
                     >
+                      <ScrollIndicators containerRef={contentContainerRef} />
                       <h2 id="topic-page-title" className="sr-only">{story.title}</h2>
                       <ErrorBoundary
                         resetKey={currentStep}
@@ -426,7 +436,7 @@ const TopicPageInner: React.FC<TopicPageInnerProps> = ({
                         }
                       }}
                       disabled={currentStepIndex === 0}
-                      className="flex items-center gap-2 px-4 py-2 rounded-xl font-medium transition-all animate-gentle-bounce"
+                      className="flex items-center gap-2 px-4 py-2 rounded-xl font-medium button-interactive animate-gentle-bounce"
                       style={{ 
                         color: currentStepIndex === 0 
                           ? (currentTheme.isDark ? currentTheme.colors.border : '#9ca3af')
@@ -446,7 +456,7 @@ const TopicPageInner: React.FC<TopicPageInnerProps> = ({
                     {isLastStep ? (
                       <button
                         onClick={handleCompleteTopic}
-                        className="flex items-center gap-2 px-6 py-3 rounded-xl font-medium bg-gradient-to-r from-green-500 to-emerald-500 text-white hover:from-green-600 hover:to-emerald-600 shadow-md hover:shadow-lg transition-all animate-scale-hover animate-glow"
+                        className="flex items-center gap-2 px-6 py-3 rounded-xl font-medium bg-gradient-to-r from-green-500 to-emerald-500 text-white hover:from-green-600 hover:to-emerald-600 shadow-md hover:shadow-lg button-interactive animate-scale-hover animate-glow"
                         style={{ '--glow-color': 'rgba(16, 185, 129, 0.5)' } as React.CSSProperties}
                       >
                         <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
@@ -457,7 +467,7 @@ const TopicPageInner: React.FC<TopicPageInnerProps> = ({
                     ) : (
                       <button
                         onClick={handleContinue}
-                        className="flex items-center gap-2 px-6 py-3 rounded-xl font-medium bg-gradient-to-r from-purple-500 to-pink-500 text-white hover:from-purple-600 hover:to-pink-600 shadow-md hover:shadow-lg transition-all animate-scale-hover animate-glow"
+                        className="flex items-center gap-2 px-6 py-3 rounded-xl font-medium bg-gradient-to-r from-purple-500 to-pink-500 text-white hover:from-purple-600 hover:to-pink-600 shadow-md hover:shadow-lg button-interactive animate-scale-hover animate-glow"
                         style={{ '--glow-color': 'rgba(168, 85, 247, 0.5)' } as React.CSSProperties}
                       >
                         Continue

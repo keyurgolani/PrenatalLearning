@@ -10,6 +10,7 @@ import {
   RecommendedForYou,
   FloatingStatusBar,
   SecondaryHeader,
+  OfflineBanner,
 } from './components';
 import { JournalModal } from './components/journal';
 import { TopicPage } from './components/TopicPage';
@@ -34,6 +35,7 @@ import {
   JournalProvider,
   KickProvider,
   CompletedStoriesProvider,
+  ModalProvider,
   useLayout,
   useTheme,
   useTopicProgress,
@@ -225,6 +227,32 @@ function FilterSidebar({
   };
   
   const currentTrimesterPathId = currentTrimester ? trimesterPathMap[currentTrimester] : null;
+
+  // Get presets for quick filters
+  const [presets, setPresets] = useState<FilterPreset[]>(() => getAllPresets());
+  const builtInPresets = presets.filter(p => p.isBuiltIn);
+  const userPresets = presets.filter(p => !p.isBuiltIn);
+  const [showSavePreset, setShowSavePreset] = useState(false);
+  const [presetName, setPresetName] = useState('');
+  
+  // Find if current filters match any preset
+  const activePreset = useMemo(() => {
+    if (!currentFilters) return undefined;
+    return findMatchingPreset(currentFilters);
+  }, [currentFilters]);
+
+  const handleSavePreset = () => {
+    if (!presetName.trim() || !currentFilters) return;
+    savePreset(presetName.trim(), currentFilters);
+    setPresets(getAllPresets());
+    setPresetName('');
+    setShowSavePreset(false);
+  };
+
+  const handleDeletePreset = (presetId: string) => {
+    deletePreset(presetId);
+    setPresets(getAllPresets());
+  };
   
   if (isJourneyMode) {
     return (
@@ -284,31 +312,7 @@ function FilterSidebar({
     );
   }
 
-  // Get presets for quick filters
-  const [presets, setPresets] = useState<FilterPreset[]>(() => getAllPresets());
-  const builtInPresets = presets.filter(p => p.isBuiltIn);
-  const userPresets = presets.filter(p => !p.isBuiltIn);
-  const [showSavePreset, setShowSavePreset] = useState(false);
-  const [presetName, setPresetName] = useState('');
-  
-  // Find if current filters match any preset
-  const activePreset = useMemo(() => {
-    if (!currentFilters) return undefined;
-    return findMatchingPreset(currentFilters);
-  }, [currentFilters]);
 
-  const handleSavePreset = () => {
-    if (!presetName.trim() || !currentFilters) return;
-    savePreset(presetName.trim(), currentFilters);
-    setPresets(getAllPresets());
-    setPresetName('');
-    setShowSavePreset(false);
-  };
-
-  const handleDeletePreset = (presetId: string) => {
-    deletePreset(presetId);
-    setPresets(getAllPresets());
-  };
 
   return (
     <nav 
@@ -1002,6 +1006,8 @@ function AppContent() {
         compact={isTopicPage}
       />
       
+      <OfflineBanner />
+      
       {/* Journal Modal - opens when journal button is clicked
           Requirements: 10.2 - Open journal popup/modal
           Requirements: 10.3 - Calendar view organized by date
@@ -1035,7 +1041,9 @@ function App() {
                           <TrimesterProvider>
                             <StreakProvider>
                               <AudioProvider>
-                                <AppContent />
+                                <ModalProvider>
+                                  <AppContent />
+                                </ModalProvider>
                               </AudioProvider>
                             </StreakProvider>
                           </TrimesterProvider>

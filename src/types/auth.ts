@@ -77,10 +77,10 @@ export interface AuthResult {
  */
 export interface AuthError {
   error: string;
-  details?: Array<{
+  details?: {
     field: string;
     message: string;
-  }>;
+  }[];
 }
 
 /**

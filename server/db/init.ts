@@ -94,7 +94,7 @@ export async function dropAllCollections(): Promise<void> {
     try {
       await db.collection(collectionName).drop();
       console.log(`Dropped collection: ${collectionName}`);
-    } catch (error) {
+    } catch {
       // Collection might not exist, ignore error
     }
   }

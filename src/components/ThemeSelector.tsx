@@ -292,7 +292,7 @@ const ThemeGridItem: React.FC<ThemeGridItemProps> = ({ theme, isSelected, onSele
   return (
     <button
       onClick={() => onSelect(theme.id)}
-      className={`relative flex flex-col items-center p-1.5 rounded-lg border-2 transition-all duration-150 hover:scale-105 ${
+      className={`relative flex flex-col items-center p-1.5 rounded-lg border-2 hover-grow focus-ring ${
         isSelected
           ? 'border-purple-500 bg-purple-50 shadow-sm'
           : isDark

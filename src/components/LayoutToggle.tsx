@@ -69,7 +69,7 @@ export const LayoutToggle: React.FC = () => {
             key={value}
             onClick={() => setLayout(value)}
             className={`
-              p-2 rounded-md transition-all duration-200 animate-gentle-bounce animate-click focus-ring
+              p-2 rounded-md button-interactive focus-ring
               ${isActive ? 'shadow-sm' : ''}
             `}
             style={

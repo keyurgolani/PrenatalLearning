@@ -16,34 +16,28 @@ interface AudioNarrationBadgeProps {
   compact?: boolean;
 }
 
+import { Headphones } from 'lucide-react';
+
 const badgeConfig: Record<Exclude<AudioStatus, 'none'>, {
   label: string;
-  compactLabel: string;
+  compactLabel: React.ReactNode;
   lightClass: string;
   darkStyle: React.CSSProperties;
   icon: React.ReactNode;
 }> = {
   full: {
     label: 'Full Audio',
-    compactLabel: '🎧',
+    compactLabel: <Headphones className="w-4 h-4" />,
     lightClass: 'bg-emerald-100 text-emerald-700',
     darkStyle: { backgroundColor: 'rgba(16, 185, 129, 0.2)', color: '#34D399' },
-    icon: (
-      <svg className="w-3.5 h-3.5" viewBox="0 0 24 24" fill="currentColor">
-        <path d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z"/>
-      </svg>
-    ),
+    icon: <Headphones className="w-3.5 h-3.5" />,
   },
   partial: {
     label: 'Partial Audio',
-    compactLabel: '🎧',
+    compactLabel: <Headphones className="w-4 h-4" />,
     lightClass: 'bg-amber-100 text-amber-700',
     darkStyle: { backgroundColor: 'rgba(245, 158, 11, 0.2)', color: '#FBBF24' },
-    icon: (
-      <svg className="w-3.5 h-3.5" viewBox="0 0 24 24" fill="currentColor">
-        <path d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z" opacity="0.6"/>
-      </svg>
-    ),
+    icon: <Headphones className="w-3.5 h-3.5 opacity-60" />,
   },
 };
 

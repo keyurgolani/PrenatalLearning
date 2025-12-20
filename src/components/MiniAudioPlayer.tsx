@@ -16,17 +16,37 @@ export const MiniAudioPlayer: React.FC = () => {
   const [isExiting, setIsExiting] = useState(false);
   const progressBarRef = useRef<HTMLDivElement>(null);
 
+  // Destructure audioState for precise dependencies
+  const { 
+    storyId, 
+    sectionName, 
+    isPlaying, 
+    isLoading, 
+    duration, 
+    currentTime, 
+    storyTitle 
+  } = audioState || { 
+    storyId: null, 
+    sectionName: '', 
+    isPlaying: false, 
+    isLoading: false, 
+    duration: 0, 
+    currentTime: 0, 
+    storyTitle: '' 
+  };
+
   // Show mini player only when audio is actively playing or loading
-  const shouldShow = audioState !== null && 
-                     audioState.storyId !== null && 
-                     (audioState.isPlaying || audioState.isLoading);
+  const shouldShow = storyId !== null && (isPlaying || isLoading);
 
   // Handle visibility based on shouldShow
   useEffect(() => {
     if (shouldShow) {
       // Audio is playing - show immediately, cancel any exit animation
-      setIsExiting(false);
-      setIsVisible(true);
+      if (!isVisible || isExiting) {
+        // eslint-disable-next-line react-hooks/set-state-in-effect
+        setIsExiting(false);
+        setIsVisible(true);
+      }
     } else if (isVisible && !isExiting) {
       // Audio stopped/paused - start exit animation
       setIsExiting(true);
@@ -39,19 +59,18 @@ export const MiniAudioPlayer: React.FC = () => {
   }, [shouldShow, isVisible, isExiting]);
 
   const handleNavigateToStory = useCallback(() => {
-    if (audioState?.storyId) {
+    if (storyId) {
       // Navigate to the specific section where audio is playing
-      const sectionPath = audioState.sectionName ? `/${audioState.sectionName}` : '';
-      navigate(`/topic/${audioState.storyId}${sectionPath}`);
+      const sectionPath = sectionName ? `/${sectionName}` : '';
+      navigate(`/topic/${storyId}${sectionPath}`);
     }
-  }, [audioState?.storyId, audioState?.sectionName, navigate]);
+  }, [storyId, sectionName, navigate]);
 
   // Handle play/pause - when pausing, navigate to the topic
   const handlePlayPause = useCallback(async () => {
-    if (audioState?.isPlaying && audioState?.storyId) {
+    if (isPlaying && storyId) {
       // User is pausing - capture navigation info before pausing
-      const storyId = audioState.storyId;
-      const sectionName = audioState.sectionName;
+      // Navigate involves state change, so we do it after toggling
       
       // Pause the audio
       await togglePlayPause();
@@ -63,11 +82,11 @@ export const MiniAudioPlayer: React.FC = () => {
       // User is playing - just toggle
       await togglePlayPause();
     }
-  }, [audioState?.isPlaying, audioState?.storyId, audioState?.sectionName, togglePlayPause, navigate]);
+  }, [isPlaying, storyId, sectionName, togglePlayPause, navigate]);
 
   // Accurate seeking using getBoundingClientRect
   const handleSeek = useCallback((e: React.MouseEvent<HTMLDivElement>) => {
-    if (!audioState || audioState.duration <= 0 || !progressBarRef.current) return;
+    if (duration <= 0 || !progressBarRef.current) return;
 
     const rect = progressBarRef.current.getBoundingClientRect();
     const clickX = e.clientX - rect.left;
@@ -75,10 +94,38 @@ export const MiniAudioPlayer: React.FC = () => {
     
     // Calculate percentage with bounds checking
     const percent = Math.max(0, Math.min(1, clickX / barWidth));
-    const targetTime = percent * audioState.duration;
+    const targetTime = percent * duration;
     
     seekTo(targetTime);
-  }, [audioState, seekTo]);
+  }, [duration, seekTo]);
+
+  // Keyboard handling for seeking
+  const handleKeyDown = useCallback((e: React.KeyboardEvent<HTMLDivElement>) => {
+    if (duration <= 0) return;
+
+    let newTime = currentTime;
+    const seekAmount = 5; // 5 seconds
+
+    switch (e.key) {
+      case 'ArrowLeft':
+        newTime = Math.max(0, currentTime - seekAmount);
+        break;
+      case 'ArrowRight':
+        newTime = Math.min(duration, currentTime + seekAmount);
+        break;
+      case 'Home':
+        newTime = 0;
+        break;
+      case 'End':
+        newTime = duration;
+        break;
+      default:
+        return;
+    }
+
+    e.preventDefault();
+    seekTo(newTime);
+  }, [currentTime, duration, seekTo]);
 
   const formatTime = (time: number): string => {
     const minutes = Math.floor(time / 60);
@@ -86,12 +133,12 @@ export const MiniAudioPlayer: React.FC = () => {
     return `${minutes}:${seconds.toString().padStart(2, '0')}`;
   };
 
-  if (!isVisible || !audioState) {
+  if (!isVisible && !shouldShow && !isExiting) {
     return null;
   }
 
-  const progressPercent = audioState.duration > 0
-    ? Math.min(100, Math.max(0, (audioState.currentTime / audioState.duration) * 100))
+  const progressPercent = duration > 0
+    ? Math.min(100, Math.max(0, (currentTime / duration) * 100))
     : 0;
 
   return (
@@ -108,14 +155,14 @@ export const MiniAudioPlayer: React.FC = () => {
       <button
         onClick={handlePlayPause}
         className="w-7 h-7 flex items-center justify-center rounded-full bg-purple-500/40 hover:bg-purple-500/60 transition-colors"
-        aria-label={audioState.isPlaying ? 'Pause and go to topic' : 'Play'}
+        aria-label={isPlaying ? 'Pause and go to topic' : 'Play'}
       >
-        {audioState.isLoading ? (
+        {isLoading ? (
           <svg className="w-3.5 h-3.5 text-white animate-spin" viewBox="0 0 24 24" fill="none">
             <circle cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="2.5" strokeOpacity="0.3" />
             <path d="M12 2a10 10 0 0 1 10 10" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" />
           </svg>
-        ) : audioState.isPlaying ? (
+        ) : isPlaying ? (
           <svg className="w-3.5 h-3.5 text-white" viewBox="0 0 24 24" fill="currentColor">
             <rect x="6" y="5" width="4" height="14" rx="1" />
             <rect x="14" y="5" width="4" height="14" rx="1" />
@@ -131,14 +178,14 @@ export const MiniAudioPlayer: React.FC = () => {
       <button
         onClick={handleNavigateToStory}
         className="flex-1 min-w-0 text-left hover:opacity-80 transition-opacity"
-        title={`Go to ${audioState.storyTitle}`}
+        title={`Go to ${storyTitle}`}
       >
         <div className="flex items-center gap-2">
           <span className="text-white/90 text-xs font-medium truncate max-w-[100px]">
-            🎧 {audioState.sectionName}
+            🎧 {sectionName}
           </span>
           <span className="text-white/60 text-[10px] tabular-nums whitespace-nowrap">
-            {formatTime(audioState.currentTime)}
+            {formatTime(currentTime)}
           </span>
         </div>
       </button>
@@ -148,7 +195,14 @@ export const MiniAudioPlayer: React.FC = () => {
         ref={progressBarRef}
         className="progress-bar w-24 h-2.5 bg-white/20 rounded-full cursor-pointer overflow-hidden relative"
         onClick={handleSeek}
-        title={`${formatTime(audioState.currentTime)} / ${formatTime(audioState.duration)}`}
+        onKeyDown={handleKeyDown}
+        role="slider"
+        tabIndex={0}
+        aria-label="Audio Progress"
+        aria-valuenow={currentTime}
+        aria-valuemin={0}
+        aria-valuemax={duration}
+        title={`${formatTime(currentTime)} / ${formatTime(duration)}`}
       >
         <div
           className="h-full bg-gradient-to-r from-purple-400 to-pink-400 rounded-full"
@@ -164,7 +218,7 @@ export const MiniAudioPlayer: React.FC = () => {
       {/* Close Button */}
       <button
         onClick={stopAudio}
-        className="w-5 h-5 flex items-center justify-center rounded-full hover:bg-white/20 transition-colors"
+        className="p-2 rounded-full hover:bg-white/10 icon-interactive"
         aria-label="Stop audio"
       >
         <svg className="w-3 h-3 text-white/70" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">

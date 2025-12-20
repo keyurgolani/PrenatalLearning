@@ -36,6 +36,7 @@ export function createApp(): Express {
   });
 
   // Error handler
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   app.use((err: Error, _req: Request, res: Response, _next: NextFunction) => {
     console.error('Server error:', err);
     res.status(500).json({

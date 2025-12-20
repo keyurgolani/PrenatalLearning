@@ -239,7 +239,7 @@ export function initializeGuestStreak(): StreakRecord {
  * Record activity for guest streak
  */
 export function recordGuestActivity(type: ActivityType, referenceId?: string): StreakRecord {
-  let streakData = getGuestStreakData() || initializeGuestStreak();
+  const streakData = getGuestStreakData() || initializeGuestStreak();
   
   const today = new Date().toISOString().split('T')[0];
   const entry: ActivityLogEntry = {
@@ -327,7 +327,7 @@ export function initializeGuestKickRecord(): KickRecord {
  * Log a kick event for guest user
  */
 export function logGuestKick(kick: Omit<KickEvent, 'profileId'>): KickRecord {
-  let kickData = getGuestKickData() || initializeGuestKickRecord();
+  const kickData = getGuestKickData() || initializeGuestKickRecord();
   
   const kickEvent: KickEvent = {
     ...kick,
@@ -374,7 +374,7 @@ export function initializeGuestJournalRecord(): JournalRecord {
  * Add journal entry for guest user
  */
 export function addGuestJournalEntry(entry: Omit<JournalEntry, 'userId'>): JournalRecord {
-  let journalData = getGuestJournalData() || initializeGuestJournalRecord();
+  const journalData = getGuestJournalData() || initializeGuestJournalRecord();
   
   const journalEntry: JournalEntry = {
     ...entry,
@@ -391,7 +391,7 @@ export function addGuestJournalEntry(entry: Omit<JournalEntry, 'userId'>): Journ
  * Save journal draft for guest user
  */
 export function saveGuestJournalDraft(draft: Omit<JournalDraft, 'userId'>): boolean {
-  let journalData = getGuestJournalData() || initializeGuestJournalRecord();
+  const journalData = getGuestJournalData() || initializeGuestJournalRecord();
   
   journalData.draft = {
     ...draft,

@@ -82,7 +82,7 @@ export const StoryListItem: React.FC<StoryListItemProps> = ({
   return (
     <article
       className={`
-        flex items-stretch rounded-3xl shadow-sm overflow-hidden transition-all duration-200
+        flex items-stretch rounded-3xl shadow-sm overflow-hidden card-interactive
         hover:shadow-md cursor-pointer focus-ring
         ${isDark ? '' : 'bg-white'}
         ${isCompleted ? 'border-2 border-green-400' : 'border-2 border-transparent'}
@@ -212,7 +212,7 @@ export const StoryListItem: React.FC<StoryListItemProps> = ({
               e.stopPropagation();
               onViewStory(story);
             }}
-            className="ml-2 px-3 py-1.5 bg-gradient-to-r from-purple-500 to-pink-500 text-white rounded-lg text-xs font-medium hover:from-purple-600 hover:to-pink-600 transition-all duration-200 whitespace-nowrap"
+            className="ml-2 px-3 py-1.5 bg-gradient-to-r from-purple-500 to-pink-500 text-white rounded-lg text-xs font-medium hover:from-purple-600 hover:to-pink-600 button-interactive whitespace-nowrap"
           >
             View
           </button>

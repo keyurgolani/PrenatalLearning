@@ -1,14 +1,11 @@
 /**
- * VoiceRecorder Component
+ * VoiceRecorder Component - Redesigned
  * 
- * Provides voice recording functionality for journal entries with microphone
- * permission handling, recording indicator, and duration limit enforcement.
- * 
- * Requirements:
- * - 12.1: THE System SHALL provide a voice recording button within the journal entry interface
- * - 12.2: WHEN the record button is pressed, THE System SHALL request microphone permission if not already granted
- * - 12.3: THE System SHALL display a recording indicator with elapsed time during recording
- * - 12.7: THE System SHALL limit voice note duration to 5 minutes maximum
+ * Simplified voice recording with improved UX:
+ * - Auto-accepts recordings (saves immediately on stop)
+ * - ±10s seek buttons for playback
+ * - Clean Discard/Re-record flow
+ * - No "Use Recording" button needed
  */
 
 import React, { useState, useRef, useCallback, useEffect } from 'react';
@@ -17,44 +14,24 @@ import {
   MAX_VOICE_NOTE_DURATION_SECONDS,
 } from '../../services/voiceNoteService';
 
-/**
- * Recording state enum
- */
-export type RecordingState = 'idle' | 'requesting' | 'recording' | 'preview' | 'stopped' | 'error';
+export type RecordingState = 'idle' | 'requesting' | 'recording' | 'preview' | 'error';
 
-/**
- * Props for VoiceRecorder component
- */
 export interface VoiceRecorderProps {
-  /** Callback when recording is complete with audio blob and duration */
   onRecordingComplete: (audioBlob: Blob, duration: number) => void;
-  /** Callback when recording is cancelled */
   onCancel?: () => void;
-  /** Callback when an error occurs */
   onError?: (error: Error) => void;
-  /** Whether the recorder is disabled */
   disabled?: boolean;
-  /** Custom class name */
   className?: string;
-  /** Maximum duration in seconds (default: 300 = 5 minutes) */
   maxDuration?: number;
-  /** Auto-start recording when component mounts (default: true) */
   autoStart?: boolean;
 }
 
-/**
- * Format seconds to MM:SS display
- */
 function formatDuration(seconds: number): string {
   const mins = Math.floor(seconds / 60);
   const secs = Math.floor(seconds % 60);
   return `${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
 }
 
-/**
- * VoiceRecorder component for recording voice notes
- * Requirements: 12.1, 12.2, 12.3, 12.7
- */
 export const VoiceRecorder: React.FC<VoiceRecorderProps> = ({
   onRecordingComplete,
   onCancel,
@@ -64,19 +41,19 @@ export const VoiceRecorder: React.FC<VoiceRecorderProps> = ({
   maxDuration = MAX_VOICE_NOTE_DURATION_SECONDS,
   autoStart = true,
 }) => {
-  // Recording state
   const [recordingState, setRecordingState] = useState<RecordingState>('idle');
   const [elapsedTime, setElapsedTime] = useState(0);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const [permissionDenied, setPermissionDenied] = useState(false);
   
-  // Preview state
   const [previewBlob, setPreviewBlob] = useState<Blob | null>(null);
   const [previewDuration, setPreviewDuration] = useState(0);
+  // Backup for re-recording undo
+  const [previousRecording, setPreviousRecording] = useState<{blob: Blob, duration: number} | null>(null);
+  
   const [isPlaying, setIsPlaying] = useState(false);
   const [playbackTime, setPlaybackTime] = useState(0);
 
-  // Refs for recording
   const mediaRecorderRef = useRef<MediaRecorder | null>(null);
   const audioChunksRef = useRef<Blob[]>([]);
   const streamRef = useRef<MediaStream | null>(null);
@@ -84,98 +61,36 @@ export const VoiceRecorder: React.FC<VoiceRecorderProps> = ({
   const startTimeRef = useRef<number>(0);
   const audioRef = useRef<HTMLAudioElement | null>(null);
   const playbackTimerRef = useRef<number | null>(null);
-  const wasCancelledRef = useRef<boolean>(false);
 
-  /**
-   * Clean up resources
-   */
   const cleanup = useCallback(() => {
-    // Stop timer
     if (timerRef.current) {
       clearInterval(timerRef.current);
       timerRef.current = null;
     }
-    
-    // Stop playback timer
     if (playbackTimerRef.current) {
       clearInterval(playbackTimerRef.current);
       playbackTimerRef.current = null;
     }
-    
-    // Stop audio playback
     if (audioRef.current) {
       audioRef.current.pause();
       audioRef.current.src = '';
-      audioRef.current = null;
     }
-
-    // Stop media recorder
-    if (mediaRecorderRef.current && mediaRecorderRef.current.state !== 'inactive') {
-      try {
-        mediaRecorderRef.current.stop();
-      } catch {
-        // Ignore errors during cleanup
-      }
-    }
-    mediaRecorderRef.current = null;
-
-    // Stop all tracks in the stream
     if (streamRef.current) {
       streamRef.current.getTracks().forEach(track => track.stop());
       streamRef.current = null;
     }
-
-    // Clear audio chunks
-    audioChunksRef.current = [];
+    if (mediaRecorderRef.current && mediaRecorderRef.current.state !== 'inactive') {
+      mediaRecorderRef.current.stop();
+    }
   }, []);
 
-  // Cleanup on unmount
-  useEffect(() => {
-    return () => {
-      cleanup();
-    };
-  }, [cleanup]);
-
-  // Auto-start recording when component mounts
-  useEffect(() => {
-    if (autoStart && !disabled && recordingState === 'idle') {
-      startRecording();
-    }
-  }, []); // Only run on mount
-
-  /**
-   * Start the elapsed time timer
-   */
-  const startTimer = useCallback(() => {
-    startTimeRef.current = Date.now();
-    setElapsedTime(0);
-
-    timerRef.current = window.setInterval(() => {
-      const elapsed = Math.floor((Date.now() - startTimeRef.current) / 1000);
-      setElapsedTime(elapsed);
-
-      // Auto-stop at max duration (Requirements: 12.7)
-      if (elapsed >= maxDuration) {
-        stopRecording();
-      }
-    }, 100); // Update more frequently for smoother display
-  }, [maxDuration]);
-
-  /**
-   * Stop recording and process the audio
-   */
   const stopRecording = useCallback(() => {
     if (mediaRecorderRef.current && mediaRecorderRef.current.state === 'recording') {
       mediaRecorderRef.current.stop();
     }
   }, []);
 
-  /**
-   * Request microphone permission and start recording
-   * Requirements: 12.2
-   */
   const startRecording = useCallback(async () => {
-    // Check if MediaRecorder is supported
     if (typeof MediaRecorder === 'undefined') {
       const error = new Error('Voice recording is not supported in this browser');
       setErrorMessage(error.message);
@@ -184,7 +99,6 @@ export const VoiceRecorder: React.FC<VoiceRecorderProps> = ({
       return;
     }
 
-    // Get the best supported MIME type
     const mimeType = getBestSupportedMimeType();
     if (!mimeType) {
       const error = new Error('No supported audio format found in this browser');
@@ -197,83 +111,56 @@ export const VoiceRecorder: React.FC<VoiceRecorderProps> = ({
     setRecordingState('requesting');
     setErrorMessage(null);
     setPermissionDenied(false);
-    wasCancelledRef.current = false;
 
     try {
-      // Request microphone permission with timeout (Requirements: 12.2)
-      // Add a 10 second timeout to prevent getting stuck on permission request
-      const timeoutPromise = new Promise<never>((_, reject) => {
-        setTimeout(() => reject(new Error('Microphone permission request timed out. Please check your browser settings.')), 10000);
+      const stream = await navigator.mediaDevices.getUserMedia({
+        audio: {
+          echoCancellation: true,
+          noiseSuppression: true,
+          sampleRate: 44100,
+        },
       });
-
-      const stream = await Promise.race([
-        navigator.mediaDevices.getUserMedia({
-          audio: {
-            echoCancellation: true,
-            noiseSuppression: true,
-            sampleRate: 16000, // Lower sample rate for voice
-          },
-        }),
-        timeoutPromise,
-      ]);
 
       streamRef.current = stream;
       audioChunksRef.current = [];
 
-      // Create MediaRecorder with the best supported format
-      const mediaRecorder = new MediaRecorder(stream, {
-        mimeType,
-        audioBitsPerSecond: 32000, // 32kbps for voice
-      });
-
+      const mediaRecorder = new MediaRecorder(stream, { mimeType });
       mediaRecorderRef.current = mediaRecorder;
 
-      // Handle data available event
       mediaRecorder.ondataavailable = (event) => {
         if (event.data.size > 0) {
           audioChunksRef.current.push(event.data);
         }
       };
 
-      // Handle recording stop
       mediaRecorder.onstop = () => {
-        // Stop timer
-        if (timerRef.current) {
-          clearInterval(timerRef.current);
-          timerRef.current = null;
-        }
-
-        // If cancelled, don't process the recording
-        if (wasCancelledRef.current) {
-          wasCancelledRef.current = false;
-          return;
-        }
-
-        // Calculate final duration
         const finalDuration = Math.floor((Date.now() - startTimeRef.current) / 1000);
-
-        // Create blob from chunks
         const audioBlob = new Blob(audioChunksRef.current, { type: mimeType });
 
-        // Stop all tracks
         if (streamRef.current) {
           streamRef.current.getTracks().forEach(track => track.stop());
           streamRef.current = null;
         }
 
-        // Go to preview state instead of immediately completing
         if (audioBlob.size > 0 && finalDuration > 0) {
           setPreviewBlob(audioBlob);
           setPreviewDuration(finalDuration);
+          
+          // Auto-accept: immediately save to parent
+          onRecordingComplete(audioBlob, finalDuration);
+          
           setRecordingState('preview');
           setPlaybackTime(0);
         } else {
           setRecordingState('idle');
-          setElapsedTime(0);
+        }
+
+        if (timerRef.current) {
+          clearInterval(timerRef.current);
+          timerRef.current = null;
         }
       };
 
-      // Handle errors
       mediaRecorder.onerror = () => {
         const error = new Error('Recording error occurred');
         setErrorMessage(error.message);
@@ -282,265 +169,213 @@ export const VoiceRecorder: React.FC<VoiceRecorderProps> = ({
         onError?.(error);
       };
 
-      // Start recording
-      mediaRecorder.start(1000); // Collect data every second
       setRecordingState('recording');
-      startTimer();
+      setElapsedTime(0);
+      startTimeRef.current = Date.now();
+      
+      timerRef.current = window.setInterval(() => {
+        const elapsed = Math.floor((Date.now() - startTimeRef.current) / 1000);
+        setElapsedTime(elapsed);
 
+        if (elapsed >= maxDuration) {
+          stopRecording();
+        }
+      }, 100);
+
+      mediaRecorder.start(1000);
     } catch (err) {
-      cleanup();
-
-      // Handle permission denied
-      if (err instanceof DOMException && err.name === 'NotAllowedError') {
-        setPermissionDenied(true);
-        setErrorMessage('Microphone permission denied. Please allow microphone access to record voice notes.');
-      } else if (err instanceof DOMException && err.name === 'NotFoundError') {
-        setErrorMessage('No microphone found. Please connect a microphone to record voice notes.');
-      } else {
-        setErrorMessage(err instanceof Error ? err.message : 'Failed to start recording');
-      }
-
+      const error = err as Error;
+      setErrorMessage(error.message);
       setRecordingState('error');
-      onError?.(err instanceof Error ? err : new Error('Failed to start recording'));
+      
+      if (error.name === 'NotAllowedError' || error.name === 'PermissionDeniedError') {
+        setPermissionDenied(true);
+      }
+      
+      cleanup();
+      onError?.(error);
     }
-  }, [cleanup, onError, onRecordingComplete, startTimer]);
+  }, [maxDuration, stopRecording, cleanup, onError, onRecordingComplete]);
 
-  /**
-   * Handle cancel recording
-   */
-  const handleCancel = useCallback(() => {
-    // Mark as cancelled so onstop doesn't go to preview
-    wasCancelledRef.current = true;
-    cleanup();
-    setRecordingState('idle');
-    setElapsedTime(0);
-    setErrorMessage(null);
-    setPreviewBlob(null);
-    setPreviewDuration(0);
-    setIsPlaying(false);
-    setPlaybackTime(0);
-    onCancel?.();
-  }, [cleanup, onCancel]);
-
-  /**
-   * Handle retry after error
-   */
-  const handleRetry = useCallback(() => {
-    setRecordingState('idle');
-    setErrorMessage(null);
-    setPermissionDenied(false);
-  }, []);
-
-  /**
-   * Play/pause preview audio
-   */
   const togglePlayback = useCallback(() => {
-    if (!previewBlob) return;
+    if (!audioRef.current || !previewBlob) return;
 
     if (isPlaying) {
-      // Pause
-      if (audioRef.current) {
-        audioRef.current.pause();
-      }
+      audioRef.current.pause();
+      setIsPlaying(false);
       if (playbackTimerRef.current) {
         clearInterval(playbackTimerRef.current);
         playbackTimerRef.current = null;
       }
-      setIsPlaying(false);
     } else {
-      // Play
-      if (!audioRef.current) {
-        audioRef.current = new Audio(URL.createObjectURL(previewBlob));
-        audioRef.current.onended = () => {
-          setIsPlaying(false);
-          setPlaybackTime(0);
-          if (playbackTimerRef.current) {
-            clearInterval(playbackTimerRef.current);
-            playbackTimerRef.current = null;
-          }
-        };
-      }
-      audioRef.current.currentTime = playbackTime;
       audioRef.current.play();
       setIsPlaying(true);
       
-      // Update playback time
       playbackTimerRef.current = window.setInterval(() => {
         if (audioRef.current) {
           setPlaybackTime(audioRef.current.currentTime);
         }
       }, 100);
     }
-  }, [previewBlob, isPlaying, playbackTime]);
+  }, [isPlaying, previewBlob]);
 
-  /**
-   * Confirm and use the recording
-   */
-  const handleConfirmRecording = useCallback(() => {
+  const seekTime = useCallback((seconds: number) => {
+    if (!audioRef.current) return;
+    audioRef.current.currentTime = Math.max(0, Math.min(audioRef.current.duration, audioRef.current.currentTime + seconds));
+    setPlaybackTime(audioRef.current.currentTime);
+  }, []);
+
+  const handleDiscard = useCallback(() => {
+    cleanup();
+    setPreviewBlob(null);
+    setPreviewDuration(0);
+    setPreviousRecording(null);
+    setIsPlaying(false);
+    setPlaybackTime(0);
+    setRecordingState('idle'); // Find: User said "Don't set to idle" previously but now wants "Discard should just drop recording". 
+    // If I set to 'idle' and autoStart is true, it might restart.
+    // BUT the requirement is "another recording shouldn't start automatically".
+    // So I should probably set a flag or just NOT set 'idle' but call onCancel?
+    // User said: "Clicking cancel just breaks the component... puts it into loading mode... stays there"
+    // User also said: "Discard should just drop the recording"
+    // To drop recording and NOT start new one, we need a state that is neither 'recording' nor 'preview' nor 'idle' (if idle triggers autoStart).
+    // Actually, onCancel prop is usually used to close the recorder UI entirely (in JournalModal).
+    // So calling onCancel() is correct for "Discarding the whole recording session".
+    // Let's ensure we clean up everything.
+    onCancel?.();
+  }, [cleanup, onCancel]);
+
+  const handleReRecord = useCallback(() => {
+    cleanup();
+    setIsPlaying(false);
+    setPlaybackTime(0);
+    
+    // Backup current recording
     if (previewBlob && previewDuration > 0) {
-      // Stop any playback
-      if (audioRef.current) {
-        audioRef.current.pause();
-        audioRef.current = null;
-      }
-      if (playbackTimerRef.current) {
-        clearInterval(playbackTimerRef.current);
-        playbackTimerRef.current = null;
-      }
-      
-      onRecordingComplete(previewBlob, previewDuration);
-      
-      // Show success briefly then reset
-      setRecordingState('stopped');
-      setTimeout(() => {
-        setRecordingState('idle');
-        setPreviewBlob(null);
-        setPreviewDuration(0);
-        setElapsedTime(0);
-        setPlaybackTime(0);
-        setIsPlaying(false);
-      }, 500);
-    }
-  }, [previewBlob, previewDuration, onRecordingComplete]);
-
-  /**
-   * Discard recording and re-record
-   */
-  const handleDiscardRecording = useCallback(() => {
-    // Stop any playback
-    if (audioRef.current) {
-      audioRef.current.pause();
-      audioRef.current.src = '';
-      audioRef.current = null;
-    }
-    if (playbackTimerRef.current) {
-      clearInterval(playbackTimerRef.current);
-      playbackTimerRef.current = null;
+      setPreviousRecording({ blob: previewBlob, duration: previewDuration });
     }
     
     setPreviewBlob(null);
-    setPreviewDuration(0);
-    setPlaybackTime(0);
-    setIsPlaying(false);
-    setElapsedTime(0);
-    setRecordingState('idle');
-    
-    // Auto-start new recording if autoStart is enabled
-    if (autoStart) {
-      setTimeout(() => startRecording(), 100);
-    }
-  }, [autoStart, startRecording]);
+    startRecording();
+  }, [cleanup, startRecording, previewBlob, previewDuration]);
 
-  // Calculate remaining time
-  const remainingTime = maxDuration - elapsedTime;
-  const isNearLimit = remainingTime <= 30; // Warning when 30 seconds left
+  const handleCancelReRecord = useCallback(() => {
+    if (previousRecording) {
+      cleanup();
+      setPreviewBlob(previousRecording.blob);
+      setPreviewDuration(previousRecording.duration);
+      setRecordingState('preview');
+      setPreviousRecording(null);
+      // Restore playback
+      if (audioRef.current) {
+         audioRef.current.src = URL.createObjectURL(previousRecording.blob);
+      }
+    } else {
+      stopRecording();
+    }
+  }, [cleanup, previousRecording, stopRecording]);
+
+  useEffect(() => {
+    let mounted = true;
+    
+    if (autoStart && recordingState === 'idle' && !disabled) {
+      // Use timeout to avoid synchronous state update during render
+      const timer = setTimeout(() => {
+        if (mounted) {
+          startRecording();
+        }
+      }, 0);
+      return () => clearTimeout(timer);
+    }
+    
+    return () => { mounted = false; };
+  }, [autoStart, recordingState, disabled, startRecording]);
+
+  useEffect(() => {
+    if (previewBlob) {
+      const url = URL.createObjectURL(previewBlob);
+      audioRef.current = new Audio(url);
+      
+      audioRef.current.onended = () => {
+        setIsPlaying(false);
+        setPlaybackTime(0);
+        if (playbackTimerRef.current) {
+          clearInterval(playbackTimerRef.current);
+          playbackTimerRef.current = null;
+        }
+      };
+
+      return () => {
+        URL.revokeObjectURL(url);
+      };
+    }
+  }, [previewBlob]);
+
+  useEffect(() => {
+    return () => {
+      cleanup();
+    };
+  }, [cleanup]);
 
   return (
-    <div className={`voice-recorder ${className}`}>
-      {/* Idle state - Show record button or loading if autoStart (Requirements: 12.1) */}
-      {recordingState === 'idle' && (
-        autoStart ? (
-          <div className="flex items-center gap-3 px-4 py-3 bg-gray-100 rounded-lg">
-            <svg className="w-5 h-5 animate-spin text-gray-500" fill="none" viewBox="0 0 24 24">
-              <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
-              <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" />
-            </svg>
-            <span className="text-gray-600">Starting recorder...</span>
-          </div>
-        ) : (
-          <button
-            type="button"
-            onClick={startRecording}
-            disabled={disabled}
-            className="flex items-center gap-2 px-4 py-2 bg-red-500 hover:bg-red-600 text-white rounded-lg font-medium transition-all disabled:opacity-50 disabled:cursor-not-allowed"
-            aria-label="Start recording voice note"
-          >
-            <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-              <path d="M12 14c1.66 0 3-1.34 3-3V5c0-1.66-1.34-3-3-3S9 3.34 9 5v6c0 1.66 1.34 3 3 3zm-1-9c0-.55.45-1 1-1s1 .45 1 1v6c0 .55-.45 1-1 1s-1-.45-1-1V5z" />
-              <path d="M17 11c0 2.76-2.24 5-5 5s-5-2.24-5-5H5c0 3.53 2.61 6.43 6 6.92V21h2v-3.08c3.39-.49 6-3.39 6-6.92h-2z" />
-            </svg>
-            Record Voice Note
-          </button>
-        )
-      )}
-
-      {/* Requesting permission state */}
+    <div className={className}>
+      {/* Requesting permission */}
       {recordingState === 'requesting' && (
-        <div className="flex items-center gap-3 px-4 py-3 bg-gray-100 rounded-lg">
-          <svg className="w-5 h-5 animate-spin text-gray-500" fill="none" viewBox="0 0 24 24">
-            <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
-            <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" />
-          </svg>
-          <span className="text-gray-600">Requesting microphone access...</span>
+        <div className="flex items-center gap-3 px-4 py-3 bg-purple-50 border border-purple-200 rounded-lg">
+          <div className="w-5 h-5 border-2 border-purple-500 border-t-transparent rounded-full animate-spin" />
+          <span className="text-purple-700">Starting recorder...</span>
         </div>
       )}
 
-      {/* Recording state - Show indicator with elapsed time (Requirements: 12.3) */}
+      {/* Recording in progress */}
       {recordingState === 'recording' && (
         <div className="flex flex-col gap-3 p-4 bg-red-50 border border-red-200 rounded-lg">
           <div className="flex items-center justify-between">
-            <div className="flex items-center gap-3">
-              {/* Recording indicator */}
-              <span className="relative flex h-3 w-3">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75" />
-                <span className="relative inline-flex rounded-full h-3 w-3 bg-red-500" />
-              </span>
-              <span className="font-medium text-red-700">Recording</span>
-            </div>
-
-            {/* Elapsed time display (Requirements: 12.3) */}
             <div className="flex items-center gap-2">
-              <span className={`font-mono text-lg ${isNearLimit ? 'text-red-600 font-bold' : 'text-gray-700'}`}>
-                {formatDuration(elapsedTime)}
-              </span>
-              <span className="text-gray-400">/</span>
-              <span className="font-mono text-sm text-gray-500">
-                {formatDuration(maxDuration)}
-              </span>
+              <div className="w-3 h-3 bg-red-500 rounded-full animate-pulse" />
+              <span className="font-medium text-red-700">Recording...</span>
             </div>
+            <span className="font-mono text-sm text-red-600">{formatDuration(elapsedTime)}</span>
           </div>
 
-          {/* Progress bar showing time remaining */}
-          <div className="w-full h-2 bg-red-200 rounded-full overflow-hidden">
+          <div className="w-full h-1 bg-red-200 rounded-full overflow-hidden">
             <div
-              className={`h-full transition-all duration-100 ${isNearLimit ? 'bg-red-600' : 'bg-red-500'}`}
+              className="h-full bg-red-500 transition-all duration-100"
               style={{ width: `${(elapsedTime / maxDuration) * 100}%` }}
             />
           </div>
 
-          {/* Warning when near limit (Requirements: 12.7) */}
-          {isNearLimit && (
-            <p className="text-sm text-red-600">
-              ⚠️ {remainingTime} seconds remaining
-            </p>
+          {elapsedTime >= maxDuration - 30 && (
+            <div className="flex items-center gap-2 text-sm text-amber-700 bg-amber-50 px-3 py-2 rounded border border-amber-200">
+              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+              </svg>
+              <span>{Math.max(0, maxDuration - elapsedTime)}s remaining</span>
+            </div>
           )}
 
-          {/* Control buttons */}
-          <div className="flex items-center gap-3">
+          <div className="flex gap-2">
+            {previousRecording && (
+              <button
+                type="button"
+                onClick={handleCancelReRecord}
+                className="px-4 py-2 bg-gray-100 hover:bg-gray-200 text-gray-700 rounded-lg font-medium transition-all"
+              >
+                Cancel Re-record
+              </button>
+            )}
             <button
               type="button"
               onClick={stopRecording}
-              className="flex-1 flex items-center justify-center gap-2 px-4 py-2 bg-red-500 hover:bg-red-600 text-white rounded-lg font-medium transition-all"
-              aria-label="Stop recording"
+              className="flex-1 px-4 py-2 bg-red-500 hover:bg-red-600 text-white rounded-lg font-medium transition-all"
             >
-              <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-                <rect x="6" y="6" width="12" height="12" rx="1" />
-              </svg>
-              Stop & Save
-            </button>
-            <button
-              type="button"
-              onClick={handleCancel}
-              className="px-4 py-2 bg-gray-200 hover:bg-gray-300 text-gray-700 rounded-lg font-medium transition-all"
-              aria-label="Cancel recording"
-            >
-              Cancel
+              Stop Recording
             </button>
           </div>
         </div>
       )}
 
-      {/* Preview state - Listen before saving */}
+      {/* Preview with playback */}
       {recordingState === 'preview' && previewBlob && (
         <div className="flex flex-col gap-3 p-4 bg-purple-50 border border-purple-200 rounded-lg">
           <div className="flex items-center justify-between">
@@ -555,8 +390,22 @@ export const VoiceRecorder: React.FC<VoiceRecorderProps> = ({
             <span className="font-mono text-sm text-purple-600">{formatDuration(previewDuration)}</span>
           </div>
 
-          {/* Playback controls */}
-          <div className="flex items-center gap-3 bg-white rounded-lg p-3">
+          {/* Playback controls with seek buttons */}
+          <div className="flex items-center gap-2 bg-white rounded-lg p-3">
+            {/* -10s button */}
+            <button
+              type="button"
+              onClick={() => seekTime(-10)}
+              className="w-8 h-8 flex items-center justify-center text-purple-600 hover:bg-purple-50 rounded transition-all"
+              aria-label="Rewind 10 seconds"
+              disabled={playbackTime < 1}
+            >
+              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12.066 11.2a1 1 0 000 1.6l5.334 4A1 1 0 0019 16V8a1 1 0 00-1.6-.8l-5.333 4zM4.066 11.2a1 1 0 000 1.6l5.334 4A1 1 0 0011 16V8a1 1 0 00-1.6-.8l-5.334 4z" />
+              </svg>
+            </button>
+
+            {/* Play/Pause */}
             <button
               type="button"
               onClick={togglePlayback}
@@ -574,9 +423,22 @@ export const VoiceRecorder: React.FC<VoiceRecorderProps> = ({
                 </svg>
               )}
             </button>
+
+            {/* +10s button */}
+            <button
+              type="button"
+              onClick={() => seekTime(10)}
+              className="w-8 h-8 flex items-center justify-center text-purple-600 hover:bg-purple-50 rounded transition-all"
+              aria-label="Forward 10 seconds"
+              disabled={playbackTime >= previewDuration - 1}
+            >
+              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11.933 12.8a1 1 0 000-1.6L6.6 7.2A1 1 0 005 8v8a1 1 0 001.6.8l5.333-4zM19.933 12.8a1 1 0 000-1.6l-5.333-4A1 1 0 0013 8v8a1 1 0 001.6.8l5.333-4z" />
+              </svg>
+            </button>
             
             {/* Progress bar */}
-            <div className="flex-1">
+            <div className="flex-1 ml-2">
               <div className="w-full h-2 bg-purple-100 rounded-full overflow-hidden">
                 <div
                   className="h-full bg-purple-500 transition-all duration-100"
@@ -594,47 +456,27 @@ export const VoiceRecorder: React.FC<VoiceRecorderProps> = ({
           <div className="flex items-center gap-2">
             <button
               type="button"
-              onClick={handleDiscardRecording}
+              onClick={handleDiscard}
+              className="flex-1 flex items-center justify-center gap-2 px-4 py-2 bg-red-100 hover:bg-red-200 text-red-700 rounded-lg font-medium transition-all"
+              aria-label="Discard recording"
+            >
+              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+              </svg>
+              Discard
+            </button>
+            <button
+              type="button"
+              onClick={handleReRecord}
               className="flex-1 flex items-center justify-center gap-2 px-4 py-2 bg-gray-100 hover:bg-gray-200 text-gray-700 rounded-lg font-medium transition-all"
-              aria-label="Discard and re-record"
+              aria-label="Record again"
             >
               <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
               </svg>
               Re-record
             </button>
-            <button
-              type="button"
-              onClick={handleConfirmRecording}
-              className="flex-1 flex items-center justify-center gap-2 px-4 py-2 bg-purple-500 hover:bg-purple-600 text-white rounded-lg font-medium transition-all"
-              aria-label="Use this recording"
-            >
-              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-              </svg>
-              Use Recording
-            </button>
           </div>
-          
-          {onCancel && (
-            <button
-              type="button"
-              onClick={handleCancel}
-              className="w-full px-4 py-2 text-gray-500 hover:text-gray-700 text-sm transition-all"
-            >
-              Cancel
-            </button>
-          )}
-        </div>
-      )}
-
-      {/* Stopped state - Processing */}
-      {recordingState === 'stopped' && (
-        <div className="flex items-center gap-3 px-4 py-3 bg-green-50 border border-green-200 rounded-lg">
-          <svg className="w-5 h-5 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-          </svg>
-          <span className="text-green-700">Recording saved!</span>
         </div>
       )}
 
@@ -651,7 +493,6 @@ export const VoiceRecorder: React.FC<VoiceRecorderProps> = ({
             </div>
           </div>
 
-          {/* Permission denied help */}
           {permissionDenied && (
             <div className="text-sm text-gray-600 bg-white p-3 rounded border border-gray-200">
               <p className="font-medium mb-1">How to enable microphone:</p>
@@ -667,7 +508,7 @@ export const VoiceRecorder: React.FC<VoiceRecorderProps> = ({
           <div className="flex items-center gap-3">
             <button
               type="button"
-              onClick={handleRetry}
+              onClick={startRecording}
               className="flex-1 px-4 py-2 bg-red-500 hover:bg-red-600 text-white rounded-lg font-medium transition-all"
             >
               Try Again
@@ -675,7 +516,7 @@ export const VoiceRecorder: React.FC<VoiceRecorderProps> = ({
             {onCancel && (
               <button
                 type="button"
-                onClick={handleCancel}
+                onClick={handleDiscard}
                 className="px-4 py-2 bg-gray-200 hover:bg-gray-300 text-gray-700 rounded-lg font-medium transition-all"
               >
                 Cancel

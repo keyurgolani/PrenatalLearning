@@ -42,7 +42,7 @@ export interface PeriodStats {
  * Time patterns response
  */
 export interface TimePatterns {
-  hourlyDistribution: Array<{ hour: number; count: number; label: string }>;
+  hourlyDistribution: { hour: number; count: number; label: string }[];
   periodStats: PeriodStats[];
   peakPeriod: { period: string; count: number; percentage: number } | null;
   peakHour: { hour: number; count: number; label: string } | null;
@@ -61,7 +61,7 @@ export interface KickStats {
   firstKickDate: string | null;
   lastKickDate: string | null;
   milestones: {
-    achieved: Array<{ count: number; label: string }>;
+    achieved: { count: number; label: string }[];
     next: { count: number; label: string } | null;
     progressToNext: number;
   };
@@ -247,11 +247,45 @@ function calculateStats(entries: JournalEntry[]): KickStats {
   };
 }
 
+const RECENT_KICKS_EMPTY: KickEventApi[] = [];
+
 /**
  * KickProvider component that manages kick tracking state
  * For logged-in users, kicks are derived from journal entries
  */
 export function KickProvider({ children }: KickProviderProps): React.ReactElement {
+  // ... (keep start of function)
+
+  // ... (keep useEffect)
+
+  // ... (keep useMemos)
+
+  /**
+   * Recent kicks - empty for now since we're using journal entries
+   * This is kept for backward compatibility
+   */
+  const recentKicks = RECENT_KICKS_EMPTY;
+
+  // ... (keep dependencies)
+
+  /**
+   * Update a kick - not supported when using journal entries
+   * Kept for backward compatibility
+   */
+  const updateKick = useCallback(async (_id: string, _note: string): Promise<KickEventApi> => {
+    void _id;
+    void _note;
+    throw new Error('Updating individual kicks is not supported. Edit the journal entry instead.');
+  }, []);
+
+  /**
+   * Delete a kick - not supported when using journal entries
+   * Kept for backward compatibility
+   */
+  const deleteKick = useCallback(async (_id: string): Promise<void> => {
+    void _id;
+    throw new Error('Deleting individual kicks is not supported. Edit the journal entry instead.');
+  }, []);
   const { isAuthenticated } = useAuth();
   const { activeProfile } = useProfile();
   const { entries, refreshEntries } = useJournal();
@@ -320,11 +354,7 @@ export function KickProvider({ children }: KickProviderProps): React.ReactElemen
     return calculateStats(entries);
   }, [entries, isAuthenticated]);
 
-  /**
-   * Recent kicks - empty for now since we're using journal entries
-   * This is kept for backward compatibility
-   */
-  const recentKicks: KickEventApi[] = [];
+
 
   /**
    * Time patterns - null for now (could be calculated from journal entries if needed)
@@ -379,21 +409,7 @@ export function KickProvider({ children }: KickProviderProps): React.ReactElemen
     }
   }, [isAuthenticated, activeProfile, refreshEntries]);
 
-  /**
-   * Update a kick - not supported when using journal entries
-   * Kept for backward compatibility
-   */
-  const updateKick = useCallback(async (_id: string, _note: string): Promise<KickEventApi> => {
-    throw new Error('Updating individual kicks is not supported. Edit the journal entry instead.');
-  }, []);
 
-  /**
-   * Delete a kick - not supported when using journal entries
-   * Kept for backward compatibility
-   */
-  const deleteKick = useCallback(async (_id: string): Promise<void> => {
-    throw new Error('Deleting individual kicks is not supported. Edit the journal entry instead.');
-  }, []);
 
   /**
    * Refresh kicks by refreshing journal entries

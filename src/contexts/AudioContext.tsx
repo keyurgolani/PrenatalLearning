@@ -5,23 +5,10 @@
  * The audio element lives here, not in individual components.
  */
 
-import React, { createContext, useContext, useState, useCallback, useRef, useEffect } from 'react';
+import React, { createContext, useContext, useState, useCallback, useRef, useEffect, useMemo } from 'react';
+import type { AudioInfo, AudioState } from '../types/audio.js';
 
-export interface AudioInfo {
-  sectionName: string;
-  storyId: number | null;
-  storyTitle: string;
-  audioSources: string[];
-  partDurations: number[];
-}
 
-export interface AudioState extends AudioInfo {
-  isPlaying: boolean;
-  isLoading: boolean;
-  currentTime: number;
-  duration: number;
-  currentPartIndex: number;
-}
 
 interface AudioContextValue {
   audioState: AudioState | null;
@@ -131,8 +118,11 @@ export const AudioProvider: React.FC<{ children: React.ReactNode }> = ({ childre
     }
   }, []);
 
+  // Ref to hold the loadPart function to avoid recursion issues
+  const loadPartRef = useRef<((partIndex: number, startTime?: number, autoPlay?: boolean) => Promise<void>) | null>(null);
+
   // Load and play a specific part
-  const loadPart = useCallback((partIndex: number, startTime: number = 0, autoPlay: boolean = true): Promise<void> => {
+  const loadPart = useCallback((partIndex: number, startTime = 0, autoPlay = true): Promise<void> => {
     return new Promise((resolve, reject) => {
       const src = audioSourcesRef.current[partIndex];
       if (!src) {
@@ -179,7 +169,10 @@ export const AudioProvider: React.FC<{ children: React.ReactNode }> = ({ childre
       const handleEnded = () => {
         const nextPart = currentPartIndexRef.current + 1;
         if (nextPart < audioSourcesRef.current.length) {
-          loadPart(nextPart, 0, true).catch(console.warn);
+          // Use ref to call ourselves
+          if (loadPartRef.current) {
+            loadPartRef.current(nextPart, 0, true).catch(console.warn);
+          }
         } else {
           // All parts finished
           isPlayingRef.current = false;
@@ -203,6 +196,11 @@ export const AudioProvider: React.FC<{ children: React.ReactNode }> = ({ childre
       audio.load();
     });
   }, [cleanupAudio, startProgressUpdates, stopProgressUpdates, getTotalDuration]);
+
+  // Update ref
+  useEffect(() => {
+    loadPartRef.current = loadPart;
+  }, [loadPart]);
 
   // Start playing audio
   const startAudio = useCallback(async (info: AudioInfo) => {
@@ -319,7 +317,7 @@ export const AudioProvider: React.FC<{ children: React.ReactNode }> = ({ childre
     };
   }, [stopProgressUpdates, cleanupAudio]);
 
-  const value: AudioContextValue = {
+  const value: AudioContextValue = useMemo(() => ({
     audioState,
     currentPageStoryId,
     currentSection,
@@ -331,7 +329,19 @@ export const AudioProvider: React.FC<{ children: React.ReactNode }> = ({ childre
     setCurrentSection,
     isOnAudioSection,
     shouldShowMiniPlayer,
-  };
+  }), [
+    audioState,
+    currentPageStoryId,
+    currentSection,
+    startAudio,
+    stopAudio,
+    togglePlayPause,
+    seekTo,
+    setCurrentPageStoryId,
+    setCurrentSection,
+    isOnAudioSection,
+    shouldShowMiniPlayer,
+  ]);
 
   return (
     <AudioContext.Provider value={value}>

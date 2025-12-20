@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import type { BreathingExercise as BreathingExerciseType, BreathingResponseData } from '../../types/exercises';
+import { Wind, PartyPopper } from 'lucide-react';
 
 interface BreathingExerciseProps {
   exercise: BreathingExerciseType;
@@ -144,7 +145,7 @@ export const BreathingExercise: React.FC<BreathingExerciseProps> = ({
       {/* Introduction */}
       <div className="bg-gradient-to-r from-blue-50 to-purple-50 rounded-xl p-6">
         <div className="flex items-start gap-3">
-          <span className="text-2xl">🌬️</span>
+          <Wind className="w-8 h-8 text-blue-500" />
           <div>
             <h4 className="font-medium text-gray-800 mb-2">Breathing Exercise</h4>
             <p className="text-gray-600">
@@ -226,7 +227,7 @@ export const BreathingExercise: React.FC<BreathingExerciseProps> = ({
       {isComplete && (
         <div className="bg-green-50 rounded-xl p-4 border border-green-200">
           <div className="flex items-start gap-3">
-            <span className="text-2xl">🎉</span>
+            <PartyPopper className="w-8 h-8 text-green-600" />
             <div>
               <p className="font-medium text-green-800">Wonderful!</p>
               <p className="text-green-700 text-sm">
@@ -242,7 +243,7 @@ export const BreathingExercise: React.FC<BreathingExerciseProps> = ({
         {!isActive && !isComplete && (
           <button
             onClick={handleStart}
-            className="px-8 py-3 rounded-xl font-medium bg-purple-500 text-white hover:bg-purple-600 transition-all"
+            className="px-8 py-3 rounded-xl font-medium bg-purple-500 text-white hover:bg-purple-600 button-interactive"
           >
             Start Breathing
           </button>
@@ -250,7 +251,7 @@ export const BreathingExercise: React.FC<BreathingExerciseProps> = ({
         {isActive && (
           <button
             onClick={handleStop}
-            className="px-8 py-3 rounded-xl font-medium bg-gray-500 text-white hover:bg-gray-600 transition-all"
+            className="px-8 py-3 rounded-xl font-medium bg-gray-500 text-white hover:bg-gray-600 button-interactive"
           >
             Stop Early
           </button>
@@ -258,7 +259,7 @@ export const BreathingExercise: React.FC<BreathingExerciseProps> = ({
         {isComplete && (
           <button
             onClick={onComplete}
-            className="px-8 py-3 rounded-xl font-medium bg-purple-500 text-white hover:bg-purple-600 transition-all"
+            className="px-8 py-3 rounded-xl font-medium bg-purple-500 text-white hover:bg-purple-600 button-interactive"
           >
             Continue
           </button>

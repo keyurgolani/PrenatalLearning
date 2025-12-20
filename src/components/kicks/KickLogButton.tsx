@@ -2,6 +2,7 @@ import React, { useState, useCallback, useRef, useEffect } from 'react';
 import { useKick } from '../../contexts/KickContext';
 import { useAuth } from '../../contexts/AuthContext';
 import { useProfile } from '../../contexts/ProfileContext';
+import { Heart } from 'lucide-react';
 
 /**
  * KickLogButton component - Quick tap button to log baby kicks
@@ -220,7 +221,7 @@ export const KickLogButton: React.FC<KickLogButtonProps> = ({
             bg-gradient-to-r from-pink-400 to-rose-400
             hover:from-pink-500 hover:to-rose-500
             disabled:opacity-50 disabled:cursor-not-allowed
-            text-white transition-all duration-200
+            text-white icon-interactive
             ${isAnimating ? 'scale-110' : 'scale-100'}
             focus:outline-none focus:ring-2 focus:ring-pink-400 focus:ring-offset-2
           `}
@@ -326,10 +327,10 @@ export const KickLogButton: React.FC<KickLogButtonProps> = ({
       {/* Success indicator */}
       {showSuccess && (
         <span 
-          className="absolute -top-2 -right-2 text-pink-500 animate-pulse"
+          className="absolute -top-2 -right-2 text-pink-500 animate-pulse flex items-center gap-0.5 text-xs font-bold"
           aria-hidden="true"
         >
-          +1 💕
+          +1 <Heart className="w-3 h-3 fill-current" />
         </span>
       )}
 

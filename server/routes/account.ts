@@ -441,7 +441,7 @@ router.post('/migrate', requireAuthWithUser, async (req: Request, res: Response,
             completedAt: now,
             createdAt: now,
             updatedAt: now,
-          } as any);
+          } as never);
           migratedProgress++;
         }
       }
@@ -456,7 +456,7 @@ router.post('/migrate', requireAuthWithUser, async (req: Request, res: Response,
       
       if (existingPrefs) {
         // Merge guest preferences with existing (guest preferences take precedence)
-        const updateFields: any = { updatedAt: now };
+        const updateFields: Record<string, unknown> = { updatedAt: now };
         
         if (data.preferences.theme) updateFields.theme = data.preferences.theme;
         if (data.preferences.fontSize) updateFields.fontSize = data.preferences.fontSize;
@@ -473,14 +473,14 @@ router.post('/migrate', requireAuthWithUser, async (req: Request, res: Response,
     // Migrate streak data
     if (data.streakData) {
       const streaksCollection = getStreaksCollection();
-      const streakData = data.streakData as any;
+      const streakData = data.streakData as Record<string, number | undefined>;
       
       // Find existing streak for this user
       const existingStreak = await streaksCollection.findOne({ userId: user._id });
       
       if (existingStreak) {
         // Merge streak data - keep the higher values
-        const updateFields: any = {};
+        const updateFields: Record<string, number> = {};
         
         if (streakData.currentStreak !== undefined) {
           updateFields.currentStreak = Math.max(
@@ -512,7 +512,7 @@ router.post('/migrate', requireAuthWithUser, async (req: Request, res: Response,
             ? new Date(streakData.lastActivityDate) 
             : now,
           streakHistory: [],
-        } as any);
+        } as never);
         migratedStreaks = 1;
       }
     }

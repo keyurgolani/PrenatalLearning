@@ -133,7 +133,7 @@ export const ViewModeToggle: React.FC<ViewModeToggleProps> = ({ variant = 'defau
             <button
               onClick={() => navigate(path)}
               className={`
-                flex items-center gap-2 px-3 py-1.5 rounded-lg text-sm font-medium transition-all duration-200 animate-gentle-bounce animate-click ${isHeader ? 'focus-ring-light' : 'focus-ring'}
+                flex items-center gap-2 px-3 py-1.5 rounded-lg text-sm font-medium button-interactive ${isHeader ? 'focus-ring-light' : 'focus-ring'}
                 ${isActive ? 'shadow-sm' : ''}
               `}
               style={

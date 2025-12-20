@@ -37,13 +37,13 @@ const router = Router();
 router.use(authRateLimiter);
 
 // Helper function to generate JWT token
-function generateToken(userId: string, rememberMe: boolean = false): string {
+function generateToken(userId: string, rememberMe = false): string {
   const expiresIn = rememberMe ? config.jwt.rememberMeExpiresIn : config.jwt.expiresIn;
   return jwt.sign({ userId }, config.jwt.secret, { expiresIn } as SignOptions);
 }
 
 // Helper function to set JWT cookie
-function setTokenCookie(res: Response, token: string, rememberMe: boolean = false): void {
+function setTokenCookie(res: Response, token: string, rememberMe = false): void {
   const maxAge = rememberMe ? 30 * 24 * 60 * 60 * 1000 : 7 * 24 * 60 * 60 * 1000; // 30 or 7 days in ms
   res.cookie('token', token, {
     httpOnly: true,
@@ -95,7 +95,7 @@ router.post('/register', async (req: Request, res: Response, next: NextFunction)
     };
 
     // Insert user
-    const userResult = await usersCollection.insertOne(userDoc as any);
+    const userResult = await usersCollection.insertOne(userDoc as never);
     const userId = userResult.insertedId;
 
     // Create default user preferences
@@ -106,7 +106,7 @@ router.post('/register', async (req: Request, res: Response, next: NextFunction)
       updatedAt: now,
     };
 
-    await preferencesCollection.insertOne(preferencesDoc as any);
+    await preferencesCollection.insertOne(preferencesDoc as never);
 
     // Generate JWT token
     const token = generateToken(userId.toString());
@@ -211,7 +211,7 @@ router.post('/login', async (req: Request, res: Response, next: NextFunction) =>
     setTokenCookie(res, token, rememberMe);
 
     // Build response
-    const response: any = {
+    const response: Record<string, unknown> = {
       message: 'Login successful',
       user: {
         id: user._id.toString(),

@@ -300,7 +300,7 @@ export const RecommendedForYou: React.FC<RecommendedForYouProps> = ({
             <article
               key={story.id}
               onClick={() => onSelectStory(story)}
-              className="rounded-xl overflow-hidden cursor-pointer transition-all duration-200 hover:shadow-lg hover:scale-[1.02]"
+              className="rounded-xl overflow-hidden cursor-pointer card-interactive"
               style={{ 
                 backgroundColor: isDark ? currentTheme.colors.surface : '#ffffff',
                 border: `1px solid ${isDark ? currentTheme.colors.border : '#e5e7eb'}`

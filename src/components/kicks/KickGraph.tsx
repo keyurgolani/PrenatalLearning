@@ -27,22 +27,24 @@ export interface KickGraphProps {
   compact?: boolean;
 }
 
+import { Star, Trophy, Crown, Sparkles, Award } from 'lucide-react';
+
 /**
  * Milestone definitions for kick counts
  */
 const MILESTONES = [
-  { count: 10, label: 'First 10!', emoji: '🌟' },
-  { count: 25, label: '25 kicks!', emoji: '⭐' },
-  { count: 50, label: '50 kicks!', emoji: '🎉' },
-  { count: 100, label: '100 kicks!', emoji: '🏆' },
-  { count: 200, label: '200 kicks!', emoji: '💫' },
-  { count: 500, label: '500 kicks!', emoji: '👑' },
+  { count: 10, label: 'First 10!', icon: <Star className="w-4 h-4 text-amber-500" /> },
+  { count: 25, label: '25 kicks!', icon: <Star className="w-4 h-4 text-amber-500 fill-current" /> },
+  { count: 50, label: '50 kicks!', icon: <Sparkles className="w-4 h-4 text-purple-500" /> },
+  { count: 100, label: '100 kicks!', icon: <Trophy className="w-4 h-4 text-yellow-500" /> },
+  { count: 200, label: '200 kicks!', icon: <Award className="w-4 h-4 text-orange-500" /> },
+  { count: 500, label: '500 kicks!', icon: <Crown className="w-4 h-4 text-yellow-600 fill-current" /> },
 ];
 
 /**
  * Get milestone for a given count
  */
-function getMilestoneForCount(count: number): { count: number; label: string; emoji: string } | null {
+function getMilestoneForCount(count: number): { count: number; label: string; icon: React.ReactNode } | null {
   for (let i = MILESTONES.length - 1; i >= 0; i--) {
     if (count >= MILESTONES[i].count) {
       return MILESTONES[i];
@@ -188,10 +190,10 @@ export const KickGraph: React.FC<KickGraphProps> = ({
             </div>
             <div>
               <h3 className={`font-semibold text-gray-800 ${compact ? 'text-sm' : 'text-base'}`}>
-                Kick Activity
+                Daily Kicks
               </h3>
               {!compact && (
-                <p className="text-xs text-gray-500">Last {days} days</p>
+                <p className="text-xs text-gray-500">Past {days} days</p>
               )}
             </div>
           </div>
@@ -209,11 +211,11 @@ export const KickGraph: React.FC<KickGraphProps> = ({
         {/* Milestone banner */}
         {showMilestones && currentMilestone && !compact && (
           <div className="mx-4 mb-2 px-3 py-2 bg-gradient-to-r from-amber-100/80 to-yellow-100/80 backdrop-blur-sm rounded-xl border border-amber-200/50 flex items-center justify-center gap-2">
-            <span className="text-base" aria-hidden="true">{currentMilestone.emoji}</span>
+            <span className="text-base" aria-hidden="true">{currentMilestone.icon}</span>
             <span className="text-sm font-medium text-amber-700">
               {currentMilestone.label}
             </span>
-            <span className="text-base" aria-hidden="true">{currentMilestone.emoji}</span>
+            <span className="text-base" aria-hidden="true">{currentMilestone.icon}</span>
           </div>
         )}
 
@@ -574,7 +576,7 @@ export const KickGraph: React.FC<KickGraphProps> = ({
                   </div>
                   <div className="flex items-center gap-1 shrink-0">
                     <span className="font-bold text-amber-600">{nextMilestone.count}</span>
-                    <span className="text-sm">{nextMilestone.emoji}</span>
+                    <span className="text-sm">{nextMilestone.icon}</span>
                   </div>
                 </div>
               )}

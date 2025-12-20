@@ -109,7 +109,7 @@ const ActivityItem: React.FC<{
     <div className="flex gap-3">
       {/* Timeline connector */}
       <div className="flex flex-col items-center">
-        <div className={`p-2 rounded-full ${style.bgColor} ${style.textColor}`}>
+        <div className={`px-3 py-1.5 rounded-lg text-sm font-medium button-interactive ${style.bgColor} ${style.textColor}`}>
           {style.icon}
         </div>
         {!isLast && (

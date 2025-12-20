@@ -49,9 +49,9 @@ function splitIntoChunks(text: string, maxChars: number): string[] {
     const searchArea = remaining.substring(0, maxChars);
     
     // Prefer breaking at ! (longer pause), then . then ;
-    let lastExclamation = searchArea.lastIndexOf('!');
-    let lastPeriod = searchArea.lastIndexOf('.');
-    let lastSemicolon = searchArea.lastIndexOf(';');
+    const lastExclamation = searchArea.lastIndexOf('!');
+    const lastPeriod = searchArea.lastIndexOf('.');
+    const lastSemicolon = searchArea.lastIndexOf(';');
     
     // Find the best break point (closest to limit but not over)
     const candidates = [lastExclamation, lastPeriod, lastSemicolon].filter(i => i > maxChars * 0.5);

@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import type { ReflectionExercise as ReflectionExerciseType, ReflectionResponseData } from '../../types/exercises';
+import { BookOpen, Lightbulb } from 'lucide-react';
 
 interface ReflectionExerciseProps {
   exercise: ReflectionExerciseType;
@@ -70,7 +71,7 @@ export const ReflectionExercise: React.FC<ReflectionExerciseProps> = ({
       {/* Introduction */}
       <div className="bg-gradient-to-r from-purple-50 to-pink-50 rounded-xl p-6">
         <div className="flex items-start gap-3">
-          <span className="text-2xl">🪞</span>
+          <BookOpen className="w-8 h-8 text-purple-600" />
           <div>
             <h4 className="font-medium text-gray-800 mb-2">Reflection Time</h4>
             <p className="text-gray-600">
@@ -84,7 +85,7 @@ export const ReflectionExercise: React.FC<ReflectionExerciseProps> = ({
       <div className="space-y-6">
         {exercise.prompts.map((prompt, index) => (
           <div key={index} className="space-y-2">
-            <label className="block">
+            <label htmlFor={`reflection-prompt-${index}`} className="block">
               <div className="flex items-start gap-3 mb-2">
                 <span className="w-6 h-6 rounded-full bg-purple-100 text-purple-700 flex items-center justify-center font-medium text-sm flex-shrink-0">
                   {index + 1}
@@ -92,11 +93,12 @@ export const ReflectionExercise: React.FC<ReflectionExerciseProps> = ({
                 <span className="text-gray-700 font-medium">{prompt}</span>
               </div>
               <textarea
+                id={`reflection-prompt-${index}`}
                 value={responses.get(index) || ''}
                 onChange={(e) => handleInputChange(index, e.target.value)}
                 placeholder="Write your thoughts here..."
                 rows={4}
-                className="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:border-purple-400 focus:outline-none resize-none transition-colors"
+                className="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:border-purple-400 focus:outline-none resize-none interactive-input"
               />
             </label>
           </div>
@@ -119,7 +121,7 @@ export const ReflectionExercise: React.FC<ReflectionExerciseProps> = ({
       {exercise.guidance && (
         <div className="bg-amber-50 rounded-xl p-4 border border-amber-200">
           <div className="flex items-start gap-2">
-            <span className="text-amber-600">💡</span>
+            <Lightbulb className="w-5 h-5 text-amber-600 flex-shrink-0" />
             <p className="text-amber-800 text-sm">{exercise.guidance}</p>
           </div>
         </div>
@@ -129,7 +131,7 @@ export const ReflectionExercise: React.FC<ReflectionExerciseProps> = ({
       <div className="flex justify-end gap-3">
         <button
           onClick={onComplete}
-          className={`px-6 py-2 rounded-lg font-medium transition-all ${
+          className={`px-6 py-2 rounded-lg font-medium button-interactive ${
             hasAnyResponse
               ? 'bg-purple-500 text-white hover:bg-purple-600'
               : 'bg-gray-200 text-gray-500'

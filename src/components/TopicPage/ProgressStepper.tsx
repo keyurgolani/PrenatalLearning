@@ -2,6 +2,7 @@ import React from 'react';
 import type { LearningStep } from '../../contexts/TopicProgressContext';
 import { LEARNING_STEPS, STEP_LABELS } from '../../contexts/TopicProgressContext';
 import { useTheme } from '../../contexts/ThemeContext';
+import { StepIcon } from './StepIcon';
 
 /**
  * ProgressStepper component for displaying topic learning progress
@@ -24,13 +25,8 @@ interface ProgressStepperProps {
   sectionProgress?: number;
 }
 
-const STEP_ICONS: Record<LearningStep, string> = {
-  'overview': '📋',
-  'core-content': '📚',
-  'practice': '🎯',
-  'integration': '🔗',
-  'exercises': '✏️',
-};
+// Instead of emoji icons, we'll use SVG icons directly in the component
+// Icons: Overview (clipboard), Core Content (book), Practice (target), Integration (link), Exercises (pencil)
 
 export const ProgressStepper: React.FC<ProgressStepperProps> = ({
   currentStep,
@@ -57,7 +53,7 @@ export const ProgressStepper: React.FC<ProgressStepperProps> = ({
               <li key={step} className="relative flex flex-col items-center">
                 <button
                   onClick={() => onStepClick(step)}
-                  className="relative flex items-center justify-center w-9 h-9 rounded-full focus:outline-none focus-visible:ring-2 focus-visible:ring-purple-500 transition-all duration-200 hover:scale-110"
+                  className="relative flex items-center justify-center w-9 h-9 rounded-full focus:outline-none icon-interactive focus-ring"
                   style={{
                     backgroundColor: isCompleted 
                       ? '#22c55e'
@@ -80,7 +76,7 @@ export const ProgressStepper: React.FC<ProgressStepperProps> = ({
                       <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
                     </svg>
                   ) : (
-                    <span className="text-sm leading-none">{STEP_ICONS[step]}</span>
+                    <StepIcon step={step} className="w-4 h-4" />
                   )}
                   {/* Current step pulse indicator */}
                   {isCurrent && (
@@ -166,7 +162,7 @@ export const ProgressStepper: React.FC<ProgressStepperProps> = ({
                         <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
                       </svg>
                     ) : (
-                      <span>{STEP_ICONS[step]}</span>
+                      <StepIcon step={step} className="w-5 h-5" />
                     )}
                   </div>
                   
@@ -273,7 +269,7 @@ export const ProgressStepper: React.FC<ProgressStepperProps> = ({
                       <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
                     </svg>
                   ) : (
-                    <span>{STEP_ICONS[step]}</span>
+                    <StepIcon step={step} className="w-6 h-6" />
                   )}
                 </div>
                 

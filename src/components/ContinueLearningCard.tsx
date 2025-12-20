@@ -193,7 +193,7 @@ export const ContinueLearningCard: React.FC<ContinueLearningCardProps> = ({
           {/* Continue Button */}
           <button
             onClick={onContinue}
-            className="w-full bg-gradient-to-r from-purple-500 to-pink-500 text-white py-3 px-6 rounded-xl font-medium hover:from-purple-600 hover:to-pink-600 transition-all duration-200 shadow-md hover:shadow-lg flex items-center justify-center gap-2 focus-ring"
+            className="w-full bg-gradient-to-r from-purple-500 to-pink-500 text-white py-3 px-6 rounded-xl font-medium hover:from-purple-600 hover:to-pink-600 button-interactive hover-glow shadow-md hover:shadow-lg flex items-center justify-center gap-2 focus-ring"
             aria-label={`Continue learning ${story.title}`}
           >
             <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">

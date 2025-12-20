@@ -12,9 +12,9 @@ const API_BASE_URL = import.meta.env.VITE_API_URL || '/api';
  */
 export class AuthServiceError extends Error {
   public readonly statusCode: number;
-  public readonly details?: Array<{ field: string; message: string }>;
+  public readonly details?: { field: string; message: string }[];
 
-  constructor(message: string, statusCode: number, details?: Array<{ field: string; message: string }>) {
+  constructor(message: string, statusCode: number, details?: { field: string; message: string }[]) {
     super(message);
     this.name = 'AuthServiceError';
     this.statusCode = statusCode;
@@ -90,7 +90,7 @@ export async function register(
 export async function login(
   email: string,
   password: string,
-  rememberMe: boolean = false
+  rememberMe = false
 ): Promise<AuthResult> {
   let response: Response;
   
@@ -140,9 +140,16 @@ export async function logout(): Promise<void> {
  */
 export async function getCurrentUser(): Promise<User | null> {
   try {
+    const headers: HeadersInit = {};
+    const token = localStorage.getItem('auth_token');
+    if (token) {
+      headers['Authorization'] = `Bearer ${token}`;
+    }
+
     const response = await fetch(`${API_BASE_URL}/auth/me`, {
       method: 'GET',
       credentials: 'include', // Include cookies for HTTP-only token
+      headers,
     });
 
     if (response.status === 401) {

@@ -41,6 +41,8 @@ export interface TopicExercise {
   title: string;
   description: string;
   prompts: string[];
+  duration?: number;
+  guidance?: string;
 }
 
 /**

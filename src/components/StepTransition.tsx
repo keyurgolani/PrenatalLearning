@@ -30,7 +30,9 @@ export const StepTransition: React.FC<StepTransitionProps> = ({
   const pendingChildrenRef = useRef<React.ReactNode>(children);
 
   // Always keep track of latest children
-  pendingChildrenRef.current = children;
+  useEffect(() => {
+    pendingChildrenRef.current = children;
+  }, [children]);
 
   // Handle step key changes - trigger animation
   useEffect(() => {
@@ -40,6 +42,7 @@ export const StepTransition: React.FC<StepTransitionProps> = ({
       if (timeoutRef2.current) clearTimeout(timeoutRef2.current);
 
       // Start exit animation
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       setPhase('exit');
 
       const exitDuration = duration * 0.35;
@@ -67,6 +70,7 @@ export const StepTransition: React.FC<StepTransitionProps> = ({
   // Update content without animation when key hasn't changed
   useEffect(() => {
     if (stepKey === displayedKey && phase === 'idle') {
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       setDisplayedContent(children);
     }
   }, [children, stepKey, displayedKey, phase]);

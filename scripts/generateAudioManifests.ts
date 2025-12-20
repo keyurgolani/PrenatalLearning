@@ -102,7 +102,7 @@ const stories: StoryData[] = [
  * - Clean up for natural speech
  */
 function formatForSpeechma(text: string): string {
-  let formatted = text
+  const formatted = text
     // Remove markdown bold markers, keep the text
     .replace(/\*\*(.+?)\*\*/g, '$1')
     // Replace em-dashes with semicolons for medium pauses

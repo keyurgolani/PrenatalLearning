@@ -177,7 +177,7 @@ const ResourceCard: React.FC<ResourceCardProps> = ({ resource }) => {
               </div>
               <button
                 onClick={toggleExpand}
-                className="absolute top-2 right-2 p-1.5 rounded-full bg-black/50 text-white hover:bg-black/70 transition-colors"
+                className="absolute top-2 right-2 p-1.5 rounded-full bg-black/50 text-white hover:bg-black/70 icon-interactive"
                 aria-label="Collapse video"
               >
                 <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -188,7 +188,7 @@ const ResourceCard: React.FC<ResourceCardProps> = ({ resource }) => {
           ) : (
             <button
               onClick={toggleExpand}
-              className="w-full p-3 flex items-center justify-center gap-2 text-sm font-medium transition-colors"
+              className="w-full p-3 flex items-center justify-center gap-2 text-sm font-medium button-interactive"
               style={{ 
                 color: isDark ? '#C084FC' : '#9333ea',
               }}
@@ -208,7 +208,7 @@ const ResourceCard: React.FC<ResourceCardProps> = ({ resource }) => {
           href={resource.url}
           target="_blank"
           rel="noopener noreferrer"
-          className="inline-flex items-center gap-1.5 text-sm font-medium transition-colors"
+          className="inline-flex items-center gap-1.5 text-sm font-medium interactive-link"
           style={{ color: isDark ? '#C084FC' : '#9333ea' }}
         >
           {embedError ? 'Video unavailable - ' : ''}

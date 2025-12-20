@@ -109,12 +109,12 @@ function findBestParagraphMatch(paragraphs: string[], searchText: string): numbe
  * Parse content into subsections based on **heading** markers
  * Returns array of { heading, startIndex, endIndex } for each subsection
  */
-function parseSubsections(paragraphs: string[]): Array<{
+function parseSubsections(paragraphs: string[]): {
   heading: string | null;
   startIndex: number;
   endIndex: number;
-}> {
-  const subsections: Array<{ heading: string | null; startIndex: number; endIndex: number }> = [];
+}[] {
+  const subsections: { heading: string | null; startIndex: number; endIndex: number }[] = [];
   let currentHeading: string | null = null;
   let currentStartIndex = 0;
 
@@ -153,7 +153,7 @@ function parseSubsections(paragraphs: string[]): Array<{
  */
 function findSubsectionForParagraph(
   paragraphIndex: number,
-  subsections: Array<{ heading: string | null; startIndex: number; endIndex: number }>
+  subsections: { heading: string | null; startIndex: number; endIndex: number }[]
 ): { heading: string | null; endIndex: number } | null {
   for (const subsection of subsections) {
     if (paragraphIndex >= subsection.startIndex && paragraphIndex <= subsection.endIndex) {

@@ -49,6 +49,13 @@ Thumbs.db
 # Kiro IDE
 .kiro/
 
+# Playwright
+playwright-report/
+test-results/
+
+# Lint reports
+lint_report.txt
+
 # Server specific
 server/dist/
 server/.env

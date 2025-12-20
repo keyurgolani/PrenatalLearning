@@ -61,7 +61,7 @@ interface ReadingModeBottomBarProps {
   currentWidthOption: { value: ContentWidth; label: string; maxWidth: string };
   currentTheme: { id: string; name: string; isDark?: boolean; colors: { primary: string; secondary: string } };
   setTheme: (id: string) => void;
-  themes: Array<{ id: string; name: string; isDark?: boolean }>;
+  themes: { id: string; name: string; isDark?: boolean }[];
   readingSettings: { autoScrollEnabled: boolean; autoScrollSpeed: ScrollSpeed };
   toggleAutoScroll: () => void;
   setAutoScrollSpeed: (speed: ScrollSpeed) => void;
@@ -416,7 +416,7 @@ const ReadingModeBottomBar: React.FC<ReadingModeBottomBarProps> = ({
         <button
           onClick={handleKick}
           disabled={isLogging}
-          className={`flex items-center gap-1 px-3 py-1 rounded-full font-medium transition-all disabled:opacity-70 ${isKicked ? 'animate-kick-bounce' : 'hover:scale-105'}`}
+          className={`flex items-center gap-1 px-3 py-1 rounded-full font-medium button-interactive disabled:opacity-70 ${isKicked ? 'animate-kick-bounce' : ''}`}
           style={{
             background: `linear-gradient(135deg, ${currentTheme.colors.primary}, #ec4899)`,
             color: '#ffffff',
@@ -442,7 +442,7 @@ const ReadingModeBottomBar: React.FC<ReadingModeBottomBarProps> = ({
         {isAuthenticated && (
           <button
             onClick={() => openJournal()}
-            className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg font-medium transition-all hover:scale-105 shadow-sm"
+            className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg font-medium button-interactive shadow-sm"
             style={{
               background: `linear-gradient(135deg, ${currentTheme.colors.primary}, ${currentTheme.colors.secondary})`,
               color: '#ffffff',
@@ -716,28 +716,34 @@ export const ReadingMode: React.FC<ReadingModeProps> = ({ children, isEnabled, o
 
       {/* Reading mode sticky player styles */}
       <style>{`
+        .reading-mode-container.player-is-sticky .audio-narration-wrapper,
         .reading-mode-container.player-is-sticky .narrate-button-container {
-          position: fixed;
+          position: sticky;
           top: 16px;
-          left: 50%;
-          transform: translateX(-50%);
+          left: 0;
+          right: 0;
           z-index: 45;
-          width: calc(100% - 32px);
-          max-width: ${currentWidthOption.maxWidth === '100%' ? 'calc(100% - 32px)' : currentWidthOption.maxWidth};
+          margin: 0 auto 24px auto;
+          width: 100%;
+          max-width: ${currentWidthOption.maxWidth === '100%' ? '100%' : currentWidthOption.maxWidth};
           padding: 12px 24px;
           background: ${isDark ? 'rgba(42, 40, 38, 0.98)' : 'rgba(255, 252, 248, 0.98)'};
           backdrop-filter: blur(12px);
+          -webkit-backdrop-filter: blur(12px);
           border: 1px solid ${colors.border};
           border-radius: 16px;
           box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
           animation: slideDown 0.3s ease-out;
         }
         @keyframes slideDown {
-          from { opacity: 0; transform: translateX(-50%) translateY(-10px); }
-          to { opacity: 1; transform: translateX(-50%) translateY(0); }
+          from { opacity: 0; transform: translateY(-10px); }
+          to { opacity: 1; transform:translateY(0); }
         }
         @media (min-width: 768px) {
-          .reading-mode-container.player-is-sticky .narrate-button-container { padding: 16px 40px; }
+          .reading-mode-container.player-is-sticky .audio-narration-wrapper,
+          .reading-mode-container.player-is-sticky .narrate-button-container { 
+            padding: 16px 40px; 
+          }
         }
       `}</style>
     </div>

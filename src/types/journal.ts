@@ -79,6 +79,10 @@ export interface JournalEntry extends JournalEntryData {
   voiceNoteIds?: string[];
   /** Number of baby kicks logged with this entry */
   kickCount?: number;
+  /** Topics referenced in this entry */
+  topicReferences?: { topicId: number; title: string }[];
+  /** Learning journeys referenced in this entry */
+  journeyReferences?: { journeyId: string; title: string }[];
   /** Actual creation timestamp in milliseconds - when this entry was first created (Requirements: 10.10) */
   createdAt: number;
   /** Actual update timestamp in milliseconds - when this entry was last modified (Requirements: 10.10) */

@@ -447,7 +447,7 @@ export interface PeriodStats {
  * Requirements: 14.6 - Display kick patterns by time of day
  */
 export interface TimePatterns {
-  hourlyDistribution: Array<{ hour: number; count: number; label: string }>;
+  hourlyDistribution: { hour: number; count: number; label: string }[];
   periodStats: PeriodStats[];
   peakPeriod: { period: string; count: number; percentage: number } | null;
   peakHour: { hour: number; count: number; label: string } | null;
@@ -467,7 +467,7 @@ export interface KickStatsApi {
   firstKickDate: string | null;
   lastKickDate: string | null;
   milestones: {
-    achieved: Array<{ count: number; label: string }>;
+    achieved: { count: number; label: string }[];
     next: { count: number; label: string } | null;
     progressToNext: number;
   };
@@ -549,8 +549,8 @@ export async function logKick(
 export async function getKicks(
   startDate?: Date,
   endDate?: Date,
-  limit: number = 100,
-  offset: number = 0
+  limit = 100,
+  offset = 0
 ): Promise<{ kicks: KickEventApi[]; pagination: KicksResponse['pagination'] }> {
   const params = new URLSearchParams();
   
@@ -607,7 +607,7 @@ export async function deleteKick(id: string): Promise<void> {
  * @returns Promise resolving to daily kick stats with summary
  */
 export async function getDailyStats(
-  days: number = 7
+  days = 7
 ): Promise<{ days: DailyKickStats[]; summary: DailyStatsResponse['summary'] }> {
   const response = await get<DailyStatsResponse>(`/kicks/daily?days=${days}`);
   return {

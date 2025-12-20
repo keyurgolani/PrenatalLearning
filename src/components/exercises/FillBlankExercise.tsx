@@ -57,7 +57,7 @@ export const FillBlankExercise: React.FC<FillBlankExerciseProps> = ({
             value={answers.get(sentenceId) || ''}
             onChange={(e) => handleInputChange(sentenceId, e.target.value)}
             disabled={showFeedback}
-            className={`w-32 px-2 py-1 border-b-2 text-center focus:outline-none transition-all ${
+            className={`w-32 px-2 py-1 border-b-2 text-center focus:outline-none interactive-input ${
               showFeedback
                 ? result?.correct
                   ? 'border-green-500 bg-green-50'
@@ -167,7 +167,7 @@ export const FillBlankExercise: React.FC<FillBlankExerciseProps> = ({
           <button
             onClick={handleSubmit}
             disabled={!allAnswered}
-            className={`px-6 py-2 rounded-lg font-medium transition-all ${
+            className={`px-6 py-2 rounded-lg font-medium button-interactive ${
               !allAnswered
                 ? 'bg-gray-200 text-gray-400 cursor-not-allowed'
                 : 'bg-purple-500 text-white hover:bg-purple-600'
@@ -178,7 +178,7 @@ export const FillBlankExercise: React.FC<FillBlankExerciseProps> = ({
         ) : (
           <button
             onClick={onComplete}
-            className="px-6 py-2 rounded-lg font-medium bg-purple-500 text-white hover:bg-purple-600 transition-all"
+            className="px-6 py-2 rounded-lg font-medium bg-purple-500 text-white hover:bg-purple-600 button-interactive"
           >
             Continue
           </button>

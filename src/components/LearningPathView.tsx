@@ -216,7 +216,7 @@ export const LearningPathView: React.FC<LearningPathViewProps> = ({
                 <article
                   className={`
                     flex-1 rounded-2xl shadow-sm overflow-hidden transition-all duration-300 ease-out
-                    hover:shadow-lg hover:scale-[1.005] cursor-pointer border-2 animate-glow focus-ring
+                    hover:shadow-lg card-interactive cursor-pointer border-2 focus-ring
                     ${item.isCurrent 
                       ? 'border-purple-300 shadow-md' 
                       : item.isCompleted 

@@ -3,6 +3,7 @@ import { useTheme } from '../contexts/ThemeContext';
 import { useReadingMode } from '../contexts/ReadingModeContext';
 import { useAuth } from '../contexts/AuthContext';
 import { useJournal } from '../contexts/JournalContext';
+import { useModal } from '../contexts';
 
 interface FloatingStatusBarProps {
   completedCount: number;
@@ -19,7 +20,7 @@ interface FloatingStatusBarProps {
  * Kick logging and other stats are now in the SecondaryHeader.
  * 
  * For logged-in users: Shows journal button that morphs into the journal modal
- * For guests: Hidden (they don't have journal access)
+ * For guests: Shows lock icon that prompts to sign up
  * In reading mode: Hidden (ReadingModeBar handles controls)
  */
 export const FloatingStatusBar: React.FC<FloatingStatusBarProps> = () => {
@@ -27,15 +28,11 @@ export const FloatingStatusBar: React.FC<FloatingStatusBarProps> = () => {
   const { settings } = useReadingMode();
   const { isAuthenticated } = useAuth();
   const { openJournal, isOpen: isJournalOpen } = useJournal();
+  const { openLogin } = useModal();
   const [isHovered, setIsHovered] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
   
   const isReadingModeActive = settings.readingModeEnabled;
-
-  // Don't show for guests - they don't have journal access
-  if (!isAuthenticated) {
-    return null;
-  }
 
   // Don't show in reading mode - ReadingModeBar handles that
   if (isReadingModeActive) {
@@ -50,6 +47,15 @@ export const FloatingStatusBar: React.FC<FloatingStatusBarProps> = () => {
   // Spacing - aligned with Continue button in TopicPage footer
   const bottomSpacing = '2rem';
   const rightSpacing = 'calc(3rem - 2px)';
+
+  const handleClick = () => {
+    setIsHovered(false);
+    if (isAuthenticated) {
+      openJournal();
+    } else {
+      openLogin();
+    }
+  };
 
   return (
     <div 
@@ -73,10 +79,7 @@ export const FloatingStatusBar: React.FC<FloatingStatusBarProps> = () => {
       
       {/* Journal FAB Button */}
       <button
-        onClick={() => {
-          setIsHovered(false);
-          openJournal();
-        }}
+        onClick={handleClick}
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
         className="relative w-14 h-14 rounded-full flex items-center justify-center shadow-lg transition-all duration-300"
@@ -87,22 +90,37 @@ export const FloatingStatusBar: React.FC<FloatingStatusBarProps> = () => {
             ? `0 8px 32px ${currentTheme.colors.primary}60, 0 4px 16px rgba(0,0,0,0.25)`
             : `0 4px 24px ${currentTheme.colors.primary}40`,
         }}
-        aria-label="Open Journal"
-        title="Open Journal"
+        aria-label={isAuthenticated ? "Open Journal" : "Sign in to Journal"}
+        title={isAuthenticated ? "Open Journal" : "Sign in to Journal"}
+        data-testid="floating-status-bar-button"
       >
-        <svg 
-          className="w-6 h-6 text-white" 
-          fill="none" 
-          stroke="currentColor" 
-          viewBox="0 0 24 24"
-        >
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
-        </svg>
+        {isAuthenticated ? (
+          <svg 
+            className="w-6 h-6 text-white" 
+            fill="none" 
+            stroke="currentColor" 
+            viewBox="0 0 24 24"
+          >
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+          </svg>
+        ) : (
+          <div className="relative">
+            <svg 
+              className="w-6 h-6 text-white opacity-90" 
+              fill="none" 
+              stroke="currentColor" 
+              viewBox="0 0 24 24"
+            >
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+            </svg>
+            <div className="absolute -top-1 -right-1 w-2.5 h-2.5 bg-yellow-400 rounded-full border border-white" />
+          </div>
+        )}
       </button>
 
       {/* Label on hover */}
       <div 
-        className="absolute right-full mr-3 top-1/2 -translate-y-1/2 px-3 py-1.5 rounded-lg whitespace-nowrap transition-all duration-200"
+        className="absolute right-full mr-3 top-1/2 -translate-y-1/2 px-3 py-1.5 rounded-lg whitespace-nowrap theme-colors"
         style={{
           backgroundColor: currentTheme.isDark ? currentTheme.colors.surface : '#ffffff',
           border: `1px solid ${currentTheme.isDark ? currentTheme.colors.border : '#e5e7eb'}`,
@@ -116,7 +134,7 @@ export const FloatingStatusBar: React.FC<FloatingStatusBarProps> = () => {
           className="text-sm font-medium"
           style={{ color: currentTheme.isDark ? currentTheme.colors.text : '#374151' }}
         >
-          Journal
+          {isAuthenticated ? "Journal" : "Sign in to Journal"}
         </span>
       </div>
     </div>

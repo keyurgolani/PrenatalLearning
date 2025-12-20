@@ -5,7 +5,7 @@ import { MiniAudioPlayer } from './MiniAudioPlayer';
 import { useTheme } from '../contexts/ThemeContext';
 import { useAuth } from '../contexts/AuthContext';
 import { useTrimester } from '../contexts/TrimesterContext';
-import { LoginModal, RegisterModal, AccountSettings } from './auth';
+import { useModal } from '../contexts';
 
 /**
  * Calendar Popup Component for date selection in user menu - matches SecondaryHeader calendar
@@ -101,7 +101,10 @@ const UserMenuCalendarPopup: React.FC<UserMenuCalendarPopupProps> = ({ selectedD
         backgroundColor: '#ffffff',
         borderColor: '#e5e7eb',
       }}
+      // eslint-disable-next-line jsx-a11y/click-events-have-key-events, jsx-a11y/no-static-element-interactions
       onClick={(e) => e.stopPropagation()}
+      role="dialog"
+      aria-modal="true"
     >
       {/* Header */}
       <div 
@@ -311,7 +314,7 @@ const UserMenu: React.FC<UserMenuProps> = ({ onLogout, onOpenAccountSettings }) 
       {/* User Button */}
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="flex items-center gap-2 px-3 py-1.5 rounded-lg bg-white/10 hover:bg-white/20 transition-colors text-white text-sm"
+        className="flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium button-interactive focus-ring-light"
         aria-expanded={isOpen}
         aria-haspopup="true"
         aria-label="User menu"
@@ -473,28 +476,8 @@ const UserMenu: React.FC<UserMenuProps> = ({ onLogout, onOpenAccountSettings }) 
 export const Header: React.FC<HeaderProps> = () => {
   const { currentTheme } = useTheme();
   const { isAuthenticated, isLoading: authLoading, logout } = useAuth();
+  const { openLogin, openRegister, openSettings } = useModal();
   
-  // Modal states
-  const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
-  const [isRegisterModalOpen, setIsRegisterModalOpen] = useState(false);
-  const [isAccountSettingsOpen, setIsAccountSettingsOpen] = useState(false);
-
-  /**
-   * Handle switching from login to register modal
-   */
-  const handleSwitchToRegister = useCallback(() => {
-    setIsLoginModalOpen(false);
-    setIsRegisterModalOpen(true);
-  }, []);
-
-  /**
-   * Handle switching from register to login modal
-   */
-  const handleSwitchToLogin = useCallback(() => {
-    setIsRegisterModalOpen(false);
-    setIsLoginModalOpen(true);
-  }, []);
-
   /**
    * Handle logout
    * Requirements: 4.3 - Redirect to home page in guest mode
@@ -502,14 +485,6 @@ export const Header: React.FC<HeaderProps> = () => {
   const handleLogout = useCallback(async () => {
     await logout();
   }, [logout]);
-
-  /**
-   * Open account settings modal
-   * Requirements: 5.8 - Display account settings content properly without blank pages
-   */
-  const handleOpenAccountSettings = useCallback(() => {
-    setIsAccountSettingsOpen(true);
-  }, []);
 
   return (
     <header className="relative z-50 flex-shrink-0" role="banner">
@@ -571,21 +546,21 @@ export const Header: React.FC<HeaderProps> = () => {
                 // Requirements: 15.2 - Display user's name and profile menu when logged in
                 <UserMenu 
                   onLogout={handleLogout} 
-                  onOpenAccountSettings={handleOpenAccountSettings}
+                  onOpenAccountSettings={openSettings}
                 />
               ) : (
                 // Not authenticated: Show login/register buttons
                 // Requirements: 15.1 - Display login/register button when no user is logged in
                 <div className="flex items-center gap-2">
                   <button
-                    onClick={() => setIsLoginModalOpen(true)}
+                    onClick={openLogin}
                     className="px-3 py-1.5 text-sm font-medium text-white hover:bg-white/10 rounded-lg transition-colors"
                     aria-label="Sign in to your account"
                   >
                     Sign In
                   </button>
                   <button
-                    onClick={() => setIsRegisterModalOpen(true)}
+                    onClick={openRegister}
                     className="px-3 py-1.5 text-sm font-medium bg-white text-purple-600 hover:bg-white/90 rounded-lg transition-colors"
                     aria-label="Create a new account"
                   >
@@ -597,26 +572,6 @@ export const Header: React.FC<HeaderProps> = () => {
           </div>
         </div>
       </div>
-
-      {/* Login Modal */}
-      <LoginModal
-        isOpen={isLoginModalOpen}
-        onClose={() => setIsLoginModalOpen(false)}
-        onSwitchToRegister={handleSwitchToRegister}
-      />
-
-      {/* Register Modal */}
-      <RegisterModal
-        isOpen={isRegisterModalOpen}
-        onClose={() => setIsRegisterModalOpen(false)}
-        onSwitchToLogin={handleSwitchToLogin}
-      />
-
-      {/* Account Settings Modal - Requirements: 5.8 - Display account settings content properly */}
-      <AccountSettings
-        isOpen={isAccountSettingsOpen}
-        onClose={() => setIsAccountSettingsOpen(false)}
-      />
     </header>
   );
 };

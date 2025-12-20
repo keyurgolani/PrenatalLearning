@@ -110,9 +110,18 @@ export const ScenarioExercise: React.FC<ScenarioExerciseProps> = ({
             : 'bg-amber-50 border border-amber-200'
         }`}>
           <div className="flex items-start gap-3">
-            <span className="text-2xl">
-              {selectedChoiceData.isOptimal ? '🌟' : '💭'}
-            </span>
+            <div className="flex items-center gap-2 mb-2">
+              {selectedChoiceData.isOptimal ? (
+                <svg className="w-5 h-5 text-yellow-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z" />
+                </svg>
+              ) : (
+                <svg className="w-5 h-5 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
+                </svg>
+              )}
+              <h4 className="font-semibold text-gray-800">Feedback</h4>
+            </div>
             <div>
               <p className={`font-medium ${
                 selectedChoiceData.isOptimal ? 'text-green-800' : 'text-amber-800'
@@ -131,7 +140,7 @@ export const ScenarioExercise: React.FC<ScenarioExerciseProps> = ({
           <button
             onClick={handleSubmit}
             disabled={!selectedChoice}
-            className={`px-6 py-2 rounded-lg font-medium transition-all ${
+            className={`px-6 py-2 rounded-lg font-medium button-interactive ${
               !selectedChoice
                 ? 'bg-gray-200 text-gray-400 cursor-not-allowed'
                 : 'bg-purple-500 text-white hover:bg-purple-600'
@@ -142,7 +151,7 @@ export const ScenarioExercise: React.FC<ScenarioExerciseProps> = ({
         ) : (
           <button
             onClick={onComplete}
-            className="px-6 py-2 rounded-lg font-medium bg-purple-500 text-white hover:bg-purple-600 transition-all"
+            className="px-6 py-2 rounded-lg font-medium bg-purple-500 text-white hover:bg-purple-600 button-interactive"
           >
             Continue
           </button>

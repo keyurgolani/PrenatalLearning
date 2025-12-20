@@ -1,4 +1,5 @@
 import { Router, type Request, type Response, type NextFunction } from 'express';
+import { Filter } from 'mongodb';
 import { requireAuthWithUser } from '../middleware/index.js';
 import {
   createJournalEntrySchema,
@@ -106,7 +107,7 @@ router.get('/', async (req: Request, res: Response, next: NextFunction) => {
     const journalCollection = getJournalEntriesCollection();
 
     // Build query
-    const query: any = { userId: user._id };
+    const query: Filter<JournalEntryDocument> = { userId: user._id };
 
     if (startDate || endDate) {
       query.journalDate = {};
@@ -188,13 +189,13 @@ router.get('/moods', async (req: Request, res: Response, next: NextFunction) => 
           $lte: endDate,
         },
         mood: { $exists: true },
-      } as any)
+      } as Filter<JournalEntryDocument>)
       .project({ journalDate: 1, mood: 1 })
       .sort({ journalDate: 1, createdAt: 1 })
       .toArray();
 
     // Calculate mood distribution
-    const moodCounts: { [mood: string]: number } = {};
+    const moodCounts: Record<string, number> = {};
     const moodTrend: { date: string; mood: string }[] = [];
 
     for (const entry of entries) {
@@ -338,7 +339,7 @@ router.get('/calendar', async (req: Request, res: Response, next: NextFunction) 
       .toArray();
 
     // Build calendar data - map of day number to entry info (supports multiple entries per day)
-    const daysWithEntries: { [day: number]: { hasEntry: boolean; entryCount: number; moods: string[]; entryIds: string[] } } = {};
+    const daysWithEntries: Record<number, { hasEntry: boolean; entryCount: number; moods: string[]; entryIds: string[] }> = {};
 
     for (const entry of entries) {
       const day = entry.journalDate.getUTCDate();
@@ -426,7 +427,7 @@ router.post('/', async (req: Request, res: Response, next: NextFunction) => {
     };
 
     // Insert entry
-    const result = await journalCollection.insertOne(entryDoc as any);
+    const result = await journalCollection.insertOne(entryDoc as never);
     const entryId = result.insertedId;
 
     console.log(`Journal entry created: ${entryId} for user: ${user._id}`);
@@ -546,7 +547,7 @@ router.put('/:id', async (req: Request, res: Response, next: NextFunction) => {
 
     // Build update object
     const now = new Date();
-    const updateFields: any = { updatedAt: now };
+    const updateFields: Record<string, unknown> = { updatedAt: now };
 
     if (updateData.content !== undefined) {
       updateFields.content = updateData.content;

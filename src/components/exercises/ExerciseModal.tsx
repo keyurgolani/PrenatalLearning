@@ -194,7 +194,7 @@ export const ExerciseModal: React.FC<ExerciseModalProps> = ({
               <div className="flex items-center gap-3">
                 <button
                   onClick={handleExitClick}
-                  className="p-2 rounded-full bg-white/20 hover:bg-white/30 transition-colors"
+                  className="p-2 rounded-full bg-white/20 hover:bg-white/30 icon-interactive"
                   aria-label="Exit exercises"
                 >
                   <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -290,7 +290,7 @@ export const ExerciseModal: React.FC<ExerciseModalProps> = ({
                 {/* Return to Story Button - Requirements 5.4 */}
                 <button
                   onClick={handleReturnToStory}
-                  className="px-8 py-3 rounded-xl font-medium bg-gradient-to-r from-purple-500 to-pink-500 text-white hover:from-purple-600 hover:to-pink-600 shadow-md hover:shadow-lg transition-all"
+                  className="px-8 py-3 rounded-xl font-medium bg-gradient-to-r from-purple-500 to-pink-500 text-white hover:from-purple-600 hover:to-pink-600 shadow-md hover:shadow-lg button-interactive"
                 >
                   Return to Story
                 </button>
@@ -314,7 +314,7 @@ export const ExerciseModal: React.FC<ExerciseModalProps> = ({
                   <button
                     onClick={handlePrevious}
                     disabled={currentIndex === 0}
-                    className="flex items-center gap-2 px-4 py-2 rounded-lg font-medium transition-all"
+                    className="flex items-center gap-2 px-4 py-2 rounded-lg font-medium button-interactive"
                     style={currentIndex === 0 
                       ? { color: isDark ? 'rgba(156, 163, 175, 0.5)' : '#9ca3af', cursor: 'not-allowed' }
                       : { color: isDark ? currentTheme.colors.textMuted : '#4b5563' }
@@ -328,7 +328,7 @@ export const ExerciseModal: React.FC<ExerciseModalProps> = ({
 
                   <button
                     onClick={handleNext}
-                    className="flex items-center gap-2 px-6 py-2 rounded-lg font-medium bg-gradient-to-r from-purple-500 to-pink-500 text-white hover:from-purple-600 hover:to-pink-600 shadow-md hover:shadow-lg transition-all"
+                    className="flex items-center gap-2 px-6 py-2 rounded-lg font-medium bg-gradient-to-r from-purple-500 to-pink-500 text-white hover:from-purple-600 hover:to-pink-600 shadow-md hover:shadow-lg button-interactive"
                   >
                     {isLastExercise ? 'Complete' : 'Next'}
                     {!isLastExercise && (
@@ -381,7 +381,7 @@ export const ExerciseModal: React.FC<ExerciseModalProps> = ({
               <div className="flex gap-3">
                 <button
                   onClick={handleCancelExit}
-                  className="flex-1 px-4 py-2 rounded-lg font-medium transition-all"
+                  className="flex-1 px-4 py-2 rounded-lg font-medium button-interactive"
                   style={isDark 
                     ? { backgroundColor: currentTheme.colors.surfaceHover, color: currentTheme.colors.textMuted }
                     : { backgroundColor: '#f3f4f6', color: '#4b5563' }
@@ -391,7 +391,7 @@ export const ExerciseModal: React.FC<ExerciseModalProps> = ({
                 </button>
                 <button
                   onClick={handleConfirmExit}
-                  className="flex-1 px-4 py-2 rounded-lg font-medium bg-purple-500 text-white hover:bg-purple-600 transition-all"
+                  className="flex-1 px-4 py-2 rounded-lg font-medium bg-purple-500 text-white hover:bg-purple-600 button-interactive"
                 >
                   Exit
                 </button>

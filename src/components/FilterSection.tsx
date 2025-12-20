@@ -320,7 +320,7 @@ export const FilterSection: React.FC<FilterSectionProps> = ({
                   key={category.id}
                   onClick={() => onCategoryChange(category.id)}
                   className={`
-                    px-3 py-1.5 rounded-full text-sm font-medium transition-all duration-200 animate-gentle-bounce animate-click focus-ring
+                    px-3 py-1.5 rounded-full text-sm font-medium button-interactive focus-ring
                     ${
                       isActive
                         ? `${category.color} text-white shadow-md scale-105`

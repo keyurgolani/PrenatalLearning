@@ -47,7 +47,7 @@ export const ReadingProgressBar: React.FC<ReadingProgressBarProps> = ({
   const clampedOverallProgress = Math.max(0, Math.min(100, overallProgress));
 
   const containerClasses = `
-    ${fixed ? 'fixed top-0 left-0 right-0 z-50' : 'relative'}
+    ${fixed ? 'sticky top-0 left-0 right-0 h-1 bg-gray-200 z-50 theme-colors' : 'relative'}
     ${className}
   `.trim();
 

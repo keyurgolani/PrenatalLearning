@@ -353,7 +353,9 @@ export const ExerciseEngine: React.FC<ExerciseEngineProps> = ({
           <div className="space-y-6">
             <div className="bg-gradient-to-r from-purple-50 to-pink-50 rounded-xl p-6">
               <div className="flex items-start gap-3">
-                <span className="text-2xl">🌟</span>
+                <svg className="w-8 h-8 text-yellow-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z" />
+                </svg>
                 <div>
                   <h4 className="font-medium text-gray-800 mb-2">Visualization Exercise</h4>
                   <p className="text-gray-600">{exercise.description}</p>
@@ -368,7 +370,7 @@ export const ExerciseEngine: React.FC<ExerciseEngineProps> = ({
             <div className="flex justify-end">
               <button
                 onClick={onNext}
-                className="px-6 py-2 rounded-lg font-medium bg-purple-500 text-white hover:bg-purple-600 transition-all"
+                className="px-6 py-2 rounded-lg font-medium bg-purple-500 text-white hover:bg-purple-600 button-interactive"
               >
                 Continue
               </button>
@@ -408,7 +410,9 @@ export const ExerciseEngine: React.FC<ExerciseEngineProps> = ({
         <div className="mt-6 bg-gradient-to-r from-green-50 to-emerald-50 rounded-xl p-6 border border-green-200">
           <div className="flex items-center gap-4">
             <div className="w-16 h-16 rounded-full bg-green-100 flex items-center justify-center">
-              <span className="text-3xl">🎉</span>
+              <svg className="w-10 h-10 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z" />
+              </svg>
             </div>
             <div>
               <h4 className="font-semibold text-green-800 text-lg">Exercise Complete!</h4>

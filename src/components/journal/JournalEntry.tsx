@@ -4,6 +4,11 @@ import type { UpdateJournalEntry } from '../../contexts/JournalContext';
 import type { JournalEntry as JournalEntryType, MoodType } from '../../types/journal';
 import { stories } from '../../data/stories';
 import { learningPaths } from '../../data/learningPaths';
+import { 
+  Smile, Sun, Cloud, Moon, Star, Heart, 
+  ThumbsUp, Sparkles, Frown, Home,
+  Edit2
+} from 'lucide-react';
 
 /**
  * JournalEntry component - Displays and edits a single journal entry
@@ -13,6 +18,8 @@ import { learningPaths } from '../../data/learningPaths';
  * - 10.6: THE System SHALL auto-save journal entries as the user types
  * - 11.6: WHEN a topic or journey is mentioned, THE System SHALL create a clickable link to that content
  */
+
+import { ContentWithTopicLinks } from './ContentWithTopicLinks';
 
 interface JournalEntryProps {
   /** The journal entry to display/edit */
@@ -30,17 +37,17 @@ interface JournalEntryProps {
  * Requirements: 11.1, 11.2 - Pregnancy-appropriate mood options
  * Requirements: 11.9 - Mood is optional and can be null/undefined
  */
-const MOOD_CONFIG: Record<MoodType, { emoji: string; label: string; color: string }> = {
-  happy: { emoji: '😊', label: 'Happy', color: 'bg-yellow-100 text-yellow-700' },
-  calm: { emoji: '😌', label: 'Calm', color: 'bg-blue-100 text-blue-700' },
-  anxious: { emoji: '😰', label: 'Anxious', color: 'bg-orange-100 text-orange-700' },
-  tired: { emoji: '😴', label: 'Tired', color: 'bg-gray-100 text-gray-700' },
-  excited: { emoji: '🤩', label: 'Excited', color: 'bg-amber-100 text-amber-700' },
-  emotional: { emoji: '🥹', label: 'Emotional', color: 'bg-rose-100 text-rose-700' },
-  grateful: { emoji: '🙏', label: 'Grateful', color: 'bg-green-100 text-green-700' },
-  hopeful: { emoji: '✨', label: 'Hopeful', color: 'bg-pink-100 text-pink-700' },
-  uncomfortable: { emoji: '😣', label: 'Uncomfortable', color: 'bg-red-100 text-red-700' },
-  nesting: { emoji: '🏠', label: 'Nesting', color: 'bg-teal-100 text-teal-700' },
+const MOOD_CONFIG: Record<MoodType, { icon: React.FC<{className?: string}>; label: string; color: string }> = {
+  happy: { icon: Smile, label: 'Happy', color: 'bg-yellow-100 text-yellow-700' },
+  calm: { icon: Sun, label: 'Calm', color: 'bg-blue-100 text-blue-700' },
+  anxious: { icon: Cloud, label: 'Anxious', color: 'bg-orange-100 text-orange-700' },
+  tired: { icon: Moon, label: 'Tired', color: 'bg-gray-100 text-gray-700' },
+  excited: { icon: Star, label: 'Excited', color: 'bg-amber-100 text-amber-700' },
+  emotional: { icon: Heart, label: 'Emotional', color: 'bg-rose-100 text-rose-700' },
+  grateful: { icon: ThumbsUp, label: 'Grateful', color: 'bg-green-100 text-green-700' },
+  hopeful: { icon: Sparkles, label: 'Hopeful', color: 'bg-pink-100 text-pink-700' },
+  uncomfortable: { icon: Frown, label: 'Uncomfortable', color: 'bg-red-100 text-red-700' },
+  nesting: { icon: Home, label: 'Nesting', color: 'bg-teal-100 text-teal-700' },
 };
 
 /**
@@ -78,70 +85,7 @@ function getAllSuggestions(): SuggestionItem[] {
 }
 
 
-/**
- * Parse content for topic/journey mentions and create clickable links
- * Requirements: 11.6 - Create clickable links for mentioned topics/journeys
- */
-function parseContentWithLinks(content: string): React.ReactNode[] {
-  // Match @mentions in the content
-  const mentionRegex = /@([^@\n]+?)(?=\s|$|@)/g;
-  const parts: React.ReactNode[] = [];
-  let lastIndex = 0;
-  let match;
 
-  const allSuggestions = getAllSuggestions();
-
-  while ((match = mentionRegex.exec(content)) !== null) {
-    // Add text before the match
-    if (match.index > lastIndex) {
-      parts.push(content.substring(lastIndex, match.index));
-    }
-
-    const mentionText = match[1].trim();
-    const suggestion = allSuggestions.find(
-      s => s.title.toLowerCase() === mentionText.toLowerCase()
-    );
-
-    if (suggestion) {
-      // Create clickable link for valid topic/journey
-      const href = suggestion.type === 'topic' 
-        ? `/story/${suggestion.id}` 
-        : `/journey/${suggestion.id}`;
-      
-      parts.push(
-        <a
-          key={`${suggestion.type}-${suggestion.id}-${match.index}`}
-          href={href}
-          className={`
-            inline-flex items-center gap-1 px-1.5 py-0.5 rounded text-sm font-medium
-            ${suggestion.type === 'topic' 
-              ? 'bg-blue-50 text-blue-600 hover:bg-blue-100' 
-              : 'bg-green-50 text-green-600 hover:bg-green-100'
-            }
-            transition-colors
-          `}
-          onClick={(e) => {
-            e.stopPropagation();
-          }}
-        >
-          {suggestion.type === 'topic' ? '📚' : '🗺️'} {mentionText}
-        </a>
-      );
-    } else {
-      // Keep as plain text if not a valid reference
-      parts.push(`@${mentionText}`);
-    }
-
-    lastIndex = match.index + match[0].length;
-  }
-
-  // Add remaining text
-  if (lastIndex < content.length) {
-    parts.push(content.substring(lastIndex));
-  }
-
-  return parts.length > 0 ? parts : [content];
-}
 
 export const JournalEntry: React.FC<JournalEntryProps> = ({
   entry,
@@ -163,8 +107,8 @@ export const JournalEntry: React.FC<JournalEntryProps> = ({
   const [suggestionFilter, setSuggestionFilter] = useState('');
   const [suggestionTriggerIndex, setSuggestionTriggerIndex] = useState(-1);
   const [selectedSuggestionIndex, setSelectedSuggestionIndex] = useState(0);
-  const [topicReferences, setTopicReferences] = useState<Array<{ topicId: number; title: string }>>([]);
-  const [journeyReferences, setJourneyReferences] = useState<Array<{ journeyId: string; title: string }>>([]);
+  const [topicReferences, setTopicReferences] = useState<{ topicId: number; title: string }[]>([]);
+  const [journeyReferences, setJourneyReferences] = useState<{ journeyId: string; title: string }[]>([]);
   
   const textareaRef = useRef<HTMLTextAreaElement>(null);
   const autoSaveTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
@@ -296,35 +240,6 @@ export const JournalEntry: React.FC<JournalEntryProps> = ({
   /**
    * Handle keyboard navigation in autocomplete
    */
-  const handleKeyDown = useCallback((e: React.KeyboardEvent<HTMLTextAreaElement>) => {
-    if (!showSuggestions) return;
-
-    switch (e.key) {
-      case 'ArrowDown':
-        e.preventDefault();
-        setSelectedSuggestionIndex(prev => 
-          prev < filteredSuggestions.length - 1 ? prev + 1 : 0
-        );
-        break;
-      case 'ArrowUp':
-        e.preventDefault();
-        setSelectedSuggestionIndex(prev => 
-          prev > 0 ? prev - 1 : filteredSuggestions.length - 1
-        );
-        break;
-      case 'Enter':
-        if (filteredSuggestions.length > 0) {
-          e.preventDefault();
-          handleSelectSuggestion(filteredSuggestions[selectedSuggestionIndex]);
-        }
-        break;
-      case 'Escape':
-        e.preventDefault();
-        setShowSuggestions(false);
-        break;
-    }
-  }, [showSuggestions, filteredSuggestions, selectedSuggestionIndex]);
-
   /**
    * Handle suggestion selection
    * Requirements: 11.6 - Create clickable links for topics/journeys
@@ -370,6 +285,38 @@ export const JournalEntry: React.FC<JournalEntryProps> = ({
     // Focus back on textarea
     textareaRef.current?.focus();
   }, [editContent, suggestionTriggerIndex, suggestionFilter, editMood, autoSave]);
+
+  /**
+   * Handle keyboard navigation in autocomplete
+   */
+  const handleKeyDown = useCallback((e: React.KeyboardEvent<HTMLTextAreaElement>) => {
+    if (!showSuggestions) return;
+
+    switch (e.key) {
+      case 'ArrowDown':
+        e.preventDefault();
+        setSelectedSuggestionIndex(prev => 
+          prev < filteredSuggestions.length - 1 ? prev + 1 : 0
+        );
+        break;
+      case 'ArrowUp':
+        e.preventDefault();
+        setSelectedSuggestionIndex(prev => 
+          prev > 0 ? prev - 1 : filteredSuggestions.length - 1
+        );
+        break;
+      case 'Enter':
+        if (filteredSuggestions.length > 0) {
+          e.preventDefault();
+          handleSelectSuggestion(filteredSuggestions[selectedSuggestionIndex]);
+        }
+        break;
+      case 'Escape':
+        e.preventDefault();
+        setShowSuggestions(false);
+        break;
+    }
+  }, [showSuggestions, filteredSuggestions, selectedSuggestionIndex, handleSelectSuggestion]);
 
   /**
    * Toggle edit mode
@@ -463,7 +410,10 @@ export const JournalEntry: React.FC<JournalEntryProps> = ({
                 inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-sm font-medium
                 ${MOOD_CONFIG[entry.mood].color}
               `}>
-                <span>{MOOD_CONFIG[entry.mood].emoji}</span>
+                {(() => {
+                  const MoodIcon = MOOD_CONFIG[entry.mood].icon;
+                  return <MoodIcon className="w-3.5 h-3.5" />;
+                })()}
                 {MOOD_CONFIG[entry.mood].label}
               </span>
             )}
@@ -474,9 +424,7 @@ export const JournalEntry: React.FC<JournalEntryProps> = ({
                 className="p-2 rounded-lg hover:bg-gray-100 transition-colors text-gray-500 hover:text-gray-700"
                 aria-label="Edit entry"
               >
-                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
-                </svg>
+                <Edit2 className="w-4 h-4" />
               </button>
             )}
           </div>
@@ -484,8 +432,12 @@ export const JournalEntry: React.FC<JournalEntryProps> = ({
 
         {/* Content with parsed links - Requirements: 11.6 */}
         <div className="px-5 py-4">
-          <div className="prose prose-sm max-w-none text-gray-700 whitespace-pre-wrap">
-            {parseContentWithLinks(entry.content)}
+          <div className="prose prose-sm max-w-none text-gray-700">
+            <ContentWithTopicLinks 
+              content={entry.content}
+              topicReferences={entry.topicReferences}
+              journeyReferences={entry.journeyReferences}
+            />
           </div>
         </div>
       </div>
@@ -553,9 +505,9 @@ export const JournalEntry: React.FC<JournalEntryProps> = ({
 
       {/* Mood selector */}
       <div className="px-5 pt-4">
-        <label className="block text-sm font-medium text-gray-700 mb-2">
+        <span className="block text-sm font-medium text-gray-700 mb-2">
           How are you feeling?
-        </label>
+        </span>
         <div className="flex flex-wrap gap-2">
           {(Object.keys(MOOD_CONFIG) as MoodType[]).map(moodKey => {
             const config = MOOD_CONFIG[moodKey];
@@ -573,7 +525,7 @@ export const JournalEntry: React.FC<JournalEntryProps> = ({
                 `}
                 aria-pressed={editMood === moodKey}
               >
-                <span className="mr-1">{config.emoji}</span>
+                <config.icon className="w-4 h-4 mr-1 inline-block" />
                 {config.label}
               </button>
             );

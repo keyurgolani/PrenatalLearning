@@ -1,4 +1,6 @@
 import React, { useState, useRef, useEffect, useCallback } from 'react';
+import { Play, Pause, RotateCcw, RotateCw } from 'lucide-react';
+import { useTheme } from '../../contexts/ThemeContext';
 
 interface JournalAudioPlayerProps {
   /** Audio source URL */
@@ -9,13 +11,16 @@ interface JournalAudioPlayerProps {
 
 /**
  * JournalAudioPlayer - Styled audio player for journal voice notes
- * Matches the look and feel of NarrateButton but with ±10 second skip buttons
+ * Matches the look and feel of global AudioPlayer but with ±10 second skip buttons
  */
 export const JournalAudioPlayer: React.FC<JournalAudioPlayerProps> = ({
   src,
   className = '',
 }) => {
+  const { currentTheme } = useTheme();
   const audioRef = useRef<HTMLAudioElement>(null);
+  const playAnimationRef = useRef<number | undefined>(undefined);
+  
   const [isPlaying, setIsPlaying] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   const [currentTime, setCurrentTime] = useState(0);
@@ -28,14 +33,15 @@ export const JournalAudioPlayer: React.FC<JournalAudioPlayerProps> = ({
     if (!audio) return;
 
     // Reset state when src changes
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setCurrentTime(0);
     setDuration(0);
     setIsPlaying(false);
     setIsLoading(true);
     setError(null);
+    if (playAnimationRef.current !== undefined) cancelAnimationFrame(playAnimationRef.current);
 
     const updateDuration = () => {
-      // Only set duration if it's a valid finite number
       if (audio.duration && isFinite(audio.duration) && !isNaN(audio.duration)) {
         setDuration(audio.duration);
       }
@@ -50,15 +56,10 @@ export const JournalAudioPlayer: React.FC<JournalAudioPlayerProps> = ({
       updateDuration();
     };
 
-    const handleTimeUpdate = () => {
-      setCurrentTime(audio.currentTime);
-      // Sometimes duration becomes available during playback
-      updateDuration();
-    };
-
     const handleEnded = () => {
       setIsPlaying(false);
       setCurrentTime(0);
+      if (playAnimationRef.current) cancelAnimationFrame(playAnimationRef.current);
     };
 
     const handleError = () => {
@@ -71,17 +72,11 @@ export const JournalAudioPlayer: React.FC<JournalAudioPlayerProps> = ({
       updateDuration();
     };
 
-    const handleLoadedData = () => {
-      updateDuration();
-    };
-
     audio.addEventListener('loadedmetadata', handleLoadedMetadata);
     audio.addEventListener('durationchange', handleDurationChange);
-    audio.addEventListener('timeupdate', handleTimeUpdate);
     audio.addEventListener('ended', handleEnded);
     audio.addEventListener('error', handleError);
     audio.addEventListener('canplay', handleCanPlay);
-    audio.addEventListener('loadeddata', handleLoadedData);
 
     // Try to load the audio
     audio.load();
@@ -89,13 +84,38 @@ export const JournalAudioPlayer: React.FC<JournalAudioPlayerProps> = ({
     return () => {
       audio.removeEventListener('loadedmetadata', handleLoadedMetadata);
       audio.removeEventListener('durationchange', handleDurationChange);
-      audio.removeEventListener('timeupdate', handleTimeUpdate);
       audio.removeEventListener('ended', handleEnded);
       audio.removeEventListener('error', handleError);
       audio.removeEventListener('canplay', handleCanPlay);
-      audio.removeEventListener('loadeddata', handleLoadedData);
+      if (playAnimationRef.current) cancelAnimationFrame(playAnimationRef.current);
     };
   }, [src]);
+
+  // Smooth progress animation loop
+  useEffect(() => {
+    if (!isPlaying) {
+      if (playAnimationRef.current !== undefined) {
+        cancelAnimationFrame(playAnimationRef.current);
+      }
+      return;
+    }
+
+    const repeat = () => {
+      const audio = audioRef.current;
+      if (!audio) return;
+
+      setCurrentTime(audio.currentTime);
+      playAnimationRef.current = requestAnimationFrame(repeat);
+    };
+
+    playAnimationRef.current = requestAnimationFrame(repeat);
+
+    return () => {
+      if (playAnimationRef.current !== undefined) {
+        cancelAnimationFrame(playAnimationRef.current);
+      }
+    };
+  }, [isPlaying]);
 
   const togglePlayPause = useCallback(async () => {
     const audio = audioRef.current;
@@ -159,31 +179,33 @@ export const JournalAudioPlayer: React.FC<JournalAudioPlayerProps> = ({
     );
   }
 
+  const isDark = currentTheme.isDark;
+
   return (
     <div
-      className={`journal-audio-player flex items-center gap-2 p-2 rounded-xl transition-all duration-300 ${className}`}
+      className={`journal-audio-player flex items-center gap-2 p-2 rounded-xl transition-all duration-300 shadow-sm ${className}`}
       style={{
-        backgroundColor: 'rgba(147, 51, 234, 0.1)',
-        border: '1px solid rgba(147, 51, 234, 0.2)',
-        boxShadow: isPlaying ? '0 0 20px rgba(147, 51, 234, 0.2)' : 'none',
+        backgroundColor: isDark ? currentTheme.colors.surface : `${currentTheme.colors.primary}10`, // 10% opacity primary
+        border: `1px solid ${isDark ? currentTheme.colors.border : `${currentTheme.colors.primary}20`}`,
+        boxShadow: isPlaying ? `0 4px 12px ${currentTheme.colors.primary}30` : 'none',
       }}
     >
-      {/* Hidden audio element */}
+      {/* eslint-disable-next-line jsx-a11y/media-has-caption */}
       <audio ref={audioRef} src={src} preload="metadata" />
 
       {/* Skip Back 10s */}
       <button
         onClick={() => skipBySeconds(-10)}
         disabled={isLoading}
-        className="skip-btn flex flex-col items-center justify-center w-8 h-8 rounded-full transition-all duration-200 hover:scale-110 active:scale-95 focus:outline-none disabled:opacity-40"
+        className="skip-btn flex flex-col items-center justify-center w-8 h-8 rounded-full icon-interactive focus-ring disabled:opacity-40"
         style={{
-          backgroundColor: 'rgba(147, 51, 234, 0.15)',
-          color: '#7c3aed',
+          backgroundColor: isDark ? currentTheme.colors.surfaceHover : `${currentTheme.colors.primary}20`,
+          color: currentTheme.colors.primary,
         }}
         aria-label="Skip back 10 seconds"
         title="-10s"
       >
-        <span className="text-sm leading-none">↺</span>
+        <RotateCcw className="w-3.5 h-3.5" />
         <span className="text-[8px] font-bold -mt-0.5">10</span>
       </button>
 
@@ -191,11 +213,11 @@ export const JournalAudioPlayer: React.FC<JournalAudioPlayerProps> = ({
       <button
         onClick={togglePlayPause}
         disabled={isLoading}
-        className="flex items-center justify-center w-9 h-9 rounded-full transition-all duration-300 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-1"
+        className="flex items-center justify-center w-9 h-9 rounded-full button-interactive focus-ring transition-transform active:scale-95"
         style={{
-          backgroundColor: '#7c3aed',
+          backgroundColor: currentTheme.colors.primary,
           color: '#ffffff',
-          boxShadow: isPlaying ? '0 0 12px rgba(147, 51, 234, 0.4)' : 'none',
+          boxShadow: isPlaying ? `0 0 12px ${currentTheme.colors.primary}60` : 'none',
         }}
         aria-label={isPlaying ? 'Pause' : 'Play'}
       >
@@ -205,14 +227,9 @@ export const JournalAudioPlayer: React.FC<JournalAudioPlayerProps> = ({
             <path d="M12 2a10 10 0 0 1 10 10" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" />
           </svg>
         ) : isPlaying ? (
-          <svg className="w-4 h-4" viewBox="0 0 24 24" fill="currentColor">
-            <rect x="6" y="5" width="4" height="14" rx="1" />
-            <rect x="14" y="5" width="4" height="14" rx="1" />
-          </svg>
+          <Pause className="w-4 h-4 fill-current" />
         ) : (
-          <svg className="w-4 h-4" viewBox="0 0 24 24" fill="currentColor">
-            <path d="M6 4l15 8-15 8V4z" />
-          </svg>
+          <Play className="w-4 h-4 fill-current ml-0.5" />
         )}
       </button>
 
@@ -222,13 +239,13 @@ export const JournalAudioPlayer: React.FC<JournalAudioPlayerProps> = ({
         disabled={isLoading}
         className="skip-btn flex flex-col items-center justify-center w-8 h-8 rounded-full transition-all duration-200 hover:scale-110 active:scale-95 focus:outline-none disabled:opacity-40"
         style={{
-          backgroundColor: 'rgba(147, 51, 234, 0.15)',
-          color: '#7c3aed',
+          backgroundColor: isDark ? currentTheme.colors.surfaceHover : `${currentTheme.colors.primary}20`,
+          color: currentTheme.colors.primary,
         }}
         aria-label="Skip forward 10 seconds"
         title="+10s"
       >
-        <span className="text-sm leading-none">↻</span>
+        <RotateCw className="w-3.5 h-3.5" />
         <span className="text-[8px] font-bold -mt-0.5">10</span>
       </button>
 
@@ -236,7 +253,7 @@ export const JournalAudioPlayer: React.FC<JournalAudioPlayerProps> = ({
       <div className="flex-1 min-w-0">
         {/* Time display */}
         <div className="flex items-center justify-end mb-1">
-          <span className="text-[10px] tabular-nums text-gray-500">
+          <span className="text-[10px] tabular-nums" style={{ color: currentTheme.colors.textMuted }}>
             {formatTime(currentTime)}{duration > 0 && isFinite(duration) ? ` / ${formatTime(duration)}` : ''}
           </span>
         </div>
@@ -244,49 +261,37 @@ export const JournalAudioPlayer: React.FC<JournalAudioPlayerProps> = ({
         {/* Progress Bar */}
         {duration > 0 && isFinite(duration) && (
           <div
-            className="relative h-2 rounded-full cursor-pointer group"
-            style={{ backgroundColor: 'rgba(147, 51, 234, 0.15)' }}
+            className="relative h-2 rounded-full cursor-pointer group outline-none focus:ring-2 focus:ring-offset-1 focus:ring-offset-white rounded-full"
+            style={{ 
+              backgroundColor: isDark ? currentTheme.colors.border : `${currentTheme.colors.primary}20`,
+              '--ring-color': currentTheme.colors.primary,
+            } as React.CSSProperties}
             onClick={handleProgressClick}
+            onKeyDown={(e) => {
+              if (e.key === 'ArrowLeft') skipBySeconds(-5);
+              if (e.key === 'ArrowRight') skipBySeconds(5);
+              if (e.key === 'Home') { e.preventDefault(); setCurrentTime(0); if (audioRef.current) audioRef.current.currentTime = 0; }
+              if (e.key === 'End') { e.preventDefault(); setCurrentTime(duration); if (audioRef.current) audioRef.current.currentTime = duration; }
+            }}
+            role="slider"
+            tabIndex={0}
+            aria-label="Audio Progress"
+            aria-valuenow={currentTime}
+            aria-valuemin={0}
+            aria-valuemax={duration}
+            aria-valuetext={`${formatTime(currentTime)} of ${formatTime(duration)}`}
           >
             {/* Progress fill */}
             <div
-              className="absolute top-0 left-0 h-full rounded-full pointer-events-none"
+              className="absolute top-0 left-0 h-full rounded-full pointer-events-none transition-[width] duration-75 ease-linear"
               style={{
                 width: `${Math.min(100, progressPercent)}%`,
-                background: 'linear-gradient(90deg, #7c3aed 0%, #8b5cf6 50%, #a78bfa 100%)',
-                boxShadow: `0 0 ${isPlaying ? '12px' : '6px'} rgba(147, 51, 234, 0.6)`,
+                backgroundColor: currentTheme.colors.primary,
+                boxShadow: `0 0 ${isPlaying ? '12px' : '6px'} ${currentTheme.colors.primary}60`,
                 zIndex: 1,
               }}
             />
-            {/* Shimmer effect when playing */}
-            {isPlaying && (
-              <div
-                className="absolute top-0 left-0 w-full h-full rounded-full pointer-events-none overflow-hidden"
-                style={{ zIndex: 2 }}
-              >
-                <div
-                  className="absolute top-0 left-0 h-full w-1/3 rounded-full"
-                  style={{
-                    background: 'linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.3) 50%, transparent 100%)',
-                    animation: 'journal-shimmer-slide 2s ease-in-out infinite',
-                  }}
-                />
-              </div>
-            )}
-            {/* Pulse ring when playing */}
-            {isPlaying && (
-              <div
-                className="absolute w-3 h-3 rounded-full pointer-events-none"
-                style={{
-                  left: `calc(${Math.min(100, progressPercent)}% - 6px)`,
-                  top: '50%',
-                  transform: 'translateY(-50%)',
-                  backgroundColor: '#a855f7',
-                  animation: 'journal-pulse-ring 1.5s ease-out infinite',
-                  zIndex: 3,
-                }}
-              />
-            )}
+            
             {/* Playhead */}
             <div
               className="journal-playhead-knob absolute w-3 h-3 rounded-full shadow-lg pointer-events-none"
@@ -294,8 +299,8 @@ export const JournalAudioPlayer: React.FC<JournalAudioPlayerProps> = ({
                 left: `calc(${Math.min(100, progressPercent)}% - 6px)`,
                 top: '50%',
                 backgroundColor: '#ffffff',
-                border: '2px solid #7c3aed',
-                boxShadow: '0 0 8px rgba(147, 51, 234, 0.6)',
+                border: `2px solid ${currentTheme.colors.primary}`,
+                boxShadow: `0 0 8px ${currentTheme.colors.primary}60`,
                 zIndex: 4,
               }}
             />
@@ -304,21 +309,13 @@ export const JournalAudioPlayer: React.FC<JournalAudioPlayerProps> = ({
       </div>
 
       <style>{`
-        @keyframes journal-pulse-ring {
-          0% { transform: translateY(-50%) scale(1); opacity: 0.8; }
-          50% { transform: translateY(-50%) scale(2); opacity: 0; }
-          100% { transform: translateY(-50%) scale(1); opacity: 0; }
-        }
-        @keyframes journal-shimmer-slide {
-          0% { transform: translateX(-100%); }
-          100% { transform: translateX(400%); }
-        }
         .journal-playhead-knob {
-          transform: translateY(-50%) scale(1);
-          transition: transform 0.15s ease-out;
+          transform: translateY(-50%) scale(0);
+          transition: transform 0.15s ease-out, left 75ms linear;
         }
-        .group:hover .journal-playhead-knob {
-          transform: translateY(-50%) scale(1.25);
+        .group:hover .journal-playhead-knob,
+        .group:focus .journal-playhead-knob {
+          transform: translateY(-50%) scale(1);
         }
         .journal-audio-player .skip-btn {
           transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1),
@@ -326,7 +323,7 @@ export const JournalAudioPlayer: React.FC<JournalAudioPlayerProps> = ({
                       box-shadow 0.2s ease;
         }
         .journal-audio-player .skip-btn:hover {
-          box-shadow: 0 0 12px rgba(147, 51, 234, 0.4);
+          box-shadow: 0 0 12px ${currentTheme.colors.primary}40;
         }
         .journal-audio-player .skip-btn:active {
           transition: transform 0.1s ease;

@@ -9,6 +9,14 @@ import { STREAK_MILESTONES } from '../types/streak';
  * Requirements: 4.6 - Display streak milestones with celebratory messages
  */
 
+import { Flame, Trophy, Crown, Sparkles } from 'lucide-react';
+
+/**
+ * StreakBadge component for displaying current streak in header
+ * Requirements: 4.3 - Display current streak count in header or profile area
+ * Requirements: 4.6 - Display streak milestones with celebratory messages
+ */
+
 interface StreakBadgeProps {
   /** Whether to show in compact mode */
   compact?: boolean;
@@ -22,13 +30,13 @@ interface StreakBadgeProps {
 function getMilestoneMessage(milestone: number): string {
   switch (milestone) {
     case 7:
-      return '🎉 One week streak! Amazing!';
+      return 'One week streak! Amazing!';
     case 30:
-      return '🏆 30 day streak! Incredible!';
+      return '30 day streak! Incredible!';
     case 100:
-      return '👑 100 day streak! Legendary!';
+      return '100 day streak! Legendary!';
     default:
-      return `🎉 ${milestone} day milestone!`;
+      return `${milestone} day milestone!`;
   }
 }
 
@@ -52,22 +60,6 @@ function getStreakColor(streak: number, hasActiveStreak: boolean): string {
 }
 
 /**
- * Fire icon for streak display
- */
-const FireIcon: React.FC<{ className?: string }> = ({ className }) => (
-  <svg
-    className={className}
-    viewBox="0 0 24 24"
-    fill="currentColor"
-    aria-hidden="true"
-  >
-    <path d="M12 23c-4.97 0-9-3.58-9-8 0-2.52 1.17-4.83 3-6.36V8c0-.55.45-1 1-1s1 .45 1 1v.64c.47-.17.97-.29 1.5-.36V6c0-.55.45-1 1-1s1 .45 1 1v2.28c.53.07 1.03.19 1.5.36V8c0-.55.45-1 1-1s1 .45 1 1v.64c1.83 1.53 3 3.84 3 6.36 0 4.42-4.03 8-9 8zm0-14c-3.31 0-6 2.69-6 6 0 2.76 2.69 5 6 5s6-2.24 6-5c0-3.31-2.69-6-6-6z" />
-    <path d="M12 19c-1.66 0-3-1.12-3-2.5S10.34 14 12 14s3 1.12 3 2.5-1.34 2.5-3 2.5z" />
-  </svg>
-);
-
-
-/**
  * Milestone celebration modal
  */
 const MilestoneCelebration: React.FC<{
@@ -79,6 +71,12 @@ const MilestoneCelebration: React.FC<{
     const timer = setTimeout(onClose, 5000);
     return () => clearTimeout(timer);
   }, [onClose]);
+
+  const getIcon = () => {
+    if (milestone >= 100) return <Crown className="w-16 h-16 text-yellow-500 mx-auto" />;
+    if (milestone >= 30) return <Trophy className="w-16 h-16 text-purple-500 mx-auto" />;
+    return <Flame className="w-16 h-16 text-orange-500 mx-auto" />;
+  };
 
   return (
     <div 
@@ -92,8 +90,8 @@ const MilestoneCelebration: React.FC<{
         className="bg-white rounded-2xl p-8 shadow-2xl text-center max-w-sm mx-4 animate-bounce-in"
         onClick={e => e.stopPropagation()}
       >
-        <div className="text-6xl mb-4">
-          {milestone >= 100 ? '👑' : milestone >= 30 ? '🏆' : '🔥'}
+        <div className="mb-4">
+          {getIcon()}
         </div>
         <h2 className="text-2xl font-bold text-gray-800 mb-2">
           {milestone} Day Streak!
@@ -114,8 +112,9 @@ const MilestoneCelebration: React.FC<{
         </div>
         <button
           onClick={onClose}
-          className="px-6 py-2 bg-gradient-to-r from-orange-400 to-red-500 text-white rounded-full font-medium hover:from-orange-500 hover:to-red-600 transition-all"
+          className="px-6 py-2 bg-gradient-to-r from-orange-400 to-red-500 text-white rounded-full font-medium hover:from-orange-500 hover:to-red-600 transition-all flex items-center gap-2 mx-auto"
         >
+          <Sparkles className="w-4 h-4" />
           Keep Going!
         </button>
       </div>
@@ -143,10 +142,10 @@ export const StreakBadge: React.FC<StreakBadgeProps> = ({
   // Calculate flame size based on streak weeks
   const streakWeeks = Math.floor(currentStreak / 7);
   const getFlameSize = () => {
-    if (streakWeeks >= 10) return 'text-lg'; // 10+ weeks
-    if (streakWeeks >= 4) return 'text-base'; // 4+ weeks
-    if (streakWeeks >= 1) return 'text-sm'; // 1+ week
-    return 'text-xs'; // less than a week
+    if (streakWeeks >= 10) return 'w-6 h-6'; // 10+ weeks
+    if (streakWeeks >= 4) return 'w-5 h-5'; // 4+ weeks
+    if (streakWeeks >= 1) return 'w-4 h-4'; // 1+ week
+    return 'w-3.5 h-3.5'; // less than a week
   };
   
   const isRadiating = streakWeeks >= 15;
@@ -155,17 +154,17 @@ export const StreakBadge: React.FC<StreakBadgeProps> = ({
     return (
       <>
         <div
-          className={`flex items-center gap-1.5 ${className}`}
+          className="inline-flex items-center gap-2 px-4 py-2 rounded-full shadow-lg icon-interactive cursor-pointer"
           title={`${currentStreak} day streak${!hasActiveStreak ? ' (inactive)' : ''}`}
           aria-label={`Current streak: ${currentStreak} days${!hasActiveStreak ? ', inactive' : ''}`}
         >
           <span 
-            className={`${getFlameSize()} ${isRadiating ? 'animate-radiate' : ''}`}
+            className={`flex items-center justify-center ${isRadiating ? 'animate-radiate' : ''}`}
             style={isRadiating ? { 
               filter: 'drop-shadow(0 0 4px rgba(251, 146, 60, 0.8))',
             } : undefined}
           >
-            🔥
+            <Flame className={`${getFlameSize()} text-orange-500`} />
           </span>
           <span 
             className="text-sm font-semibold"
@@ -197,7 +196,7 @@ export const StreakBadge: React.FC<StreakBadgeProps> = ({
         aria-label={`Current streak: ${currentStreak} days${!hasActiveStreak ? ', inactive' : ''}`}
       >
         <div className="flex items-center gap-2">
-          <FireIcon className={`w-5 h-5 ${streakColor} ${isOnFire ? 'animate-pulse' : ''}`} />
+          <Flame className={`w-5 h-5 ${streakColor} ${isOnFire ? 'animate-pulse' : ''}`} />
           <div className="flex flex-col">
             <span className={`text-lg font-bold ${streakColor}`}>
               {currentStreak}

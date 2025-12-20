@@ -14,7 +14,7 @@ export type { TrimesterContextValue } from './TrimesterContext';
 export { StreakProvider, useStreak } from './StreakContext';
 export type { StreakContextValue } from './StreakContext';
 export { AudioProvider, useAudio } from './AudioContext';
-export type { AudioState } from './AudioContext';
+export type { AudioState } from '../types/audio';
 export { AuthProvider, useAuth } from './AuthContext';
 export type { AuthContextValue } from '../types/auth';
 export { ProfileProvider, useProfile } from './ProfileContext';
@@ -42,3 +42,5 @@ export type {
 } from './KickContext';
 export { CompletedStoriesProvider, useCompletedStories } from './CompletedStoriesContext';
 export type { CompletedStoriesContextValue } from './CompletedStoriesContext';
+export { ModalProvider, useModal } from './ModalContext';
+

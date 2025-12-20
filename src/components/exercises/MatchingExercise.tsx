@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import type { MatchingExercise as MatchingExerciseType } from '../../types/exercises';
 import { validateMatchingPairs } from '../../utils/exerciseValidation';
 import type { UserMatch } from '../../utils/exerciseValidation';
+import { PartyPopper, Lightbulb, ArrowRight } from 'lucide-react';
 
 interface MatchingExerciseProps {
   exercise: MatchingExerciseType;
@@ -130,7 +131,7 @@ export const MatchingExercise: React.FC<MatchingExerciseProps> = ({
             >
               <span className="text-gray-700">{pair.left}</span>
               {matches.has(pair.id) && (
-                <span className="ml-2 text-blue-500">→</span>
+                <ArrowRight className="ml-2 w-4 h-4 text-blue-500" />
               )}
             </button>
           ))}
@@ -163,9 +164,11 @@ export const MatchingExercise: React.FC<MatchingExerciseProps> = ({
             : 'bg-amber-50 border border-amber-200'
         }`}>
           <div className="flex items-start gap-3">
-            <span className="text-2xl">
-              {Array.from(validationResults.values()).every(v => v) ? '🎉' : '💡'}
-            </span>
+            {Array.from(validationResults.values()).every(v => v) ? (
+              <PartyPopper className="w-8 h-8 text-green-500" />
+            ) : (
+              <Lightbulb className="w-8 h-8 text-amber-500" />
+            )}
             <div>
               <p className="font-medium text-gray-800">
                 {Array.from(validationResults.values()).filter(v => v).length} of {exercise.pairs.length} correct!
@@ -186,7 +189,7 @@ export const MatchingExercise: React.FC<MatchingExerciseProps> = ({
           <button
             onClick={handleSubmit}
             disabled={!allMatched}
-            className={`px-6 py-2 rounded-lg font-medium transition-all ${
+            className={`px-6 py-2 rounded-lg font-medium button-interactive ${
               !allMatched
                 ? 'bg-gray-200 text-gray-400 cursor-not-allowed'
                 : 'bg-purple-500 text-white hover:bg-purple-600'
@@ -197,7 +200,7 @@ export const MatchingExercise: React.FC<MatchingExerciseProps> = ({
         ) : (
           <button
             onClick={onComplete}
-            className="px-6 py-2 rounded-lg font-medium bg-purple-500 text-white hover:bg-purple-600 transition-all"
+            className="px-6 py-2 rounded-lg font-medium bg-purple-500 text-white hover:bg-purple-600 button-interactive"
           >
             Continue
           </button>

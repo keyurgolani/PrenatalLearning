@@ -177,7 +177,7 @@ const RelatedStoryCard: React.FC<RelatedStoryCardProps> = ({
   return (
     <button
       onClick={onSelect}
-      className="text-left rounded-xl overflow-hidden shadow-md hover:shadow-lg transition-all hover:scale-[1.02] focus-ring animate-card-enter"
+      className="text-left rounded-xl overflow-hidden shadow-md card-interactive focus-ring animate-card-enter"
       style={{ 
         backgroundColor: isDark ? theme.colors.surface : '#ffffff',
         border: `1px solid ${isDark ? theme.colors.border : '#e5e7eb'}`,

@@ -21,6 +21,10 @@ const mockState = vi.hoisted(() => ({
   dueDate: null as Date | null,
 }));
 
+const mockOpenLogin = vi.fn();
+const mockOpenRegister = vi.fn();
+const mockOpenSettings = vi.fn();
+
 // Mock the contexts
 vi.mock('../contexts/AuthContext', () => ({
   useAuth: () => ({
@@ -66,6 +70,16 @@ vi.mock('../contexts/ThemeContext', () => ({
   }),
 }));
 
+// Mock useModal from contexts barrel export
+vi.mock('../contexts', () => ({
+  useModal: () => ({
+    openLogin: mockOpenLogin,
+    openRegister: mockOpenRegister,
+    openSettings: mockOpenSettings,
+    closeAll: vi.fn(),
+  }),
+}));
+
 // Mock child components
 vi.mock('./ViewModeToggle', () => ({
   ViewModeToggle: () => <div data-testid="view-mode-toggle">View Toggle</div>,
@@ -73,13 +87,6 @@ vi.mock('./ViewModeToggle', () => ({
 
 vi.mock('./MiniAudioPlayer', () => ({
   MiniAudioPlayer: () => <div data-testid="mini-audio-player">Audio Player</div>,
-}));
-
-vi.mock('./auth', () => ({
-  LoginModal: ({ isOpen }: { isOpen: boolean }) => isOpen ? <div data-testid="login-modal">Login Modal</div> : null,
-  RegisterModal: ({ isOpen }: { isOpen: boolean }) => isOpen ? <div data-testid="register-modal">Register Modal</div> : null,
-  ProfileSelector: ({ isOpen }: { isOpen: boolean }) => isOpen ? <div data-testid="profile-selector">Profile Selector</div> : null,
-  AccountSettings: ({ isOpen }: { isOpen: boolean }) => isOpen ? <div data-testid="account-settings">Account Settings</div> : null,
 }));
 
 // Import after mocks
@@ -131,7 +138,7 @@ describe('Header', () => {
       const signInButton = screen.getByLabelText('Sign in to your account');
       fireEvent.click(signInButton);
       
-      expect(screen.getByTestId('login-modal')).toBeDefined();
+      expect(mockOpenLogin).toHaveBeenCalledTimes(1);
     });
 
     it('should open register modal when Sign Up is clicked', () => {
@@ -141,7 +148,7 @@ describe('Header', () => {
       const signUpButton = screen.getByLabelText('Create a new account');
       fireEvent.click(signUpButton);
       
-      expect(screen.getByTestId('register-modal')).toBeDefined();
+      expect(mockOpenRegister).toHaveBeenCalledTimes(1);
     });
   });
 

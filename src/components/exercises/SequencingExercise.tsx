@@ -124,7 +124,7 @@ export const SequencingExercise: React.FC<SequencingExerciseProps> = ({
                 <button
                   onClick={() => moveItem(index, 'up')}
                   disabled={index === 0}
-                  className="p-1 rounded transition-all"
+                  className="p-1 rounded icon-interactive"
                   style={index === 0 
                     ? { color: isDark ? 'rgba(156, 163, 175, 0.3)' : '#d1d5db', cursor: 'not-allowed' }
                     : { color: isDark ? currentTheme.colors.textMuted : '#6b7280' }
@@ -138,7 +138,7 @@ export const SequencingExercise: React.FC<SequencingExerciseProps> = ({
                 <button
                   onClick={() => moveItem(index, 'down')}
                   disabled={index === items.length - 1}
-                  className="p-1 rounded transition-all"
+                  className="p-1 rounded icon-interactive"
                   style={index === items.length - 1 
                     ? { color: isDark ? 'rgba(156, 163, 175, 0.3)' : '#d1d5db', cursor: 'not-allowed' }
                     : { color: isDark ? currentTheme.colors.textMuted : '#6b7280' }
@@ -210,14 +210,14 @@ export const SequencingExercise: React.FC<SequencingExerciseProps> = ({
         {!showFeedback ? (
           <button
             onClick={handleSubmit}
-            className="px-6 py-2 rounded-lg font-medium bg-purple-500 text-white hover:bg-purple-600 transition-all"
+            className="px-6 py-2 rounded-lg font-medium bg-purple-500 text-white hover:bg-purple-600 button-interactive"
           >
             Check Sequence
           </button>
         ) : (
           <button
             onClick={onComplete}
-            className="px-6 py-2 rounded-lg font-medium bg-purple-500 text-white hover:bg-purple-600 transition-all"
+            className="px-6 py-2 rounded-lg font-medium bg-purple-500 text-white hover:bg-purple-600 button-interactive"
           >
             Continue
           </button>

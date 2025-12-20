@@ -33,7 +33,6 @@ export const ProfileSelector: React.FC<ProfileSelectorProps> = ({
     error,
     createProfile, 
     switchProfile,
-    clearError,
   } = useProfile();
   
   // State for create profile form
@@ -70,14 +69,6 @@ export const ProfileSelector: React.FC<ProfileSelectorProps> = ({
       return () => clearTimeout(timer);
     }
   }, [isCreating]);
-
-  // Clear errors when opening/closing
-  useEffect(() => {
-    if (isOpen) {
-      clearError();
-      setCreateError(null);
-    }
-  }, [isOpen, clearError]);
 
   // Handle escape key to close
   useEffect(() => {

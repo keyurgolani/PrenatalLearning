@@ -181,7 +181,7 @@ export const ProgressDashboard: React.FC<ProgressDashboardProps> = ({
   }
 
   return (
-    <div className={`space-y-6 ${className}`}>
+    <div className={`space-y-6 theme-colors ${className}`}>
       {/* Overview Stats Grid - Requirements: 11.1, 11.5, 11.6 */}
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
         {/* Stories Completed */}

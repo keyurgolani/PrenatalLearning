@@ -235,7 +235,7 @@ function clearGuestData(): void {
  * Requirements: 6.6 - Transfer progress, preferences to server and clear localStorage
  * @param _profileId - Deprecated parameter, kept for backward compatibility
  */
-export async function migrateLocalData(_profileId?: string): Promise<MigrateResponse> {
+export async function migrateLocalData(_profileId?: string): Promise<MigrateResponse> { // eslint-disable-line @typescript-eslint/no-unused-vars
   // Collect all guest data
   const guestData = collectGuestData();
 

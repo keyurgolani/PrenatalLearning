@@ -101,9 +101,8 @@ export const CompactStoryCard: React.FC<CompactStoryCardProps> = ({
   return (
     <article
       className={`
-        shadow-sm overflow-hidden transition-all duration-300 ease-out
-        hover:shadow-lg hover:scale-[1.005] cursor-pointer break-inside-avoid mb-6 animate-glow transition-theme
-        animate-gradient-border-wrapper focus-ring
+        shadow-sm overflow-hidden card-interactive theme-colors
+        cursor-pointer break-inside-avoid mb-6
         ${isDark ? '' : 'bg-white'}
         ${isCompleted ? 'border-2 border-green-400' : 'border-2 border-transparent'}
         ${isFocused ? 'active' : ''}

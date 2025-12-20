@@ -106,7 +106,7 @@ export interface ObjectIdValidationResult {
  * validateObjectId('invalid', 'journal entry ID')
  * // { isValid: false, objectId: null, error: 'Invalid journal entry ID format. Expected a 24-character hexadecimal string.' }
  */
-export function validateObjectId(id: unknown, fieldName: string = 'ID'): ObjectIdValidationResult {
+export function validateObjectId(id: unknown, fieldName = 'ID'): ObjectIdValidationResult {
   // Check for null/undefined
   if (id === null || id === undefined) {
     return {
@@ -159,7 +159,7 @@ export function validateObjectId(id: unknown, fieldName: string = 'ID'): ObjectI
       objectId,
       error: undefined,
     };
-  } catch (err) {
+  } catch {
     return {
       isValid: false,
       objectId: null,

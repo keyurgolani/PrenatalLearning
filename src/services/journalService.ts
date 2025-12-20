@@ -65,10 +65,10 @@ export interface MoodStats {
   totalEntries: number;
   moodCounts: Record<MoodType, number>;
   moodPercentages: Record<MoodType, number>;
-  recentMoods: Array<{
+  recentMoods: {
     date: string;
     mood: MoodType;
-  }>;
+  }[];
   dominantMood: MoodType | null;
 }
 
@@ -81,8 +81,8 @@ export interface CreateJournalEntryData {
   content?: string;
   mood?: MoodType | null;
   entryType?: 'text' | 'voice';
-  topicReferences?: Array<{ topicId: number; title: string }>;
-  journeyReferences?: Array<{ journeyId: string; title: string }>;
+  topicReferences?: { topicId: number; title: string }[];
+  journeyReferences?: { journeyId: string; title: string }[];
 }
 
 /**
@@ -98,8 +98,8 @@ export interface UpdateJournalEntryData {
   content?: string;
   mood?: MoodType | null;
   kickCount?: number;
-  topicReferences?: Array<{ topicId: number; title: string }>;
-  journeyReferences?: Array<{ journeyId: string; title: string }>;
+  topicReferences?: { topicId: number; title: string }[];
+  journeyReferences?: { journeyId: string; title: string }[];
 }
 
 /**
@@ -112,8 +112,8 @@ interface ApiJournalEntry {
   content: string;
   mood?: MoodType | null;
   entryType?: 'text' | 'voice';
-  topicReferences?: Array<{ topicId: number; title: string }>;
-  journeyReferences?: Array<{ journeyId: string; title: string }>;
+  topicReferences?: { topicId: number; title: string }[];
+  journeyReferences?: { journeyId: string; title: string }[];
   voiceNoteIds?: string[];
   kickCount?: number;
   createdAt: string;
@@ -139,7 +139,7 @@ interface MoodStatsResponse {
   totalEntries: number;
   moodCounts: Record<string, number>;
   moodPercentages: Record<string, number>;
-  recentMoods: Array<{ date: string; mood: string }>;
+  recentMoods: { date: string; mood: string }[];
   dominantMood: string | null;
 }
 
@@ -707,7 +707,7 @@ export async function deleteEntry(id: string): Promise<void> {
  * @param days - Number of days to include in statistics (default: 30)
  * @returns Promise resolving to mood statistics
  */
-export async function getMoodStats(days: number = 30): Promise<MoodStats> {
+export async function getMoodStats(days = 30): Promise<MoodStats> {
   const response = await get<MoodStatsResponse>(`/journal/moods?days=${days}`);
   
   // Convert string keys to MoodType

@@ -132,7 +132,7 @@ export const SearchSuggestions: React.FC<SearchSuggestionsProps> = ({
                   key={`recent-${search}`}
                   role="option"
                   aria-selected={isSelected}
-                  className={`px-4 py-2.5 cursor-pointer flex items-center gap-3 transition-colors ${
+                  className={`px-4 py-2.5 cursor-pointer flex items-center gap-3 button-interactive ${
                     isSelected ? 'bg-purple-50' : ''
                   }`}
                   style={{
@@ -176,7 +176,7 @@ export const SearchSuggestions: React.FC<SearchSuggestionsProps> = ({
                   key={`${suggestion.type}-${suggestion.text}`}
                   role="option"
                   aria-selected={isSelected}
-                  className={`px-4 py-2.5 cursor-pointer flex items-center gap-3 transition-colors ${
+                  className={`px-4 py-2.5 cursor-pointer flex items-center gap-3 button-interactive ${
                     isSelected ? 'bg-purple-50' : ''
                   }`}
                   style={{

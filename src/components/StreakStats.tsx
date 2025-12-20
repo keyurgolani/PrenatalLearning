@@ -27,7 +27,7 @@ const StatCard: React.FC<{
 }> = ({ label, value, icon, color }) => (
   <div className="bg-white rounded-xl p-4 shadow-sm">
     <div className="flex items-center gap-3">
-      <div className={`p-2 rounded-lg ${color}`}>
+      <div className={`px-4 py-2 rounded-lg font-medium button-interactive ${color}`}>
         {icon}
       </div>
       <div>

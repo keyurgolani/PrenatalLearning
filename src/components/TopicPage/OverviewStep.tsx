@@ -171,12 +171,12 @@ export const OverviewStep: React.FC<OverviewStepProps> = ({ story, category }) =
         }}
       >
         <div className="flex items-center justify-between mb-4">
-          <h3
-            className="text-lg font-semibold flex items-center"
-            style={{ color: isDark ? currentTheme.colors.text : '#1f2937' }}
-          >
-            <span className="mr-2">🌟</span> Introduction
-          </h3>
+           <h2 className="text-2xl font-bold mb-6 flex items-center gap-2" style={{ color: currentTheme.colors.text }}>
+            <svg className="w-6 h-6 text-purple-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z" />
+            </svg>
+            Introduction
+          </h2>
           <span
             className="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-medium"
             style={

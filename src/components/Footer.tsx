@@ -1,5 +1,6 @@
 import React from 'react';
 import { useTheme } from '../contexts/ThemeContext';
+import { Heart } from 'lucide-react';
 
 /**
  * Footer component with supportive message
@@ -25,7 +26,7 @@ export const Footer: React.FC = () => {
     >
       <div className="max-w-6xl mx-auto text-center">
         <div className="mb-4">
-          <span className="text-3xl">💜</span>
+          <Heart className="w-8 h-8 mx-auto text-purple-600 fill-current" />
         </div>
         <p 
           className="font-medium mb-2"

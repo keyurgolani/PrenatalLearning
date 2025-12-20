@@ -2,6 +2,7 @@ import React, { useMemo, useState, useEffect } from 'react';
 import { useKick, type PeriodStats } from '../../contexts/KickContext';
 import { useAuth } from '../../contexts/AuthContext';
 import { useProfile } from '../../contexts/ProfileContext';
+import { Sunrise, Sun, Sunset, Moon } from 'lucide-react';
 
 /**
  * KickPatternChart component - Time-of-day distribution visualization
@@ -23,27 +24,27 @@ export interface KickPatternChartProps {
 /**
  * Period icons and colors for visual representation
  */
-const PERIOD_CONFIG: Record<string, { icon: string; color: string; gradient: string; bgColor: string }> = {
+const PERIOD_CONFIG: Record<string, { icon: React.ReactNode; color: string; gradient: string; bgColor: string }> = {
   morning: {
-    icon: '🌅',
+    icon: <Sunrise className="w-6 h-6 text-amber-500" />,
     color: '#f59e0b',
     gradient: 'from-amber-400 to-orange-400',
     bgColor: 'bg-amber-50',
   },
   afternoon: {
-    icon: '☀️',
+    icon: <Sun className="w-6 h-6 text-yellow-500" />,
     color: '#eab308',
     gradient: 'from-yellow-400 to-amber-400',
     bgColor: 'bg-yellow-50',
   },
   evening: {
-    icon: '🌆',
+    icon: <Sunset className="w-6 h-6 text-orange-500" />,
     color: '#f97316',
     gradient: 'from-orange-400 to-rose-400',
     bgColor: 'bg-orange-50',
   },
   night: {
-    icon: '🌙',
+    icon: <Moon className="w-6 h-6 text-indigo-500" />,
     color: '#8b5cf6',
     gradient: 'from-purple-400 to-indigo-400',
     bgColor: 'bg-purple-50',

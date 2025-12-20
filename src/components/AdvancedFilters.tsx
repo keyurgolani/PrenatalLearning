@@ -87,7 +87,7 @@ export const AdvancedFilters: React.FC<AdvancedFiltersProps> = ({
                 <button
                   key={value}
                   onClick={() => onTrimesterChange(value)}
-                  className={`w-full text-left px-2.5 py-1.5 rounded-lg text-xs font-medium transition-all flex items-center gap-2 focus-ring ${
+                  className={`w-full text-left px-2.5 py-1.5 rounded-lg text-xs font-medium button-interactive flex items-center gap-2 focus-ring ${
                     isActive
                       ? 'bg-purple-600 text-white shadow-sm'
                       : 'hover:bg-gray-100'

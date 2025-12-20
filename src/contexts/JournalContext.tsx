@@ -15,16 +15,17 @@ import { GUEST_PROFILE_ID } from '../services/guestStorageService';
 export interface CreateJournalEntry {
   content?: string;
   mood?: MoodType | null;
-  topicReferences?: Array<{ topicId: number; title: string }>;
-  journeyReferences?: Array<{ journeyId: string; title: string }>;
+  kickCount?: number;
+  topicReferences?: { topicId: number; title: string }[];
+  journeyReferences?: { journeyId: string; title: string }[];
 }
 
 export interface UpdateJournalEntry {
   content?: string;
   mood?: MoodType | null;
   kickCount?: number;
-  topicReferences?: Array<{ topicId: number; title: string }>;
-  journeyReferences?: Array<{ journeyId: string; title: string }>;
+  topicReferences?: { topicId: number; title: string }[];
+  journeyReferences?: { journeyId: string; title: string }[];
 }
 
 /**
@@ -38,8 +39,8 @@ interface ApiJournalEntry {
   mood?: MoodType | null;
   kickCount?: number;
   entryType?: 'text' | 'voice';
-  topicReferences?: Array<{ topicId: number; title: string }>;
-  journeyReferences?: Array<{ journeyId: string; title: string }>;
+  topicReferences?: { topicId: number; title: string }[];
+  journeyReferences?: { journeyId: string; title: string }[];
   voiceNoteIds?: string[];
   createdAt: string;
   updatedAt: string;
@@ -323,6 +324,7 @@ export function JournalProvider({ children }: JournalProviderProps): React.React
           journalDate: journalDateISO, // Logical date for the entry (YYYY-MM-DDT00:00:00.000Z)
           content: data.content || '', // Default to empty string if not provided (Requirements: 11.8)
           mood: data.mood, // Optional and nullable (Requirements: 11.1, 11.9)
+          kickCount: data.kickCount, // Optional kick count
           topicReferences: data.topicReferences,
           journeyReferences: data.journeyReferences,
         });

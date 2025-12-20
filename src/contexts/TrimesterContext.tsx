@@ -139,19 +139,25 @@ export function TrimesterProvider({ children }: TrimesterProviderProps): React.R
 
   // Load due date from server when user logs in
   useEffect(() => {
-    // Only load from server when auth state changes to authenticated
-    if (isAuthenticated && !hasLoadedFromServer.current) {
-      setIsLoadingFromServer(true);
-      loadDueDateFromServer().then((serverDueDate) => {
-        if (serverDueDate) {
-          setDueDateState(serverDueDate);
-          // Also update localStorage for offline access
-          saveDueDateToStorage(serverDueDate);
+    const syncDueDate = async () => {
+      // Only load from server when auth state changes to authenticated
+      if (isAuthenticated && !hasLoadedFromServer.current) {
+        setIsLoadingFromServer(true);
+        try {
+          const serverDueDate = await loadDueDateFromServer();
+          if (serverDueDate) {
+            setDueDateState(serverDueDate);
+            // Also update localStorage for offline access
+            saveDueDateToStorage(serverDueDate);
+          }
+        } finally {
+          setIsLoadingFromServer(false);
+          hasLoadedFromServer.current = true;
         }
-        hasLoadedFromServer.current = true;
-        setIsLoadingFromServer(false);
-      });
-    }
+      }
+    };
+
+    syncDueDate();
     
     // Reset the flag when user logs out
     if (!isAuthenticated && previousAuthState.current) {

@@ -37,8 +37,7 @@ export function FontSizeControl({
   const currentSize = settings.fontSize;
 
   return (
-    <div 
-      className={`flex items-center gap-1 ${className}`}
+    <div        className={`p-2 rounded-md button-interactive ${className}`}
       role="group"
       aria-label="Font size controls"
     >

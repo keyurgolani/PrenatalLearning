@@ -418,12 +418,12 @@ router.get('/daily', async (req: Request, res: Response, next: NextFunction) => 
     }
 
     // Generate array for all days in range (including days with 0 kicks)
-    const result: Array<{
+    const result: {
       date: string;
       count: number;
       firstKick: string | null;
       lastKick: string | null;
-    }> = [];
+    }[] = [];
 
     const currentDate = new Date(startDate);
     const today = new Date();
@@ -497,7 +497,7 @@ router.get('/patterns', async (req: Request, res: Response, next: NextFunction) 
     ]).toArray();
 
     // Create hourly distribution (0-23)
-    const hourlyDistribution: Array<{ hour: number; count: number; label: string }> = [];
+    const hourlyDistribution: { hour: number; count: number; label: string }[] = [];
     for (let hour = 0; hour < 24; hour++) {
       const hourData = hourlyKicks.find(h => h._id === hour);
       const period = hour < 12 ? 'AM' : 'PM';

@@ -2,7 +2,7 @@
 import React, { createContext, useContext, useState, useEffect, useCallback, useMemo } from 'react';
 import type { User, AuthContextValue } from '../types/auth';
 import { authService, AuthServiceError } from '../services/authService';
-import { setAuthErrorHandler, clearAuthErrorHandler } from '../services/apiClient';
+import { setAuthErrorHandler, clearAuthErrorHandler, addRequestInterceptor } from '../services/apiClient';
 
 /**
  * AuthContext for managing user authentication state
@@ -38,6 +38,8 @@ export function AuthProvider({ children }: AuthProviderProps): React.ReactElemen
       } catch (err) {
         // Silently fail - user is not authenticated
         console.warn('Auth check failed:', err);
+        // If we have a token but auth failed, clear it
+        localStorage.removeItem('auth_token');
       } finally {
         if (mounted) {
           setIsLoading(false);
@@ -52,12 +54,34 @@ export function AuthProvider({ children }: AuthProviderProps): React.ReactElemen
     };
   }, []);
 
+  // Set up API client interceptor to add token from localStorage
+  useEffect(() => {
+    const removeInterceptor = addRequestInterceptor((config) => {
+      const token = localStorage.getItem('auth_token');
+      if (token) {
+        return {
+          ...config,
+          headers: {
+            ...config.headers,
+            Authorization: `Bearer ${token}`,
+          },
+        };
+      }
+      return config;
+    });
+
+    return () => {
+      removeInterceptor();
+    };
+  }, []);
+
   // Set up API client auth error handler for 401 responses
   // Requirements: 16.1 - Handle 401 responses with redirect to login
   useEffect(() => {
     const handleAuthError = () => {
       // Clear user state on 401 - this effectively logs out the user
       setUser(null);
+      localStorage.removeItem('auth_token');
       setError('Your session has expired. Please log in again.');
     };
 
@@ -72,13 +96,16 @@ export function AuthProvider({ children }: AuthProviderProps): React.ReactElemen
    * Login with email and password
    * Requirements: 3.1 - Authenticate user and create session
    */
-  const login = useCallback(async (email: string, password: string, rememberMe: boolean = false) => {
+  const login = useCallback(async (email: string, password: string, rememberMe = false) => {
     setIsLoading(true);
     setError(null);
 
     try {
       const result = await authService.login(email, password, rememberMe);
       setUser(result.user);
+      if (result.token) {
+        localStorage.setItem('auth_token', result.token);
+      }
       
       // Handle deletion warning if present
       if (result.warning?.type === 'deletion_pending') {
@@ -107,6 +134,9 @@ export function AuthProvider({ children }: AuthProviderProps): React.ReactElemen
     try {
       const result = await authService.register(email, password, name);
       setUser(result.user);
+      if (result.token) {
+        localStorage.setItem('auth_token', result.token);
+      }
     } catch (err) {
       if (err instanceof AuthServiceError) {
         setError(err.message);
@@ -130,9 +160,11 @@ export function AuthProvider({ children }: AuthProviderProps): React.ReactElemen
     try {
       await authService.logout();
       setUser(null);
+      localStorage.removeItem('auth_token');
     } catch (err) {
       // Even if logout fails on server, clear local state
       setUser(null);
+      localStorage.removeItem('auth_token');
       if (err instanceof AuthServiceError) {
         console.warn('Logout error:', err.message);
       }

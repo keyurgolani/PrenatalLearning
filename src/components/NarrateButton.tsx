@@ -223,7 +223,7 @@ export const NarrateButton: React.FC<NarrateButtonProps> = ({
       <button
         onClick={() => skipBySeconds(-20)}
         disabled={!isThisAudioPlaying || isLoading}
-        className="skip-btn flex flex-col items-center justify-center w-11 h-11 rounded-full transition-all duration-200 hover:scale-110 active:scale-95 focus:outline-none disabled:opacity-40"
+        className="skip-btn flex flex-col items-center justify-center w-11 h-11 rounded-full icon-interactive focus-ring disabled:opacity-40"
         style={{
           backgroundColor: isDark ? 'rgba(168, 85, 247, 0.3)' : 'rgba(147, 51, 234, 0.15)',
           color: isDark ? '#C084FC' : '#7c3aed',
@@ -255,7 +255,7 @@ export const NarrateButton: React.FC<NarrateButtonProps> = ({
       <button
         onClick={handleTogglePlayPause}
         disabled={isLoading}
-        className="flex items-center justify-center w-12 h-12 rounded-full transition-all duration-300 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2"
+        className="flex items-center justify-center w-12 h-12 rounded-full button-interactive focus-ring"
         style={{
           backgroundColor: isDark ? '#9333ea' : '#7c3aed',
           color: '#ffffff',

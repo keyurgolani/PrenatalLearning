@@ -73,7 +73,7 @@ export const TrimesterBadge: React.FC<TrimesterBadgeProps> = ({
   
   return (
     <span
-      className={`inline-flex items-center rounded-full font-medium ${sizeClasses[size]} ${isDark ? '' : config.lightClass} ${className}`}
+      className={`inline-flex items-center gap-1.5 rounded-full font-medium theme-colors ${sizeClasses[size]} ${isDark ? '' : config.lightClass} ${className}`}
       style={isDark ? config.darkStyle : {}}
       title={`Recommended for ${config.fullLabel.toLowerCase()}`}
       data-testid="trimester-badge"
