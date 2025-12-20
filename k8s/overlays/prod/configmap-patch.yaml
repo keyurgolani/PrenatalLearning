@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: app-config
+  namespace: prenatal-learning-prod
+data:
+  CORS_ORIGIN: "https://your-domain.com"
+  NODE_ENV: "production"
+  RATE_LIMIT_MAX_REQUESTS: "50"
+  AUTH_RATE_LIMIT_MAX_REQUESTS: "3"
+  MONGODB_HOST: "prod-mongodb"

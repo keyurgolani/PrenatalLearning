@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: app-config
+  namespace: prenatal-learning
+  labels:
+    app.kubernetes.io/name: prenatal-learning-hub
+data:
+  MONGODB_DB_NAME: "prenatal-learning-hub"
+  MONGODB_HOST: "mongodb"
+  JWT_EXPIRES_IN: "7d"
+  JWT_REMEMBER_ME_EXPIRES_IN: "30d"
+  RATE_LIMIT_WINDOW_MS: "60000"
+  RATE_LIMIT_MAX_REQUESTS: "100"
+  AUTH_RATE_LIMIT_MAX_REQUESTS: "5"
+  NODE_ENV: "production"
+  CORS_ORIGIN: "http://localhost:8080"

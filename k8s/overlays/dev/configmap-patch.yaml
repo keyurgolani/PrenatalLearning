@@ -1,0 +1,9 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: app-config
+  namespace: prenatal-learning-dev
+data:
+  CORS_ORIGIN: "http://localhost:8080"
+  NODE_ENV: "development"
+  MONGODB_HOST: "dev-mongodb"

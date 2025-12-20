@@ -2,6 +2,8 @@
 
 A beautiful, interactive web application designed to help expectant parents bond with their baby through educational stories, activities, and exercises during pregnancy.
 
+**🌐 Live Demo: [prenatal.keyurgolani.photography](https://prenatal.keyurgolani.photography)**
+
 ## Features
 
 ### Learning & Content
@@ -148,6 +150,19 @@ A beautiful, interactive web application designed to help expectant parents bond
 | `npm run docker:clean:volumes` | Remove containers and volumes only       |
 | `npm run docker:clean:all`     | Remove everything including all images   |
 
+#### Kubernetes
+
+| Command                    | Description                        |
+| -------------------------- | ---------------------------------- |
+| `npm run k8s:dev:build`    | Build local images for dev cluster |
+| `npm run k8s:dev:apply`    | Deploy to dev namespace            |
+| `npm run k8s:dev:delete`   | Remove dev deployment              |
+| `npm run k8s:dev:status`   | Check dev deployment status        |
+| `npm run k8s:prod:preview` | Preview production manifests       |
+| `npm run k8s:prod:apply`   | Deploy to production namespace     |
+| `npm run k8s:prod:delete`  | Remove production deployment       |
+| `npm run k8s:prod:status`  | Check production deployment status |
+
 ## Docker Deployment
 
 The application runs as a full stack with frontend, backend API, and MongoDB database.
@@ -216,6 +231,62 @@ docker build -t prenatal-learning .
 # Backend only
 docker build -t prenatal-learning-backend ./server
 ```
+
+## Kubernetes Deployment
+
+The application can be deployed to Kubernetes using Kustomize overlays for different environments.
+
+### Prerequisites
+
+- kubectl configured with cluster access
+- Kustomize (built into kubectl v1.14+)
+- Docker (for building dev images)
+
+### Development Environment
+
+Dev uses locally built images for faster iteration:
+
+```bash
+# Build local images
+npm run k8s:dev:build
+
+# Deploy to cluster
+npm run k8s:dev:apply
+
+# Port forward to access the app
+kubectl port-forward svc/dev-frontend 8080:80 -n prenatal-learning-dev
+
+# Open http://localhost:8080
+```
+
+### Production Environment
+
+Production uses published images from Docker Hub (`keyurgolani/prenatal-learning:latest`).
+
+Before deploying:
+
+1. Update `k8s/overlays/prod/secrets.yaml` with secure credentials
+2. Update `k8s/overlays/prod/configmap-patch.yaml` with your domain
+3. Update `k8s/overlays/prod/ingress.yaml` with your domain and TLS settings
+
+```bash
+# Preview manifests
+npm run k8s:prod:preview
+
+# Deploy to cluster
+npm run k8s:prod:apply
+```
+
+### Environment Differences
+
+| Feature         | Development                     | Production                                         |
+| --------------- | ------------------------------- | -------------------------------------------------- |
+| Images          | Local (`prenatal-learning:dev`) | Published (`keyurgolani/prenatal-learning:latest`) |
+| Replicas        | 1                               | 2                                                  |
+| MongoDB Storage | 1Gi                             | 10Gi                                               |
+| Ingress         | No                              | Yes                                                |
+
+See `k8s/README.md` for detailed Kubernetes deployment documentation.
 
 ## Project Structure
 

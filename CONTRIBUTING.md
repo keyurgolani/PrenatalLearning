@@ -115,6 +115,31 @@ npm run docker:clean
 npm run docker:clean:all    # Remove everything including all images
 ```
 
+### Using Kubernetes
+
+For Kubernetes-based development (useful for testing k8s-specific configurations):
+
+```bash
+# Build local images for dev
+npm run k8s:dev:build
+
+# Deploy to local cluster (Docker Desktop, minikube, kind, etc.)
+npm run k8s:dev:apply
+
+# Port forward to access the app
+kubectl port-forward svc/dev-frontend 8080:80 -n prenatal-learning-dev
+
+# Check deployment status
+npm run k8s:dev:status
+
+# View logs
+kubectl logs -f deployment/dev-backend -n prenatal-learning-dev
+kubectl logs -f deployment/dev-frontend -n prenatal-learning-dev
+
+# Clean up
+npm run k8s:dev:delete
+```
+
 ### Manual Setup
 
 If you prefer running services individually:

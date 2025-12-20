@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: prenatal-learning-prod
+  labels:
+    app.kubernetes.io/name: prenatal-learning-hub
+    environment: production

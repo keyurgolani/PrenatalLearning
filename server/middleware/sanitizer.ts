@@ -23,6 +23,11 @@ const NOSQL_OPERATORS = [
 ];
 
 /**
+ * Fields that should NOT be sanitized (passwords are hashed, not used in queries)
+ */
+const EXCLUDED_FIELDS = ['password', 'newPassword', 'currentPassword', 'confirmPassword'];
+
+/**
  * Escapes HTML entities in a string to prevent XSS attacks.
  * Converts < > " ' & to their HTML entity equivalents.
  */
@@ -62,13 +67,20 @@ export function sanitizeNoSqlString(str: string): string {
  * Note: HTML escaping is NOT done here because React already escapes content
  * when rendering, and double-escaping causes issues like &#x27; appearing in text.
  * Handles nested objects and arrays.
+ * 
+ * @param value - The value to sanitize
+ * @param fieldName - Optional field name to check against excluded fields
  */
-export function sanitizeValue(value: unknown): unknown {
+export function sanitizeValue(value: unknown, fieldName?: string): unknown {
   if (value === null || value === undefined) {
     return value;
   }
 
   if (typeof value === 'string') {
+    // Skip sanitization for password fields - they're hashed, not used in queries
+    if (fieldName && EXCLUDED_FIELDS.includes(fieldName)) {
+      return value;
+    }
     // Only sanitize NoSQL patterns - React handles HTML escaping on render
     return sanitizeNoSqlString(value);
   }
@@ -80,14 +92,15 @@ export function sanitizeValue(value: unknown): unknown {
   if (typeof value === 'object') {
     const sanitizedObj: Record<string, unknown> = {};
     for (const [key, val] of Object.entries(value)) {
-      // Also sanitize object keys to prevent operator injection via keys
-      const sanitizedKey = typeof key === 'string' ? sanitizeNoSqlString(key) : key;
       // Reject keys that start with $ (MongoDB operators)
       if (typeof key === 'string' && key.startsWith('$')) {
         // Skip this key entirely - it's likely an injection attempt
         continue;
       }
-      sanitizedObj[sanitizedKey] = sanitizeValue(val);
+      // Also sanitize object keys to prevent operator injection via keys
+      const sanitizedKey = typeof key === 'string' ? sanitizeNoSqlString(key) : key;
+      // Pass the field name to check if it should be excluded from sanitization
+      sanitizedObj[sanitizedKey] = sanitizeValue(val, key);
     }
     return sanitizedObj;
   }
@@ -98,8 +111,7 @@ export function sanitizeValue(value: unknown): unknown {
 
 /**
  * Express middleware that sanitizes all user inputs in request body, query, and params.
- * - Escapes HTML entities (< > " ' &) to prevent XSS
- * - Escapes $ characters to prevent NoSQL injection
+ * - Escapes $ characters to prevent NoSQL injection (except for password fields)
  * - Removes object keys starting with $ (MongoDB operators)
  */
 export function sanitizeInput(
@@ -138,8 +150,12 @@ export function rejectMaliciousInput(
   res: Response,
   next: NextFunction
 ): void {
-  const checkForInjection = (value: unknown, path: string): string | null => {
+  const checkForInjection = (value: unknown, path: string, fieldName?: string): string | null => {
     if (typeof value === 'string') {
+      // Skip injection check for password fields
+      if (fieldName && EXCLUDED_FIELDS.includes(fieldName)) {
+        return null;
+      }
       if (containsNoSqlInjection(value)) {
         return `Potentially malicious input detected in ${path}`;
       }
@@ -154,7 +170,7 @@ export function rejectMaliciousInput(
         if (key.startsWith('$')) {
           return `Invalid field name in ${path}: ${key}`;
         }
-        const result = checkForInjection(val, `${path}.${key}`);
+        const result = checkForInjection(val, `${path}.${key}`, key);
         if (result) return result;
       }
     }

@@ -1,0 +1,43 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+namespace: prenatal-learning-dev
+
+namePrefix: dev-
+
+resources:
+  - ../../base
+  - namespace.yaml
+  - secrets.yaml
+  - nginx-configmap.yaml
+
+images:
+  - name: keyurgolani/prenatal-learning
+    newName: prenatal-learning
+    newTag: dev
+  - name: keyurgolani/prenatal-learning-backend
+    newName: prenatal-learning-backend
+    newTag: dev
+
+patches:
+  - target:
+      kind: Deployment
+      name: backend
+    path: backend-patch.yaml
+  - target:
+      kind: Deployment
+      name: mongodb
+    path: mongodb-patch.yaml
+  - target:
+      kind: Deployment
+      name: frontend
+    path: frontend-patch.yaml
+  - target:
+      kind: ConfigMap
+      name: app-config
+    path: configmap-patch.yaml
+
+labels:
+  - pairs:
+      environment: development
+    includeSelectors: false

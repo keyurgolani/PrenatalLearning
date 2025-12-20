@@ -1,7 +1,7 @@
 {
   "name": "prenatal-learning-hub",
   "private": true,
-  "version": "1.3.0",
+  "version": "1.3.1",
   "type": "module",
   "scripts": {
     "dev": "vite",
@@ -42,7 +42,16 @@
     "docker:status": "docker compose -f docker-compose.dev.yml ps",
     "docker:clean": "docker compose -f docker-compose.dev.yml down -v --rmi local",
     "docker:clean:volumes": "docker compose -f docker-compose.dev.yml down -v",
-    "docker:clean:all": "docker compose -f docker-compose.dev.yml down -v --rmi all --remove-orphans"
+    "docker:clean:all": "docker compose -f docker-compose.dev.yml down -v --rmi all --remove-orphans",
+    "k8s:dev:preview": "kubectl kustomize k8s/overlays/dev",
+    "k8s:dev:build": "docker build -t prenatal-learning:dev . && docker build -t prenatal-learning-backend:dev ./server",
+    "k8s:dev:apply": "kubectl apply -k k8s/overlays/dev",
+    "k8s:dev:delete": "kubectl delete -k k8s/overlays/dev",
+    "k8s:dev:status": "kubectl get all -n prenatal-learning-dev",
+    "k8s:prod:preview": "kubectl kustomize k8s/overlays/prod",
+    "k8s:prod:apply": "kubectl apply -k k8s/overlays/prod",
+    "k8s:prod:delete": "kubectl delete -k k8s/overlays/prod",
+    "k8s:prod:status": "kubectl get all -n prenatal-learning-prod"
   },
   "dependencies": {
     "react": "^19.2.0",

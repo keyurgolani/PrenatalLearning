@@ -26,7 +26,18 @@ export class AuthServiceError extends Error {
  * Helper function to handle API responses
  */
 async function handleResponse<T>(response: Response): Promise<T> {
-  const data = await response.json();
+  let data: unknown;
+  
+  try {
+    data = await response.json();
+  } catch {
+    // JSON parsing failed - server returned non-JSON response
+    console.error('Failed to parse server response');
+    throw new AuthServiceError(
+      'Server returned an invalid response. Please try again.',
+      response.status
+    );
+  }
   
   if (!response.ok) {
     const errorData = data as AuthError;
@@ -49,14 +60,25 @@ export async function register(
   password: string,
   name: string
 ): Promise<AuthResult> {
-  const response = await fetch(`${API_BASE_URL}/auth/register`, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    credentials: 'include', // Include cookies for HTTP-only token
-    body: JSON.stringify({ email, password, name }),
-  });
+  let response: Response;
+  
+  try {
+    response = await fetch(`${API_BASE_URL}/auth/register`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      credentials: 'include', // Include cookies for HTTP-only token
+      body: JSON.stringify({ email, password, name }),
+    });
+  } catch (error) {
+    // Network error - server unreachable, CORS blocked, etc.
+    console.error('Registration network error:', error);
+    throw new AuthServiceError(
+      'Unable to connect to the server. Please check your connection and try again.',
+      0
+    );
+  }
 
   return handleResponse<AuthResult>(response);
 }
@@ -70,14 +92,25 @@ export async function login(
   password: string,
   rememberMe: boolean = false
 ): Promise<AuthResult> {
-  const response = await fetch(`${API_BASE_URL}/auth/login`, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    credentials: 'include', // Include cookies for HTTP-only token
-    body: JSON.stringify({ email, password, rememberMe }),
-  });
+  let response: Response;
+  
+  try {
+    response = await fetch(`${API_BASE_URL}/auth/login`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      credentials: 'include', // Include cookies for HTTP-only token
+      body: JSON.stringify({ email, password, rememberMe }),
+    });
+  } catch (error) {
+    // Network error - server unreachable, CORS blocked, etc.
+    console.error('Login network error:', error);
+    throw new AuthServiceError(
+      'Unable to connect to the server. Please check your connection and try again.',
+      0
+    );
+  }
 
   return handleResponse<AuthResult>(response);
 }
