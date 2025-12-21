@@ -25,9 +25,9 @@ import {
   Trash2, 
   Edit2, 
   Plus,
-  Minus,
-  Footprints
+  Minus
 } from 'lucide-react';
+import { BabyKickIcon } from '../icons/BabyKickIcon';
 
 /**
  * JournalModal component - Main journal interface with calendar and entry editor
@@ -38,17 +38,17 @@ interface JournalModalProps {
   className?: string;
 }
 
-const MOOD_OPTIONS: { value: MoodType; emoji: string; label: string }[] = [
-  { value: 'happy', emoji: '😊', label: 'Happy' },
-  { value: 'calm', emoji: '😌', label: 'Calm' },
-  { value: 'anxious', emoji: '😰', label: 'Anxious' },
-  { value: 'tired', emoji: '😴', label: 'Tired' },
-  { value: 'excited', emoji: '🤩', label: 'Excited' },
-  { value: 'emotional', emoji: '🥹', label: 'Emotional' },
-  { value: 'grateful', emoji: '🙏', label: 'Grateful' },
-  { value: 'hopeful', emoji: '✨', label: 'Hopeful' },
-  { value: 'uncomfortable', emoji: '😣', label: 'Uncomfortable' },
-  { value: 'nesting', emoji: '🏠', label: 'Nesting' },
+const MOOD_OPTIONS: { value: MoodType; emoji: string; label: string; color: string; gradient: string }[] = [
+  { value: 'happy', emoji: '😊', label: 'Happy', color: '#fbbf24', gradient: 'linear-gradient(to right, #fbbf24, #eab308)' }, // Amber-400 to Yellow-500
+  { value: 'calm', emoji: '😌', label: 'Calm', color: '#60a5fa', gradient: 'linear-gradient(to right, #60a5fa, #06b6d4)' }, // Blue-400 to Cyan-500
+  { value: 'anxious', emoji: '😰', label: 'Anxious', color: '#a78bfa', gradient: 'linear-gradient(to right, #a78bfa, #a855f7)' }, // Violet-400 to Purple-500
+  { value: 'tired', emoji: '😴', label: 'Tired', color: '#94a3b8', gradient: 'linear-gradient(to right, #94a3b8, #71717a)' }, // Slate-400 to Zinc-500
+  { value: 'excited', emoji: '🤩', label: 'Excited', color: '#f59e0b', gradient: 'linear-gradient(to right, #fb923c, #f59e0b)' }, // Orange-400 to Amber-500
+  { value: 'emotional', emoji: '🥹', label: 'Emotional', color: '#f472b6', gradient: 'linear-gradient(to right, #f472b6, #f43f5e)' }, // Pink-400 to Rose-500
+  { value: 'grateful', emoji: '🙏', label: 'Grateful', color: '#34d399', gradient: 'linear-gradient(to right, #34d399, #14b8a6)' }, // Emerald-400 to Teal-500
+  { value: 'hopeful', emoji: '✨', label: 'Hopeful', color: '#fcd34d', gradient: 'linear-gradient(to right, #fde047, #fbbf24)' }, // Yellow-300 to Amber-400
+  { value: 'uncomfortable', emoji: '😣', label: 'Uncomfortable', color: '#fb923c', gradient: 'linear-gradient(to right, #fb923c, #f87171)' }, // Orange-400 to Red-400
+  { value: 'nesting', emoji: '🏠', label: 'Nesting', color: '#84cc16', gradient: 'linear-gradient(to right, #a3e635, #22c55e)' }, // Lime-400 to Green-500
 ];
 
 interface SuggestionItem {
@@ -773,7 +773,7 @@ export const JournalModal: React.FC<JournalModalProps> = ({ className = '' }) =>
             backgroundColor: currentTheme.colors.surface,
             color: currentTheme.colors.textMuted,
             borderWidth: '1px',
-            borderColor: currentTheme.colors.border
+            borderColor: isDark ? 'rgba(255, 255, 255, 0.2)' : currentTheme.colors.border
           }}
           onMouseEnter={(e) => {
             e.currentTarget.style.backgroundColor = isDark ? currentTheme.colors.surfaceHover || currentTheme.colors.surface : '#f9fafb';
@@ -1203,11 +1203,11 @@ export const JournalModal: React.FC<JournalModalProps> = ({ className = '' }) =>
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                     {/* Voice Note */}
                     <div 
-                      className="rounded-xl p-3 transition-colors"
+                      className="rounded-xl p-3 transition-colors relative overflow-hidden"
                       style={{
-                        backgroundColor: isDark ? currentTheme.colors.surfaceHover || `${currentTheme.colors.primary}10` : '#f9fafb',
+                        backgroundColor: isDark ? 'rgba(124, 58, 237, 0.15)' : '#f5f3ff', // Stronger violet tint
                         borderWidth: '1px',
-                        borderColor: currentTheme.colors.border
+                        borderColor: isDark ? 'rgba(139, 92, 246, 0.4)' : '#ddd6fe' // More vibrant border
                       }}
                     >
                       <span className="text-[10px] font-bold uppercase tracking-widest mb-2 block flex items-center gap-2" style={{ color: currentTheme.colors.textMuted }}>
@@ -1282,17 +1282,17 @@ export const JournalModal: React.FC<JournalModalProps> = ({ className = '' }) =>
                       )}
                     </div>
 
-                    {/* Baby Kicks - Playful Redesign */}
+                    {/* Baby Kicks - Strictly Cherry Pink */}
                     <div 
-                      className="rounded-xl p-3 transition-colors group h-fit"
+                      className="rounded-xl p-3 transition-colors group h-fit relative overflow-hidden"
                       style={{
-                        backgroundColor: isDark ? currentTheme.colors.surfaceHover || `${currentTheme.colors.primary}10` : '#f9fafb',
+                        backgroundColor: isDark ? 'rgba(236, 72, 153, 0.15)' : '#fdf2f8', // Stronger Pink tint
                         borderWidth: '1px',
-                        borderColor: currentTheme.colors.border
+                        borderColor: isDark ? 'rgba(236, 72, 153, 0.5)' : '#fbcfe8' // More vibrant pink border
                       }}
                     >
-                      <span className="text-[10px] font-bold uppercase tracking-widest mb-2 block flex items-center gap-2" style={{ color: currentTheme.colors.textMuted }}>
-                        <Footprints className="w-3 h-3" style={{ color: currentTheme.colors.primary }} />
+                      <span className="text-[10px] font-bold uppercase tracking-widest mb-2 block flex items-center gap-2" style={{ color: '#ec4899' }}>
+                        <BabyKickIcon className="w-3 h-3 text-pink-500" />
                         Baby Kicks
                       </span>
                       <div className="flex items-center gap-2">
@@ -1303,20 +1303,20 @@ export const JournalModal: React.FC<JournalModalProps> = ({ className = '' }) =>
                           style={{
                             backgroundColor: currentTheme.colors.surface,
                             borderWidth: '1px',
-                            borderColor: currentTheme.colors.border,
-                            color: currentTheme.colors.textMuted
+                            borderColor: isDark ? 'rgba(236, 72, 153, 0.3)' : '#fbcfe8',
+                            color: '#ec4899'
                           }}
                           onMouseEnter={(e) => {
                             if (entryKickCount > 0) {
-                              e.currentTarget.style.backgroundColor = `${currentTheme.colors.primary}15`;
-                              e.currentTarget.style.color = currentTheme.colors.primary;
-                              e.currentTarget.style.borderColor = currentTheme.colors.primary;
+                              e.currentTarget.style.backgroundColor = 'rgba(236, 72, 153, 0.15)';
+                              e.currentTarget.style.color = '#ec4899';
+                              e.currentTarget.style.borderColor = '#ec4899';
                             }
                           }}
                           onMouseLeave={(e) => {
                             e.currentTarget.style.backgroundColor = currentTheme.colors.surface;
-                            e.currentTarget.style.color = currentTheme.colors.textMuted;
-                            e.currentTarget.style.borderColor = currentTheme.colors.border;
+                            e.currentTarget.style.color = '#ec4899';
+                            e.currentTarget.style.borderColor = isDark ? 'rgba(236, 72, 153, 0.3)' : '#fbcfe8';
                           }}
                         >
                           <Minus className="w-3 h-3" />
@@ -1326,28 +1326,29 @@ export const JournalModal: React.FC<JournalModalProps> = ({ className = '' }) =>
                           style={{
                             backgroundColor: currentTheme.colors.surface,
                             borderWidth: '1px',
-                            borderColor: currentTheme.colors.border
+                            borderColor: isDark ? 'rgba(236, 72, 153, 0.3)' : '#fbcfe8'
                           }}
                         >
-                          <span key={entryKickCount} className="text-lg font-bold animate-spring-in inline-block" style={{ color: currentTheme.colors.text }}>
+                          <span key={entryKickCount} className="text-lg font-bold animate-kick-bounce inline-block" style={{ color: '#ec4899' }}>
                              {entryKickCount}
                           </span>
                           {entryKickCount > 0 && (
-                            <div className="absolute inset-0 pointer-events-none" style={{ backgroundColor: `${currentTheme.colors.primary}10` }} />
+                            <div className="absolute inset-0 pointer-events-none" style={{ backgroundColor: 'rgba(236, 72, 153, 0.1)' }} />
                           )}
                         </div>
                         <button
                           onClick={() => setEntryKickCount(prev => prev + 1)}
                           className="w-8 h-8 flex items-center justify-center text-white rounded-lg transition-all active:scale-95 shadow-md"
                           style={{
-                            backgroundColor: isDark ? currentTheme.colors.primary : '#111827',
-                            boxShadow: `0 4px 12px ${currentTheme.colors.primary}30`
+                            background: 'linear-gradient(to right, #ec4899, #f43f5e)', // Pink-500 to Rose-500
+                            boxShadow: '0 4px 12px rgba(236, 72, 153, 0.4)'
                           }}
                           onMouseEnter={(e) => {
-                            e.currentTarget.style.backgroundColor = currentTheme.colors.primary;
+                            e.currentTarget.style.opacity = '0.9';
                           }}
                           onMouseLeave={(e) => {
-                            e.currentTarget.style.backgroundColor = isDark ? currentTheme.colors.primary : '#111827';
+                            e.currentTarget.style.background = 'linear-gradient(to right, #ec4899, #f43f5e)';
+                            e.currentTarget.style.opacity = '1';
                           }}
                         >
                           <Plus className="w-3 h-3" />
@@ -1421,18 +1422,18 @@ export const JournalModal: React.FC<JournalModalProps> = ({ className = '' }) =>
                       onClick={() => setShowNewEntryForm(false)}
                       className="px-4 py-2 text-sm rounded-lg font-medium transition-all"
                       style={{
-                        backgroundColor: currentTheme.colors.surface,
-                        color: currentTheme.colors.textMuted,
+                        backgroundColor: isDark ? 'rgba(255,255,255,0.05)' : '#ffffff',
+                        color: isDark ? '#d1d5db' : '#6b7280',
                         borderWidth: '1px',
-                        borderColor: currentTheme.colors.border
+                        borderColor: isDark ? 'rgba(255,255,255,0.1)' : '#e5e7eb'
                       }}
                       onMouseEnter={(e) => {
-                        e.currentTarget.style.backgroundColor = isDark ? currentTheme.colors.surfaceHover || currentTheme.colors.surface : '#f9fafb';
-                        e.currentTarget.style.borderColor = currentTheme.colors.textMuted;
+                        e.currentTarget.style.backgroundColor = isDark ? 'rgba(255,255,255,0.1)' : '#f9fafb';
+                        e.currentTarget.style.borderColor = isDark ? 'rgba(255,255,255,0.2)' : '#6b7280';
                       }}
                       onMouseLeave={(e) => {
-                        e.currentTarget.style.backgroundColor = currentTheme.colors.surface;
-                        e.currentTarget.style.borderColor = currentTheme.colors.border;
+                        e.currentTarget.style.backgroundColor = isDark ? 'rgba(255,255,255,0.05)' : '#ffffff';
+                        e.currentTarget.style.borderColor = isDark ? 'rgba(255,255,255,0.1)' : '#e5e7eb';
                       }}
                       disabled={isSaving}
                     >
@@ -1484,7 +1485,9 @@ export const JournalModal: React.FC<JournalModalProps> = ({ className = '' }) =>
                     animationDelay: `${index * 0.1}s`,
                     backgroundColor: currentTheme.colors.surface,
                     borderWidth: '1px',
-                    borderColor: editingEntryId === entry.id ? currentTheme.colors.primary : currentTheme.colors.border,
+                    borderColor: editingEntryId === entry.id 
+                      ? currentTheme.colors.primary 
+                      : (isDark ? 'rgba(255,255,255,0.15)' : currentTheme.colors.border),
                     boxShadow: editingEntryId === entry.id ? `0 0 0 4px ${currentTheme.colors.primary}15, 0 10px 25px ${currentTheme.colors.primary}15` : undefined,
                     overflow: editingEntryId === entry.id ? 'visible' : 'hidden'
                   }}
@@ -1514,16 +1517,13 @@ export const JournalModal: React.FC<JournalModalProps> = ({ className = '' }) =>
                                 key={option.value}
                                 type="button"
                                 onClick={() => setEditMood(prev => prev === option.value ? undefined : option.value)}
-                                className="group relative flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg text-xs font-medium transition-all duration-300"
-                                style={{
-                                  backgroundColor: editMood === option.value 
-                                    ? (isDark ? currentTheme.colors.primary : '#111827')
-                                    : (isDark ? currentTheme.colors.surfaceHover || `${currentTheme.colors.primary}15` : '#f9fafb'),
-                                  color: editMood === option.value 
-                                    ? '#ffffff' 
-                                    : currentTheme.colors.text,
-                                  transform: editMood === option.value ? 'scale(1.05)' : 'scale(1)',
-                                  boxShadow: editMood === option.value ? '0 4px 12px rgba(0,0,0,0.15)' : 'none'
+                                className={`group relative flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg text-xs font-medium transition-all duration-300 ${editMood === option.value ? 'text-white shadow-md' : ''}`}
+                                style={editMood !== option.value ? {
+                                  backgroundColor: isDark ? 'rgba(255,255,255,0.05)' : '#f9fafb',
+                                  color: currentTheme.colors.text,
+                                  border: isDark ? '1px solid rgba(255,255,255,0.1)' : '1px solid #e5e7eb',
+                                } : {
+                                  background: option.gradient
                                 }}
                               >
                                 <span className={`text-base transition-transform duration-300 ${editMood === option.value ? 'scale-125' : 'group-hover:scale-110'}`}>{option.emoji}</span>
@@ -1712,13 +1712,13 @@ export const JournalModal: React.FC<JournalModalProps> = ({ className = '' }) =>
                           <div 
                             className="rounded-xl p-3 transition-colors h-fit"
                             style={{
-                              backgroundColor: isDark ? currentTheme.colors.surfaceHover || `${currentTheme.colors.primary}10` : '#f9fafb',
-                              borderWidth: '1px',
-                              borderColor: currentTheme.colors.border
+                                backgroundColor: isDark ? 'rgba(236, 72, 153, 0.15)' : '#fdf2f8', // Stronger Pink tint
+                                borderWidth: '1px',
+                                borderColor: isDark ? 'rgba(236, 72, 153, 0.5)' : '#fbcfe8'
                             }}
                           >
-                            <span className="text-[10px] font-bold uppercase tracking-widest mb-2 block flex items-center gap-2" style={{ color: currentTheme.colors.textMuted }}>
-                              <Footprints className="w-3 h-3" style={{ color: currentTheme.colors.primary }} />
+                            <span className="text-[10px] font-bold uppercase tracking-widest mb-2 block flex items-center gap-2" style={{ color: '#ec4899' }}>
+                              <BabyKickIcon className="w-3 h-3 text-pink-500" />
                               Baby Kicks
                             </span>
                             <div className="flex items-center gap-2">
@@ -1729,20 +1729,20 @@ export const JournalModal: React.FC<JournalModalProps> = ({ className = '' }) =>
                                 style={{
                                   backgroundColor: currentTheme.colors.surface,
                                   borderWidth: '1px',
-                                  borderColor: currentTheme.colors.border,
-                                  color: currentTheme.colors.textMuted
+                                  borderColor: isDark ? 'rgba(236, 72, 153, 0.3)' : '#fbcfe8',
+                                  color: '#ec4899'
                                 }}
                                 onMouseEnter={(e) => {
                                   if (editKickCount > 0) {
-                                    e.currentTarget.style.backgroundColor = `${currentTheme.colors.primary}15`;
-                                    e.currentTarget.style.color = currentTheme.colors.primary;
-                                    e.currentTarget.style.borderColor = currentTheme.colors.primary;
+                                    e.currentTarget.style.backgroundColor = 'rgba(236, 72, 153, 0.15)';
+                                    e.currentTarget.style.color = '#ec4899';
+                                    e.currentTarget.style.borderColor = '#ec4899';
                                   }
                                 }}
                                 onMouseLeave={(e) => {
                                   e.currentTarget.style.backgroundColor = currentTheme.colors.surface;
-                                  e.currentTarget.style.color = currentTheme.colors.textMuted;
-                                  e.currentTarget.style.borderColor = currentTheme.colors.border;
+                                  e.currentTarget.style.color = '#ec4899';
+                                  e.currentTarget.style.borderColor = isDark ? 'rgba(236, 72, 153, 0.3)' : '#fbcfe8';
                                 }}
                               >
                                 <Minus className="w-5 h-5" />
@@ -1752,21 +1752,26 @@ export const JournalModal: React.FC<JournalModalProps> = ({ className = '' }) =>
                                 style={{
                                   backgroundColor: currentTheme.colors.surface,
                                   borderWidth: '1px',
-                                  borderColor: currentTheme.colors.border
+                                  borderColor: isDark ? 'rgba(236, 72, 153, 0.3)' : '#fbcfe8'
                                 }}
                               >
-                                <span key={editKickCount} className="text-2xl font-bold animate-spring-in inline-block" style={{ color: currentTheme.colors.text }}>{editKickCount}</span>
-                                {editKickCount > 0 && <div className="absolute inset-0 pointer-events-none" style={{ backgroundColor: `${currentTheme.colors.primary}10` }} />}
+                                <span key={editKickCount} className="text-2xl font-bold animate-kick-bounce inline-block" style={{ color: '#ec4899' }}>{editKickCount}</span>
+                                {editKickCount > 0 && <div className="absolute inset-0 pointer-events-none" style={{ backgroundColor: 'rgba(236, 72, 153, 0.1)' }} />}
                               </div>
                               <button 
                                 onClick={() => setEditKickCount(prev => prev + 1)} 
                                 className="w-11 h-11 flex items-center justify-center text-white rounded-xl transition-all active:scale-95 shadow-lg"
                                 style={{
-                                  backgroundColor: isDark ? currentTheme.colors.primary : '#111827',
-                                  boxShadow: `0 4px 12px ${currentTheme.colors.primary}30`
+                                    background: 'linear-gradient(to right, #ec4899, #f43f5e)',
+                                    boxShadow: '0 4px 12px rgba(236, 72, 153, 0.4)'
                                 }}
-                                onMouseEnter={(e) => { e.currentTarget.style.backgroundColor = currentTheme.colors.primary; }}
-                                onMouseLeave={(e) => { e.currentTarget.style.backgroundColor = isDark ? currentTheme.colors.primary : '#111827'; }}
+                                onMouseEnter={(e) => { 
+                                     e.currentTarget.style.opacity = '0.9';
+                                }}
+                                onMouseLeave={(e) => { 
+                                    e.currentTarget.style.background = 'linear-gradient(to right, #ec4899, #f43f5e)';
+                                    e.currentTarget.style.opacity = '1';
+                                }}
                               >
                                 <Plus className="w-5 h-5" />
                               </button>
@@ -1780,18 +1785,18 @@ export const JournalModal: React.FC<JournalModalProps> = ({ className = '' }) =>
                           onClick={handleCancelEdit} 
                           className="px-4 py-2 text-sm rounded-lg font-medium transition-all" 
                           style={{
-                            backgroundColor: currentTheme.colors.surface,
-                            color: currentTheme.colors.textMuted,
+                            backgroundColor: isDark ? 'rgba(255,255,255,0.05)' : '#ffffff',
+                            color: isDark ? '#d1d5db' : '#6b7280',
                             borderWidth: '1px',
-                            borderColor: currentTheme.colors.border
+                            borderColor: isDark ? 'rgba(255,255,255,0.1)' : '#e5e7eb'
                           }}
                           onMouseEnter={(e) => {
-                            e.currentTarget.style.backgroundColor = isDark ? currentTheme.colors.surfaceHover || currentTheme.colors.surface : '#f9fafb';
-                            e.currentTarget.style.borderColor = currentTheme.colors.textMuted;
+                            e.currentTarget.style.backgroundColor = isDark ? 'rgba(255,255,255,0.1)' : '#f9fafb';
+                            e.currentTarget.style.borderColor = isDark ? 'rgba(255,255,255,0.2)' : '#6b7280';
                           }}
                           onMouseLeave={(e) => {
-                            e.currentTarget.style.backgroundColor = currentTheme.colors.surface;
-                            e.currentTarget.style.borderColor = currentTheme.colors.border;
+                            e.currentTarget.style.backgroundColor = isDark ? 'rgba(255,255,255,0.05)' : '#ffffff';
+                            e.currentTarget.style.borderColor = isDark ? 'rgba(255,255,255,0.1)' : '#e5e7eb';
                           }}
                           disabled={isSaving}
                         >
@@ -1828,23 +1833,20 @@ export const JournalModal: React.FC<JournalModalProps> = ({ className = '' }) =>
                           {/* Kick Counter */}
                           {(entry.kickCount || 0) > 0 && (
                             <div 
-                              className="flex items-center gap-2 px-3 py-1.5 rounded-lg shadow-sm"
+                              className="h-10 flex items-center gap-2 px-3 rounded-lg shadow-md"
                               style={{
-                                backgroundColor: `${currentTheme.colors.primary}15`,
-                                color: currentTheme.colors.primary,
-                                borderWidth: '1px',
-                                borderColor: `${currentTheme.colors.primary}25`
+                                background: 'linear-gradient(to right, #ec4899, #f43f5e)', // Pink-500 to Rose-500
                               }}
                             >
-                              <Footprints className="w-4 h-4" />
+                              <BabyKickIcon className="w-5 h-5" />
                               <span className="text-sm font-bold">{entry.kickCount}</span>
                             </div>
                           )}
                           {/* Mood Indicator */}
                           {entry.mood && MOOD_OPTIONS.find(m => m.value === entry.mood) && (
                             <div 
-                              className="flex items-center gap-2 px-3 py-1.5 text-white rounded-lg shadow-md"
-                              style={{ backgroundColor: isDark ? currentTheme.colors.primary : '#111827' }}
+                              className="h-10 flex items-center gap-2 px-3 rounded-lg shadow-md text-white"
+                              style={{ background: MOOD_OPTIONS.find(m => m.value === entry.mood)?.gradient }}
                             >
                               <span className="text-lg">{MOOD_OPTIONS.find(m => m.value === entry.mood)?.emoji}</span>
                               <span className="text-sm font-bold">{MOOD_OPTIONS.find(m => m.value === entry.mood)?.label}</span>
@@ -1975,11 +1977,16 @@ export const JournalModal: React.FC<JournalModalProps> = ({ className = '' }) =>
                   onClick={handleShowNewEntryForm}
                   className="flex items-center gap-2 px-8 py-3 text-white rounded-xl font-medium shadow-xl hover:shadow-2xl hover:-translate-y-1 transition-all"
                   style={{
-                    backgroundColor: isDark ? currentTheme.colors.primary : '#111827',
-                    boxShadow: `0 10px 25px ${currentTheme.colors.primary}30`
+                    background: 'linear-gradient(135deg, #a855f7, #ec4899)',
+                    boxShadow: '0 10px 25px rgba(236, 72, 153, 0.4)'
                   }}
-                  onMouseEnter={(e) => { e.currentTarget.style.backgroundColor = currentTheme.colors.primary; }}
-                  onMouseLeave={(e) => { e.currentTarget.style.backgroundColor = isDark ? currentTheme.colors.primary : '#111827'; }}
+                  onMouseEnter={(e) => { 
+                       e.currentTarget.style.opacity = '0.9';
+                  }}
+                  onMouseLeave={(e) => { 
+                       e.currentTarget.style.background = 'linear-gradient(135deg, #a855f7, #ec4899)';
+                       e.currentTarget.style.opacity = '1';
+                  }}
                 >
                   <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />

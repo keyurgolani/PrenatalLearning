@@ -8,6 +8,7 @@ import { useJournal } from '../contexts/JournalContext';
 import { ThemeSelector } from './ThemeSelector';
 import { FontSizeControl } from './FontSizeControl';
 import { kickService, generateSessionId } from '../services/kickService';
+import { BabyKickIcon } from './icons/BabyKickIcon';
 
 /**
  * ReadingModeBar - Floating semi-transparent bar shown during reading mode
@@ -241,20 +242,12 @@ export const ReadingModeBar: React.FC<ReadingModeBarProps> = ({
         <button
           onClick={handleKick}
           disabled={isLogging}
-          className="flex items-center gap-1.5 px-4 py-1.5 rounded-full font-medium button-interactive disabled:opacity-70"
-          style={{
-            background: `linear-gradient(135deg, ${currentTheme.colors.primary}, #ec4899)`,
-            color: '#ffffff',
-          }}
+          className="flex items-center gap-1.5 px-4 py-1.5 rounded-full font-medium button-interactive disabled:opacity-70 bg-gradient-to-r from-pink-400 to-rose-400 text-white"
           title="Log a kick"
         >
-          <svg 
+          <BabyKickIcon 
             className={`w-4 h-4 ${isLogging ? 'animate-bounce' : ''}`}
-            fill="currentColor" 
-            viewBox="0 0 24 24"
-          >
-            <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" />
-          </svg>
+          />
           <span className="text-sm">Kick</span>
           {displayKicks > 0 && (
             <span className="ml-0.5 px-1.5 py-0.5 text-xs font-bold bg-white/20 rounded-full">
