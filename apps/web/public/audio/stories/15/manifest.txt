@@ -9,6 +9,9 @@
 # - Semicolon (;) = medium pause (~1s)
 # - Exclamation mark (!) = longer pause (~1.5s)
 #
+# IMPORTANT: Entries are commented out by default.
+# Uncomment an entry (remove the leading #) ONLY when the audio file exists.
+#
 
 # === INTRODUCTION ===
 # introduction|1|introduction.mp3|Hello, little one. Today we're going on a treasure hunt; but instead of searching for gold or jewels, we're looking for something even more precious. We're searching for nature's secret code.! Take a deep breath, dear mother. Place your hands gently on your belly and feel the life growing within. That life, your precious baby, is being built according to patterns so beautiful, so elegant, that mathematicians have spent centuries marveling at them.! Close your eyes and imagine... imagine you have magical glasses that let you see the hidden patterns in everything. Suddenly, the world transforms. The petals of a flower aren't just pretty; they're arranged according to a secret number sequence. The branches of a tree aren't random; they follow a pattern that repeats at every scale. A snowflake isn't just frozen water; it's a geometric masterpiece.! These patterns have names: Fibonacci and fractals. And today, we're going to discover why nature loves them so much.! Are you ready, little one? Let's put on our magical glasses and see the world as nature designed it...

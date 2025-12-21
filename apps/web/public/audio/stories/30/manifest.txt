@@ -9,6 +9,9 @@
 # - Semicolon (;) = medium pause (~1s)
 # - Exclamation mark (!) = longer pause (~1.5s)
 #
+# IMPORTANT: Entries are commented out by default.
+# Uncomment an entry (remove the leading #) ONLY when the audio file exists.
+#
 
 # === INTRODUCTION ===
 # introduction|1|introduction.mp3|Hello, little one. Today we're going to explore one of the most beautiful and important questions humans have ever asked: What does it mean to be good? What is the right thing to do?! Take a deep breath, dear mother. Place your hands gently on your belly. Feel the warmth, the connection, the love that flows between you and your baby.! From the moment humans first gathered around fires and formed communities, we have wondered about these questions. How should we treat each other? What makes an action right or wrong? What does it mean to live a good life?! These questions are at the heart of ethics; the study of morality, of right and wrong, of how we should live. And the answers we find shape everything: our relationships, our communities, our world.! Your baby will grow up facing choices every day; small choices and big ones. They will need to decide how to treat others, what kind of person to be, what values to hold dear. The wisdom of ethics, gathered over thousands of years, can help guide them.! Are you ready, little one? Let's explore the beautiful journey of ethics together...

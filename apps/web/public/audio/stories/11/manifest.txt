@@ -9,6 +9,9 @@
 # - Semicolon (;) = medium pause (~1s)
 # - Exclamation mark (!) = longer pause (~1.5s)
 #
+# IMPORTANT: Entries are commented out by default.
+# Uncomment an entry (remove the leading #) ONLY when the audio file exists.
+#
 
 # === INTRODUCTION ===
 # introduction|1|introduction.mp3|Hello, little one. Today we're going to explore something truly magical; a hidden garden that exists inside every human being, including you and your mother.! Take a deep breath, dear mother. Place your hands gently on your belly. Inside you, and inside your growing baby, there exists a world so small that you cannot see it, yet so vast that it contains more living things than there are stars in the Milky Way galaxy.! This hidden world is called the microbiome; a community of trillions of tiny living things that call your body home. They are not invaders or enemies. They are partners, helpers, and friends who have been with humans since the very beginning of our story.! Imagine, if you will, the most beautiful garden you've ever seen. Now imagine that garden exists inside you; in your gut, on your skin, in your mouth, and in many other places. This is your microbiome, little one. This is the hidden garden we're about to explore.! Are you ready to meet the tiny gardeners who tend this invisible world? Let's begin...

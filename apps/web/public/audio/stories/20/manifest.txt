@@ -9,6 +9,9 @@
 # - Semicolon (;) = medium pause (~1s)
 # - Exclamation mark (!) = longer pause (~1.5s)
 #
+# IMPORTANT: Entries are commented out by default.
+# Uncomment an entry (remove the leading #) ONLY when the audio file exists.
+#
 
 # === INTRODUCTION ===
 # introduction|1|introduction.mp3|Hello, little one. Today we're going to share one of the most empowering secrets about being human; the incredible power of your growing brain.! Take a deep breath, dear mother. Place your hands gently on your belly. Feel the warmth, the connection, the love that flows between you and your baby.! Right now, inside your womb, something miraculous is happening. Your baby's brain is growing at an astonishing rate; creating about 250,000 new brain cells every single minute. Tiny connections called synapses are forming, building the foundation for everything your child will ever learn, feel, and become.! But here's the beautiful secret we're going to explore today: this growth doesn't stop. Your baby's brain will keep changing, adapting, and growing throughout their entire life. Every time they learn something new, every time they practice a skill, every time they face a challenge; their brain physically transforms.! Scientists call this "neuroplasticity"; the brain's remarkable ability to rewire itself. And there's a powerful way of thinking, called a "growth mindset," that helps us embrace this gift.! Little one, you are not born with a fixed amount of intelligence or talent. Your brain is like a garden that grows more beautiful with every seed of effort you plant.! Are you ready to discover the power of your growing mind? Let's begin...

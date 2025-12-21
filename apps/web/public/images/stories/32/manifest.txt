@@ -5,12 +5,14 @@
 # 1. Create images based on the suggested descriptions below
 # 2. Save image files with the suggested filenames (or update the filename field)
 # 3. Place image files in public/images/stories/32/
-# 4. Remove the # from lines you have created images for
+# 4. Remove the # prefix from lines you have created images for to activate them
 # 5. Position options: before, after, inline
+#
+# IMPORTANT: Entries are commented out by default.
+# Uncomment an entry (remove the leading #) ONLY when the image file exists.
 #
 
 # === SUGGESTED IMAGES FROM ANALOGIES ===
-# These images would help visualize the key analogies in the story
 
 # coreContent|after|analogy-0.png|Illustration of Cave Art|Like a message in a bottle thrown across 40,000 years of time—our ancestors reaching out to tell us they were here, they felt, they created
 # coreContent|after|analogy-1.png|Illustration of Universal Language of Art|Like a smile that needs no translation—art communicates through feelings and experiences that all humans share
@@ -20,7 +22,6 @@
 # coreContent|after|analogy-5.png|Illustration of Art and Meaning|Like a map for the journey of life—art helps us navigate the confusing terrain of existence by showing us patterns and paths
 
 # === SUGGESTED IMAGES FROM KEY CONCEPTS ===
-# These images would help illustrate the main concepts
 
 # coreContent|inline|concept-0.png|Illustration of: Art is fundamental to being human—we have created it since the dawn of our species, even when sur...|Art is fundamental to being human—we have created it since the dawn of our species, even when survival was difficult
 # coreContent|inline|concept-1.png|Illustration of: Art is a universal language that speaks across all cultural and linguistic boundaries through col...|Art is a universal language that speaks across all cultural and linguistic boundaries through color, shape, sound, and movement
@@ -31,9 +32,8 @@
 # coreContent|inline|concept-6.png|Illustration of: Everyone is an artist—creativity is not reserved for the talented few but is a birthright of all ...|Everyone is an artist—creativity is not reserved for the talented few but is a birthright of all humans
 
 # === SECTION-SPECIFIC IMAGES ===
-# Add images for specific sections as needed
 
-# introduction|before|intro-img0.png|[Add alt text for introduction image]|[Optional caption for introduction image]
-# coreContent|before|core-img0.png|[Add alt text for coreContent image]|[Optional caption for coreContent image]
-# interactiveSection|before|interactive-img0.png|[Add alt text for interactiveSection image]|[Optional caption for interactiveSection image]
-# integration|before|integration-img0.png|[Add alt text for integration image]|[Optional caption for integration image]
+# introduction|before|intro-img0.png|[Add alt text for introduction image]|[Optional caption]
+# coreContent|before|core-img0.png|[Add alt text for coreContent image]|[Optional caption]
+# interactiveSection|before|interactive-img0.png|[Add alt text for interactiveSection image]|[Optional caption]
+# integration|before|integration-img0.png|[Add alt text for integration image]|[Optional caption]

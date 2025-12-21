@@ -5,12 +5,14 @@
 # 1. Create images based on the suggested descriptions below
 # 2. Save image files with the suggested filenames (or update the filename field)
 # 3. Place image files in public/images/stories/29/
-# 4. Remove the # from lines you have created images for
+# 4. Remove the # prefix from lines you have created images for to activate them
 # 5. Position options: before, after, inline
+#
+# IMPORTANT: Entries are commented out by default.
+# Uncomment an entry (remove the leading #) ONLY when the image file exists.
 #
 
 # === SUGGESTED IMAGES FROM ANALOGIES ===
-# These images would help visualize the key analogies in the story
 
 # coreContent|after|analogy-0.png|Illustration of Human Diversity|Like a garden with many different flowers—each unique and beautiful, together creating something more wonderful than any single flower alone
 # coreContent|after|analogy-1.png|Illustration of Cultural Heritage|Like a precious family recipe passed down through generations—connecting us to our ancestors and giving us roots
@@ -20,7 +22,6 @@
 # coreContent|after|analogy-5.png|Illustration of Human Family|Like a great tree with many branches—each branch unique, but all connected to the same trunk and roots
 
 # === SUGGESTED IMAGES FROM KEY CONCEPTS ===
-# These images would help illustrate the main concepts
 
 # coreContent|inline|concept-0.png|Illustration of: All humans share about 99.9% of their DNA and descended from common ancestors in Africa about 200...|All humans share about 99.9% of their DNA and descended from common ancestors in Africa about 200,000 years ago
 # coreContent|inline|concept-1.png|Illustration of: Universal human experiences unite all cultures: birth celebrations, family bonds, sharing food, m...|Universal human experiences unite all cultures: birth celebrations, family bonds, sharing food, making music, telling stories, and marking life transitions with rituals
@@ -30,9 +31,8 @@
 # coreContent|inline|concept-5.png|Illustration of: Learning about different cultures expands our empathy and understanding of what it means to be human|Learning about different cultures expands our empathy and understanding of what it means to be human
 
 # === SECTION-SPECIFIC IMAGES ===
-# Add images for specific sections as needed
 
-# introduction|before|intro-img0.png|[Add alt text for introduction image]|[Optional caption for introduction image]
-# coreContent|before|core-img0.png|[Add alt text for coreContent image]|[Optional caption for coreContent image]
-# interactiveSection|before|interactive-img0.png|[Add alt text for interactiveSection image]|[Optional caption for interactiveSection image]
-# integration|before|integration-img0.png|[Add alt text for integration image]|[Optional caption for integration image]
+# introduction|before|intro-img0.png|[Add alt text for introduction image]|[Optional caption]
+# coreContent|before|core-img0.png|[Add alt text for coreContent image]|[Optional caption]
+# interactiveSection|before|interactive-img0.png|[Add alt text for interactiveSection image]|[Optional caption]
+# integration|before|integration-img0.png|[Add alt text for integration image]|[Optional caption]

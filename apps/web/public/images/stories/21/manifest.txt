@@ -5,12 +5,14 @@
 # 1. Create images based on the suggested descriptions below
 # 2. Save image files with the suggested filenames (or update the filename field)
 # 3. Place image files in public/images/stories/21/
-# 4. Remove the # from lines you have created images for
+# 4. Remove the # prefix from lines you have created images for to activate them
 # 5. Position options: before, after, inline
+#
+# IMPORTANT: Entries are commented out by default.
+# Uncomment an entry (remove the leading #) ONLY when the image file exists.
 #
 
 # === SUGGESTED IMAGES FROM ANALOGIES ===
-# These images would help visualize the key analogies in the story
 
 # coreContent|after|analogy-0.png|Illustration of Language Evolution|Seeds growing into a forest—simple sounds were seeds that grew over millennia into the vast forest of human languages
 # coreContent|after|analogy-1.png|Illustration of Writing|Capturing butterflies—spoken words are like butterflies that fly away, but writing lets us capture and preserve them forever
@@ -20,7 +22,6 @@
 # coreContent|after|analogy-5.png|Illustration of The River of Language|A river flowing through time—language flows from the past through the present to the future, carrying the thoughts of all humanity
 
 # === SUGGESTED IMAGES FROM KEY CONCEPTS ===
-# These images would help illustrate the main concepts
 
 # coreContent|inline|concept-0.png|Illustration of: Language evolved gradually over hundreds of thousands of years, from simple sounds to complex sys...|Language evolved gradually over hundreds of thousands of years, from simple sounds to complex systems of symbols and grammar
 # coreContent|inline|concept-1.png|Illustration of: Human anatomy—including the lowered larynx, specialized brain areas (Broca's and Wernicke's), and...|Human anatomy—including the lowered larynx, specialized brain areas (Broca's and Wernicke's), and the FOXP2 gene—enabled the development of speech
@@ -31,9 +32,8 @@
 # coreContent|inline|concept-6.png|Illustration of: Language is fundamentally about connection—sharing our inner worlds and building relationships wi...|Language is fundamentally about connection—sharing our inner worlds and building relationships with others
 
 # === SECTION-SPECIFIC IMAGES ===
-# Add images for specific sections as needed
 
-# introduction|before|intro-img0.png|[Add alt text for introduction image]|[Optional caption for introduction image]
-# coreContent|before|core-img0.png|[Add alt text for coreContent image]|[Optional caption for coreContent image]
-# interactiveSection|before|interactive-img0.png|[Add alt text for interactiveSection image]|[Optional caption for interactiveSection image]
-# integration|before|integration-img0.png|[Add alt text for integration image]|[Optional caption for integration image]
+# introduction|before|intro-img0.png|[Add alt text for introduction image]|[Optional caption]
+# coreContent|before|core-img0.png|[Add alt text for coreContent image]|[Optional caption]
+# interactiveSection|before|interactive-img0.png|[Add alt text for interactiveSection image]|[Optional caption]
+# integration|before|integration-img0.png|[Add alt text for integration image]|[Optional caption]

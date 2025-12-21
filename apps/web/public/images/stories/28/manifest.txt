@@ -5,12 +5,14 @@
 # 1. Create images based on the suggested descriptions below
 # 2. Save image files with the suggested filenames (or update the filename field)
 # 3. Place image files in public/images/stories/28/
-# 4. Remove the # from lines you have created images for
+# 4. Remove the # prefix from lines you have created images for to activate them
 # 5. Position options: before, after, inline
+#
+# IMPORTANT: Entries are commented out by default.
+# Uncomment an entry (remove the leading #) ONLY when the image file exists.
 #
 
 # === SUGGESTED IMAGES FROM ANALOGIES ===
-# These images would help visualize the key analogies in the story
 
 # coreContent|after|analogy-0.png|Illustration of Compound Interest|Like a snowball rolling downhill, gathering more snow with each rotation until it becomes enormous—your money gathers more money as it grows
 # coreContent|after|analogy-1.png|Illustration of Saving|Like planting seeds in a garden—you give up eating them today so you can harvest a whole crop tomorrow
@@ -20,7 +22,6 @@
 # coreContent|after|analogy-5.png|Illustration of Financial Freedom|Like having wings—not about flying everywhere, but about having the choice to fly whenever you want
 
 # === SUGGESTED IMAGES FROM KEY CONCEPTS ===
-# These images would help illustrate the main concepts
 
 # coreContent|inline|concept-0.png|Illustration of: Saving is the foundation of wealth—choosing to keep some of what you have for future use and futu...|Saving is the foundation of wealth—choosing to keep some of what you have for future use and future choices
 # coreContent|inline|concept-1.png|Illustration of: Compound interest is exponential growth where your money earns returns, and those returns earn mo...|Compound interest is exponential growth where your money earns returns, and those returns earn more returns over time
@@ -30,9 +31,8 @@
 # coreContent|inline|concept-5.png|Illustration of: True wealth includes health, relationships, purpose, time, and peace—not just money|True wealth includes health, relationships, purpose, time, and peace—not just money
 
 # === SECTION-SPECIFIC IMAGES ===
-# Add images for specific sections as needed
 
-# introduction|before|intro-img0.png|[Add alt text for introduction image]|[Optional caption for introduction image]
-# coreContent|before|core-img0.png|[Add alt text for coreContent image]|[Optional caption for coreContent image]
-# interactiveSection|before|interactive-img0.png|[Add alt text for interactiveSection image]|[Optional caption for interactiveSection image]
-# integration|before|integration-img0.png|[Add alt text for integration image]|[Optional caption for integration image]
+# introduction|before|intro-img0.png|[Add alt text for introduction image]|[Optional caption]
+# coreContent|before|core-img0.png|[Add alt text for coreContent image]|[Optional caption]
+# interactiveSection|before|interactive-img0.png|[Add alt text for interactiveSection image]|[Optional caption]
+# integration|before|integration-img0.png|[Add alt text for integration image]|[Optional caption]

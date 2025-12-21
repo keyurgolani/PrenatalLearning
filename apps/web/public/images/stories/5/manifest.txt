@@ -5,12 +5,14 @@
 # 1. Create images based on the suggested descriptions below
 # 2. Save image files with the suggested filenames (or update the filename field)
 # 3. Place image files in public/images/stories/5/
-# 4. Remove the # from lines you have created images for
+# 4. Remove the # prefix from lines you have created images for to activate them
 # 5. Position options: before, after, inline
+#
+# IMPORTANT: Entries are commented out by default.
+# Uncomment an entry (remove the leading #) ONLY when the image file exists.
 #
 
 # === SUGGESTED IMAGES FROM ANALOGIES ===
-# These images would help visualize the key analogies in the story
 
 # coreContent|after|analogy-0.png|Illustration of Binary System|A kingdom where there are only two things: light and darkness, on and off—every message is made from just these two simple things
 # coreContent|after|analogy-1.png|Illustration of Transistors|Microscopic light switches so tiny that billions fit on a chip smaller than your thumbnail
@@ -21,7 +23,6 @@
 # coreContent|after|analogy-6.png|Illustration of Computer Evolution|From ENIAC weighing as much as several elephants to smartphones with more power than existed in the entire world when grandparents were born
 
 # === SUGGESTED IMAGES FROM KEY CONCEPTS ===
-# These images would help illustrate the main concepts
 
 # coreContent|inline|concept-0.png|Illustration of: Computers work using binary—just two states: on (1) and off (0)|Computers work using binary—just two states: on (1) and off (0)
 # coreContent|inline|concept-1.png|Illustration of: Transistors are tiny switches that can turn on and off billions of times per second|Transistors are tiny switches that can turn on and off billions of times per second
@@ -31,9 +32,8 @@
 # coreContent|inline|concept-5.png|Illustration of: Everything a computer does—games, music, pictures—comes from patterns of ones and zeros|Everything a computer does—games, music, pictures—comes from patterns of ones and zeros
 
 # === SECTION-SPECIFIC IMAGES ===
-# Add images for specific sections as needed
 
-# introduction|before|intro-img0.png|[Add alt text for introduction image]|[Optional caption for introduction image]
-# coreContent|before|core-img0.png|[Add alt text for coreContent image]|[Optional caption for coreContent image]
-# interactiveSection|before|interactive-img0.png|[Add alt text for interactiveSection image]|[Optional caption for interactiveSection image]
-# integration|before|integration-img0.png|[Add alt text for integration image]|[Optional caption for integration image]
+# introduction|before|intro-img0.png|[Add alt text for introduction image]|[Optional caption]
+# coreContent|before|core-img0.png|[Add alt text for coreContent image]|[Optional caption]
+# interactiveSection|before|interactive-img0.png|[Add alt text for interactiveSection image]|[Optional caption]
+# integration|before|integration-img0.png|[Add alt text for integration image]|[Optional caption]

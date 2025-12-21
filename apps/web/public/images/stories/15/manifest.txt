@@ -5,12 +5,14 @@
 # 1. Create images based on the suggested descriptions below
 # 2. Save image files with the suggested filenames (or update the filename field)
 # 3. Place image files in public/images/stories/15/
-# 4. Remove the # from lines you have created images for
+# 4. Remove the # prefix from lines you have created images for to activate them
 # 5. Position options: before, after, inline
+#
+# IMPORTANT: Entries are commented out by default.
+# Uncomment an entry (remove the leading #) ONLY when the image file exists.
 #
 
 # === SUGGESTED IMAGES FROM ANALOGIES ===
-# These images would help visualize the key analogies in the story
 
 # coreContent|after|analogy-0.png|Illustration of Fibonacci Sequence|The Fibonacci sequence is like nature's favorite recipe—the same ingredients (1, 1, 2, 3, 5, 8...) appear in sunflowers, pinecones, and seashells, creating beauty through simple addition
 # coreContent|after|analogy-1.png|Illustration of Golden Ratio|The Golden Ratio is like nature's measuring tape—a proportion so pleasing that artists, architects, and evolution itself keep using it to create beauty
@@ -20,7 +22,6 @@
 # coreContent|after|analogy-5.png|Illustration of Fractal Branching|Your lungs are like an upside-down tree—branching and branching until a tennis court of surface area fits inside your chest
 
 # === SUGGESTED IMAGES FROM KEY CONCEPTS ===
-# These images would help illustrate the main concepts
 
 # coreContent|inline|concept-0.png|Illustration of: The Fibonacci sequence (1, 1, 2, 3, 5, 8, 13, 21...) appears throughout nature in flower petals, ...|The Fibonacci sequence (1, 1, 2, 3, 5, 8, 13, 21...) appears throughout nature in flower petals, seed spirals, and pinecone scales
 # coreContent|inline|concept-1.png|Illustration of: The Golden Ratio (approximately 1.618) emerges from Fibonacci numbers and creates naturally pleas...|The Golden Ratio (approximately 1.618) emerges from Fibonacci numbers and creates naturally pleasing proportions
@@ -30,9 +31,8 @@
 # coreContent|inline|concept-5.png|Illustration of: Complex beauty emerges from simple rules repeated over and over|Complex beauty emerges from simple rules repeated over and over
 
 # === SECTION-SPECIFIC IMAGES ===
-# Add images for specific sections as needed
 
-# introduction|before|intro-img0.png|[Add alt text for introduction image]|[Optional caption for introduction image]
-# coreContent|before|core-img0.png|[Add alt text for coreContent image]|[Optional caption for coreContent image]
-# interactiveSection|before|interactive-img0.png|[Add alt text for interactiveSection image]|[Optional caption for interactiveSection image]
-# integration|before|integration-img0.png|[Add alt text for integration image]|[Optional caption for integration image]
+# introduction|before|intro-img0.png|[Add alt text for introduction image]|[Optional caption]
+# coreContent|before|core-img0.png|[Add alt text for coreContent image]|[Optional caption]
+# interactiveSection|before|interactive-img0.png|[Add alt text for interactiveSection image]|[Optional caption]
+# integration|before|integration-img0.png|[Add alt text for integration image]|[Optional caption]

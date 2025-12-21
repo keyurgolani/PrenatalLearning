@@ -5,12 +5,14 @@
 # 1. Create images based on the suggested descriptions below
 # 2. Save image files with the suggested filenames (or update the filename field)
 # 3. Place image files in public/images/stories/7/
-# 4. Remove the # from lines you have created images for
+# 4. Remove the # prefix from lines you have created images for to activate them
 # 5. Position options: before, after, inline
+#
+# IMPORTANT: Entries are commented out by default.
+# Uncomment an entry (remove the leading #) ONLY when the image file exists.
 #
 
 # === SUGGESTED IMAGES FROM ANALOGIES ===
-# These images would help visualize the key analogies in the story
 
 # coreContent|after|analogy-0.png|Illustration of Blockchain|A glass notebook that everyone can see, no one can erase, with thousands of identical copies around the world that all update together
 # coreContent|after|analogy-1.png|Illustration of Cryptographic Hash|A magical fingerprint machine that turns any information into a unique code—change even one letter, and the fingerprint is completely different
@@ -21,7 +23,6 @@
 # coreContent|after|analogy-6.png|Illustration of Smart Contract|A promise that keeps itself—like a vending machine that automatically gives you a snack when you put in money, no trust required
 
 # === SUGGESTED IMAGES FROM KEY CONCEPTS ===
-# These images would help illustrate the main concepts
 
 # coreContent|inline|concept-0.png|Illustration of: Blockchain is like a glass notebook—everyone can see it, no one can erase it, and thousands of co...|Blockchain is like a glass notebook—everyone can see it, no one can erase it, and thousands of copies exist worldwide
 # coreContent|inline|concept-1.png|Illustration of: Cryptographic hashing creates unique fingerprints for each block, making any tampering immediatel...|Cryptographic hashing creates unique fingerprints for each block, making any tampering immediately detectable
@@ -31,9 +32,8 @@
 # coreContent|inline|concept-5.png|Illustration of: Blockchain enables trust between strangers through verification rather than faith in institutions|Blockchain enables trust between strangers through verification rather than faith in institutions
 
 # === SECTION-SPECIFIC IMAGES ===
-# Add images for specific sections as needed
 
-# introduction|before|intro-img0.png|[Add alt text for introduction image]|[Optional caption for introduction image]
-# coreContent|before|core-img0.png|[Add alt text for coreContent image]|[Optional caption for coreContent image]
-# interactiveSection|before|interactive-img0.png|[Add alt text for interactiveSection image]|[Optional caption for interactiveSection image]
-# integration|before|integration-img0.png|[Add alt text for integration image]|[Optional caption for integration image]
+# introduction|before|intro-img0.png|[Add alt text for introduction image]|[Optional caption]
+# coreContent|before|core-img0.png|[Add alt text for coreContent image]|[Optional caption]
+# interactiveSection|before|interactive-img0.png|[Add alt text for interactiveSection image]|[Optional caption]
+# integration|before|integration-img0.png|[Add alt text for integration image]|[Optional caption]

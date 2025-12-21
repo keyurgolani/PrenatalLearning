@@ -5,12 +5,14 @@
 # 1. Create images based on the suggested descriptions below
 # 2. Save image files with the suggested filenames (or update the filename field)
 # 3. Place image files in public/images/stories/11/
-# 4. Remove the # from lines you have created images for
+# 4. Remove the # prefix from lines you have created images for to activate them
 # 5. Position options: before, after, inline
+#
+# IMPORTANT: Entries are commented out by default.
+# Uncomment an entry (remove the leading #) ONLY when the image file exists.
 #
 
 # === SUGGESTED IMAGES FROM ANALOGIES ===
-# These images would help visualize the key analogies in the story
 
 # coreContent|after|analogy-0.png|Illustration of Microbiome|A hidden garden inside your body, with trillions of tiny gardeners working to keep you healthy
 # coreContent|after|analogy-1.png|Illustration of Gut Bacteria|Gardeners who break down food, extract nutrients, and produce vitamins—tending the soil of your digestive system
@@ -24,7 +26,6 @@
 # coreContent|after|analogy-9.png|Illustration of First 1000 Days|The planting season of your microbiome garden—when the foundation for lifelong health is established
 
 # === SUGGESTED IMAGES FROM KEY CONCEPTS ===
-# These images would help illustrate the main concepts
 
 # coreContent|inline|concept-0.png|Illustration of: The microbiome is a community of trillions of microorganisms—bacteria, fungi, viruses, and more—t...|The microbiome is a community of trillions of microorganisms—bacteria, fungi, viruses, and more—that live in and on your body
 # coreContent|inline|concept-1.png|Illustration of: Your gut microbiome helps digest food, produce vitamins, train your immune system, and even influ...|Your gut microbiome helps digest food, produce vitamins, train your immune system, and even influence your mood through the gut-brain axis
@@ -34,9 +35,8 @@
 # coreContent|inline|concept-5.png|Illustration of: The relationship between you and your microbiome is symbiotic—you provide a home, they provide es...|The relationship between you and your microbiome is symbiotic—you provide a home, they provide essential services
 
 # === SECTION-SPECIFIC IMAGES ===
-# Add images for specific sections as needed
 
-# introduction|before|intro-img0.png|[Add alt text for introduction image]|[Optional caption for introduction image]
-# coreContent|before|core-img0.png|[Add alt text for coreContent image]|[Optional caption for coreContent image]
-# interactiveSection|before|interactive-img0.png|[Add alt text for interactiveSection image]|[Optional caption for interactiveSection image]
-# integration|before|integration-img0.png|[Add alt text for integration image]|[Optional caption for integration image]
+# introduction|before|intro-img0.png|[Add alt text for introduction image]|[Optional caption]
+# coreContent|before|core-img0.png|[Add alt text for coreContent image]|[Optional caption]
+# interactiveSection|before|interactive-img0.png|[Add alt text for interactiveSection image]|[Optional caption]
+# integration|before|integration-img0.png|[Add alt text for integration image]|[Optional caption]

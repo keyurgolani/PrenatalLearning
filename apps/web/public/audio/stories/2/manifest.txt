@@ -9,6 +9,9 @@
 # - Semicolon (;) = medium pause (~1s)
 # - Exclamation mark (!) = longer pause (~1.5s)
 #
+# IMPORTANT: Entries are commented out by default.
+# Uncomment an entry (remove the leading #) ONLY when the audio file exists.
+#
 
 # === INTRODUCTION ===
 # introduction|1|introduction.mp3|Hello again, little one. Today we're going to explore something magical; something you're already feeling right now, even before you're born.! Take a deep breath, dear mother. Place your hands gently on your belly. Feel how your baby rests there, cradled and held. That gentle pull, that invisible embrace that keeps everything in its place; that's what we're going to explore today.! It's called gravity, and it's one of the most wonderful mysteries in all of nature.! Close your eyes and imagine... imagine you're holding a ball in your hand. When you let go, what happens? It falls, doesn't it? But why? Why doesn't it float up to the ceiling or drift sideways? What invisible hand reaches out to catch it and pull it down?! This is the question that has fascinated humans for thousands of years. And the answers we've found are more beautiful and strange than anyone could have imagined.! Are you ready, little one? Let's discover the secret dance of gravity...

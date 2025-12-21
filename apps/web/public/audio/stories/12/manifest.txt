@@ -9,6 +9,9 @@
 # - Semicolon (;) = medium pause (~1s)
 # - Exclamation mark (!) = longer pause (~1.5s)
 #
+# IMPORTANT: Entries are commented out by default.
+# Uncomment an entry (remove the leading #) ONLY when the audio file exists.
+#
 
 # === INTRODUCTION ===
 # introduction|1|introduction.mp3|Hello, little one. Today we're going to tell you the most amazing family story ever told; a story that connects you to every living thing on Earth.! Take a deep breath, dear mother. Place your hands gently on your belly. Feel the warmth, the connection, the love that flows between you and your baby.! Right now, inside your womb, your baby is growing, changing, developing; just as life itself has been growing and changing for nearly four billion years. Your baby is the latest chapter in an incredible story that began when Earth was young.! This is the story of evolution; the great adventure of life on Earth. It's a story of connection, of change, of survival, and of the beautiful web that links every creature that has ever lived.! Are you ready, little one? Let's discover how you are part of the greatest family tree in the universe...

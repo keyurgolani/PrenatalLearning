@@ -9,6 +9,9 @@
 # - Semicolon (;) = medium pause (~1s)
 # - Exclamation mark (!) = longer pause (~1.5s)
 #
+# IMPORTANT: Entries are commented out by default.
+# Uncomment an entry (remove the leading #) ONLY when the audio file exists.
+#
 
 # === INTRODUCTION ===
 # introduction|1|introduction.mp3|Hello, little one. Today we're going to explore something magical; a language that needs no words, a conversation that happens in silence, a way of speaking that you're already beginning to learn.! Take a deep breath, dear mother. Place your hands gently on your belly. Notice how your body feels right now. Are your shoulders relaxed or tense? Is your face soft or furrowed? Your body is speaking, even now, even in stillness.! You see, little one, long before humans invented words, we communicated with our bodies. A smile meant friendship. A frown meant danger. Open arms meant welcome. This ancient language is written in our very biology, and it's the first language you'll ever learn.! Right now, floating in your warm, safe world, you can't see faces or gestures. But you can feel. You sense when your mother's body relaxes, when her heart beats calmly, when her muscles soften. You're already learning the language of the body.! Scientists have discovered that about 60 to 70 percent of all human communication is nonverbal. That means most of what we say to each other isn't said with words at all; it's expressed through our faces, our hands, our posture, our eyes.! Are you ready to explore this silent symphony of communication? Let's journey into the wonderful world of body language...

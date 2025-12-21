@@ -9,6 +9,9 @@
 # - Semicolon (;) = medium pause (~1s)
 # - Exclamation mark (!) = longer pause (~1.5s)
 #
+# IMPORTANT: Entries are commented out by default.
+# Uncomment an entry (remove the leading #) ONLY when the audio file exists.
+#
 
 # === INTRODUCTION ===
 # introduction|1|introduction.mp3|Hello, little one. Today we're going on a magical journey; a journey into the world of words and language.! Take a deep breath, dear mother. Place your hands gently on your belly. Feel the connection between you and your baby.! Right now, as you read these words, something remarkable is happening. Patterns of ink on a page, or light on a screen, are transforming into thoughts in your mind. You're not just seeing shapes; you're understanding meaning. This is the magic of language.! And here's something wonderful: your baby can already hear your voice. Around 23 weeks of pregnancy, babies begin to recognize the rhythm and melody of their mother's speech. They can't understand the words yet, but they're already learning the music of language; the rises and falls, the patterns and pauses.! Little one, you are floating in a world of sound. Your mother's heartbeat is your constant companion, and her voice is the most beautiful sound you know. Every word she speaks is a gift, preparing your brain for the incredible journey of language that lies ahead.! Are you ready to discover how humans learned to speak, to write, to share their thoughts across time and space? Let's explore the magic of words together...

@@ -5,12 +5,14 @@
 # 1. Create images based on the suggested descriptions below
 # 2. Save image files with the suggested filenames (or update the filename field)
 # 3. Place image files in public/images/stories/3/
-# 4. Remove the # from lines you have created images for
+# 4. Remove the # prefix from lines you have created images for to activate them
 # 5. Position options: before, after, inline
+#
+# IMPORTANT: Entries are commented out by default.
+# Uncomment an entry (remove the leading #) ONLY when the image file exists.
 #
 
 # === SUGGESTED IMAGES FROM ANALOGIES ===
-# These images would help visualize the key analogies in the story
 
 # coreContent|after|analogy-0.png|Illustration of Wave-Particle Duality|A friend who is somehow both a fish and a bird—swimming when in water, flying when in sky, but genuinely both all the time
 # coreContent|after|analogy-1.png|Illustration of Superposition|A magical coin that is both heads AND tails while spinning, only choosing when you catch it and look
@@ -20,7 +22,6 @@
 # coreContent|after|analogy-5.png|Illustration of Decoherence|Quantum fuzziness that disappears when things get big, like ripples that fade in a busy pond
 
 # === SUGGESTED IMAGES FROM KEY CONCEPTS ===
-# These images would help illustrate the main concepts
 
 # coreContent|inline|concept-0.png|Illustration of: Particles like electrons and photons exhibit wave-particle duality—they can behave as both waves ...|Particles like electrons and photons exhibit wave-particle duality—they can behave as both waves and particles
 # coreContent|inline|concept-1.png|Illustration of: Quantum superposition means particles can exist in multiple states simultaneously until measured|Quantum superposition means particles can exist in multiple states simultaneously until measured
@@ -31,9 +32,8 @@
 # coreContent|inline|concept-6.png|Illustration of: Everything in the universe, including us, is made of quantum particles following these strange rules|Everything in the universe, including us, is made of quantum particles following these strange rules
 
 # === SECTION-SPECIFIC IMAGES ===
-# Add images for specific sections as needed
 
-# introduction|before|intro-img0.png|[Add alt text for introduction image]|[Optional caption for introduction image]
-# coreContent|before|core-img0.png|[Add alt text for coreContent image]|[Optional caption for coreContent image]
-# interactiveSection|before|interactive-img0.png|[Add alt text for interactiveSection image]|[Optional caption for interactiveSection image]
-# integration|before|integration-img0.png|[Add alt text for integration image]|[Optional caption for integration image]
+# introduction|before|intro-img0.png|[Add alt text for introduction image]|[Optional caption]
+# coreContent|before|core-img0.png|[Add alt text for coreContent image]|[Optional caption]
+# interactiveSection|before|interactive-img0.png|[Add alt text for interactiveSection image]|[Optional caption]
+# integration|before|integration-img0.png|[Add alt text for integration image]|[Optional caption]

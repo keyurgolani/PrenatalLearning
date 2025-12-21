@@ -5,12 +5,14 @@
 # 1. Create images based on the suggested descriptions below
 # 2. Save image files with the suggested filenames (or update the filename field)
 # 3. Place image files in public/images/stories/31/
-# 4. Remove the # from lines you have created images for
+# 4. Remove the # prefix from lines you have created images for to activate them
 # 5. Position options: before, after, inline
+#
+# IMPORTANT: Entries are commented out by default.
+# Uncomment an entry (remove the leading #) ONLY when the image file exists.
 #
 
 # === SUGGESTED IMAGES FROM ANALOGIES ===
-# These images would help visualize the key analogies in the story
 
 # coreContent|after|analogy-0.png|Illustration of Democracy|Like a family where everyone gets a say in important decisions—parents listen to children, siblings consider each other, and choices are made together with care for everyone
 # coreContent|after|analogy-1.png|Illustration of Voting|Like raising your hand in class to share your opinion—each person gets one hand, one voice, and together the class decides
@@ -20,7 +22,6 @@
 # coreContent|after|analogy-5.png|Illustration of Rights and Freedoms|Like a protective shield that belongs to every person—it guards your ability to speak, believe, and live freely, even when others disagree
 
 # === SUGGESTED IMAGES FROM KEY CONCEPTS ===
-# These images would help illustrate the main concepts
 
 # coreContent|inline|concept-0.png|Illustration of: Democracy means "rule by the people"—a system where citizens participate in making decisions that...|Democracy means "rule by the people"—a system where citizens participate in making decisions that affect their lives
 # coreContent|inline|concept-1.png|Illustration of: Core democratic principles include rule of law, individual rights, separation of powers, and acco...|Core democratic principles include rule of law, individual rights, separation of powers, and accountability of leaders to the people
@@ -30,9 +31,8 @@
 # coreContent|inline|concept-5.png|Illustration of: Democracy requires ongoing effort and vigilance from ordinary citizens to protect rights, ensure ...|Democracy requires ongoing effort and vigilance from ordinary citizens to protect rights, ensure fair elections, and hold leaders accountable
 
 # === SECTION-SPECIFIC IMAGES ===
-# Add images for specific sections as needed
 
-# introduction|before|intro-img0.png|[Add alt text for introduction image]|[Optional caption for introduction image]
-# coreContent|before|core-img0.png|[Add alt text for coreContent image]|[Optional caption for coreContent image]
-# interactiveSection|before|interactive-img0.png|[Add alt text for interactiveSection image]|[Optional caption for interactiveSection image]
-# integration|before|integration-img0.png|[Add alt text for integration image]|[Optional caption for integration image]
+# introduction|before|intro-img0.png|[Add alt text for introduction image]|[Optional caption]
+# coreContent|before|core-img0.png|[Add alt text for coreContent image]|[Optional caption]
+# interactiveSection|before|interactive-img0.png|[Add alt text for interactiveSection image]|[Optional caption]
+# integration|before|integration-img0.png|[Add alt text for integration image]|[Optional caption]

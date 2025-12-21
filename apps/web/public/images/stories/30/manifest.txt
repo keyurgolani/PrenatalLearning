@@ -5,12 +5,14 @@
 # 1. Create images based on the suggested descriptions below
 # 2. Save image files with the suggested filenames (or update the filename field)
 # 3. Place image files in public/images/stories/30/
-# 4. Remove the # from lines you have created images for
+# 4. Remove the # prefix from lines you have created images for to activate them
 # 5. Position options: before, after, inline
+#
+# IMPORTANT: Entries are commented out by default.
+# Uncomment an entry (remove the leading #) ONLY when the image file exists.
 #
 
 # === SUGGESTED IMAGES FROM ANALOGIES ===
-# These images would help visualize the key analogies in the story
 
 # coreContent|after|analogy-0.png|Illustration of The Golden Rule|Like a mirror that helps us see ourselves in others—when we imagine how we would feel, we understand how to treat them
 # coreContent|after|analogy-1.png|Illustration of Virtue Development|Like learning to play music—we become skilled through practice, and eventually good actions become natural and effortless
@@ -20,7 +22,6 @@
 # coreContent|after|analogy-5.png|Illustration of Web of Ethics|Like invisible threads connecting all people—every act of honesty and kindness strengthens the fabric that holds society together
 
 # === SUGGESTED IMAGES FROM KEY CONCEPTS ===
-# These images would help illustrate the main concepts
 
 # coreContent|inline|concept-0.png|Illustration of: The Golden Rule—treat others as you would like to be treated—appears in virtually every culture a...|The Golden Rule—treat others as you would like to be treated—appears in virtually every culture and religion throughout human history
 # coreContent|inline|concept-1.png|Illustration of: Empathy (feeling what others feel) and compassion (wanting to help) are the emotional foundations...|Empathy (feeling what others feel) and compassion (wanting to help) are the emotional foundations of ethical behavior
@@ -30,9 +31,8 @@
 # coreContent|inline|concept-5.png|Illustration of: Ethics connects us all: every act of kindness strengthens the web of human connection, while ever...|Ethics connects us all: every act of kindness strengthens the web of human connection, while every act of cruelty weakens it
 
 # === SECTION-SPECIFIC IMAGES ===
-# Add images for specific sections as needed
 
-# introduction|before|intro-img0.png|[Add alt text for introduction image]|[Optional caption for introduction image]
-# coreContent|before|core-img0.png|[Add alt text for coreContent image]|[Optional caption for coreContent image]
-# interactiveSection|before|interactive-img0.png|[Add alt text for interactiveSection image]|[Optional caption for interactiveSection image]
-# integration|before|integration-img0.png|[Add alt text for integration image]|[Optional caption for integration image]
+# introduction|before|intro-img0.png|[Add alt text for introduction image]|[Optional caption]
+# coreContent|before|core-img0.png|[Add alt text for coreContent image]|[Optional caption]
+# interactiveSection|before|interactive-img0.png|[Add alt text for interactiveSection image]|[Optional caption]
+# integration|before|integration-img0.png|[Add alt text for integration image]|[Optional caption]

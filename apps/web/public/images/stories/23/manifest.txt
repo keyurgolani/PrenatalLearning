@@ -5,12 +5,14 @@
 # 1. Create images based on the suggested descriptions below
 # 2. Save image files with the suggested filenames (or update the filename field)
 # 3. Place image files in public/images/stories/23/
-# 4. Remove the # from lines you have created images for
+# 4. Remove the # prefix from lines you have created images for to activate them
 # 5. Position options: before, after, inline
+#
+# IMPORTANT: Entries are commented out by default.
+# Uncomment an entry (remove the leading #) ONLY when the image file exists.
 #
 
 # === SUGGESTED IMAGES FROM ANALOGIES ===
-# These images would help visualize the key analogies in the story
 
 # coreContent|after|analogy-0.png|Illustration of Music and the Brain|A symphony orchestra—when you listen to music, different parts of your brain play together like instruments in an orchestra, creating a unified experience
 # coreContent|after|analogy-1.png|Illustration of The Heartbeat as Music|The first drum—your mother's heartbeat is like a drum that has been playing for you since the very beginning, the rhythm that all other music builds upon
@@ -20,7 +22,6 @@
 # coreContent|after|analogy-5.png|Illustration of Music as Connection|An invisible thread—music creates invisible threads between people, connecting hearts across distance and time
 
 # === SUGGESTED IMAGES FROM KEY CONCEPTS ===
-# These images would help illustrate the main concepts
 
 # coreContent|inline|concept-0.png|Illustration of: Music may be older than language—our ancestors likely sang before they spoke, using melody and rh...|Music may be older than language—our ancestors likely sang before they spoke, using melody and rhythm to communicate emotions and bond with each other
 # coreContent|inline|concept-1.png|Illustration of: Every human culture has music, suggesting it is deeply wired into our brains as an essential part...|Every human culture has music, suggesting it is deeply wired into our brains as an essential part of being human
@@ -31,9 +32,8 @@
 # coreContent|inline|concept-6.png|Illustration of: Making music together synchronizes brain waves and heartbeats, creating powerful bonds between pe...|Making music together synchronizes brain waves and heartbeats, creating powerful bonds between people
 
 # === SECTION-SPECIFIC IMAGES ===
-# Add images for specific sections as needed
 
-# introduction|before|intro-img0.png|[Add alt text for introduction image]|[Optional caption for introduction image]
-# coreContent|before|core-img0.png|[Add alt text for coreContent image]|[Optional caption for coreContent image]
-# interactiveSection|before|interactive-img0.png|[Add alt text for interactiveSection image]|[Optional caption for interactiveSection image]
-# integration|before|integration-img0.png|[Add alt text for integration image]|[Optional caption for integration image]
+# introduction|before|intro-img0.png|[Add alt text for introduction image]|[Optional caption]
+# coreContent|before|core-img0.png|[Add alt text for coreContent image]|[Optional caption]
+# interactiveSection|before|interactive-img0.png|[Add alt text for interactiveSection image]|[Optional caption]
+# integration|before|integration-img0.png|[Add alt text for integration image]|[Optional caption]

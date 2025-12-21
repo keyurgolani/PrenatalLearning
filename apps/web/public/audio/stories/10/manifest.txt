@@ -9,6 +9,9 @@
 # - Semicolon (;) = medium pause (~1s)
 # - Exclamation mark (!) = longer pause (~1.5s)
 #
+# IMPORTANT: Entries are commented out by default.
+# Uncomment an entry (remove the leading #) ONLY when the audio file exists.
+#
 
 # === INTRODUCTION ===
 # introduction|1|introduction.mp3|Hello, little one. Today we're going to explore something truly wonderful; the incredible symphony that plays inside you every moment of every day.! Take a deep breath, dear mother. Place your hands gently on your belly. Feel the rhythm of your own heartbeat, the gentle rise and fall of your breath. These are the first notes of the symphony we're about to discover.! Right now, inside your body and inside your baby's growing body, something magical is happening. Trillions of tiny cells; about 37 trillion in an adult body; are working together in perfect harmony. Each cell knows its part, each organ plays its instrument, and together they create the most beautiful music in the universe: the music of life.! Imagine, if you will, the grandest orchestra ever assembled. Not dozens of musicians, not hundreds, but trillions; all playing together without a single conductor visible on stage. This is your body, little one. This is the symphony inside.! Are you ready to meet the musicians? Let's begin...

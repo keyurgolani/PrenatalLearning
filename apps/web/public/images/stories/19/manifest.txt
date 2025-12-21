@@ -5,12 +5,14 @@
 # 1. Create images based on the suggested descriptions below
 # 2. Save image files with the suggested filenames (or update the filename field)
 # 3. Place image files in public/images/stories/19/
-# 4. Remove the # from lines you have created images for
+# 4. Remove the # prefix from lines you have created images for to activate them
 # 5. Position options: before, after, inline
+#
+# IMPORTANT: Entries are commented out by default.
+# Uncomment an entry (remove the leading #) ONLY when the image file exists.
 #
 
 # === SUGGESTED IMAGES FROM ANALOGIES ===
-# These images would help visualize the key analogies in the story
 
 # coreContent|after|analogy-0.png|Illustration of Memory|A magnificent library with endless shelves, where every experience becomes a book that can be revisited
 # coreContent|after|analogy-1.png|Illustration of Hippocampus|A master librarian who creates the index linking all parts of a memory together, conducting the orchestra of recall
@@ -20,7 +22,6 @@
 # coreContent|after|analogy-5.png|Illustration of Memory Retrieval|Following paths through the library—cues like smells, songs, or images that lead you back to stored memories
 
 # === SUGGESTED IMAGES FROM KEY CONCEPTS ===
-# These images would help illustrate the main concepts
 
 # coreContent|inline|concept-0.png|Illustration of: Memory is like a vast library where experiences, facts, and skills are stored and can be retrieve...|Memory is like a vast library where experiences, facts, and skills are stored and can be retrieved when needed
 # coreContent|inline|concept-1.png|Illustration of: The hippocampus acts as a master librarian, creating an index that links together different parts...|The hippocampus acts as a master librarian, creating an index that links together different parts of memories stored across the brain
@@ -31,9 +32,8 @@
 # coreContent|inline|concept-6.png|Illustration of: Neuroplasticity means the brain can always learn and change—the library is always growing|Neuroplasticity means the brain can always learn and change—the library is always growing
 
 # === SECTION-SPECIFIC IMAGES ===
-# Add images for specific sections as needed
 
-# introduction|before|intro-img0.png|[Add alt text for introduction image]|[Optional caption for introduction image]
-# coreContent|before|core-img0.png|[Add alt text for coreContent image]|[Optional caption for coreContent image]
-# interactiveSection|before|interactive-img0.png|[Add alt text for interactiveSection image]|[Optional caption for interactiveSection image]
-# integration|before|integration-img0.png|[Add alt text for integration image]|[Optional caption for integration image]
+# introduction|before|intro-img0.png|[Add alt text for introduction image]|[Optional caption]
+# coreContent|before|core-img0.png|[Add alt text for coreContent image]|[Optional caption]
+# interactiveSection|before|interactive-img0.png|[Add alt text for interactiveSection image]|[Optional caption]
+# integration|before|integration-img0.png|[Add alt text for integration image]|[Optional caption]

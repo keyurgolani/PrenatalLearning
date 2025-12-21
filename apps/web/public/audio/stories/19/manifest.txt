@@ -9,6 +9,9 @@
 # - Semicolon (;) = medium pause (~1s)
 # - Exclamation mark (!) = longer pause (~1.5s)
 #
+# IMPORTANT: Entries are commented out by default.
+# Uncomment an entry (remove the leading #) ONLY when the audio file exists.
+#
 
 # === INTRODUCTION ===
 # introduction|1|introduction.mp3|Hello, little one. Today we're going to explore one of the most magical places in the universe; the library of memory inside your mind.! Take a deep breath, dear mother. Place your hands gently on your belly. Feel the warmth, the connection, the love that flows between you and your baby.! Now, think of a cherished memory. Perhaps the day you learned you were expecting this little one. Perhaps a moment from your childhood that still makes you smile. Notice how that memory comes alive; the images, the feelings, maybe even the sounds and smells.! That memory is stored somewhere in your brain, waiting to be called forth whenever you need it. But how does the brain do this? How does it capture a fleeting moment and turn it into something you can revisit years later?! Little one, your brain is already beginning to form memories. The sound of your mother's voice, the rhythm of her heartbeat, the gentle movements as she walks; these experiences are being woven into the very first pages of your memory book.! Are you ready to explore the magnificent library of memory? Let's discover how your brain captures, stores, and treasures the moments of your life...

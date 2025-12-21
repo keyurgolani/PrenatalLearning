@@ -9,6 +9,9 @@
 # - Semicolon (;) = medium pause (~1s)
 # - Exclamation mark (!) = longer pause (~1.5s)
 #
+# IMPORTANT: Entries are commented out by default.
+# Uncomment an entry (remove the leading #) ONLY when the audio file exists.
+#
 
 # === INTRODUCTION ===
 # introduction|1|introduction.mp3|Hello, little one. Today we're going to explore something truly magical; the secret code that makes you, you.! Take a deep breath, dear mother. Place your hands gently on your belly. Feel the warmth, the connection, the love that flows between you and your baby.! Right now, inside your womb, something extraordinary is happening. Your baby is growing, cell by cell, following an ancient recipe that has been passed down through countless generations. This recipe is written in a language older than any human tongue, a language that all living things share.! This is the language of DNA; the twisted ladder of life, the blueprint of being, the dance of molecules that creates everything from the tiniest bacteria to the mightiest whale, from the smallest flower to you and your precious baby.! Are you ready, little one? Let's discover the beautiful code that makes you who you are...

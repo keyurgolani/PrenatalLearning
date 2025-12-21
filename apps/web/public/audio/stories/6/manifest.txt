@@ -9,6 +9,9 @@
 # - Semicolon (;) = medium pause (~1s)
 # - Exclamation mark (!) = longer pause (~1.5s)
 #
+# IMPORTANT: Entries are commented out by default.
+# Uncomment an entry (remove the leading #) ONLY when the audio file exists.
+#
 
 # === INTRODUCTION ===
 # introduction|1|introduction.mp3|Hello, little one. Today we're going on a wonderful adventure into a world where machines learn to think; not like humans, but in their own special way.! Take a deep breath, dear mother. Place your hands gently on your belly. Feel the warmth, the connection, the love that flows between you and your baby.! Now, imagine something amazing. All around the world, there are machines that can recognize faces in photographs, understand spoken words, translate languages, and even create art and music. These machines weren't programmed with every rule; instead, they learned, just like a child learns.! This is the world of Artificial Intelligence, or AI. And here's the most wonderful secret: these learning machines are inspired by something even more amazing; the human brain, like the one growing inside you right now, little one.! Are you ready? Let's discover how machines learned to learn...

@@ -5,12 +5,14 @@
 # 1. Create images based on the suggested descriptions below
 # 2. Save image files with the suggested filenames (or update the filename field)
 # 3. Place image files in public/images/stories/8/
-# 4. Remove the # from lines you have created images for
+# 4. Remove the # prefix from lines you have created images for to activate them
 # 5. Position options: before, after, inline
+#
+# IMPORTANT: Entries are commented out by default.
+# Uncomment an entry (remove the leading #) ONLY when the image file exists.
 #
 
 # === SUGGESTED IMAGES FROM ANALOGIES ===
-# These images would help visualize the key analogies in the story
 
 # coreContent|after|analogy-0.png|Illustration of Packet Switching|Cutting a painting into a thousand pieces, sending each through different routes, and reassembling at the destination—faster and more reliable than one truck carrying the whole thing
 # coreContent|after|analogy-1.png|Illustration of TCP Protocol|A careful librarian who numbers every page, checks that all pages arrived, puts them in order, and asks for any missing pages to be sent again
@@ -21,7 +23,6 @@
 # coreContent|after|analogy-6.png|Illustration of The Internet|A postal system made of light, where billions of tiny messages crisscross the globe every second, each finding its own path to the destination
 
 # === SUGGESTED IMAGES FROM KEY CONCEPTS ===
-# These images would help illustrate the main concepts
 
 # coreContent|inline|concept-0.png|Illustration of: The internet is a global network connecting billions of devices, using packets of data that trave...|The internet is a global network connecting billions of devices, using packets of data that travel through cables, satellites, and wireless signals
 # coreContent|inline|concept-1.png|Illustration of: Packet switching breaks messages into small pieces that travel independently and reassemble at th...|Packet switching breaks messages into small pieces that travel independently and reassemble at the destination—more reliable than sending everything through one path
@@ -31,9 +32,8 @@
 # coreContent|inline|concept-5.png|Illustration of: The World Wide Web, created by Tim Berners-Lee in 1989, uses HTML, HTTP, and browsers to make inf...|The World Wide Web, created by Tim Berners-Lee in 1989, uses HTML, HTTP, and browsers to make information accessible and interconnected
 
 # === SECTION-SPECIFIC IMAGES ===
-# Add images for specific sections as needed
 
-# introduction|before|intro-img0.png|[Add alt text for introduction image]|[Optional caption for introduction image]
-# coreContent|before|core-img0.png|[Add alt text for coreContent image]|[Optional caption for coreContent image]
-# interactiveSection|before|interactive-img0.png|[Add alt text for interactiveSection image]|[Optional caption for interactiveSection image]
-# integration|before|integration-img0.png|[Add alt text for integration image]|[Optional caption for integration image]
+# introduction|before|intro-img0.png|[Add alt text for introduction image]|[Optional caption]
+# coreContent|before|core-img0.png|[Add alt text for coreContent image]|[Optional caption]
+# interactiveSection|before|interactive-img0.png|[Add alt text for interactiveSection image]|[Optional caption]
+# integration|before|integration-img0.png|[Add alt text for integration image]|[Optional caption]

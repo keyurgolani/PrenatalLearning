@@ -9,6 +9,9 @@
 # - Semicolon (;) = medium pause (~1s)
 # - Exclamation mark (!) = longer pause (~1.5s)
 #
+# IMPORTANT: Entries are commented out by default.
+# Uncomment an entry (remove the leading #) ONLY when the audio file exists.
+#
 
 # === INTRODUCTION ===
 # introduction|1|introduction.mp3|Hello, little one. Today we're going to tell you about something truly wonderful; the incredible diversity of human beings and the beautiful cultures they have created all around the world.! Take a deep breath, dear mother. Place your hands gently on your belly. Feel the warmth, the connection, the love that flows between you and your baby.! Right now, at this very moment, there are nearly eight billion people on Earth. They live on every continent, speak thousands of different languages, celebrate countless traditions, and see the world in wonderfully different ways. Yet beneath all these differences, we are one family; the human family.! Your baby will grow up in a world filled with this beautiful diversity. They will meet people who look different, speak different languages, eat different foods, and celebrate different holidays. And this is one of the greatest gifts of being human; the chance to learn from each other, to share our stories, and to discover that our differences make us stronger.! Are you ready, little one? Let's take a journey around the world and discover the human rainbow...

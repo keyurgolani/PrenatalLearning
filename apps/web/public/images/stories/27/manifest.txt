@@ -5,12 +5,14 @@
 # 1. Create images based on the suggested descriptions below
 # 2. Save image files with the suggested filenames (or update the filename field)
 # 3. Place image files in public/images/stories/27/
-# 4. Remove the # from lines you have created images for
+# 4. Remove the # prefix from lines you have created images for to activate them
 # 5. Position options: before, after, inline
+#
+# IMPORTANT: Entries are commented out by default.
+# Uncomment an entry (remove the leading #) ONLY when the image file exists.
 #
 
 # === SUGGESTED IMAGES FROM ANALOGIES ===
-# These images would help visualize the key analogies in the story
 
 # coreContent|after|analogy-0.png|Illustration of Digital Scarcity|Bitcoin is like a gold mine with exactly 21 million nuggets—everyone knows exactly how much exists, and no one can create more
 # coreContent|after|analogy-1.png|Illustration of Mining|Bitcoin mining is like a global lottery where computers buy tickets by solving puzzles—winners get new coins, and the lottery gets harder over time
@@ -20,7 +22,6 @@
 # coreContent|after|analogy-5.png|Illustration of Decentralization|Cryptocurrency is like a language that belongs to everyone—no single person or company controls it, yet everyone can use it
 
 # === SUGGESTED IMAGES FROM KEY CONCEPTS ===
-# These images would help illustrate the main concepts
 
 # coreContent|inline|concept-0.png|Illustration of: Cryptocurrency is digital money secured by cryptography, operating without banks or central autho...|Cryptocurrency is digital money secured by cryptography, operating without banks or central authorities
 # coreContent|inline|concept-1.png|Illustration of: Bitcoin was created in 2009 by the mysterious Satoshi Nakamoto, solving the "double-spending prob...|Bitcoin was created in 2009 by the mysterious Satoshi Nakamoto, solving the "double-spending problem" for digital money
@@ -30,9 +31,8 @@
 # coreContent|inline|concept-5.png|Illustration of: Cryptocurrency represents trust in code and mathematics rather than trust in banks and governments|Cryptocurrency represents trust in code and mathematics rather than trust in banks and governments
 
 # === SECTION-SPECIFIC IMAGES ===
-# Add images for specific sections as needed
 
-# introduction|before|intro-img0.png|[Add alt text for introduction image]|[Optional caption for introduction image]
-# coreContent|before|core-img0.png|[Add alt text for coreContent image]|[Optional caption for coreContent image]
-# interactiveSection|before|interactive-img0.png|[Add alt text for interactiveSection image]|[Optional caption for interactiveSection image]
-# integration|before|integration-img0.png|[Add alt text for integration image]|[Optional caption for integration image]
+# introduction|before|intro-img0.png|[Add alt text for introduction image]|[Optional caption]
+# coreContent|before|core-img0.png|[Add alt text for coreContent image]|[Optional caption]
+# interactiveSection|before|interactive-img0.png|[Add alt text for interactiveSection image]|[Optional caption]
+# integration|before|integration-img0.png|[Add alt text for integration image]|[Optional caption]

@@ -5,12 +5,14 @@
 # 1. Create images based on the suggested descriptions below
 # 2. Save image files with the suggested filenames (or update the filename field)
 # 3. Place image files in public/images/stories/16/
-# 4. Remove the # from lines you have created images for
+# 4. Remove the # prefix from lines you have created images for to activate them
 # 5. Position options: before, after, inline
+#
+# IMPORTANT: Entries are commented out by default.
+# Uncomment an entry (remove the leading #) ONLY when the image file exists.
 #
 
 # === SUGGESTED IMAGES FROM ANALOGIES ===
-# These images would help visualize the key analogies in the story
 
 # coreContent|after|analogy-0.png|Illustration of Probability|Probability is like a measuring stick for uncertainty—it doesn't tell us exactly what will happen, but it measures how likely different outcomes are
 # coreContent|after|analogy-1.png|Illustration of Gambler's Fallacy|Thinking a coin is 'due' for heads after many tails is like thinking a coin has a memory—but coins don't remember, each flip is a fresh start
@@ -20,7 +22,6 @@
 # coreContent|after|analogy-5.png|Illustration of Birthday Paradox|The birthday paradox is surprising because we forget how many pairs of people there are—like forgetting how many handshakes happen when everyone shakes hands with everyone
 
 # === SUGGESTED IMAGES FROM KEY CONCEPTS ===
-# These images would help illustrate the main concepts
 
 # coreContent|inline|concept-0.png|Illustration of: Probability measures how likely something is to happen, expressed as a number between 0 (impossib...|Probability measures how likely something is to happen, expressed as a number between 0 (impossible) and 1 (certain)
 # coreContent|inline|concept-1.png|Illustration of: Each random event is independent—past outcomes do not affect future probabilities (avoiding the g...|Each random event is independent—past outcomes do not affect future probabilities (avoiding the gambler's fallacy)
@@ -30,9 +31,8 @@
 # coreContent|inline|concept-5.png|Illustration of: Our intuition about probability is often wrong—mathematics reveals surprising truths like the bir...|Our intuition about probability is often wrong—mathematics reveals surprising truths like the birthday paradox
 
 # === SECTION-SPECIFIC IMAGES ===
-# Add images for specific sections as needed
 
-# introduction|before|intro-img0.png|[Add alt text for introduction image]|[Optional caption for introduction image]
-# coreContent|before|core-img0.png|[Add alt text for coreContent image]|[Optional caption for coreContent image]
-# interactiveSection|before|interactive-img0.png|[Add alt text for interactiveSection image]|[Optional caption for interactiveSection image]
-# integration|before|integration-img0.png|[Add alt text for integration image]|[Optional caption for integration image]
+# introduction|before|intro-img0.png|[Add alt text for introduction image]|[Optional caption]
+# coreContent|before|core-img0.png|[Add alt text for coreContent image]|[Optional caption]
+# interactiveSection|before|interactive-img0.png|[Add alt text for interactiveSection image]|[Optional caption]
+# integration|before|integration-img0.png|[Add alt text for integration image]|[Optional caption]

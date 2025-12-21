@@ -5,12 +5,14 @@
 # 1. Create images based on the suggested descriptions below
 # 2. Save image files with the suggested filenames (or update the filename field)
 # 3. Place image files in public/images/stories/10/
-# 4. Remove the # from lines you have created images for
+# 4. Remove the # prefix from lines you have created images for to activate them
 # 5. Position options: before, after, inline
+#
+# IMPORTANT: Entries are commented out by default.
+# Uncomment an entry (remove the leading #) ONLY when the image file exists.
 #
 
 # === SUGGESTED IMAGES FROM ANALOGIES ===
-# These images would help visualize the key analogies in the story
 
 # coreContent|after|analogy-0.png|Illustration of Body Systems|A grand orchestra with trillions of musicians, each system playing its own instrument section
 # coreContent|after|analogy-1.png|Illustration of Muscular System|The string section—providing movement and flow, able to play softly or loudly, quickly or slowly
@@ -24,7 +26,6 @@
 # coreContent|after|analogy-9.png|Illustration of Homeostasis|The orchestra adjusting its performance to keep everything in harmony—the perfect balance of life
 
 # === SUGGESTED IMAGES FROM KEY CONCEPTS ===
-# These images would help illustrate the main concepts
 
 # coreContent|inline|concept-0.png|Illustration of: The human body contains about 37 trillion cells, all working together like musicians in an orchestra|The human body contains about 37 trillion cells, all working together like musicians in an orchestra
 # coreContent|inline|concept-1.png|Illustration of: Major organ systems include muscular, skeletal, respiratory, digestive, nervous, cardiovascular, ...|Major organ systems include muscular, skeletal, respiratory, digestive, nervous, cardiovascular, endocrine, and immune systems
@@ -34,9 +35,8 @@
 # coreContent|inline|concept-5.png|Illustration of: All body systems communicate and cooperate constantly, creating the symphony of life|All body systems communicate and cooperate constantly, creating the symphony of life
 
 # === SECTION-SPECIFIC IMAGES ===
-# Add images for specific sections as needed
 
-# introduction|before|intro-img0.png|[Add alt text for introduction image]|[Optional caption for introduction image]
-# coreContent|before|core-img0.png|[Add alt text for coreContent image]|[Optional caption for coreContent image]
-# interactiveSection|before|interactive-img0.png|[Add alt text for interactiveSection image]|[Optional caption for interactiveSection image]
-# integration|before|integration-img0.png|[Add alt text for integration image]|[Optional caption for integration image]
+# introduction|before|intro-img0.png|[Add alt text for introduction image]|[Optional caption]
+# coreContent|before|core-img0.png|[Add alt text for coreContent image]|[Optional caption]
+# interactiveSection|before|interactive-img0.png|[Add alt text for interactiveSection image]|[Optional caption]
+# integration|before|integration-img0.png|[Add alt text for integration image]|[Optional caption]

@@ -9,6 +9,9 @@
 # - Semicolon (;) = medium pause (~1s)
 # - Exclamation mark (!) = longer pause (~1.5s)
 #
+# IMPORTANT: Entries are commented out by default.
+# Uncomment an entry (remove the leading #) ONLY when the audio file exists.
+#
 
 # === INTRODUCTION ===
 # introduction|1|introduction.mp3|Hello, little one. Today we're going to explore one of the most fascinating dances in all of human society; the dance of markets.! Take a deep breath, dear mother. Place your hands gently on your belly. Feel the rhythm of your heartbeat, the gentle movements of your baby. There's a dance happening inside you right now; nutrients flowing, cells exchanging, life sustaining life.! Markets are like that too, little one. They're places where things flow from those who have them to those who need them, where value moves like a river through society, connecting millions of people who will never meet.! Imagine a great ballroom where buyers and sellers come together. Some want to sell what they have; others want to buy what they need. And in the middle of this swirling dance, something magical happens: prices emerge, resources find their way to where they're needed, and strangers cooperate without even knowing each other's names.! This is the story of markets; how they work, why they matter, and the beautiful invisible choreography that coordinates our world.! Are you ready to join the dance? Let's begin...

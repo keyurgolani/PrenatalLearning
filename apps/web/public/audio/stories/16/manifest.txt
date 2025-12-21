@@ -9,6 +9,9 @@
 # - Semicolon (;) = medium pause (~1s)
 # - Exclamation mark (!) = longer pause (~1.5s)
 #
+# IMPORTANT: Entries are commented out by default.
+# Uncomment an entry (remove the leading #) ONLY when the audio file exists.
+#
 
 # === INTRODUCTION ===
 # introduction|1|introduction.mp3|Hello, little one. Today we're going to explore something magical; the mathematics of chance. The invisible rules that govern luck, uncertainty, and all the wonderful surprises life has in store.! Take a deep breath, dear mother. Place your hands gently on your belly and feel the miracle growing within. Your baby's existence is itself a beautiful example of probability; the incredible chance that brought together exactly the right combination of genes to create this unique little person.! Close your eyes and imagine... imagine you could see the invisible threads of chance that weave through every moment of every day. The probability that it will rain tomorrow. The likelihood that you'll meet a friend on the street. The chances that your baby will have your eyes or your partner's smile.! These aren't just random guesses; they're mathematics. Beautiful, elegant mathematics that helps us understand uncertainty and make sense of a world where nothing is ever completely certain.! Are you ready, little one? Let's discover the wonderful world of probability...

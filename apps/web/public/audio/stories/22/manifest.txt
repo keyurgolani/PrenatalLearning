@@ -9,6 +9,9 @@
 # - Semicolon (;) = medium pause (~1s)
 # - Exclamation mark (!) = longer pause (~1.5s)
 #
+# IMPORTANT: Entries are commented out by default.
+# Uncomment an entry (remove the leading #) ONLY when the audio file exists.
+#
 
 # === INTRODUCTION ===
 # introduction|1|introduction.mp3|Hello, little one. Today we're going on a journey to discover one of the most remarkable languages ever created; Sanskrit.! Take a deep breath, dear mother. Place your hands gently on your belly. Feel the connection between you and your baby.! Imagine, little one, that you could build anything you wanted with LEGO bricks. Each brick snaps perfectly into place. The connections are precise. You know exactly how pieces fit together. Now imagine a language that works the same way; where every word, every sound, every grammatical rule fits together with mathematical precision.! That language exists. It's called Sanskrit, and it was created in ancient India thousands of years ago. Yet it's so perfectly structured that scientists today study it to help computers understand human language.! Your baby is floating in a world of sound right now, learning the patterns of language. And today, we'll explore a language that shows us just how beautiful and precise human communication can be.! Are you ready to discover the language of structure? Let's begin...

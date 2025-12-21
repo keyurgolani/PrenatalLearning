@@ -9,6 +9,9 @@
 # - Semicolon (;) = medium pause (~1s)
 # - Exclamation mark (!) = longer pause (~1.5s)
 #
+# IMPORTANT: Entries are commented out by default.
+# Uncomment an entry (remove the leading #) ONLY when the audio file exists.
+#
 
 # === INTRODUCTION ===
 # introduction|1|introduction.mp3|Hello, little one. Today we're going to share a beautiful story about growing; not just growing bigger, but growing something precious over time. We're going to learn about wealth and wisdom.! Take a deep breath, dear mother. Place your hands gently on your belly. Feel the life growing within you; this is the most precious kind of growth there is.! Now, imagine planting a tiny seed in rich soil. At first, nothing seems to happen. Days pass, weeks pass. But beneath the surface, roots are spreading, gathering strength. Then one day, a tiny green shoot appears. With patience and care, that seed becomes a mighty tree.! Building wealth is just like growing a tree, little one. It starts small, requires patience, and rewards those who understand that the greatest things in life take time to grow.! This isn't just a story about money. It's a story about patience, about making wise choices, about understanding that what we do today shapes our tomorrow. It's about the beautiful mathematics of growth and the wisdom of thinking ahead.! Are you ready? Let's discover the secrets of building a future filled with possibility...

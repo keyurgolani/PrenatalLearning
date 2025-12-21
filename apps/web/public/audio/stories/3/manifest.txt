@@ -9,6 +9,9 @@
 # - Semicolon (;) = medium pause (~1s)
 # - Exclamation mark (!) = longer pause (~1.5s)
 #
+# IMPORTANT: Entries are commented out by default.
+# Uncomment an entry (remove the leading #) ONLY when the audio file exists.
+#
 
 # === INTRODUCTION ===
 # introduction|1|introduction.mp3|Hello, little one. Today we're going on a very special adventure; a journey into a world so tiny and so strange that it seems like pure magic.! Take a deep breath, dear mother. Place your hands gently on your belly. Feel the warmth, the connection, the love that flows between you and your baby.! Now, imagine you could shrink down, smaller and smaller, until you were tinier than a grain of sand, tinier than a speck of dust, tinier than the smallest thing you can imagine. What would you find there?! You would find a world where the rules are completely different. A world where things can be in two places at once. A world where looking at something changes what it is. A world where particles separated by vast distances seem to whisper secrets to each other instantly.! This is the quantum world, little one. And it's not science fiction; it's the true nature of reality at its smallest scale. Everything you see, everything you touch, everything you are is made of these quantum building blocks, dancing their strange and beautiful dance.! Are you ready to explore the quantum garden? Let's step through the looking glass together...

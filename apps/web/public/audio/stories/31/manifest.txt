@@ -9,6 +9,9 @@
 # - Semicolon (;) = medium pause (~1s)
 # - Exclamation mark (!) = longer pause (~1.5s)
 #
+# IMPORTANT: Entries are commented out by default.
+# Uncomment an entry (remove the leading #) ONLY when the audio file exists.
+#
 
 # === INTRODUCTION ===
 # introduction|1|introduction.mp3|Hello, little one. Today we're going to tell you about something truly remarkable; how people learned to make decisions together, to share power, and to build communities where every voice can be heard.! Take a deep breath, dear mother. Place your hands gently on your belly. Feel the connection between you and your baby, this beautiful bond of love and trust.! Right now, all around the world, people are making decisions together. In town halls and parliaments, in community meetings and voting booths, in classrooms and family discussions; humans are practicing the ancient art of deciding things together. This is democracy, and it's one of humanity's most precious inventions.! Your baby will grow up in a world shaped by these collective decisions. They will have a voice, a vote, a chance to help shape the future. And understanding how we make decisions together is one of the most important things they can learn.! Are you ready, little one? Let's discover the beautiful story of democracy; how people learned to govern themselves...

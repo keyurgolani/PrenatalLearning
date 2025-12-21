@@ -9,6 +9,9 @@
 # - Semicolon (;) = medium pause (~1s)
 # - Exclamation mark (!) = longer pause (~1.5s)
 #
+# IMPORTANT: Entries are commented out by default.
+# Uncomment an entry (remove the leading #) ONLY when the audio file exists.
+#
 
 # === INTRODUCTION ===
 # introduction|1|introduction.mp3|Hello, little one. Today we're going on a wonderful journey through time; a journey to discover one of humanity's most clever inventions: money.! Take a deep breath, dear mother. Place your hands gently on your belly. Feel the warmth, the connection, the love that flows between you and your baby.! Now, imagine something remarkable. What if you had a beautiful painting, but you needed food? What if you were a farmer with extra wheat, but you needed shoes? How would you get what you need?! This is the puzzle that humans faced long, long ago. And the solution they invented; money; changed everything about how we live together.! Money isn't just coins and bills, little one. It's a story of human cooperation, of trust between strangers, of the amazing things we can do when we work together. And here's the beautiful secret: money only works because we all believe in it together.! Are you ready? Let's travel through time and discover how a simple idea became one of the most powerful forces in human history...

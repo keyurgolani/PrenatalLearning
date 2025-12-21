@@ -5,12 +5,14 @@
 # 1. Create images based on the suggested descriptions below
 # 2. Save image files with the suggested filenames (or update the filename field)
 # 3. Place image files in public/images/stories/25/
-# 4. Remove the # from lines you have created images for
+# 4. Remove the # prefix from lines you have created images for to activate them
 # 5. Position options: before, after, inline
+#
+# IMPORTANT: Entries are commented out by default.
+# Uncomment an entry (remove the leading #) ONLY when the image file exists.
 #
 
 # === SUGGESTED IMAGES FROM ANALOGIES ===
-# These images would help visualize the key analogies in the story
 
 # coreContent|after|analogy-0.png|Illustration of Barter Problem|Like trying to trade puzzle pieces when you need to find someone whose missing piece is exactly what you have, and who has exactly the piece you need
 # coreContent|after|analogy-1.png|Illustration of Money as Medium of Exchange|Money is like a universal translator that lets any goods "speak" to any other goods—wheat can become shoes, paintings can become food
@@ -20,7 +22,6 @@
 # coreContent|after|analogy-5.png|Illustration of Digital Money|Digital money is like the score in a video game—the numbers change, but no physical coins move; it's all about keeping track
 
 # === SUGGESTED IMAGES FROM KEY CONCEPTS ===
-# These images would help illustrate the main concepts
 
 # coreContent|inline|concept-0.png|Illustration of: Money evolved from barter to solve the "double coincidence of wants"—the problem of finding someo...|Money evolved from barter to solve the "double coincidence of wants"—the problem of finding someone who has what you want and wants what you have
 # coreContent|inline|concept-1.png|Illustration of: Early money included shells, beads, salt, and cattle—things people agreed were valuable|Early money included shells, beads, salt, and cattle—things people agreed were valuable
@@ -30,9 +31,8 @@
 # coreContent|inline|concept-5.png|Illustration of: All money ultimately works because of trust—we accept it because we trust others will accept it too|All money ultimately works because of trust—we accept it because we trust others will accept it too
 
 # === SECTION-SPECIFIC IMAGES ===
-# Add images for specific sections as needed
 
-# introduction|before|intro-img0.png|[Add alt text for introduction image]|[Optional caption for introduction image]
-# coreContent|before|core-img0.png|[Add alt text for coreContent image]|[Optional caption for coreContent image]
-# interactiveSection|before|interactive-img0.png|[Add alt text for interactiveSection image]|[Optional caption for interactiveSection image]
-# integration|before|integration-img0.png|[Add alt text for integration image]|[Optional caption for integration image]
+# introduction|before|intro-img0.png|[Add alt text for introduction image]|[Optional caption]
+# coreContent|before|core-img0.png|[Add alt text for coreContent image]|[Optional caption]
+# interactiveSection|before|interactive-img0.png|[Add alt text for interactiveSection image]|[Optional caption]
+# integration|before|integration-img0.png|[Add alt text for integration image]|[Optional caption]

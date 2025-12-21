@@ -9,6 +9,9 @@
 # - Semicolon (;) = medium pause (~1s)
 # - Exclamation mark (!) = longer pause (~1.5s)
 #
+# IMPORTANT: Entries are commented out by default.
+# Uncomment an entry (remove the leading #) ONLY when the audio file exists.
+#
 
 # === INTRODUCTION ===
 # introduction|1|introduction.mp3|Hello, little one. Today we're going on a journey into something beautiful; the world of art and the human need to create.! Take a deep breath, dear mother. Place your hands gently on your belly. Feel the warmth, the connection, the love that flows between you and your baby.! Look around you right now. Perhaps there's a painting on the wall, a pattern on a blanket, a photograph of someone you love. Maybe you can hear music playing softly, or see the way light falls through a window, creating shadows and shapes.! All of this is art. And the fact that humans create it; that we have always created it; is one of the most wonderful mysteries of our existence.! Long before we had writing, before we built cities, before we invented the wheel, we were making art. Deep in caves, by flickering firelight, our ancestors painted animals on stone walls. They carved figures from bone and ivory. They decorated their bodies and their tools with patterns and colors.! Why? What drove them to create beauty when survival was so hard? What drives us still?! Little one, you are already surrounded by art. Your mother's heartbeat is a rhythm. Her voice is a melody. The way she moves is a dance. And soon, you will add your own creativity to the world.! Are you ready to explore the wonder of art? Let's discover why humans create beauty...

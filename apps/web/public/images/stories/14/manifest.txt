@@ -5,12 +5,14 @@
 # 1. Create images based on the suggested descriptions below
 # 2. Save image files with the suggested filenames (or update the filename field)
 # 3. Place image files in public/images/stories/14/
-# 4. Remove the # from lines you have created images for
+# 4. Remove the # prefix from lines you have created images for to activate them
 # 5. Position options: before, after, inline
+#
+# IMPORTANT: Entries are commented out by default.
+# Uncomment an entry (remove the leading #) ONLY when the image file exists.
 #
 
 # === SUGGESTED IMAGES FROM ANALOGIES ===
-# These images would help visualize the key analogies in the story
 
 # coreContent|after|analogy-0.png|Illustration of Infinity|Infinity is like a road that goes on forever—no matter how far you travel, there's always more road ahead, always another horizon to reach
 # coreContent|after|analogy-1.png|Illustration of Countable vs Uncountable Infinity|Countable infinity is like stars you can point to one by one; uncountable infinity is like trying to point to every grain of sand on every beach—there are simply too many to ever list
@@ -20,7 +22,6 @@
 # coreContent|after|analogy-5.png|Illustration of Infinite Divisibility|Space is like a magical cake that can always be cut in half again—no matter how small the slice, you can always make it smaller
 
 # === SUGGESTED IMAGES FROM KEY CONCEPTS ===
-# These images would help illustrate the main concepts
 
 # coreContent|inline|concept-0.png|Illustration of: Infinity (∞) is not a number but the concept of something without end or limit|Infinity (∞) is not a number but the concept of something without end or limit
 # coreContent|inline|concept-1.png|Illustration of: The counting numbers (1, 2, 3...) form a "countable infinity" that can be listed one by one|The counting numbers (1, 2, 3...) form a "countable infinity" that can be listed one by one
@@ -30,9 +31,8 @@
 # coreContent|inline|concept-5.png|Illustration of: There is a hierarchy of infinities (ℵ₀, ℵ₁, ℵ₂...), each larger than the last, with no largest in...|There is a hierarchy of infinities (ℵ₀, ℵ₁, ℵ₂...), each larger than the last, with no largest infinity
 
 # === SECTION-SPECIFIC IMAGES ===
-# Add images for specific sections as needed
 
-# introduction|before|intro-img0.png|[Add alt text for introduction image]|[Optional caption for introduction image]
-# coreContent|before|core-img0.png|[Add alt text for coreContent image]|[Optional caption for coreContent image]
-# interactiveSection|before|interactive-img0.png|[Add alt text for interactiveSection image]|[Optional caption for interactiveSection image]
-# integration|before|integration-img0.png|[Add alt text for integration image]|[Optional caption for integration image]
+# introduction|before|intro-img0.png|[Add alt text for introduction image]|[Optional caption]
+# coreContent|before|core-img0.png|[Add alt text for coreContent image]|[Optional caption]
+# interactiveSection|before|interactive-img0.png|[Add alt text for interactiveSection image]|[Optional caption]
+# integration|before|integration-img0.png|[Add alt text for integration image]|[Optional caption]

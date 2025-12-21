@@ -105,22 +105,28 @@ A beautiful, interactive web application designed to help expectant parents bond
 
 #### Backend Development
 
-| Command                 | Description                      |
-| ----------------------- | -------------------------------- |
-| `pnpm run server:dev`   | Start backend development server |
-| `pnpm run server:build` | Build backend for production     |
-| `pnpm run server:start` | Start production backend         |
-| `pnpm run server:test`  | Run backend tests                |
-| `pnpm run server:lint`  | Run backend ESLint               |
+| Command                      | Description                      |
+| ---------------------------- | -------------------------------- |
+| `pnpm run dev:server`        | Start backend development server |
+| `pnpm run build:server`      | Build backend for production     |
+| `pnpm run start:server`      | Start production backend         |
+| `pnpm run test:server`       | Run backend tests                |
+| `pnpm run test:watch:server` | Run backend tests in watch mode  |
+| `pnpm run lint:server`       | Run backend ESLint               |
+| `pnpm run typecheck:server`  | Run backend TypeScript checking  |
 
 #### Workspace Commands
 
-| Command              | Description                     |
-| -------------------- | ------------------------------- |
-| `pnpm run build:all` | Build all packages in workspace |
-| `pnpm run lint:all`  | Lint all packages in workspace  |
-| `pnpm run test:all`  | Run tests in all packages       |
-| `pnpm run clean`     | Clean all node_modules and dist |
+| Command                       | Description                       |
+| ----------------------------- | --------------------------------- |
+| `pnpm run dev:all`            | Start all dev servers in parallel |
+| `pnpm run build:all`          | Build all packages in workspace   |
+| `pnpm run lint:all`           | Lint all packages in workspace    |
+| `pnpm run lint:fix`           | Fix lint issues in all packages   |
+| `pnpm run test:all`           | Run tests in all packages         |
+| `pnpm run typecheck:all`      | Type check all packages           |
+| `pnpm run clean`              | Clean all node_modules and dist   |
+| `pnpm run generate:manifests` | Generate audio/image manifests    |
 
 #### Docker - Stack Management
 

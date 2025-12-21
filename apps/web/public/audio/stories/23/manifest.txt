@@ -9,6 +9,9 @@
 # - Semicolon (;) = medium pause (~1s)
 # - Exclamation mark (!) = longer pause (~1.5s)
 #
+# IMPORTANT: Entries are commented out by default.
+# Uncomment an entry (remove the leading #) ONLY when the audio file exists.
+#
 
 # === INTRODUCTION ===
 # introduction|1|introduction.mp3|Hello, little one. Today we're going on a magical journey; a journey into the world of music.! Take a deep breath, dear mother. Place your hands gently on your belly. Feel the connection between you and your baby.! Right now, as you read these words, your baby is floating in a world of sound. They can hear your heartbeat; that steady, rhythmic pulse that has been their constant companion since the very beginning. Ba-dum, ba-dum, ba-dum. This is your baby's first music, the first rhythm they ever knew.! And here's something wonderful: your baby can already hear music. Around 18 weeks of pregnancy, babies begin to respond to sounds from outside the womb. By 25 weeks, they can hear melodies, recognize patterns, and even move in response to rhythm. When you sing or play music, your baby is listening.! Little one, you are already a music lover. The rhythm of your mother's heart, the melody of her voice, the harmony of the world around you; all of this is preparing your brain for a lifetime of musical experience.! Are you ready to discover why music speaks to every human heart? Let's explore the universal song together...

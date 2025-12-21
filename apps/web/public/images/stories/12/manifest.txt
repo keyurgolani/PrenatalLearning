@@ -5,12 +5,14 @@
 # 1. Create images based on the suggested descriptions below
 # 2. Save image files with the suggested filenames (or update the filename field)
 # 3. Place image files in public/images/stories/12/
-# 4. Remove the # from lines you have created images for
+# 4. Remove the # prefix from lines you have created images for to activate them
 # 5. Position options: before, after, inline
+#
+# IMPORTANT: Entries are commented out by default.
+# Uncomment an entry (remove the leading #) ONLY when the image file exists.
 #
 
 # === SUGGESTED IMAGES FROM ANALOGIES ===
-# These images would help visualize the key analogies in the story
 
 # coreContent|after|analogy-0.png|Illustration of Tree of Life|A vast family tree where every living thing is a branch or leaf, all connected to the same trunk and roots
 # coreContent|after|analogy-1.png|Illustration of Natural Selection|Like a filter that lets through the creatures best suited to their environment, allowing helpful traits to become more common over generations
@@ -21,7 +23,6 @@
 # coreContent|after|analogy-6.png|Illustration of Vestigial Structures|Like old family heirlooms that no longer serve their original purpose but remind us of our ancestors
 
 # === SUGGESTED IMAGES FROM KEY CONCEPTS ===
-# These images would help illustrate the main concepts
 
 # coreContent|inline|concept-0.png|Illustration of: All living things are connected through the Tree of Life, descended from a common ancestor called...|All living things are connected through the Tree of Life, descended from a common ancestor called LUCA that lived about 3.5-4 billion years ago
 # coreContent|inline|concept-1.png|Illustration of: Evolution happens through natural selection: organisms with helpful traits survive and pass those...|Evolution happens through natural selection: organisms with helpful traits survive and pass those traits to their offspring
@@ -31,9 +32,8 @@
 # coreContent|inline|concept-5.png|Illustration of: Evolution is ongoing; life continues to adapt and change in response to the environment|Evolution is ongoing; life continues to adapt and change in response to the environment
 
 # === SECTION-SPECIFIC IMAGES ===
-# Add images for specific sections as needed
 
-# introduction|before|intro-img0.png|[Add alt text for introduction image]|[Optional caption for introduction image]
-# coreContent|before|core-img0.png|[Add alt text for coreContent image]|[Optional caption for coreContent image]
-# interactiveSection|before|interactive-img0.png|[Add alt text for interactiveSection image]|[Optional caption for interactiveSection image]
-# integration|before|integration-img0.png|[Add alt text for integration image]|[Optional caption for integration image]
+# introduction|before|intro-img0.png|[Add alt text for introduction image]|[Optional caption]
+# coreContent|before|core-img0.png|[Add alt text for coreContent image]|[Optional caption]
+# interactiveSection|before|interactive-img0.png|[Add alt text for interactiveSection image]|[Optional caption]
+# integration|before|integration-img0.png|[Add alt text for integration image]|[Optional caption]

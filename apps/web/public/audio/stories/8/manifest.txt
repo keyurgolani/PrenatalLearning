@@ -9,6 +9,9 @@
 # - Semicolon (;) = medium pause (~1s)
 # - Exclamation mark (!) = longer pause (~1.5s)
 #
+# IMPORTANT: Entries are commented out by default.
+# Uncomment an entry (remove the leading #) ONLY when the audio file exists.
+#
 
 # === INTRODUCTION ===
 # introduction|1|introduction.mp3|Hello, little one. Today we're going on a magical journey through invisible threads that stretch across the entire world; threads that carry voices, pictures, stories, and love from one person to another, no matter how far apart they are.! Take a deep breath, dear mother. Place your hands gently on your belly. Feel the connection between you and your baby; a connection that needs no wires, no signals, just love.! Now, imagine something wonderful. What if you could send a message to someone on the other side of the world, and they would receive it in less than a second? What if you could see your grandmother's face even though she lives thousands of miles away? What if all the knowledge in all the libraries in the world could fit in your pocket?! This is the world of the internet; a vast, invisible network that connects billions of people, billions of devices, and billions of ideas. And here's the beautiful secret: the internet isn't magic, even though it seems like it. It's the result of human creativity, cooperation, and the simple desire to connect.! Are you ready? Let's discover how messages travel around the world...

@@ -9,6 +9,9 @@
 # - Semicolon (;) = medium pause (~1s)
 # - Exclamation mark (!) = longer pause (~1.5s)
 #
+# IMPORTANT: Entries are commented out by default.
+# Uncomment an entry (remove the leading #) ONLY when the audio file exists.
+#
 
 # === INTRODUCTION ===
 # introduction|1|introduction.mp3|Hello, little one. Today we're going on a wonderful adventure into a world of tiny switches and magical thinking machines.! Take a deep breath, dear mother. Place your hands gently on your belly. Feel the warmth, the connection, the love that flows between you and your baby.! Now, imagine something amazing. Right now, all around the world, there are machines that can remember things, solve puzzles, play music, show pictures, and even help people talk to each other across oceans. These machines are called computers, and they're everywhere; in phones, in cars, in hospitals, and in homes.! But here's the most wonderful secret: inside every computer, no matter how smart it seems, there's really just one simple thing happening over and over again; tiny switches turning on and off, like little lights blinking in the dark.! Are you ready, little one? Let's discover how these simple switches create the amazing world of computers...

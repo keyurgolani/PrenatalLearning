@@ -9,6 +9,9 @@
 # - Semicolon (;) = medium pause (~1s)
 # - Exclamation mark (!) = longer pause (~1.5s)
 #
+# IMPORTANT: Entries are commented out by default.
+# Uncomment an entry (remove the leading #) ONLY when the audio file exists.
+#
 
 # === INTRODUCTION ===
 # introduction|1|introduction.mp3|Hello, little one. Today we're going on a wonderful adventure into a world of trust and truth; a world where promises are kept forever and no one can cheat.! Take a deep breath, dear mother. Place your hands gently on your belly. Feel the warmth, the connection, the love that flows between you and your baby.! Now, imagine something remarkable. What if there was a way to write something down that could never be erased, never be changed, never be lied about? What if everyone in the world could see this record, and everyone could trust it was true?! This is the world of blockchain; a magical chain of trust that's changing how humans work together. And here's the beautiful secret: blockchain isn't about computers or money. It's about something much more precious; it's about trust.! Are you ready? Let's discover how a simple idea became one of the most important inventions of our time...

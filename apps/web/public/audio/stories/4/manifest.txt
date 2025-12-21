@@ -9,6 +9,9 @@
 # - Semicolon (;) = medium pause (~1s)
 # - Exclamation mark (!) = longer pause (~1.5s)
 #
+# IMPORTANT: Entries are commented out by default.
+# Uncomment an entry (remove the leading #) ONLY when the audio file exists.
+#
 
 # === INTRODUCTION ===
 # introduction|1|introduction.mp3|Hello, little one. Tonight we're going to tell you a very special story; the story of the stars.! Take a deep breath, dear mother. Place your hands gently on your belly and feel the warmth of your connection with your baby.! Look up at the night sky in your imagination. See those twinkling points of light scattered across the darkness like diamonds on black velvet? Each one of those stars has a story to tell. Each one is a sun, burning bright, creating the very ingredients that make up you and me.! Here's a secret, little one; a beautiful, wonderful secret: You are made of stars. The iron in your blood, the calcium in your tiny forming bones, the oxygen you'll breathe with your first cry; all of it was cooked inside ancient stars, billions of years ago.! Tonight, we'll journey through the life of a star, from its gentle birth in a cosmic cloud to its spectacular ending. And along the way, we'll discover how the stars gave us the greatest gift of all: the building blocks of life.! Are you ready, little one? Let's begin our starlight story...

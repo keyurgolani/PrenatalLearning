@@ -9,6 +9,9 @@
 # - Semicolon (;) = medium pause (~1s)
 # - Exclamation mark (!) = longer pause (~1.5s)
 #
+# IMPORTANT: Entries are commented out by default.
+# Uncomment an entry (remove the leading #) ONLY when the audio file exists.
+#
 
 # === INTRODUCTION ===
 # introduction|1|introduction.mp3|Hello, little one. Today we're going to explore something wonderful; the colorful world of emotions, the feelings that paint our inner lives with joy, love, and sometimes storms.! Take a deep breath, dear mother. Place your hands gently on your belly. Notice how you feel right now. Perhaps there's warmth, love, anticipation. Perhaps a little tiredness or worry. Whatever you feel is perfectly okay.! You see, little one, emotions are like weather inside our heads. Just as the sky outside can be sunny or cloudy, calm or stormy, our inner world has its own weather patterns. And just like the weather outside, our inner weather is always changing.! Right now, as you float in your warm, safe world, you're already beginning to feel. Scientists have discovered that babies in the womb can sense their mother's emotions. When your mother feels calm, you feel calm. When she feels joy, you feel joy too. You're already learning the language of feelings.! Emotions are one of the most precious gifts you'll receive. They'll help you understand the world, connect with others, and know what matters to you. They're not something to fear or fight; they're wise messengers, here to guide you through life.! Are you ready to explore the rainbow of feelings? Let's journey into the wonderful world of emotions...

@@ -5,12 +5,14 @@
 # 1. Create images based on the suggested descriptions below
 # 2. Save image files with the suggested filenames (or update the filename field)
 # 3. Place image files in public/images/stories/13/
-# 4. Remove the # from lines you have created images for
+# 4. Remove the # prefix from lines you have created images for to activate them
 # 5. Position options: before, after, inline
+#
+# IMPORTANT: Entries are commented out by default.
+# Uncomment an entry (remove the leading #) ONLY when the image file exists.
 #
 
 # === SUGGESTED IMAGES FROM ANALOGIES ===
-# These images would help visualize the key analogies in the story
 
 # coreContent|after|analogy-0.png|Illustration of Mathematics as Language|Mathematics is like a secret code that the universe uses to write everything—from the spiral of a galaxy to the pattern of a snowflake
 # coreContent|after|analogy-1.png|Illustration of Zero|Zero is like a quiet hero—it looks like nothing, but it makes everything possible, like the silence between musical notes that makes the music meaningful
@@ -20,7 +22,6 @@
 # coreContent|after|analogy-5.png|Illustration of Patterns in the Body|Your body is a mathematical symphony—your heartbeat is the rhythm, your DNA is the score, and your growth follows the conductor's precise timing
 
 # === SUGGESTED IMAGES FROM KEY CONCEPTS ===
-# These images would help illustrate the main concepts
 
 # coreContent|inline|concept-0.png|Illustration of: Mathematics is the universal language that describes patterns in nature and the cosmos|Mathematics is the universal language that describes patterns in nature and the cosmos
 # coreContent|inline|concept-1.png|Illustration of: Number systems evolved across cultures, from finger counting to the revolutionary invention of zero|Number systems evolved across cultures, from finger counting to the revolutionary invention of zero
@@ -30,9 +31,8 @@
 # coreContent|inline|concept-5.png|Illustration of: Patterns and rhythms are mathematical—even your heartbeat follows mathematical principles|Patterns and rhythms are mathematical—even your heartbeat follows mathematical principles
 
 # === SECTION-SPECIFIC IMAGES ===
-# Add images for specific sections as needed
 
-# introduction|before|intro-img0.png|[Add alt text for introduction image]|[Optional caption for introduction image]
-# coreContent|before|core-img0.png|[Add alt text for coreContent image]|[Optional caption for coreContent image]
-# interactiveSection|before|interactive-img0.png|[Add alt text for interactiveSection image]|[Optional caption for interactiveSection image]
-# integration|before|integration-img0.png|[Add alt text for integration image]|[Optional caption for integration image]
+# introduction|before|intro-img0.png|[Add alt text for introduction image]|[Optional caption]
+# coreContent|before|core-img0.png|[Add alt text for coreContent image]|[Optional caption]
+# interactiveSection|before|interactive-img0.png|[Add alt text for interactiveSection image]|[Optional caption]
+# integration|before|integration-img0.png|[Add alt text for integration image]|[Optional caption]

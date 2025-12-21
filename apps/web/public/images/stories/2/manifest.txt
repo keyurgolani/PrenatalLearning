@@ -5,12 +5,14 @@
 # 1. Create images based on the suggested descriptions below
 # 2. Save image files with the suggested filenames (or update the filename field)
 # 3. Place image files in public/images/stories/2/
-# 4. Remove the # from lines you have created images for
+# 4. Remove the # prefix from lines you have created images for to activate them
 # 5. Position options: before, after, inline
+#
+# IMPORTANT: Entries are commented out by default.
+# Uncomment an entry (remove the leading #) ONLY when the image file exists.
 #
 
 # === SUGGESTED IMAGES FROM ANALOGIES ===
-# These images would help visualize the key analogies in the story
 
 # coreContent|after|analogy-0.png|Illustration of Spacetime Curvature|A bowling ball on a trampoline—the heavy ball creates a dip, and marbles roll around it following the curved surface
 # coreContent|after|analogy-1.png|Illustration of Orbits|Throwing a ball so hard that as it falls, the Earth curves away beneath it—it keeps falling but never lands
@@ -20,7 +22,6 @@
 # coreContent|after|analogy-5.png|Illustration of Universal Attraction|Invisible strings connecting everything in the universe, with bigger things having stronger strings
 
 # === SUGGESTED IMAGES FROM KEY CONCEPTS ===
-# These images would help illustrate the main concepts
 
 # coreContent|inline|concept-0.png|Illustration of: Gravity is the force that attracts all objects with mass toward each other|Gravity is the force that attracts all objects with mass toward each other
 # coreContent|inline|concept-1.png|Illustration of: Newton discovered that the same gravity that makes apples fall keeps the Moon orbiting Earth|Newton discovered that the same gravity that makes apples fall keeps the Moon orbiting Earth
@@ -31,9 +32,8 @@
 # coreContent|inline|concept-6.png|Illustration of: Gravitational waves are ripples in spacetime caused by massive objects moving|Gravitational waves are ripples in spacetime caused by massive objects moving
 
 # === SECTION-SPECIFIC IMAGES ===
-# Add images for specific sections as needed
 
-# introduction|before|intro-img0.png|[Add alt text for introduction image]|[Optional caption for introduction image]
-# coreContent|before|core-img0.png|[Add alt text for coreContent image]|[Optional caption for coreContent image]
-# interactiveSection|before|interactive-img0.png|[Add alt text for interactiveSection image]|[Optional caption for interactiveSection image]
-# integration|before|integration-img0.png|[Add alt text for integration image]|[Optional caption for integration image]
+# introduction|before|intro-img0.png|[Add alt text for introduction image]|[Optional caption]
+# coreContent|before|core-img0.png|[Add alt text for coreContent image]|[Optional caption]
+# interactiveSection|before|interactive-img0.png|[Add alt text for interactiveSection image]|[Optional caption]
+# integration|before|integration-img0.png|[Add alt text for integration image]|[Optional caption]

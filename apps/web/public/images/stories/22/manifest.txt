@@ -5,12 +5,14 @@
 # 1. Create images based on the suggested descriptions below
 # 2. Save image files with the suggested filenames (or update the filename field)
 # 3. Place image files in public/images/stories/22/
-# 4. Remove the # from lines you have created images for
+# 4. Remove the # prefix from lines you have created images for to activate them
 # 5. Position options: before, after, inline
+#
+# IMPORTANT: Entries are commented out by default.
+# Uncomment an entry (remove the leading #) ONLY when the image file exists.
 #
 
 # === SUGGESTED IMAGES FROM ANALOGIES ===
-# These images would help visualize the key analogies in the story
 
 # coreContent|after|analogy-0.png|Illustration of Sanskrit vs. Other Languages|LEGO bricks vs. clay—Sanskrit has precise, interlocking pieces while other languages are more fluid and shapeable but less exact
 # coreContent|after|analogy-1.png|Illustration of Panini's Grammar|A complete blueprint—4,000 rules that can generate any valid Sanskrit word or sentence, like architectural plans for language
@@ -20,7 +22,6 @@
 # coreContent|after|analogy-5.png|Illustration of Sanskrit and Computers|Ancient programming language—structured so precisely that modern AI researchers study it to improve machine understanding of language
 
 # === SUGGESTED IMAGES FROM KEY CONCEPTS ===
-# These images would help illustrate the main concepts
 
 # coreContent|inline|concept-0.png|Illustration of: Sanskrit is one of the most precisely structured languages ever created, with systematic grammar ...|Sanskrit is one of the most precisely structured languages ever created, with systematic grammar rules that minimize ambiguity
 # coreContent|inline|concept-1.png|Illustration of: Panini's Ashtadhyayi (circa 400 BCE) contains about 4,000 rules that completely describe Sanskrit...|Panini's Ashtadhyayi (circa 400 BCE) contains about 4,000 rules that completely describe Sanskrit grammar—an early example of algorithmic thinking
@@ -31,9 +32,8 @@
 # coreContent|inline|concept-6.png|Illustration of: Sanskrit demonstrates that precision and creativity are partners, not opposites—structure enables...|Sanskrit demonstrates that precision and creativity are partners, not opposites—structure enables rather than limits expression
 
 # === SECTION-SPECIFIC IMAGES ===
-# Add images for specific sections as needed
 
-# introduction|before|intro-img0.png|[Add alt text for introduction image]|[Optional caption for introduction image]
-# coreContent|before|core-img0.png|[Add alt text for coreContent image]|[Optional caption for coreContent image]
-# interactiveSection|before|interactive-img0.png|[Add alt text for interactiveSection image]|[Optional caption for interactiveSection image]
-# integration|before|integration-img0.png|[Add alt text for integration image]|[Optional caption for integration image]
+# introduction|before|intro-img0.png|[Add alt text for introduction image]|[Optional caption]
+# coreContent|before|core-img0.png|[Add alt text for coreContent image]|[Optional caption]
+# interactiveSection|before|interactive-img0.png|[Add alt text for interactiveSection image]|[Optional caption]
+# integration|before|integration-img0.png|[Add alt text for integration image]|[Optional caption]

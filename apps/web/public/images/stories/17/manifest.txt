@@ -5,12 +5,14 @@
 # 1. Create images based on the suggested descriptions below
 # 2. Save image files with the suggested filenames (or update the filename field)
 # 3. Place image files in public/images/stories/17/
-# 4. Remove the # from lines you have created images for
+# 4. Remove the # prefix from lines you have created images for to activate them
 # 5. Position options: before, after, inline
+#
+# IMPORTANT: Entries are commented out by default.
+# Uncomment an entry (remove the leading #) ONLY when the image file exists.
 #
 
 # === SUGGESTED IMAGES FROM ANALOGIES ===
-# These images would help visualize the key analogies in the story
 
 # coreContent|after|analogy-0.png|Illustration of Consciousness|A light inside—while a robot might process information in the dark, conscious beings have the lights on, experiencing from the inside
 # coreContent|after|analogy-1.png|Illustration of Global Workspace Theory|A theater where the spotlight of attention illuminates the stage of consciousness, while countless processes work in the dark audience
@@ -20,7 +22,6 @@
 # coreContent|after|analogy-5.png|Illustration of Consciousness and the Universe|The universe opening its eyes—matter organizing itself to experience itself
 
 # === SUGGESTED IMAGES FROM KEY CONCEPTS ===
-# These images would help illustrate the main concepts
 
 # coreContent|inline|concept-0.png|Illustration of: Consciousness is the inner experience of being aware—the "light inside" that makes you more than ...|Consciousness is the inner experience of being aware—the "light inside" that makes you more than just a biological machine
 # coreContent|inline|concept-1.png|Illustration of: The "hard problem" of consciousness asks why physical brain processes create subjective experienc...|The "hard problem" of consciousness asks why physical brain processes create subjective experience at all
@@ -31,9 +32,8 @@
 # coreContent|inline|concept-6.png|Illustration of: Consciousness connects us to each other and allows the universe to experience itself through us|Consciousness connects us to each other and allows the universe to experience itself through us
 
 # === SECTION-SPECIFIC IMAGES ===
-# Add images for specific sections as needed
 
-# introduction|before|intro-img0.png|[Add alt text for introduction image]|[Optional caption for introduction image]
-# coreContent|before|core-img0.png|[Add alt text for coreContent image]|[Optional caption for coreContent image]
-# interactiveSection|before|interactive-img0.png|[Add alt text for interactiveSection image]|[Optional caption for interactiveSection image]
-# integration|before|integration-img0.png|[Add alt text for integration image]|[Optional caption for integration image]
+# introduction|before|intro-img0.png|[Add alt text for introduction image]|[Optional caption]
+# coreContent|before|core-img0.png|[Add alt text for coreContent image]|[Optional caption]
+# interactiveSection|before|interactive-img0.png|[Add alt text for interactiveSection image]|[Optional caption]
+# integration|before|integration-img0.png|[Add alt text for integration image]|[Optional caption]
