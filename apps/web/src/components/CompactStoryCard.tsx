@@ -3,6 +3,7 @@ import type { Story, Category, Trimester } from '../types';
 import { useTheme } from '../contexts/ThemeContext';
 import { getTotalReadingTime, formatReadingTime } from '../utils/readingTime';
 import { AudioNarrationBadge } from './AudioNarrationBadge';
+import { IllustrationBadge } from './IllustrationBadge';
 
 /**
  * Trimester badge colors and labels
@@ -138,9 +139,15 @@ export const CompactStoryCard: React.FC<CompactStoryCardProps> = ({
         data-testid="category-indicator"
       />
 
-      <div className="p-5">
+      <div className="p-5 relative">
+        {/* Media Badges - Top Right Corner */}
+        <div className="absolute top-3 right-3 flex items-center gap-1.5">
+          <IllustrationBadge storyId={story.id} fullOnly={true} />
+          <AudioNarrationBadge storyId={story.id} />
+        </div>
+
         {/* Header with Title and Completion Status */}
-        <div className="flex items-start justify-between gap-3 mb-3">
+        <div className="flex items-start justify-between gap-3 mb-3 pr-16">
           <h3
             className={`text-base font-semibold leading-snug transition-theme ${isDark ? '' : 'text-gray-800'}`}
             style={isDark ? { color: currentTheme.colors.text } : {}}
@@ -175,9 +182,6 @@ export const CompactStoryCard: React.FC<CompactStoryCardProps> = ({
 
         {/* Metadata Row */}
         <div className="flex flex-wrap items-center gap-2">
-          {/* Audio Narration Badge */}
-          <AudioNarrationBadge storyId={story.id} />
-
           {/* Trimester Badge - Requirements 1.4: Display trimester badge on story cards */}
           <span
             className={`inline-flex items-center px-2.5 py-1 rounded-full text-xs font-medium ${isDark ? '' : trimesterConfig[story.recommendedTrimester].lightClass}`}

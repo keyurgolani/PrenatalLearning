@@ -73,6 +73,7 @@ export { StoryImage, type StoryImageProps } from './StoryImage';
 export { MiniAudioPlayer } from './MiniAudioPlayer';
 export { NarrateButton, stopAllAudio } from './NarrateButton';
 export { AudioNarrationBadge } from './AudioNarrationBadge';
+export { IllustrationBadge } from './IllustrationBadge';
 
 // Floating Status Bar
 export { FloatingStatusBar } from './FloatingStatusBar';

@@ -20,6 +20,7 @@ interface UserMenuCalendarPopupProps {
 const UserMenuCalendarPopup: React.FC<UserMenuCalendarPopupProps> = ({ selectedDate, onSelectDate, onClear, onClose }) => {
   const { currentTheme } = useTheme();
   const popupRef = useRef<HTMLDivElement>(null);
+  const isDark = currentTheme.isDark;
   
   // Start with selected date's month or current month
   const [viewDate, setViewDate] = useState(() => {
@@ -81,11 +82,31 @@ const UserMenuCalendarPopup: React.FC<UserMenuCalendarPopupProps> = ({ selectedD
             ? 'text-white shadow-md' 
             : today
               ? 'font-bold'
-              : 'hover:bg-gray-100'
+              : ''
         }`}
         style={{
-          backgroundColor: selected ? currentTheme.colors.primary : today ? `${currentTheme.colors.primary}20` : 'transparent',
-          color: selected ? '#ffffff' : '#374151',
+          backgroundColor: selected 
+            ? currentTheme.colors.primary 
+            : today 
+              ? `${currentTheme.colors.primary}20` 
+              : 'transparent',
+          color: selected 
+            ? '#ffffff' 
+            : isDark 
+              ? currentTheme.colors.text 
+              : '#374151',
+        }}
+        onMouseEnter={(e) => {
+          if (!selected && !today) {
+            e.currentTarget.style.backgroundColor = isDark 
+              ? currentTheme.colors.surfaceHover || currentTheme.colors.border 
+              : '#f3f4f6';
+          }
+        }}
+        onMouseLeave={(e) => {
+          if (!selected && !today) {
+            e.currentTarget.style.backgroundColor = 'transparent';
+          }
         }}
       >
         {day}
@@ -96,10 +117,10 @@ const UserMenuCalendarPopup: React.FC<UserMenuCalendarPopupProps> = ({ selectedD
   return (
     <div
       ref={popupRef}
-      className="rounded-xl shadow-lg border overflow-hidden animate-pop-in"
+      className="rounded-xl shadow-lg overflow-hidden animate-pop-in"
       style={{
-        backgroundColor: '#ffffff',
-        borderColor: '#e5e7eb',
+        backgroundColor: isDark ? currentTheme.colors.surface : '#ffffff',
+        border: `1px solid ${isDark ? currentTheme.colors.border : '#e5e7eb'}`,
       }}
       onClick={(e) => e.stopPropagation()}
       onKeyDown={(e) => {
@@ -110,10 +131,10 @@ const UserMenuCalendarPopup: React.FC<UserMenuCalendarPopupProps> = ({ selectedD
     >
       {/* Header */}
       <div 
-        className="flex items-center justify-between px-3 py-2 border-b"
+        className="flex items-center justify-between px-3 py-2"
         style={{ 
           background: `linear-gradient(135deg, ${currentTheme.colors.primary}, ${currentTheme.colors.secondary})`,
-          borderColor: '#f3f4f6',
+          borderBottom: `1px solid ${isDark ? currentTheme.colors.border : '#f3f4f6'}`,
         }}
       >
         <button
@@ -142,7 +163,8 @@ const UserMenuCalendarPopup: React.FC<UserMenuCalendarPopupProps> = ({ selectedD
         {['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa'].map(d => (
           <div 
             key={d} 
-            className="w-8 h-6 flex items-center justify-center text-[10px] font-semibold uppercase text-gray-400"
+            className="w-8 h-6 flex items-center justify-center text-[10px] font-semibold uppercase"
+            style={{ color: isDark ? currentTheme.colors.textMuted : '#9ca3af' }}
           >
             {d}
           </div>
@@ -156,10 +178,16 @@ const UserMenuCalendarPopup: React.FC<UserMenuCalendarPopupProps> = ({ selectedD
 
       {/* Footer with clear button */}
       {selectedDate && (
-        <div className="px-2 py-2 border-t border-gray-100">
+        <div 
+          className="px-2 py-2"
+          style={{ borderTop: `1px solid ${isDark ? currentTheme.colors.border : '#f3f4f6'}` }}
+        >
           <button
             onClick={() => { onClear(); onClose(); }}
-            className="w-full flex items-center justify-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium transition-colors hover:opacity-90 bg-red-50 text-red-600"
+            className="w-full flex items-center justify-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium transition-colors text-red-500"
+            style={{ 
+              backgroundColor: isDark ? 'rgba(239, 68, 68, 0.1)' : '#fef2f2',
+            }}
           >
             <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
@@ -268,10 +296,12 @@ interface UserMenuProps {
 
 const UserMenu: React.FC<UserMenuProps> = ({ onLogout, onOpenAccountSettings }) => {
   const { user } = useAuth();
+  const { currentTheme } = useTheme();
   const { hasDueDate, currentTrimester, currentWeek, dueDate, setDueDate, clearDueDate } = useTrimester();
   const [isOpen, setIsOpen] = useState(false);
   const [showCalendar, setShowCalendar] = useState(false);
   const menuRef = useRef<HTMLDivElement>(null);
+  const isDark = currentTheme.isDark;
 
   // Close menu when clicking outside
   useEffect(() => {
@@ -343,24 +373,57 @@ const UserMenu: React.FC<UserMenuProps> = ({ onLogout, onOpenAccountSettings }) 
       {/* Dropdown Menu */}
       {isOpen && (
         <div 
-          className="absolute right-0 top-full mt-2 w-56 bg-white rounded-xl shadow-xl border border-gray-200 overflow-hidden z-50 animate-pop-in"
+          className="absolute right-0 top-full mt-2 w-56 rounded-xl shadow-xl overflow-hidden z-50 animate-pop-in"
+          style={{
+            backgroundColor: isDark ? currentTheme.colors.surface : '#ffffff',
+            border: `1px solid ${isDark ? currentTheme.colors.border : '#e5e7eb'}`,
+          }}
           role="menu"
         >
           {/* User Info Header */}
-          <div className="px-4 py-3 bg-gray-50 border-b border-gray-100">
-            <p className="font-medium text-gray-900 truncate">{user.name}</p>
-            <p className="text-sm text-gray-500 truncate">{user.email}</p>
+          <div 
+            className="px-4 py-3"
+            style={{
+              backgroundColor: isDark ? currentTheme.colors.surfaceHover : '#f9fafb',
+              borderBottom: `1px solid ${isDark ? currentTheme.colors.border : '#f3f4f6'}`,
+            }}
+          >
+            <p 
+              className="font-medium truncate"
+              style={{ color: isDark ? currentTheme.colors.text : '#111827' }}
+            >
+              {user.name}
+            </p>
+            <p 
+              className="text-sm truncate"
+              style={{ color: isDark ? currentTheme.colors.textMuted : '#6b7280' }}
+            >
+              {user.email}
+            </p>
           </div>
 
           {/* Due Date Section - Requirements: 17.4 - Display due date in user dropdown menu */}
-          <div className="px-4 py-2 border-b border-gray-100">
-            <p className="text-xs text-gray-400 uppercase tracking-wide mb-1">Due Date</p>
+          <div 
+            className="px-4 py-2"
+            style={{
+              borderBottom: `1px solid ${isDark ? currentTheme.colors.border : '#f3f4f6'}`,
+            }}
+          >
+            <p 
+              className="text-xs uppercase tracking-wide mb-1"
+              style={{ color: isDark ? currentTheme.colors.textMuted : '#9ca3af' }}
+            >
+              Due Date
+            </p>
             {hasDueDate ? (
               <div className="space-y-2">
                 {/* Current trimester and week display */}
                 <button
                   onClick={() => setShowCalendar(!showCalendar)}
-                  className="w-full flex items-center gap-2 p-1.5 -mx-1.5 rounded-lg bg-purple-50 hover:bg-purple-100 transition-colors"
+                  className="w-full flex items-center gap-2 p-1.5 -mx-1.5 rounded-lg transition-colors"
+                  style={{
+                    backgroundColor: isDark ? `${currentTheme.colors.primary}20` : '#faf5ff',
+                  }}
                 >
                   <div className={`w-8 h-8 rounded-full flex items-center justify-center ${
                     currentTrimester === 'first' ? 'bg-pink-500' :
@@ -371,12 +434,26 @@ const UserMenu: React.FC<UserMenuProps> = ({ onLogout, onOpenAccountSettings }) 
                     </svg>
                   </div>
                   <div className="flex-1 min-w-0 text-left">
-                    <p className="font-medium text-gray-900 text-sm">
+                    <p 
+                      className="font-medium text-sm"
+                      style={{ color: isDark ? currentTheme.colors.text : '#111827' }}
+                    >
                       {currentTrimester === 'first' ? '1st' : currentTrimester === 'second' ? '2nd' : '3rd'} Trimester
                     </p>
-                    <p className="text-xs text-gray-500">Week {currentWeek} • Due {dueDate?.toLocaleDateString()}</p>
+                    <p 
+                      className="text-xs"
+                      style={{ color: isDark ? currentTheme.colors.textMuted : '#6b7280' }}
+                    >
+                      Week {currentWeek} • Due {dueDate?.toLocaleDateString()}
+                    </p>
                   </div>
-                  <svg className="w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <svg 
+                    className="w-4 h-4" 
+                    style={{ color: isDark ? currentTheme.colors.textMuted : '#9ca3af' }}
+                    fill="none" 
+                    stroke="currentColor" 
+                    viewBox="0 0 24 24"
+                  >
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
                   </svg>
                 </button>
@@ -402,19 +479,53 @@ const UserMenu: React.FC<UserMenuProps> = ({ onLogout, onOpenAccountSettings }) 
               <div className="space-y-2">
                 <button
                   onClick={() => setShowCalendar(!showCalendar)}
-                  className="w-full flex items-center gap-2 text-left hover:bg-gray-50 rounded-lg p-1.5 -mx-1.5 transition-colors"
+                  className="w-full flex items-center gap-2 text-left rounded-lg p-1.5 -mx-1.5 transition-colors"
+                  style={{
+                    backgroundColor: 'transparent',
+                  }}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.backgroundColor = isDark ? currentTheme.colors.surfaceHover || '' : '#f9fafb';
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.backgroundColor = 'transparent';
+                  }}
                   role="menuitem"
                 >
-                  <div className="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center">
-                    <svg className="w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <div 
+                    className="w-8 h-8 rounded-full flex items-center justify-center"
+                    style={{ backgroundColor: isDark ? currentTheme.colors.border : '#f3f4f6' }}
+                  >
+                    <svg 
+                      className="w-4 h-4" 
+                      style={{ color: isDark ? currentTheme.colors.textMuted : '#9ca3af' }}
+                      fill="none" 
+                      stroke="currentColor" 
+                      viewBox="0 0 24 24"
+                    >
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
                     </svg>
                   </div>
                   <div className="flex-1 min-w-0">
-                    <p className="font-medium text-gray-900 text-sm">Set due date</p>
-                    <p className="text-xs text-gray-500">For personalized content</p>
+                    <p 
+                      className="font-medium text-sm"
+                      style={{ color: isDark ? currentTheme.colors.text : '#111827' }}
+                    >
+                      Set due date
+                    </p>
+                    <p 
+                      className="text-xs"
+                      style={{ color: isDark ? currentTheme.colors.textMuted : '#6b7280' }}
+                    >
+                      For personalized content
+                    </p>
                   </div>
-                  <svg className="w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <svg 
+                    className="w-4 h-4" 
+                    style={{ color: isDark ? currentTheme.colors.textMuted : '#9ca3af' }}
+                    fill="none" 
+                    stroke="currentColor" 
+                    viewBox="0 0 24 24"
+                  >
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
                   </svg>
                 </button>
@@ -439,10 +550,26 @@ const UserMenu: React.FC<UserMenuProps> = ({ onLogout, onOpenAccountSettings }) 
           <div className="py-1">
             <button
               onClick={handleOpenAccountSettings}
-              className="w-full px-4 py-2.5 text-left text-sm text-gray-700 hover:bg-gray-50 flex items-center gap-3 transition-colors"
+              className="w-full px-4 py-2.5 text-left text-sm flex items-center gap-3 transition-colors"
+              style={{ 
+                color: isDark ? currentTheme.colors.text : '#374151',
+                backgroundColor: 'transparent',
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.backgroundColor = isDark ? currentTheme.colors.surfaceHover || '' : '#f9fafb';
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.backgroundColor = 'transparent';
+              }}
               role="menuitem"
             >
-              <svg className="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <svg 
+                className="w-5 h-5" 
+                style={{ color: isDark ? currentTheme.colors.textMuted : '#9ca3af' }}
+                fill="none" 
+                stroke="currentColor" 
+                viewBox="0 0 24 24"
+              >
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
               </svg>
@@ -451,10 +578,20 @@ const UserMenu: React.FC<UserMenuProps> = ({ onLogout, onOpenAccountSettings }) 
           </div>
 
           {/* Logout */}
-          <div className="border-t border-gray-100 py-1">
+          <div 
+            className="py-1"
+            style={{ borderTop: `1px solid ${isDark ? currentTheme.colors.border : '#f3f4f6'}` }}
+          >
             <button
               onClick={handleLogout}
-              className="w-full px-4 py-2.5 text-left text-sm text-red-600 hover:bg-red-50 flex items-center gap-3 transition-colors"
+              className="w-full px-4 py-2.5 text-left text-sm text-red-500 flex items-center gap-3 transition-colors"
+              style={{ backgroundColor: 'transparent' }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.backgroundColor = isDark ? 'rgba(239, 68, 68, 0.1)' : '#fef2f2';
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.backgroundColor = 'transparent';
+              }}
               role="menuitem"
             >
               <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
