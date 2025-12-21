@@ -54,8 +54,8 @@ A beautiful, interactive web application designed to help expectant parents bond
 
 ### Prerequisites
 
-- Node.js 18+
-- npm or yarn
+- Node.js 20+
+- pnpm 9+ (recommended) or npm
 
 ### Installation
 
@@ -66,102 +66,118 @@ A beautiful, interactive web application designed to help expectant parents bond
    cd PrenatalLearning
    ```
 
-2. Install dependencies:
+2. Install pnpm (if not already installed):
 
    ```bash
-   npm install
+   corepack enable
+   corepack prepare pnpm@9.15.0 --activate
    ```
 
-3. Start the development server:
+3. Install dependencies:
 
    ```bash
-   npm run dev
+   pnpm install
    ```
 
-4. Open [http://localhost:5173](http://localhost:5173) in your browser
+4. Start the development server:
+
+   ```bash
+   pnpm run dev
+   ```
+
+5. Open [http://localhost:5173](http://localhost:5173) in your browser
 
 ### Available Scripts
 
 #### Frontend Development
 
-| Command                 | Description                       |
-| ----------------------- | --------------------------------- |
-| `npm run dev`           | Start frontend development server |
-| `npm run build`         | Build frontend for production     |
-| `npm run preview`       | Preview production build          |
-| `npm run lint`          | Run ESLint                        |
-| `npm run lint:fix`      | Run ESLint with auto-fix          |
-| `npm run typecheck`     | Run TypeScript type checking      |
-| `npm run test`          | Run tests once                    |
-| `npm run test:watch`    | Run tests in watch mode           |
-| `npm run test:coverage` | Run tests with coverage report    |
+| Command                  | Description                       |
+| ------------------------ | --------------------------------- |
+| `pnpm run dev`           | Start frontend development server |
+| `pnpm run build`         | Build frontend for production     |
+| `pnpm run preview`       | Preview production build          |
+| `pnpm run lint`          | Run ESLint                        |
+| `pnpm run lint:fix`      | Run ESLint with auto-fix          |
+| `pnpm run typecheck`     | Run TypeScript type checking      |
+| `pnpm run test`          | Run tests once                    |
+| `pnpm run test:watch`    | Run tests in watch mode           |
+| `pnpm run test:coverage` | Run tests with coverage report    |
 
 #### Backend Development
 
-| Command                | Description                      |
-| ---------------------- | -------------------------------- |
-| `npm run server:dev`   | Start backend development server |
-| `npm run server:build` | Build backend for production     |
-| `npm run server:start` | Start production backend         |
-| `npm run server:test`  | Run backend tests                |
-| `npm run server:lint`  | Run backend ESLint               |
+| Command                 | Description                      |
+| ----------------------- | -------------------------------- |
+| `pnpm run server:dev`   | Start backend development server |
+| `pnpm run server:build` | Build backend for production     |
+| `pnpm run server:start` | Start production backend         |
+| `pnpm run server:test`  | Run backend tests                |
+| `pnpm run server:lint`  | Run backend ESLint               |
+
+#### Workspace Commands
+
+| Command              | Description                     |
+| -------------------- | ------------------------------- |
+| `pnpm run build:all` | Build all packages in workspace |
+| `pnpm run lint:all`  | Lint all packages in workspace  |
+| `pnpm run test:all`  | Run tests in all packages       |
+| `pnpm run clean`     | Clean all node_modules and dist |
 
 #### Docker - Stack Management
 
-| Command                               | Description                          |
-| ------------------------------------- | ------------------------------------ |
-| `npm run docker:dev`                  | Start full stack (dev build)         |
-| `npm run docker:dev:detach`           | Start full stack in background       |
-| `npm run docker:dev:down`             | Stop dev environment                 |
-| `npm run docker:dev:rebuild`          | Rebuild and restart frontend+backend |
-| `npm run docker:dev:rebuild:frontend` | Rebuild frontend only                |
-| `npm run docker:dev:rebuild:backend`  | Rebuild backend only                 |
-| `npm run docker:prod`                 | Start production environment         |
-| `npm run docker:prod:detach`          | Start production in background       |
-| `npm run docker:prod:down`            | Stop production environment          |
-| `npm run docker:status`               | Show container status                |
+| Command                                | Description                          |
+| -------------------------------------- | ------------------------------------ |
+| `pnpm run docker:dev`                  | Start full stack (dev build)         |
+| `pnpm run docker:dev:detach`           | Start full stack in background       |
+| `pnpm run docker:dev:down`             | Stop dev environment                 |
+| `pnpm run docker:dev:rebuild`          | Rebuild and restart frontend+backend |
+| `pnpm run docker:dev:rebuild:frontend` | Rebuild frontend only                |
+| `pnpm run docker:dev:rebuild:backend`  | Rebuild backend only                 |
+| `pnpm run docker:prod`                 | Start production environment         |
+| `pnpm run docker:prod:detach`          | Start production in background       |
+| `pnpm run docker:prod:down`            | Stop production environment          |
+| `pnpm run docker:status`               | Show container status                |
 
 #### Docker - Logs & Debugging
 
-| Command                        | Description               |
-| ------------------------------ | ------------------------- |
-| `npm run docker:logs`          | Follow all container logs |
-| `npm run docker:logs:frontend` | Follow frontend logs      |
-| `npm run docker:logs:backend`  | Follow backend logs       |
-| `npm run docker:logs:db`       | Follow MongoDB logs       |
+| Command                         | Description               |
+| ------------------------------- | ------------------------- |
+| `pnpm run docker:logs`          | Follow all container logs |
+| `pnpm run docker:logs:frontend` | Follow frontend logs      |
+| `pnpm run docker:logs:backend`  | Follow backend logs       |
+| `pnpm run docker:logs:db`       | Follow MongoDB logs       |
 
 #### Docker - Service Management
 
-| Command                           | Description                     |
-| --------------------------------- | ------------------------------- |
-| `npm run docker:restart`          | Restart all containers          |
-| `npm run docker:restart:frontend` | Restart frontend container      |
-| `npm run docker:restart:backend`  | Restart backend container       |
-| `npm run docker:restart:db`       | Restart MongoDB container       |
-| `npm run docker:shell:backend`    | Open shell in backend container |
-| `npm run docker:shell:db`         | Open MongoDB shell              |
-| `npm run docker:db:status`        | Check MongoDB connection status |
+| Command                            | Description                     |
+| ---------------------------------- | ------------------------------- |
+| `pnpm run docker:restart`          | Restart all containers          |
+| `pnpm run docker:restart:frontend` | Restart frontend container      |
+| `pnpm run docker:restart:backend`  | Restart backend container       |
+| `pnpm run docker:restart:db`       | Restart MongoDB container       |
+| `pnpm run docker:shell:backend`    | Open shell in backend container |
+| `pnpm run docker:shell:db`         | Open MongoDB shell              |
+| `pnpm run docker:db:status`        | Check MongoDB connection status |
 
 #### Docker - Cleanup
 
-| Command                        | Description                              |
-| ------------------------------ | ---------------------------------------- |
-| `npm run docker:clean`         | Remove containers, volumes, local images |
-| `npm run docker:clean:volumes` | Remove containers and volumes only       |
-| `npm run docker:clean:all`     | Remove everything including all images   |
+| Command                         | Description                              |
+| ------------------------------- | ---------------------------------------- |
+| `pnpm run docker:clean`         | Remove containers, volumes, local images |
+| `pnpm run docker:clean:volumes` | Remove containers and volumes only       |
+| `pnpm run docker:clean:all`     | Remove everything including all images   |
 
 #### Kubernetes
 
-| Command                    | Description                        |
-| -------------------------- | ---------------------------------- |
-| `npm run k8s:dev:build`    | Build local images for dev cluster |
-| `npm run k8s:dev:apply`    | Deploy to dev namespace            |
-| `npm run k8s:dev:delete`   | Remove dev deployment              |
-| `npm run k8s:dev:status`   | Check dev deployment status        |
-| `npm run k8s:prod:preview` | Preview production manifests       |
-| `npm run k8s:prod:apply`   | Deploy to production namespace     |
-| `npm run k8s:prod:delete`  | Remove production deployment       |
-| `npm run k8s:prod:status`  | Check production deployment status |
+| Command                     | Description                        |
+| --------------------------- | ---------------------------------- |
+| `pnpm run k8s:dev:build`    | Build local images for dev cluster |
+| `pnpm run k8s:dev:apply`    | Deploy to dev namespace            |
+| `pnpm run k8s:dev:delete`   | Remove dev deployment              |
+| `pnpm run k8s:dev:status`   | Check dev deployment status        |
+| `pnpm run k8s:prod:preview` | Preview production manifests       |
+| `pnpm run k8s:prod:apply`   | Deploy to production namespace     |
+| `pnpm run k8s:prod:delete`  | Remove production deployment       |
+| `pnpm run k8s:prod:status`  | Check production deployment status |
 
 ## Docker Deployment
 
@@ -180,10 +196,10 @@ The application runs as a full stack with frontend, backend API, and MongoDB dat
 
    ```bash
    # Development (builds from source)
-   npm run docker:dev
+   pnpm run docker:dev
 
    # Production (uses pre-built images)
-   npm run docker:prod
+   pnpm run docker:prod
    ```
 
 3. Open [http://localhost:8080](http://localhost:8080) in your browser
@@ -226,10 +242,10 @@ See `.env.example` for all available configuration options:
 
 ```bash
 # Frontend only
-docker build -t prenatal-learning .
+docker build -f infra/docker/Dockerfile.web -t prenatal-learning .
 
 # Backend only
-docker build -t prenatal-learning-backend ./server
+docker build -f infra/docker/Dockerfile.server -t prenatal-learning-backend ./apps/server
 ```
 
 ## Kubernetes Deployment
@@ -248,10 +264,10 @@ Dev uses locally built images for faster iteration:
 
 ```bash
 # Build local images
-npm run k8s:dev:build
+pnpm run k8s:dev:build
 
 # Deploy to cluster
-npm run k8s:dev:apply
+pnpm run k8s:dev:apply
 
 # Port forward to access the app
 kubectl port-forward svc/dev-frontend 8080:80 -n prenatal-learning-dev
@@ -265,16 +281,16 @@ Production uses published images from Docker Hub (`keyurgolani/prenatal-learning
 
 Before deploying:
 
-1. Update `k8s/overlays/prod/secrets.yaml` with secure credentials
-2. Update `k8s/overlays/prod/configmap-patch.yaml` with your domain
-3. Update `k8s/overlays/prod/ingress.yaml` with your domain and TLS settings
+1. Update `infra/k8s/overlays/prod/secrets.yaml` with secure credentials
+2. Update `infra/k8s/overlays/prod/configmap-patch.yaml` with your domain
+3. Update `infra/k8s/overlays/prod/ingress.yaml` with your domain and TLS settings
 
 ```bash
 # Preview manifests
-npm run k8s:prod:preview
+pnpm run k8s:prod:preview
 
 # Deploy to cluster
-npm run k8s:prod:apply
+pnpm run k8s:prod:apply
 ```
 
 ### Environment Differences
@@ -286,41 +302,45 @@ npm run k8s:prod:apply
 | MongoDB Storage | 1Gi                             | 10Gi                                               |
 | Ingress         | No                              | Yes                                                |
 
-See `k8s/README.md` for detailed Kubernetes deployment documentation.
+See `infra/k8s/README.md` for detailed Kubernetes deployment documentation.
 
 ## Project Structure
 
 ```
-├── src/                      # Frontend source code
-│   ├── components/           # React components
-│   │   ├── auth/             # Authentication components
-│   │   ├── exercises/        # Interactive exercise components
-│   │   ├── journal/          # Journal and voice recording
-│   │   ├── kicks/            # Kick tracking components
-│   │   ├── TopicPage/        # Topic/story page components
-│   │   ├── Header.tsx        # Main header component
-│   │   ├── SecondaryHeader.tsx # Stats bar (due date, kick, progress)
-│   │   ├── ReadingModeBar.tsx  # Floating bar for reading mode
-│   │   └── FloatingStatusBar.tsx # Journal FAB for logged-in users
-│   ├── contexts/             # React context providers
-│   ├── data/                 # Story and category data
-│   │   ├── stories/          # Individual story content
-│   │   └── interactiveExercises/
-│   ├── hooks/                # Custom React hooks
-│   ├── services/             # API and service utilities
-│   ├── types/                # TypeScript type definitions
-│   └── utils/                # Helper utilities
-├── server/                   # Backend API server
-│   ├── config/               # Server configuration
-│   ├── middleware/           # Express middleware
-│   ├── models/               # MongoDB models
-│   ├── routes/               # API route handlers
-│   ├── validators/           # Zod validation schemas
-│   └── utils/                # Server utilities
-├── public/                   # Static assets
-│   ├── audio/                # Audio narration files
-│   └── images/               # Story illustrations
-└── docker-compose*.yml       # Docker configurations
+├── apps/                     # Application packages
+│   ├── web/                  # Frontend React application
+│   │   ├── src/              # Source code
+│   │   │   ├── components/   # React components
+│   │   │   ├── contexts/     # React context providers
+│   │   │   ├── data/         # Story and category data
+│   │   │   ├── hooks/        # Custom React hooks
+│   │   │   ├── services/     # API and service utilities
+│   │   │   ├── types/        # TypeScript type definitions
+│   │   │   └── utils/        # Helper utilities
+│   │   ├── public/           # Static assets (images, audio)
+│   │   └── package.json      # Web app dependencies
+│   └── server/               # Backend Express API
+│       ├── config/           # Server configuration
+│       ├── middleware/       # Express middleware
+│       ├── models/           # MongoDB models
+│       ├── routes/           # API route handlers
+│       ├── validators/       # Zod validation schemas
+│       ├── utils/            # Server utilities
+│       └── package.json      # Server dependencies
+├── infra/                    # Infrastructure configuration
+│   ├── docker/               # Docker configuration
+│   │   ├── Dockerfile.web    # Frontend Dockerfile
+│   │   ├── Dockerfile.server # Backend Dockerfile
+│   │   ├── docker-compose.yml
+│   │   ├── docker-compose.dev.yml
+│   │   └── nginx.conf
+│   └── k8s/                  # Kubernetes manifests
+│       ├── base/             # Base Kustomize configs
+│       └── overlays/         # Environment-specific overlays
+├── scripts/                  # Build and utility scripts
+├── .github/                  # GitHub Actions workflows
+├── package.json              # Root workspace configuration
+└── pnpm-workspace.yaml       # pnpm workspace definition
 ```
 
 ## UI Architecture
@@ -371,7 +391,7 @@ We're actively seeking community help with:
 - **Illustration Images**: Better quality illustrations for story content. Current placeholder images need professional artwork that's warm, educational, and pregnancy-appropriate.
 - **Audio Narration**: High-quality audio narration generated with professional TTS software or voice actors. Current audio manifests contain transcripts ready for recording.
 
-See the `public/images/stories/` and `public/audio/stories/` directories for manifest files that describe what's needed for each story.
+See the `apps/web/public/images/stories/` and `apps/web/public/audio/stories/` directories for manifest files that describe what's needed for each story.
 
 ## License
 

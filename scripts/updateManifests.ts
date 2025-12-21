@@ -18,12 +18,16 @@ interface ManifestEntry {
   transcript: string;
 }
 
+// OutputEntry interface describes the format of manifest entries
+// (kept for documentation purposes, not used in code)
 interface OutputEntry {
   sectionName: string;
   partNumber: number;
   filename: string;
   transcript: string;
 }
+// Suppress unused variable warning for documentation interface
+void (0 as unknown as OutputEntry);
 
 /**
  * Split text into chunks of approximately maxChars, breaking at sentence boundaries

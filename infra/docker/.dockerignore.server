@@ -1,0 +1,16 @@
+node_modules
+dist
+.env
+.env.local
+*.log
+npm-debug.log*
+pnpm-debug.log*
+.DS_Store
+coverage
+.nyc_output
+*.test.ts
+*.spec.ts
+__tests__
+
+# npm lock file (using pnpm)
+package-lock.json

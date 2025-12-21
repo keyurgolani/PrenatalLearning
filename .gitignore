@@ -1,15 +1,21 @@
 # Dependencies
 node_modules/
 
+# pnpm
+.pnpm-store/
+
 # Build output
 dist/
+build/
 
-# Environment files
+# Environment files (keep .env.example files)
 .env
 .env.local
 .env.development.local
 .env.test.local
 .env.production.local
+apps/server/.env
+infra/docker/.env
 
 # IDE and editor files
 .vscode/
@@ -57,5 +63,9 @@ test-results/
 lint_report.txt
 
 # Server specific
-server/dist/
-server/.env
+apps/server/dist/
+
+# Temporary files
+*.tmp
+*.temp
+.cache/

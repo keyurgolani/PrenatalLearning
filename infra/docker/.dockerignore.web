@@ -1,0 +1,20 @@
+node_modules
+**/node_modules
+**/dist
+.git
+.gitignore
+*.md
+.vscode
+.idea
+*.log
+.env*
+
+# Server directory (has its own Dockerfile)
+apps/server
+
+# Infrastructure
+infra
+
+# npm lock file (using pnpm)
+package-lock.json
+**/package-lock.json
