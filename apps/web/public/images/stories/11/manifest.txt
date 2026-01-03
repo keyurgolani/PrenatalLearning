@@ -14,29 +14,29 @@
 
 # === SUGGESTED IMAGES FROM ANALOGIES ===
 
-# coreContent|after|analogy-0.png|Illustration of Microbiome|A hidden garden inside your body, with trillions of tiny gardeners working to keep you healthy
-# coreContent|after|analogy-1.png|Illustration of Gut Bacteria|Gardeners who break down food, extract nutrients, and produce vitamins—tending the soil of your digestive system
-# coreContent|after|analogy-2.png|Illustration of Microbiome Diversity|A garden with many different types of plants is healthier than one with just a few—variety is strength
-# coreContent|after|analogy-3.png|Illustration of Gut-Brain Axis|A two-way communication highway between your gut garden and your brain, with bacteria helping to send happy signals
-# coreContent|after|analogy-4.png|Illustration of Immune Training|Your microbiome is like a teacher for your immune system, introducing it to friendly bacteria so it learns who belongs
-# coreContent|after|analogy-5.png|Illustration of Symbiosis|A partnership where both sides benefit—you provide a home, your bacteria provide essential services
-# coreContent|after|analogy-6.png|Illustration of Fiber|Fertilizer for your gut garden—the favorite food of beneficial bacteria
-# coreContent|after|analogy-7.png|Illustration of Fermented Foods|New plants for your garden—live bacteria that add to your microbiome's diversity
-# coreContent|after|analogy-8.png|Illustration of Dysbiosis|A garden out of balance—when weeds take over and the helpful plants struggle
-# coreContent|after|analogy-9.png|Illustration of First 1000 Days|The planting season of your microbiome garden—when the foundation for lifelong health is established
+coreContent|after|analogy-0.png|Illustration of Microbiome|A hidden garden inside your body, with trillions of tiny gardeners working to keep you healthy
+coreContent|after|analogy-1.png|Illustration of Gut Bacteria|Gardeners who break down food, extract nutrients, and produce vitamins—tending the soil of your digestive system
+coreContent|after|analogy-2.png|Illustration of Microbiome Diversity|A garden with many different types of plants is healthier than one with just a few—variety is strength
+coreContent|after|analogy-3.png|Illustration of Gut-Brain Axis|A two-way communication highway between your gut garden and your brain, with bacteria helping to send happy signals
+coreContent|after|analogy-4.png|Illustration of Immune Training|Your microbiome is like a teacher for your immune system, introducing it to friendly bacteria so it learns who belongs
+coreContent|after|analogy-5.png|Illustration of Symbiosis|A partnership where both sides benefit—you provide a home, your bacteria provide essential services
+coreContent|after|analogy-6.png|Illustration of Fiber|Fertilizer for your gut garden—the favorite food of beneficial bacteria
+coreContent|after|analogy-7.png|Illustration of Fermented Foods|New plants for your garden—live bacteria that add to your microbiome's diversity
+coreContent|after|analogy-8.png|Illustration of Dysbiosis|A garden out of balance—when weeds take over and the helpful plants struggle
+coreContent|after|analogy-9.png|Illustration of First 1000 Days|The planting season of your microbiome garden—when the foundation for lifelong health is established
 
 # === SUGGESTED IMAGES FROM KEY CONCEPTS ===
 
-# coreContent|inline|concept-0.png|Illustration of: The microbiome is a community of trillions of microorganisms—bacteria, fungi, viruses, and more—t...|The microbiome is a community of trillions of microorganisms—bacteria, fungi, viruses, and more—that live in and on your body
-# coreContent|inline|concept-1.png|Illustration of: Your gut microbiome helps digest food, produce vitamins, train your immune system, and even influ...|Your gut microbiome helps digest food, produce vitamins, train your immune system, and even influence your mood through the gut-brain axis
-# coreContent|inline|concept-2.png|Illustration of: About 90% of your body's serotonin (the happiness chemical) is produced in your gut with help fro...|About 90% of your body's serotonin (the happiness chemical) is produced in your gut with help from bacteria
-# coreContent|inline|concept-3.png|Illustration of: A diverse microbiome—with many different species—is generally healthier than a less diverse one|A diverse microbiome—with many different species—is generally healthier than a less diverse one
-# coreContent|inline|concept-4.png|Illustration of: Your microbiome begins forming at birth and is shaped by diet, lifestyle, environment, and early ...|Your microbiome begins forming at birth and is shaped by diet, lifestyle, environment, and early life experiences
-# coreContent|inline|concept-5.png|Illustration of: The relationship between you and your microbiome is symbiotic—you provide a home, they provide es...|The relationship between you and your microbiome is symbiotic—you provide a home, they provide essential services
+coreContent|inline|concept-0.png|Illustration of: The microbiome is a community of trillions of microorganisms—bacteria, fungi, viruses, and more—t...|The microbiome is a community of trillions of microorganisms—bacteria, fungi, viruses, and more—that live in and on your body
+coreContent|inline|concept-1.png|Illustration of: Your gut microbiome helps digest food, produce vitamins, train your immune system, and even influ...|Your gut microbiome helps digest food, produce vitamins, train your immune system, and even influence your mood through the gut-brain axis
+coreContent|inline|concept-2.png|Illustration of: About 90% of your body's serotonin (the happiness chemical) is produced in your gut with help fro...|About 90% of your body's serotonin (the happiness chemical) is produced in your gut with help from bacteria
+coreContent|inline|concept-3.png|Illustration of: A diverse microbiome—with many different species—is generally healthier than a less diverse one|A diverse microbiome—with many different species—is generally healthier than a less diverse one
+coreContent|inline|concept-4.png|Illustration of: Your microbiome begins forming at birth and is shaped by diet, lifestyle, environment, and early ...|Your microbiome begins forming at birth and is shaped by diet, lifestyle, environment, and early life experiences
+coreContent|inline|concept-5.png|Illustration of: The relationship between you and your microbiome is symbiotic—you provide a home, they provide es...|The relationship between you and your microbiome is symbiotic—you provide a home, they provide essential services
 
 # === SECTION-SPECIFIC IMAGES ===
 
-# introduction|before|intro-img0.png|[Add alt text for introduction image]|[Optional caption]
+introduction|before|intro-img0.png|[Add alt text for introduction image]|[Optional caption]
 # coreContent|before|core-img0.png|[Add alt text for coreContent image]|[Optional caption]
 # interactiveSection|before|interactive-img0.png|[Add alt text for interactiveSection image]|[Optional caption]
 # integration|before|integration-img0.png|[Add alt text for integration image]|[Optional caption]

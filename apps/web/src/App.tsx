@@ -14,7 +14,7 @@ import {
 } from './components';
 import { JournalModal } from './components/journal';
 import { TopicPage } from './components/TopicPage';
-import { JournalPage } from './pages';
+import { JournalPage, DailyEnrichmentPage } from './pages';
 import { stories, categories, getCategoryById } from './data';
 import { learningPaths, type LearningPath } from './data/learningPaths';
 import type { Story, CategoryId, DifficultyLevel, DurationFilter, CompletionStatus, AdvancedFilterState } from './types';
@@ -993,6 +993,10 @@ function AppContent() {
             totalCount={stories.length}
           />
         } 
+      />
+      <Route 
+        path="/daily" 
+        element={<DailyEnrichmentPage />} 
       />
     </Routes>
       

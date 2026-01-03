@@ -59,6 +59,11 @@ export const storyTrimesterMap: Record<number, Trimester> = {
   30: 'third',   // Ethics - deeper philosophical topic
   31: 'third',   // Democracy - complex societal topic
   32: 'any',     // Art & Creativity - valuable at any stage
+
+  // NEW DEEP DIVE TOPICS (Content Revamp)
+  33: 'third',   // Network Journey - advanced technical deep dive
+  34: 'second',  // Subconscious Mind - valuable for prenatal bonding
+  35: 'third',   // LLM Story - advanced AI topic
 };
 
 /**

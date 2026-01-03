@@ -1,0 +1,91 @@
+# Story Illustration Generation
+
+- [x] Explore directory structure and locate manifest and story content <!-- id: 0 -->
+- [x] Analyze application theme and visual style <!-- id: 1 -->
+- [x] Generate images for the first story <!-- id: 2 -->
+  - [x] Read story content <!-- id: 3 -->
+  - [x] Generate images based on manifest <!-- id: 4 -->
+    - [x] Analogy 0, 1, 2, 4, 5 generated and deployed
+    - [x] Analogy 3 generated and deployed
+    - [x] Concepts 0-5 generated and deployed
+  - [x] Save images to project directory <!-- id: 5 -->
+  - [x] Uncomment entries in manifest <!-- id: 6 -->
+- [/] Generate images for the second story <!-- id: 7 -->
+  - [x] Read story content and manifest <!-- id: 8 -->
+  - [/] Generate images based on manifest <!-- id: 9 -->
+    - [x] Analogy 0, 3 generated and deployed
+    - [x] Analogy 0 generated and deployed (Accurate version)
+    - [x] Analogy 3 generated and deployed
+    - [x] Analogy 1, 2 generated and deployed (Accurate versions)
+    - [x] Analogy 4, 5 generated and deployed
+    - [x] Concepts 0-6 generated and deployed
+  - [x] Save images to project directory <!-- id: 10 -->
+  - [x] Uncomment entries in manifest <!-- id: 11 -->
+- [x] Generate images for the third story <!-- id: 12 -->
+  - [x] Read story content and manifest <!-- id: 13 -->
+  - [x] Generate images based on manifest <!-- id: 14 -->
+    - [x] Analogies 0-5 generated and deployed
+    - [x] Concepts 0-6 generated and deployed
+  - [x] Save images to project directory <!-- id: 15 -->
+  - [x] Uncomment entries in manifest <!-- id: 16 -->
+- [x] Generate images for the fourth story <!-- id: 17 -->
+  - [x] Read story content and manifest <!-- id: 18 -->
+  - [x] Generate images based on manifest <!-- id: 19 -->
+    - [x] Analogies 0-5 generated and deployed
+    - [x] Concepts 0-6 generated and deployed
+  - [x] Save images to project directory <!-- id: 20 -->
+  - [x] Uncomment entries in manifest <!-- id: 21 -->
+- [x] Generate images for the fifth story <!-- id: 22 -->
+  - [x] Read story content and manifest <!-- id: 23 -->
+  - [x] Generate images based on manifest <!-- id: 24 -->
+    - [x] Analogies 0-6 generated and deployed
+    - [x] Concepts 0-5 generated and deployed
+    - [x] Intro image generated and deployed
+  - [x] Save images to project directory <!-- id: 25 -->
+  - [x] Uncomment entries in manifest <!-- id: 26 -->
+  - [x] Uncomment entries in manifest <!-- id: 26 -->
+- [x] Generate images for the sixth story <!-- id: 27 -->
+  - [x] Read story content and manifest <!-- id: 28 -->
+  - [x] Generate images based on manifest <!-- id: 29 -->
+    - [x] Analogies 0-6 generated and deployed
+    - [x] Concepts 0-5 generated and deployed
+    - [x] Intro image generated and deployed
+  - [x] Save images to project directory <!-- id: 30 -->
+  - [x] Uncomment entries in manifest <!-- id: 31 -->
+- [x] Generate images for the seventh story <!-- id: 32 -->
+  - [x] Read story content and manifest <!-- id: 33 -->
+  - [x] Generate images based on manifest <!-- id: 34 -->
+    - [x] Analogies 0-6 generated and deployed
+    - [x] Concepts 0-5 generated and deployed
+    - [x] Intro image generated and deployed
+  - [x] Save images to project directory <!-- id: 35 -->
+  - [x] Uncomment entries in manifest <!-- id: 36 -->
+- [/] Generate images for the eighth story <!-- id: 37 -->
+
+  - [x] Read story content and manifest <!-- id: 38 -->
+  - [/] Generate images based on manifest <!-- id: 39 -->
+    - [/] Analogies 0-3, 5-6 generated and deployed
+    - [/] Concepts 0-5 generated and deployed
+    - [x] Intro image
+  - [x] Save images to project directory <!-- id: 40 -->
+  - [x] Uncomment entries in manifest <!-- id: 41 -->
+
+- [x] Generate images for Story 9: The Dance of DNA <!-- id: 42 -->
+
+  - [x] Read story content and manifest <!-- id: 43 -->
+  - [x] Generate images based on manifest <!-- id: 44 -->
+    - [x] Analogies 0-6 generated and deployed
+    - [x] Concepts 0-5 generated and deployed
+    - [x] Intro image generated and deployed
+  - [x] Save images to project directory <!-- id: 45 -->
+  - [x] Uncomment entries in manifest <!-- id: 46 -->
+
+- [ ] Generate images for the tenth story <!-- id: 47 -->
+  - [ ] Read story content and manifest <!-- id: 48 -->
+  - [ ] Generate images based on manifest <!-- id: 49 -->
+    - [ ] Analogies
+    - [ ] Concepts
+    - [ ] Intro image
+  - [ ] Save images to project directory <!-- id: 50 -->
+  - [ ] Uncomment entries in manifest <!-- id: 51 -->
+- [x] Generate images for the eighth story (Complete) <!-- id: 37 -->

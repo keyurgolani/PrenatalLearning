@@ -142,8 +142,8 @@ export const CompactStoryCard: React.FC<CompactStoryCardProps> = ({
       <div className="p-5 relative">
         {/* Media Badges - Top Right Corner */}
         <div className="absolute top-3 right-3 flex items-center gap-1.5">
-          <IllustrationBadge storyId={story.id} fullOnly={true} />
           <AudioNarrationBadge storyId={story.id} />
+          <IllustrationBadge storyId={story.id} />
         </div>
 
         {/* Header with Title and Completion Status */}

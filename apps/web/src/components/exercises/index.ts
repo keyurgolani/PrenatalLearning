@@ -12,6 +12,11 @@
  * - 2.2: ReflectionExercise - Text input for journaling
  * - 2.5: BreathingExercise - Animated breathing guide
  * - 2.1, 2.6: ExerciseEngine - Core logic component for rendering exercises
+ * - NEW: InteractiveSimulation - Canvas-based interactive simulations
+ * - NEW: LogicPuzzle - Grid-based deduction puzzles
+ * - NEW: BuilderExercise - Form-based content building
+ * - NEW: PatternAnalysis - Step-by-step pattern discovery
+ * - NEW: GuidedPractice - Timed guided exercises with checkpoints
  */
 
 export { QuizExercise } from './QuizExercise';
@@ -21,6 +26,11 @@ export { FillBlankExercise } from './FillBlankExercise';
 export { ScenarioExercise } from './ScenarioExercise';
 export { ReflectionExercise } from './ReflectionExercise';
 export { BreathingExercise } from './BreathingExercise';
+export { InteractiveSimulation } from './InteractiveSimulation';
+export { LogicPuzzle } from './LogicPuzzle';
+export { BuilderExercise } from './BuilderExercise';
+export { PatternAnalysis } from './PatternAnalysis';
+export { GuidedPractice } from './GuidedPractice';
 export { ExerciseEngine } from './ExerciseEngine';
 export type { ExerciseEngineProps } from './ExerciseEngine';
 export { ExerciseModal } from './ExerciseModal';

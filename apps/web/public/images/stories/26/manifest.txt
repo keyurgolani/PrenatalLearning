@@ -14,25 +14,25 @@
 
 # === SUGGESTED IMAGES FROM ANALOGIES ===
 
-# coreContent|after|analogy-0.png|Illustration of Supply and Demand|Like two dancers in a waltz—supply loves high prices and spins faster when they rise, demand loves low prices and leaps when they fall, and they meet in the middle at equilibrium
-# coreContent|after|analogy-1.png|Illustration of Price Discovery|Like a conversation between millions of people, where prices are the words—rising prices say "this is scarce!" and falling prices say "there's plenty!"
-# coreContent|after|analogy-2.png|Illustration of The Invisible Hand|Like a dance where no one calls the steps, but everyone moves in harmony—individual choices guided by prices create coordination without a coordinator
-# coreContent|after|analogy-3.png|Illustration of Markets as Information Processors|Like a giant brain made of countless small decisions, gathering information from millions of people and coordinating their actions through prices
-# coreContent|after|analogy-4.png|Illustration of Equilibrium|Like a moment of perfect harmony in a dance, where the amount sellers want to sell exactly matches the amount buyers want to buy
-# coreContent|after|analogy-5.png|Illustration of Global Trade|Like a dance with billions of participants, all moving to the rhythm of prices, all connected by invisible threads of exchange
+coreContent|after|analogy-0.png|Illustration of Supply and Demand|Like two dancers in a waltz—supply loves high prices and spins faster when they rise, demand loves low prices and leaps when they fall, and they meet in the middle at equilibrium
+coreContent|after|analogy-1.png|Illustration of Price Discovery|Like a conversation between millions of people, where prices are the words—rising prices say "this is scarce!" and falling prices say "there's plenty!"
+coreContent|after|analogy-2.png|Illustration of The Invisible Hand|Like a dance where no one calls the steps, but everyone moves in harmony—individual choices guided by prices create coordination without a coordinator
+coreContent|after|analogy-3.png|Illustration of Markets as Information Processors|Like a giant brain made of countless small decisions, gathering information from millions of people and coordinating their actions through prices
+coreContent|after|analogy-4.png|Illustration of Equilibrium|Like a moment of perfect harmony in a dance, where the amount sellers want to sell exactly matches the amount buyers want to buy
+coreContent|after|analogy-5.png|Illustration of Global Trade|Like a dance with billions of participants, all moving to the rhythm of prices, all connected by invisible threads of exchange
 
 # === SUGGESTED IMAGES FROM KEY CONCEPTS ===
 
-# coreContent|inline|concept-0.png|Illustration of: Supply and demand are like dance partners—supply increases when prices rise, demand increases whe...|Supply and demand are like dance partners—supply increases when prices rise, demand increases when prices fall, and they meet at equilibrium
-# coreContent|inline|concept-1.png|Illustration of: Prices are messengers that carry information about scarcity and value across the world without an...|Prices are messengers that carry information about scarcity and value across the world without anyone sending explicit messages
-# coreContent|inline|concept-2.png|Illustration of: Markets coordinate the activities of millions of people through the "invisible hand" of individua...|Markets coordinate the activities of millions of people through the "invisible hand" of individual decisions guided by prices
-# coreContent|inline|concept-3.png|Illustration of: Scarcity is the mother of value—things are valuable because there isn't enough for everyone to ha...|Scarcity is the mother of value—things are valuable because there isn't enough for everyone to have as much as they want
-# coreContent|inline|concept-4.png|Illustration of: Price discovery is the process by which markets figure out what things are worth through the inte...|Price discovery is the process by which markets figure out what things are worth through the interaction of buyers and sellers
-# coreContent|inline|concept-5.png|Illustration of: Markets enable cooperation between strangers who may never meet, connecting people across the glo...|Markets enable cooperation between strangers who may never meet, connecting people across the globe through trade
+coreContent|inline|concept-0.png|Illustration of: Supply and demand are like dance partners—supply increases when prices rise, demand increases whe...|Supply and demand are like dance partners—supply increases when prices rise, demand increases when prices fall, and they meet at equilibrium
+coreContent|inline|concept-1.png|Illustration of: Prices are messengers that carry information about scarcity and value across the world without an...|Prices are messengers that carry information about scarcity and value across the world without anyone sending explicit messages
+coreContent|inline|concept-2.png|Illustration of: Markets coordinate the activities of millions of people through the "invisible hand" of individua...|Markets coordinate the activities of millions of people through the "invisible hand" of individual decisions guided by prices
+coreContent|inline|concept-3.png|Illustration of: Scarcity is the mother of value—things are valuable because there isn't enough for everyone to ha...|Scarcity is the mother of value—things are valuable because there isn't enough for everyone to have as much as they want
+coreContent|inline|concept-4.png|Illustration of: Price discovery is the process by which markets figure out what things are worth through the inte...|Price discovery is the process by which markets figure out what things are worth through the interaction of buyers and sellers
+coreContent|inline|concept-5.png|Illustration of: Markets enable cooperation between strangers who may never meet, connecting people across the glo...|Markets enable cooperation between strangers who may never meet, connecting people across the globe through trade
 
 # === SECTION-SPECIFIC IMAGES ===
 
-# introduction|before|intro-img0.png|[Add alt text for introduction image]|[Optional caption]
+introduction|before|intro-img0.png|Illustration of The Great Exchange|A vibrant, magical bazaar or marketplace scene with diverse people trading, glowing with energy and connection
 # coreContent|before|core-img0.png|[Add alt text for coreContent image]|[Optional caption]
 # interactiveSection|before|interactive-img0.png|[Add alt text for interactiveSection image]|[Optional caption]
 # integration|before|integration-img0.png|[Add alt text for integration image]|[Optional caption]

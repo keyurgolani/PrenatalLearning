@@ -14,26 +14,26 @@
 
 # === SUGGESTED IMAGES FROM ANALOGIES ===
 
-# coreContent|after|analogy-0.png|Illustration of Wave-Particle Duality|A friend who is somehow both a fish and a bird—swimming when in water, flying when in sky, but genuinely both all the time
-# coreContent|after|analogy-1.png|Illustration of Superposition|A magical coin that is both heads AND tails while spinning, only choosing when you catch it and look
-# coreContent|after|analogy-2.png|Illustration of Quantum Observation|A cosmic game of hide-and-seek where particles spread out when not watched but snap into position when observed
-# coreContent|after|analogy-3.png|Illustration of Entanglement|Two gloves from the same pair—finding a left glove in New York instantly tells you the Tokyo glove is right, but no message was sent
-# coreContent|after|analogy-4.png|Illustration of Uncertainty Principle|Photographing a hummingbird—freeze position and lose wing motion, capture motion and lose position
-# coreContent|after|analogy-5.png|Illustration of Decoherence|Quantum fuzziness that disappears when things get big, like ripples that fade in a busy pond
+coreContent|after|analogy-0.png|Illustration of Wave-Particle Duality|A friend who is somehow both a fish and a bird—swimming when in water, flying when in sky, but genuinely both all the time
+coreContent|after|analogy-1.png|Illustration of Superposition|A magical coin that is both heads AND tails while spinning, only choosing when you catch it and look
+coreContent|after|analogy-2.png|Illustration of Quantum Observation|A cosmic game of hide-and-seek where particles spread out when not watched but snap into position when observed
+coreContent|after|analogy-3.png|Illustration of Entanglement|Two gloves from the same pair—finding a left glove in New York instantly tells you the Tokyo glove is right, but no message was sent
+coreContent|after|analogy-4.png|Illustration of Uncertainty Principle|Photographing a hummingbird—freeze position and lose wing motion, capture motion and lose position
+coreContent|after|analogy-5.png|Illustration of Decoherence|Quantum fuzziness that disappears when things get big, like ripples that fade in a busy pond
 
 # === SUGGESTED IMAGES FROM KEY CONCEPTS ===
 
-# coreContent|inline|concept-0.png|Illustration of: Particles like electrons and photons exhibit wave-particle duality—they can behave as both waves ...|Particles like electrons and photons exhibit wave-particle duality—they can behave as both waves and particles
-# coreContent|inline|concept-1.png|Illustration of: Quantum superposition means particles can exist in multiple states simultaneously until measured|Quantum superposition means particles can exist in multiple states simultaneously until measured
-# coreContent|inline|concept-2.png|Illustration of: The act of observation collapses superposition into a definite state—looking changes reality|The act of observation collapses superposition into a definite state—looking changes reality
-# coreContent|inline|concept-3.png|Illustration of: Schrödinger's cat illustrates how quantum superposition seems absurd at large scales|Schrödinger's cat illustrates how quantum superposition seems absurd at large scales
-# coreContent|inline|concept-4.png|Illustration of: Quantum entanglement connects particles across any distance in mysterious ways|Quantum entanglement connects particles across any distance in mysterious ways
-# coreContent|inline|concept-5.png|Illustration of: The uncertainty principle sets fundamental limits on what can be known about particles|The uncertainty principle sets fundamental limits on what can be known about particles
-# coreContent|inline|concept-6.png|Illustration of: Everything in the universe, including us, is made of quantum particles following these strange rules|Everything in the universe, including us, is made of quantum particles following these strange rules
+coreContent|inline|concept-0.png|Illustration of: Particles like electrons and photons exhibit wave-particle duality—they can behave as both waves ...|Particles like electrons and photons exhibit wave-particle duality—they can behave as both waves and particles
+coreContent|inline|concept-1.png|Illustration of: Quantum superposition means particles can exist in multiple states simultaneously until measured|Quantum superposition means particles can exist in multiple states simultaneously until measured
+coreContent|inline|concept-2.png|Illustration of: The act of observation collapses superposition into a definite state—looking changes reality|The act of observation collapses superposition into a definite state—looking changes reality
+coreContent|inline|concept-3.png|Illustration of: Schrödinger's cat illustrates how quantum superposition seems absurd at large scales|Schrödinger's cat illustrates how quantum superposition seems absurd at large scales
+coreContent|inline|concept-4.png|Illustration of: Quantum entanglement connects particles across any distance in mysterious ways|Quantum entanglement connects particles across any distance in mysterious ways
+coreContent|inline|concept-5.png|Illustration of: The uncertainty principle sets fundamental limits on what can be known about particles|The uncertainty principle sets fundamental limits on what can be known about particles
+coreContent|inline|concept-6.png|Illustration of: Everything in the universe, including us, is made of quantum particles following these strange rules|Everything in the universe, including us, is made of quantum particles following these strange rules
 
 # === SECTION-SPECIFIC IMAGES ===
 
-# introduction|before|intro-img0.png|[Add alt text for introduction image]|[Optional caption]
+introduction|before|intro-img0.png|[Add alt text for introduction image]|[Optional caption]
 # coreContent|before|core-img0.png|[Add alt text for coreContent image]|[Optional caption]
 # interactiveSection|before|interactive-img0.png|[Add alt text for interactiveSection image]|[Optional caption]
 # integration|before|integration-img0.png|[Add alt text for integration image]|[Optional caption]

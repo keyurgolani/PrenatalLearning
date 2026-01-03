@@ -14,26 +14,26 @@
 
 # === SUGGESTED IMAGES FROM ANALOGIES ===
 
-# coreContent|after|analogy-0.png|Illustration of Body Language|A silent symphony—a rich, complex conversation happening all around us without a single word being spoken
-# coreContent|after|analogy-1.png|Illustration of Facial Expressions|A canvas of emotion—with over 40 muscles, the face can paint thousands of different expressions
-# coreContent|after|analogy-2.png|Illustration of Mirror Neurons|The empathy engine—brain cells that fire both when we act and when we watch others, helping us feel what they feel
-# coreContent|after|analogy-3.png|Illustration of Personal Space|An invisible bubble around each person—its size varies by relationship and culture
-# coreContent|after|analogy-4.png|Illustration of Mother-Baby Attunement|A dance of nonverbal communication—mother and baby learning to read and respond to each other's silent signals
-# coreContent|after|analogy-5.png|Illustration of Presence|A gift of full attention—communicated entirely through body language, saying "You matter, I see you, I'm with you"
+coreContent|after|analogy-0.png|Illustration of Body Language|A silent symphony—a rich, complex conversation happening all around us without a single word being spoken
+coreContent|after|analogy-1.png|Illustration of Facial Expressions|A canvas of emotion—with over 40 muscles, the face can paint thousands of different expressions
+coreContent|after|analogy-2.png|Illustration of Mirror Neurons|The empathy engine—brain cells that fire both when we act and when we watch others, helping us feel what they feel
+coreContent|after|analogy-3.png|Illustration of Personal Space|An invisible bubble around each person—its size varies by relationship and culture
+coreContent|after|analogy-4.png|Illustration of Mother-Baby Attunement|A dance of nonverbal communication—mother and baby learning to read and respond to each other's silent signals
+coreContent|after|analogy-5.png|Illustration of Presence|A gift of full attention—communicated entirely through body language, saying "You matter, I see you, I'm with you"
 
 # === SUGGESTED IMAGES FROM KEY CONCEPTS ===
 
-# coreContent|inline|concept-0.png|Illustration of: About 60-70% of human communication is nonverbal—expressed through facial expressions, gestures, ...|About 60-70% of human communication is nonverbal—expressed through facial expressions, gestures, posture, and tone
-# coreContent|inline|concept-1.png|Illustration of: Six universal facial expressions (happiness, sadness, fear, anger, surprise, disgust) are recogni...|Six universal facial expressions (happiness, sadness, fear, anger, surprise, disgust) are recognized across all human cultures
-# coreContent|inline|concept-2.png|Illustration of: Mirror neurons in the brain fire both when we perform an action and when we observe others, enabl...|Mirror neurons in the brain fire both when we perform an action and when we observe others, enabling empathy and imitation
-# coreContent|inline|concept-3.png|Illustration of: Body language includes facial expressions, eye contact, gestures, posture, personal space (proxem...|Body language includes facial expressions, eye contact, gestures, posture, personal space (proxemics), touch (haptics), and paralanguage
-# coreContent|inline|concept-4.png|Illustration of: Some body language is universal and biological, while other aspects are learned from culture|Some body language is universal and biological, while other aspects are learned from culture
-# coreContent|inline|concept-5.png|Illustration of: Babies are born with a special attraction to faces and eyes, beginning to learn body language fro...|Babies are born with a special attraction to faces and eyes, beginning to learn body language from their first moments
-# coreContent|inline|concept-6.png|Illustration of: Authentic communication happens when words and body language are congruent—the body often reveals...|Authentic communication happens when words and body language are congruent—the body often reveals truth that words try to hide
+coreContent|inline|concept-0.png|Illustration of: About 60-70% of human communication is nonverbal—expressed through facial expressions, gestures, ...|About 60-70% of human communication is nonverbal—expressed through facial expressions, gestures, posture, and tone
+coreContent|inline|concept-1.png|Illustration of: Six universal facial expressions (happiness, sadness, fear, anger, surprise, disgust) are recogni...|Six universal facial expressions (happiness, sadness, fear, anger, surprise, disgust) are recognized across all human cultures
+coreContent|inline|concept-2.png|Illustration of: Mirror neurons in the brain fire both when we perform an action and when we observe others, enabl...|Mirror neurons in the brain fire both when we perform an action and when we observe others, enabling empathy and imitation
+coreContent|inline|concept-3.png|Illustration of: Body language includes facial expressions, eye contact, gestures, posture, personal space (proxem...|Body language includes facial expressions, eye contact, gestures, posture, personal space (proxemics), touch (haptics), and paralanguage
+coreContent|inline|concept-4.png|Illustration of: Some body language is universal and biological, while other aspects are learned from culture|Some body language is universal and biological, while other aspects are learned from culture
+coreContent|inline|concept-5.png|Illustration of: Babies are born with a special attraction to faces and eyes, beginning to learn body language fro...|Babies are born with a special attraction to faces and eyes, beginning to learn body language from their first moments
+coreContent|inline|concept-6.png|Illustration of: Authentic communication happens when words and body language are congruent—the body often reveals...|Authentic communication happens when words and body language are congruent—the body often reveals truth that words try to hide
 
 # === SECTION-SPECIFIC IMAGES ===
 
-# introduction|before|intro-img0.png|[Add alt text for introduction image]|[Optional caption]
+introduction|before|intro-img0.png|Illustration of Speaking Without Words|A beautiful, artistic montage of hands, eyes, and postures forming a "sentence" without text, representing the language of the body
 # coreContent|before|core-img0.png|[Add alt text for coreContent image]|[Optional caption]
 # interactiveSection|before|interactive-img0.png|[Add alt text for interactiveSection image]|[Optional caption]
 # integration|before|integration-img0.png|[Add alt text for integration image]|[Optional caption]

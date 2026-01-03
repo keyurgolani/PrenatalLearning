@@ -14,26 +14,26 @@
 
 # === SUGGESTED IMAGES FROM ANALOGIES ===
 
-# coreContent|after|analogy-0.png|Illustration of Music and the Brain|A symphony orchestra—when you listen to music, different parts of your brain play together like instruments in an orchestra, creating a unified experience
-# coreContent|after|analogy-1.png|Illustration of The Heartbeat as Music|The first drum—your mother's heartbeat is like a drum that has been playing for you since the very beginning, the rhythm that all other music builds upon
-# coreContent|after|analogy-2.png|Illustration of Universal Music|A river flowing through time—music flows from ancient humans to the present day, with every culture adding its own streams to the great river of human song
-# coreContent|after|analogy-3.png|Illustration of Music and Emotion|A key to the heart—music is like a key that can unlock emotions we didn't even know we had, opening doors that words cannot reach
-# coreContent|after|analogy-4.png|Illustration of Prenatal Music Learning|A warm blanket of sound—when your mother sings, the music surrounds you like a warm blanket, teaching you about rhythm and melody before you're even born
-# coreContent|after|analogy-5.png|Illustration of Music as Connection|An invisible thread—music creates invisible threads between people, connecting hearts across distance and time
+coreContent|after|analogy-0.png|Illustration of The Heartbeat as Music|The first drum—your mother's heartbeat is like a drum that has been playing for you since the very beginning, the rhythm that all other music builds upon
+coreContent|after|analogy-1.png|Illustration of Melody as Speech|A melody transforming into a sentence—pitch and rhythm in speech (prosody) are just like music, carrying meaning beyond the words themselves
+coreContent|after|analogy-2.png|Illustration of Harmony and Emotion|Colors blending to create mood—chords color our emotions instantly without words, just as mixing colors changes the feeling of a painting
+coreContent|after|analogy-3.png|Illustration of Music and Emotion|A key to the heart—music is like a key that can unlock emotions we didn't even know we had, opening doors that words cannot reach
+coreContent|after|analogy-4.png|Illustration of Prenatal Music Learning|A warm blanket of sound—when your mother sings, the music surrounds you like a warm blanket, teaching you about rhythm and melody before you're even born
+coreContent|after|analogy-5.png|Illustration of Music as Connection|An invisible thread—music creates invisible threads between people, connecting hearts across distance and time
 
 # === SUGGESTED IMAGES FROM KEY CONCEPTS ===
 
-# coreContent|inline|concept-0.png|Illustration of: Music may be older than language—our ancestors likely sang before they spoke, using melody and rh...|Music may be older than language—our ancestors likely sang before they spoke, using melody and rhythm to communicate emotions and bond with each other
-# coreContent|inline|concept-1.png|Illustration of: Every human culture has music, suggesting it is deeply wired into our brains as an essential part...|Every human culture has music, suggesting it is deeply wired into our brains as an essential part of being human
-# coreContent|inline|concept-2.png|Illustration of: Music engages almost every part of the brain simultaneously—auditory processing, motor control, e...|Music engages almost every part of the brain simultaneously—auditory processing, motor control, emotion, memory, and pattern recognition
-# coreContent|inline|concept-3.png|Illustration of: Babies can hear and respond to music in the womb, and they remember melodies they heard before birth|Babies can hear and respond to music in the womb, and they remember melodies they heard before birth
-# coreContent|inline|concept-4.png|Illustration of: Universal elements appear in music across all cultures: the octave, lullaby patterns, and dance r...|Universal elements appear in music across all cultures: the octave, lullaby patterns, and dance rhythms that synchronize with our bodies
-# coreContent|inline|concept-5.png|Illustration of: Music activates the brain's reward system, releasing dopamine and creating feelings of pleasure a...|Music activates the brain's reward system, releasing dopamine and creating feelings of pleasure and connection
-# coreContent|inline|concept-6.png|Illustration of: Making music together synchronizes brain waves and heartbeats, creating powerful bonds between pe...|Making music together synchronizes brain waves and heartbeats, creating powerful bonds between people
+coreContent|inline|concept-0.png|Illustration of: Music may be older than language—our ancestors likely sang before they spoke, using melody and rh...|Music may be older than language—our ancestors likely sang before they spoke, using melody and rhythm to communicate emotions and bond with each other
+coreContent|inline|concept-1.png|Illustration of: Every human culture has music, suggesting it is deeply wired into our brains as an essential part...|Every human culture has music, suggesting it is deeply wired into our brains as an essential part of being human
+coreContent|inline|concept-2.png|Illustration of: Music engages almost every part of the brain simultaneously—auditory processing, motor control, e...|Music engages almost every part of the brain simultaneously—auditory processing, motor control, emotion, memory, and pattern recognition
+coreContent|inline|concept-3.png|Illustration of: Babies can hear and respond to music in the womb, and they remember melodies they heard before birth|Babies can hear and respond to music in the womb, and they remember melodies they heard before birth
+coreContent|inline|concept-4.png|Illustration of: Universal elements appear in music across all cultures: the octave, lullaby patterns, and dance r...|Universal elements appear in music across all cultures: the octave, lullaby patterns, and dance rhythms that synchronize with our bodies
+coreContent|inline|concept-5.png|Illustration of: Music activates the brain's reward system, releasing dopamine and creating feelings of pleasure a...|Music activates the brain's reward system, releasing dopamine and creating feelings of pleasure and connection
+coreContent|inline|concept-6.png|Illustration of: Making music together synchronizes brain waves and heartbeats, creating powerful bonds between pe...|Making music together synchronizes brain waves and heartbeats, creating powerful bonds between people
 
 # === SECTION-SPECIFIC IMAGES ===
 
-# introduction|before|intro-img0.png|[Add alt text for introduction image]|[Optional caption]
+introduction|before|intro-img0.png|Illustration of The Universal Song|A swirling galaxy where the stars form musical notes and staves, representing the cosmic and universal nature of music
 # coreContent|before|core-img0.png|[Add alt text for coreContent image]|[Optional caption]
 # interactiveSection|before|interactive-img0.png|[Add alt text for interactiveSection image]|[Optional caption]
 # integration|before|integration-img0.png|[Add alt text for integration image]|[Optional caption]

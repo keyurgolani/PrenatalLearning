@@ -3,3 +3,4 @@
  */
 
 export { JournalPage } from './JournalPage';
+export { DailyEnrichmentPage } from './DailyEnrichmentPage';

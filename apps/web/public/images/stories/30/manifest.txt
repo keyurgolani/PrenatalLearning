@@ -14,25 +14,25 @@
 
 # === SUGGESTED IMAGES FROM ANALOGIES ===
 
-# coreContent|after|analogy-0.png|Illustration of The Golden Rule|Like a mirror that helps us see ourselves in others—when we imagine how we would feel, we understand how to treat them
-# coreContent|after|analogy-1.png|Illustration of Virtue Development|Like learning to play music—we become skilled through practice, and eventually good actions become natural and effortless
-# coreContent|after|analogy-2.png|Illustration of Ripples of Kindness|Like a stone dropped in a pond—each act of kindness creates ripples that spread far beyond what we can see
-# coreContent|after|analogy-3.png|Illustration of The Golden Mean|Like tuning a guitar string—too loose or too tight produces a bad sound, but the right tension creates beautiful music
-# coreContent|after|analogy-4.png|Illustration of Moral Compass|Like a compass that helps travelers find their way—good character guides us through difficult choices
-# coreContent|after|analogy-5.png|Illustration of Web of Ethics|Like invisible threads connecting all people—every act of honesty and kindness strengthens the fabric that holds society together
+coreContent|after|analogy-0.png|Illustration of The Golden Rule|Like a mirror that helps us see ourselves in others—when we imagine how we would feel, we understand how to treat them
+coreContent|after|analogy-1.png|Illustration of Virtue Development|Like learning to play music—we become skilled through practice, and eventually good actions become natural and effortless
+coreContent|after|analogy-2.png|Illustration of Ripples of Kindness|Like a stone dropped in a pond—each act of kindness creates ripples that spread far beyond what we can see
+coreContent|after|analogy-3.png|Illustration of The Golden Mean|Like tuning a guitar string—too loose or too tight produces a bad sound, but the right tension creates beautiful music
+coreContent|after|analogy-4.png|Illustration of Moral Compass|Like a compass that helps travelers find their way—good character guides us through difficult choices
+coreContent|after|analogy-5.png|Illustration of Web of Ethics|Like invisible threads connecting all people—every act of honesty and kindness strengthens the fabric that holds society together
 
 # === SUGGESTED IMAGES FROM KEY CONCEPTS ===
 
-# coreContent|inline|concept-0.png|Illustration of: The Golden Rule—treat others as you would like to be treated—appears in virtually every culture a...|The Golden Rule—treat others as you would like to be treated—appears in virtually every culture and religion throughout human history
-# coreContent|inline|concept-1.png|Illustration of: Empathy (feeling what others feel) and compassion (wanting to help) are the emotional foundations...|Empathy (feeling what others feel) and compassion (wanting to help) are the emotional foundations of ethical behavior
-# coreContent|inline|concept-2.png|Illustration of: Virtue ethics teaches that good character is built through practice—we become good by repeatedly ...|Virtue ethics teaches that good character is built through practice—we become good by repeatedly choosing good actions
-# coreContent|inline|concept-3.png|Illustration of: Eudaimonia (flourishing) is the goal of ethics: living well by developing virtues, forming loving...|Eudaimonia (flourishing) is the goal of ethics: living well by developing virtues, forming loving relationships, and contributing to something larger than ourselves
-# coreContent|inline|concept-4.png|Illustration of: Moral development is a lifelong journey—our understanding of right and wrong deepens as we grow a...|Moral development is a lifelong journey—our understanding of right and wrong deepens as we grow and face ethical challenges
-# coreContent|inline|concept-5.png|Illustration of: Ethics connects us all: every act of kindness strengthens the web of human connection, while ever...|Ethics connects us all: every act of kindness strengthens the web of human connection, while every act of cruelty weakens it
+coreContent|inline|concept-0.png|Illustration of: The Golden Rule—treat others as you would like to be treated—appears in virtually every culture a...|The Golden Rule—treat others as you would like to be treated—appears in virtually every culture and religion throughout human history
+coreContent|inline|concept-1.png|Illustration of: Empathy (feeling what others feel) and compassion (wanting to help) are the emotional foundations...|Empathy (feeling what others feel) and compassion (wanting to help) are the emotional foundations of ethical behavior
+coreContent|inline|concept-2.png|Illustration of: Virtue ethics teaches that good character is built through practice—we become good by repeatedly ...|Virtue ethics teaches that good character is built through practice—we become good by repeatedly choosing good actions
+coreContent|inline|concept-3.png|Illustration of: Eudaimonia (flourishing) is the goal of ethics: living well by developing virtues, forming loving...|Eudaimonia (flourishing) is the goal of ethics: living well by developing virtues, forming loving relationships, and contributing to something larger than ourselves
+coreContent|inline|concept-4.png|Illustration of: Moral development is a lifelong journey—our understanding of right and wrong deepens as we grow a...|Moral development is a lifelong journey—our understanding of right and wrong deepens as we grow and face ethical challenges
+coreContent|inline|concept-5.png|Illustration of: Ethics connects us all: every act of kindness strengthens the web of human connection, while ever...|Ethics connects us all: every act of kindness strengthens the web of human connection, while every act of cruelty weakens it
 
 # === SECTION-SPECIFIC IMAGES ===
 
-# introduction|before|intro-img0.png|[Add alt text for introduction image]|[Optional caption]
+introduction|before|intro-img0.png|Illustration of The Journey of Ethics|A wise guide leading us on the path of moral understanding
 # coreContent|before|core-img0.png|[Add alt text for coreContent image]|[Optional caption]
 # interactiveSection|before|interactive-img0.png|[Add alt text for interactiveSection image]|[Optional caption]
 # integration|before|integration-img0.png|[Add alt text for integration image]|[Optional caption]

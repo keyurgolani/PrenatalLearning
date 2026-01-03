@@ -1,0 +1,40 @@
+# Image Manifest for Story 34: The Silent Architect: Unlocking Your Subconscious Mind
+# Format: sectionName|position|filename|altText|caption
+#
+# Instructions:
+# 1. Create images based on the suggested descriptions below
+# 2. Save image files with the suggested filenames (or update the filename field)
+# 3. Place image files in public/images/stories/34/
+# 4. Remove the # prefix from lines you have created images for to activate them
+# 5. Position options: before, after, inline
+#
+# IMPORTANT: Entries are commented out by default.
+# Uncomment an entry (remove the leading #) ONLY when the image file exists.
+#
+
+# === SUGGESTED IMAGES FROM ANALOGIES ===
+
+# coreContent|after|analogy-0.png|Illustration of Subconscious Mind|A fertile garden that grows whatever seeds (thoughts) are planted, without judgment
+# coreContent|after|analogy-1.png|Illustration of Conscious Mind|The gardener who chooses what to plant
+# coreContent|after|analogy-2.png|Illustration of RAS Filter|A spotlight that illuminates what you believe is important
+# coreContent|after|analogy-3.png|Illustration of Twilight State|An open door to the garden, when the gatekeeper (conscious mind) is drowsy
+# coreContent|after|analogy-4.png|Illustration of Affirmations|Seeds planted through repetition until they take root
+# coreContent|after|analogy-5.png|Illustration of Mother's Inner State|The weather and soil conditions in baby's first garden
+
+# === SUGGESTED IMAGES FROM KEY CONCEPTS ===
+
+# coreContent|inline|concept-0.png|Illustration of: Conscious vs Subconscious Mind - The gardener and the soil|Conscious vs Subconscious Mind - The gardener and the soil
+# coreContent|inline|concept-1.png|Illustration of: Reticular Activating System (RAS) - The filter that shapes perception|Reticular Activating System (RAS) - The filter that shapes perception
+# coreContent|inline|concept-2.png|Illustration of: The language of the subconscious - Images, feelings, repetition|The language of the subconscious - Images, feelings, repetition
+# coreContent|inline|concept-3.png|Illustration of: The Twilight State - Theta brainwaves and suggestibility|The Twilight State - Theta brainwaves and suggestibility
+# coreContent|inline|concept-4.png|Illustration of: Visualization - Programming the subconscious through mental imagery|Visualization - Programming the subconscious through mental imagery
+# coreContent|inline|concept-5.png|Illustration of: Affirmations - Planting seeds through repeated positive statements|Affirmations - Planting seeds through repeated positive statements
+# coreContent|inline|concept-6.png|Illustration of: Belief systems - How beliefs shape reality|Belief systems - How beliefs shape reality
+# coreContent|inline|concept-7.png|Illustration of: Prenatal influence - How mother's inner state affects baby|Prenatal influence - How mother's inner state affects baby
+
+# === SECTION-SPECIFIC IMAGES ===
+
+# introduction|before|intro-img0.png|[Add alt text for introduction image]|[Optional caption]
+# coreContent|before|core-img0.png|[Add alt text for coreContent image]|[Optional caption]
+# interactiveSection|before|interactive-img0.png|[Add alt text for interactiveSection image]|[Optional caption]
+# integration|before|integration-img0.png|[Add alt text for integration image]|[Optional caption]

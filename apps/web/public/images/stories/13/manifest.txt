@@ -14,25 +14,25 @@
 
 # === SUGGESTED IMAGES FROM ANALOGIES ===
 
-# coreContent|after|analogy-0.png|Illustration of Mathematics as Language|Mathematics is like a secret code that the universe uses to write everything—from the spiral of a galaxy to the pattern of a snowflake
-# coreContent|after|analogy-1.png|Illustration of Zero|Zero is like a quiet hero—it looks like nothing, but it makes everything possible, like the silence between musical notes that makes the music meaningful
-# coreContent|after|analogy-2.png|Illustration of Fibonacci in Nature|Nature uses Fibonacci numbers like a recipe—the same ingredients (1, 1, 2, 3, 5, 8...) appear in sunflowers, pinecones, and seashells
-# coreContent|after|analogy-3.png|Illustration of Golden Ratio|The Golden Ratio is like nature's favorite proportion—a recipe for beauty that appears in galaxies, hurricanes, and even the proportions of your own body
-# coreContent|after|analogy-4.png|Illustration of Universal Language|If we met aliens, we might not share words, but we would share mathematics—like two strangers who can't speak but can both understand music
-# coreContent|after|analogy-5.png|Illustration of Patterns in the Body|Your body is a mathematical symphony—your heartbeat is the rhythm, your DNA is the score, and your growth follows the conductor's precise timing
+coreContent|after|analogy-0.png|Illustration of Mathematics as Language|Mathematics is like a secret code that the universe uses to write everything—from the spiral of a galaxy to the pattern of a snowflake
+coreContent|after|analogy-1.png|Illustration of Zero|Zero is like a quiet hero—it looks like nothing, but it makes everything possible, like the silence between musical notes that makes the music meaningful
+coreContent|after|analogy-2.png|Illustration of Fibonacci in Nature|Nature uses Fibonacci numbers like a recipe—the same ingredients (1, 1, 2, 3, 5, 8...) appear in sunflowers, pinecones, and seashells
+coreContent|after|analogy-3.png|Illustration of Golden Ratio|The Golden Ratio is like nature's favorite proportion—a recipe for beauty that appears in galaxies, hurricanes, and even the proportions of your own body
+coreContent|after|analogy-4.png|Illustration of Universal Language|If we met aliens, we might not share words, but we would share mathematics—like two strangers who can't speak but can both understand music
+coreContent|after|analogy-5.png|Illustration of Patterns in the Body|Your body is a mathematical symphony—your heartbeat is the rhythm, your DNA is the score, and your growth follows the conductor's precise timing
 
 # === SUGGESTED IMAGES FROM KEY CONCEPTS ===
 
-# coreContent|inline|concept-0.png|Illustration of: Mathematics is the universal language that describes patterns in nature and the cosmos|Mathematics is the universal language that describes patterns in nature and the cosmos
-# coreContent|inline|concept-1.png|Illustration of: Number systems evolved across cultures, from finger counting to the revolutionary invention of zero|Number systems evolved across cultures, from finger counting to the revolutionary invention of zero
-# coreContent|inline|concept-2.png|Illustration of: The Fibonacci sequence (1, 1, 2, 3, 5, 8, 13...) appears throughout nature in flowers, shells, an...|The Fibonacci sequence (1, 1, 2, 3, 5, 8, 13...) appears throughout nature in flowers, shells, and spirals
-# coreContent|inline|concept-3.png|Illustration of: The Golden Ratio (approximately 1.618) is found in beautiful proportions throughout nature and art|The Golden Ratio (approximately 1.618) is found in beautiful proportions throughout nature and art
-# coreContent|inline|concept-4.png|Illustration of: Mathematics describes reality so well that scientists call it "unreasonably effective"|Mathematics describes reality so well that scientists call it "unreasonably effective"
-# coreContent|inline|concept-5.png|Illustration of: Patterns and rhythms are mathematical—even your heartbeat follows mathematical principles|Patterns and rhythms are mathematical—even your heartbeat follows mathematical principles
+coreContent|inline|concept-0.png|Illustration of: Mathematics is the universal language that describes patterns in nature and the cosmos|Mathematics is the universal language that describes patterns in nature and the cosmos
+coreContent|inline|concept-1.png|Illustration of: Number systems evolved across cultures, from finger counting to the revolutionary invention of zero|Number systems evolved across cultures, from finger counting to the revolutionary invention of zero
+coreContent|inline|concept-2.png|Illustration of: The Fibonacci sequence (1, 1, 2, 3, 5, 8, 13...) appears throughout nature in flowers, shells, an...|The Fibonacci sequence (1, 1, 2, 3, 5, 8, 13...) appears throughout nature in flowers, shells, and spirals
+coreContent|inline|concept-3.png|Illustration of: The Golden Ratio (approximately 1.618) is found in beautiful proportions throughout nature and art|The Golden Ratio (approximately 1.618) is found in beautiful proportions throughout nature and art
+coreContent|inline|concept-4.png|Illustration of: Mathematics describes reality so well that scientists call it "unreasonably effective"|Mathematics describes reality so well that scientists call it "unreasonably effective"
+coreContent|inline|concept-5.png|Illustration of: Patterns and rhythms are mathematical—even your heartbeat follows mathematical principles|Patterns and rhythms are mathematical—even your heartbeat follows mathematical principles
 
 # === SECTION-SPECIFIC IMAGES ===
 
-# introduction|before|intro-img0.png|[Add alt text for introduction image]|[Optional caption]
+introduction|before|intro-img0.png|[Add alt text for introduction image]|[Optional caption]
 # coreContent|before|core-img0.png|[Add alt text for coreContent image]|[Optional caption]
 # interactiveSection|before|interactive-img0.png|[Add alt text for interactiveSection image]|[Optional caption]
 # integration|before|integration-img0.png|[Add alt text for integration image]|[Optional caption]

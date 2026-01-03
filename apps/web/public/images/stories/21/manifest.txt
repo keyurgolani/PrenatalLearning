@@ -14,26 +14,26 @@
 
 # === SUGGESTED IMAGES FROM ANALOGIES ===
 
-# coreContent|after|analogy-0.png|Illustration of Language Evolution|Seeds growing into a forest—simple sounds were seeds that grew over millennia into the vast forest of human languages
-# coreContent|after|analogy-1.png|Illustration of Writing|Capturing butterflies—spoken words are like butterflies that fly away, but writing lets us capture and preserve them forever
-# coreContent|after|analogy-2.png|Illustration of The Alphabet|Building blocks—with just 26 letters, you can build any word, just as with a few types of blocks you can build any structure
+coreContent|after|analogy-0.png|Illustration of Language Evolution|Seeds growing into a forest—simple sounds were seeds that grew over millennia into the vast forest of human languages
+coreContent|after|analogy-1.png|Illustration of Writing|Capturing butterflies—spoken words are like butterflies that fly away, but writing lets us capture and preserve them forever
+coreContent|after|analogy-2.png|Illustration of The Alphabet|Building blocks—with just 26 letters, you can build any word, just as with a few types of blocks you can build any structure
 # coreContent|after|analogy-3.png|Illustration of Language and Thought|Windows to the world—each language is a different window, showing the world from a slightly different angle
 # coreContent|after|analogy-4.png|Illustration of Baby Language Learning|A sponge absorbing water—babies absorb language effortlessly, soaking up words and patterns from everything they hear
 # coreContent|after|analogy-5.png|Illustration of The River of Language|A river flowing through time—language flows from the past through the present to the future, carrying the thoughts of all humanity
 
 # === SUGGESTED IMAGES FROM KEY CONCEPTS ===
 
-# coreContent|inline|concept-0.png|Illustration of: Language evolved gradually over hundreds of thousands of years, from simple sounds to complex sys...|Language evolved gradually over hundreds of thousands of years, from simple sounds to complex systems of symbols and grammar
-# coreContent|inline|concept-1.png|Illustration of: Human anatomy—including the lowered larynx, specialized brain areas (Broca's and Wernicke's), and...|Human anatomy—including the lowered larynx, specialized brain areas (Broca's and Wernicke's), and the FOXP2 gene—enabled the development of speech
-# coreContent|inline|concept-2.png|Illustration of: Writing was invented about 5,000 years ago, allowing thoughts to be preserved and transmitted acr...|Writing was invented about 5,000 years ago, allowing thoughts to be preserved and transmitted across time and space
-# coreContent|inline|concept-3.png|Illustration of: There are about 7,000 languages spoken today, all sharing deep structural similarities because th...|There are about 7,000 languages spoken today, all sharing deep structural similarities because they come from the same human mind
-# coreContent|inline|concept-4.png|Illustration of: Language may influence how we think (Sapir-Whorf hypothesis), but it doesn't limit our thoughts—w...|Language may influence how we think (Sapir-Whorf hypothesis), but it doesn't limit our thoughts—we can always learn new ways of seeing
-# coreContent|inline|concept-5.png|Illustration of: Babies begin learning language before birth, recognizing their mother's voice and the patterns of...|Babies begin learning language before birth, recognizing their mother's voice and the patterns of their native language
-# coreContent|inline|concept-6.png|Illustration of: Language is fundamentally about connection—sharing our inner worlds and building relationships wi...|Language is fundamentally about connection—sharing our inner worlds and building relationships with others
+coreContent|inline|concept-0.png|Illustration of: Language evolved gradually over hundreds of thousands of years, from simple sounds to complex sys...|Language evolved gradually over hundreds of thousands of years, from simple sounds to complex systems of symbols and grammar
+coreContent|inline|concept-1.png|Illustration of: Human anatomy—including the lowered larynx, specialized brain areas (Broca's and Wernicke's), and...|Human anatomy—including the lowered larynx, specialized brain areas (Broca's and Wernicke's), and the FOXP2 gene—enabled the development of speech
+coreContent|inline|concept-2.png|Illustration of: Writing was invented about 5,000 years ago, allowing thoughts to be preserved and transmitted acr...|Writing was invented about 5,000 years ago, allowing thoughts to be preserved and transmitted across time and space
+coreContent|inline|concept-3.png|Illustration of: There are about 7,000 languages spoken today, all sharing deep structural similarities because th...|There are about 7,000 languages spoken today, all sharing deep structural similarities because they come from the same human mind
+coreContent|inline|concept-4.png|Illustration of: Language may influence how we think (Sapir-Whorf hypothesis), but it doesn't limit our thoughts—w...|Language may influence how we think (Sapir-Whorf hypothesis), but it doesn't limit our thoughts—we can always learn new ways of seeing
+coreContent|inline|concept-5.png|Illustration of: Babies begin learning language before birth, recognizing their mother's voice and the patterns of...|Babies begin learning language before birth, recognizing their mother's voice and the patterns of their native language
+coreContent|inline|concept-6.png|Illustration of: Language is fundamentally about connection—sharing our inner worlds and building relationships wi...|Language is fundamentally about connection—sharing our inner worlds and building relationships with others
 
 # === SECTION-SPECIFIC IMAGES ===
 
-# introduction|before|intro-img0.png|[Add alt text for introduction image]|[Optional caption]
+introduction|before|intro-img0.png|Illustration of The Magic of Words|A magical open book releasing a swirl of glowing letters and symbols that form shapes of animals and objects in the air
 # coreContent|before|core-img0.png|[Add alt text for coreContent image]|[Optional caption]
 # interactiveSection|before|interactive-img0.png|[Add alt text for interactiveSection image]|[Optional caption]
 # integration|before|integration-img0.png|[Add alt text for integration image]|[Optional caption]

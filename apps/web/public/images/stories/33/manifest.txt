@@ -1,0 +1,39 @@
+# Image Manifest for Story 33: The Journey of a Signal: What Happens When You Type a URL
+# Format: sectionName|position|filename|altText|caption
+#
+# Instructions:
+# 1. Create images based on the suggested descriptions below
+# 2. Save image files with the suggested filenames (or update the filename field)
+# 3. Place image files in public/images/stories/33/
+# 4. Remove the # prefix from lines you have created images for to activate them
+# 5. Position options: before, after, inline
+#
+# IMPORTANT: Entries are commented out by default.
+# Uncomment an entry (remove the leading #) ONLY when the image file exists.
+#
+
+# === SUGGESTED IMAGES FROM ANALOGIES ===
+
+# coreContent|after|analogy-0.png|Illustration of DNS Lookup|Like asking for directions through a family hierarchy—yourself, mother, grandmother, ancient records
+# coreContent|after|analogy-1.png|Illustration of TCP Handshake|Like the bonding between mother and baby—kick, feel, respond
+# coreContent|after|analogy-2.png|Illustration of TLS Encryption|Like developing a secret language only you and your friend understand
+# coreContent|after|analogy-3.png|Illustration of Packet Switching|Like a photo split into puzzle pieces that find their own paths and reassemble
+# coreContent|after|analogy-4.png|Illustration of Load Balancing|Like a traffic controller directing cars to different lanes
+
+# === SUGGESTED IMAGES FROM KEY CONCEPTS ===
+
+# coreContent|inline|concept-0.png|Illustration of: DNS (Domain Name System) - The internet's address book|DNS (Domain Name System) - The internet's address book
+# coreContent|inline|concept-1.png|Illustration of: TCP Handshake - Three-way connection establishment (SYN, SYN-ACK, ACK)|TCP Handshake - Three-way connection establishment (SYN, SYN-ACK, ACK)
+# coreContent|inline|concept-2.png|Illustration of: TLS/SSL - Encryption for secure communication|TLS/SSL - Encryption for secure communication
+# coreContent|inline|concept-3.png|Illustration of: HTTP Request/Response - The language of web communication|HTTP Request/Response - The language of web communication
+# coreContent|inline|concept-4.png|Illustration of: Packet Switching - Data traveling in pieces that reassemble|Packet Switching - Data traveling in pieces that reassemble
+# coreContent|inline|concept-5.png|Illustration of: Load Balancing - Distributing work across multiple servers|Load Balancing - Distributing work across multiple servers
+# coreContent|inline|concept-6.png|Illustration of: DOM/CSSOM - Browser's internal representation of web pages|DOM/CSSOM - Browser's internal representation of web pages
+# coreContent|inline|concept-7.png|Illustration of: Rendering Pipeline - How browsers paint pixels on screen|Rendering Pipeline - How browsers paint pixels on screen
+
+# === SECTION-SPECIFIC IMAGES ===
+
+# introduction|before|intro-img0.png|[Add alt text for introduction image]|[Optional caption]
+# coreContent|before|core-img0.png|[Add alt text for coreContent image]|[Optional caption]
+# interactiveSection|before|interactive-img0.png|[Add alt text for interactiveSection image]|[Optional caption]
+# integration|before|integration-img0.png|[Add alt text for integration image]|[Optional caption]

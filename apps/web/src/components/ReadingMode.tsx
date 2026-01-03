@@ -484,6 +484,8 @@ const readingModeColors = {
 };
 
 
+import { ScrollIndicators } from './ScrollIndicators';
+
 export const ReadingMode: React.FC<ReadingModeProps> = ({ children, isEnabled, onExit, bottomBarSlot, scrollContainerRef: externalScrollRef }) => {
   const { currentTheme, setTheme, themes } = useTheme();
   const { settings: accessibilitySettings, setFontSize, setFontFamily } = useAccessibility();
@@ -656,17 +658,25 @@ export const ReadingMode: React.FC<ReadingModeProps> = ({ children, isEnabled, o
 
   return (
     <div
-      ref={scrollContainerRef}
-      className={`fixed inset-0 z-50 overflow-y-auto reading-mode-container ${isPlayerSticky ? 'player-is-sticky' : ''}`}
+      className={`fixed inset-0 z-50 reading-mode-container bg-opacity-100 ${isPlayerSticky ? 'player-is-sticky' : ''}`}
       style={{ background: colors.background }}
       role="dialog"
       aria-modal="true"
       aria-label="Reading mode view"
     >
 
-
-      {/* Centered content container - Requirements 8.7 */}
-      <div className="min-h-screen flex flex-col items-center px-4 pt-8 pb-20" style={{ color: colors.text }}>
+      {/* Main Container Wrapper - Relative for ScrollIndicators positioning */}
+      <div className="absolute inset-0 z-0">
+        <ScrollIndicators containerRef={scrollContainerRef} />
+        
+        {/* Scrollable Container */}
+        <div 
+          ref={scrollContainerRef}
+          className="absolute inset-0 overflow-y-auto custom-scrollbar"
+          style={{ scrollBehavior: 'smooth' }}
+        >
+          {/* Centered content container - Requirements 8.7 */}
+          <div className="min-h-screen flex flex-col items-center px-4 pt-8 pb-20" style={{ color: colors.text }}>
         <div
           className="w-full rounded-2xl shadow-lg reading-mode-content transition-all duration-300"
           style={{
@@ -683,8 +693,12 @@ export const ReadingMode: React.FC<ReadingModeProps> = ({ children, isEnabled, o
           >
             {children}
           </div>
+          </div>
         </div>
       </div>
+      </div>
+
+
 
 
       {/* Bottom controls bar - auto-hides after inactivity */}

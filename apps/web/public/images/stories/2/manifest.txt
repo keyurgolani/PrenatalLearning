@@ -14,26 +14,26 @@
 
 # === SUGGESTED IMAGES FROM ANALOGIES ===
 
-# coreContent|after|analogy-0.png|Illustration of Spacetime Curvature|A bowling ball on a trampoline—the heavy ball creates a dip, and marbles roll around it following the curved surface
-# coreContent|after|analogy-1.png|Illustration of Orbits|Throwing a ball so hard that as it falls, the Earth curves away beneath it—it keeps falling but never lands
-# coreContent|after|analogy-2.png|Illustration of Weightlessness|Being in a falling elevator—everything falls together at the same rate, so you float inside
-# coreContent|after|analogy-3.png|Illustration of Black Holes|A trampoline stretched so far down by something so heavy that it becomes a bottomless pit
-# coreContent|after|analogy-4.png|Illustration of Gravitational Waves|Ripples spreading across a pond when you drop a stone—but the pond is spacetime itself
-# coreContent|after|analogy-5.png|Illustration of Universal Attraction|Invisible strings connecting everything in the universe, with bigger things having stronger strings
+coreContent|after|analogy-0.png|Illustration of Spacetime Curvature|A bowling ball on a trampoline—the heavy ball creates a dip, and marbles roll around it following the curved surface
+coreContent|after|analogy-1.png|Illustration of Orbits|Throwing a ball so hard that as it falls, the Earth curves away beneath it—it keeps falling but never lands
+coreContent|after|analogy-2.png|Illustration of Weightlessness|Being in a falling elevator—everything falls together at the same rate, so you float inside
+coreContent|after|analogy-3.png|Illustration of Black Holes|A trampoline stretched so far down by something so heavy that it becomes a bottomless pit
+coreContent|after|analogy-4.png|Illustration of Gravitational Waves|Ripples spreading across a pond when you drop a stone—but the pond is spacetime itself
+coreContent|after|analogy-5.png|Illustration of Universal Attraction|Invisible strings connecting everything in the universe, with bigger things having stronger strings
 
 # === SUGGESTED IMAGES FROM KEY CONCEPTS ===
 
-# coreContent|inline|concept-0.png|Illustration of: Gravity is the force that attracts all objects with mass toward each other|Gravity is the force that attracts all objects with mass toward each other
-# coreContent|inline|concept-1.png|Illustration of: Newton discovered that the same gravity that makes apples fall keeps the Moon orbiting Earth|Newton discovered that the same gravity that makes apples fall keeps the Moon orbiting Earth
-# coreContent|inline|concept-2.png|Illustration of: Einstein revealed that gravity is actually the bending of spacetime by massive objects|Einstein revealed that gravity is actually the bending of spacetime by massive objects
-# coreContent|inline|concept-3.png|Illustration of: Objects in orbit are actually falling, but moving sideways fast enough to keep missing|Objects in orbit are actually falling, but moving sideways fast enough to keep missing
-# coreContent|inline|concept-4.png|Illustration of: Time moves slower near massive objects—gravity bends time as well as space|Time moves slower near massive objects—gravity bends time as well as space
-# coreContent|inline|concept-5.png|Illustration of: Black holes are places where gravity is so strong that nothing can escape, not even light|Black holes are places where gravity is so strong that nothing can escape, not even light
-# coreContent|inline|concept-6.png|Illustration of: Gravitational waves are ripples in spacetime caused by massive objects moving|Gravitational waves are ripples in spacetime caused by massive objects moving
+coreContent|inline|concept-0.png|Illustration of: Gravity is the force that attracts all objects with mass toward each other|Gravity is the force that attracts all objects with mass toward each other
+coreContent|inline|concept-1.png|Illustration of: Newton discovered that the same gravity that makes apples fall keeps the Moon orbiting Earth|Newton discovered that the same gravity that makes apples fall keeps the Moon orbiting Earth
+coreContent|inline|concept-2.png|Illustration of: Einstein revealed that gravity is actually the bending of spacetime by massive objects|Einstein revealed that gravity is actually the bending of spacetime by massive objects
+coreContent|inline|concept-3.png|Illustration of: Objects in orbit are actually falling, but moving sideways fast enough to keep missing|Objects in orbit are actually falling, but moving sideways fast enough to keep missing
+coreContent|inline|concept-4.png|Illustration of: Time moves slower near massive objects—gravity bends time as well as space|Time moves slower near massive objects—gravity bends time as well as space
+coreContent|inline|concept-5.png|Illustration of: Black holes are places where gravity is so strong that nothing can escape, not even light|Black holes are places where gravity is so strong that nothing can escape, not even light
+coreContent|inline|concept-6.png|Illustration of: Gravitational waves are ripples in spacetime caused by massive objects moving|Gravitational waves are ripples in spacetime caused by massive objects moving
 
 # === SECTION-SPECIFIC IMAGES ===
 
-# introduction|before|intro-img0.png|[Add alt text for introduction image]|[Optional caption]
+introduction|before|intro-img0.png|[Add alt text for introduction image]|[Optional caption]
 # coreContent|before|core-img0.png|[Add alt text for coreContent image]|[Optional caption]
 # interactiveSection|before|interactive-img0.png|[Add alt text for interactiveSection image]|[Optional caption]
 # integration|before|integration-img0.png|[Add alt text for integration image]|[Optional caption]

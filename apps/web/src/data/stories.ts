@@ -34,6 +34,9 @@ import { diversityStory } from './stories/diversity-story';
 import { ethicsStory } from './stories/ethics-story';
 import { democracyStory } from './stories/democracy-story';
 import { artStory } from './stories/art-story';
+import { networkJourneyStory } from './stories/network-journey-story';
+import { subconsciousMindStory } from './stories/subconscious-mind-story';
+import { llmStory } from './stories/llm-story';
 
 /**
  * Story data for the Prenatal Learning Hub
@@ -148,6 +151,11 @@ export const stories: Story[] = [
   convertToStory(ethicsStory as StoryFileContent),
   convertToStory(democracyStory as StoryFileContent),
   convertToStory(artStory as StoryFileContent),
+  
+  // New Deep Dive Topics (from Content Revamp)
+  convertToStory(networkJourneyStory as StoryFileContent),  // Technology - "What Happens When..."
+  convertToStory(subconsciousMindStory as StoryFileContent), // Psychology - Subconscious Mind
+  convertToStory(llmStory as StoryFileContent), // Technology - Large Language Models
 ];
 
 /**

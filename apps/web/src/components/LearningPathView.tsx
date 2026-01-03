@@ -7,6 +7,7 @@ import {
 import { type LearningPath } from '../data/learningPaths';
 import { useTheme } from '../contexts/ThemeContext';
 import { AudioNarrationBadge } from './AudioNarrationBadge';
+import { IllustrationBadge } from './IllustrationBadge';
 
 interface LearningPathViewProps {
   stories: Story[];
@@ -298,8 +299,9 @@ export const LearningPathView: React.FC<LearningPathViewProps> = ({
 
                         {/* Metadata */}
                         <div className="flex flex-wrap items-center gap-2 mt-2">
-                          {/* Audio Narration Badge */}
+                          {/* Media Badges */}
                           <AudioNarrationBadge storyId={story.id} />
+                          <IllustrationBadge storyId={story.id} />
                           
                           <span 
                             className={`inline-flex items-center px-2 py-0.5 rounded text-xs font-medium ${isDark ? '' : 'bg-purple-100 text-purple-700'}`}

@@ -14,26 +14,26 @@
 
 # === SUGGESTED IMAGES FROM ANALOGIES ===
 
-# coreContent|after|analogy-0.png|Illustration of Blockchain|A glass notebook that everyone can see, no one can erase, with thousands of identical copies around the world that all update together
-# coreContent|after|analogy-1.png|Illustration of Cryptographic Hash|A magical fingerprint machine that turns any information into a unique code—change even one letter, and the fingerprint is completely different
-# coreContent|after|analogy-2.png|Illustration of Chain Structure|Paper clips hooked through each other—remove one from the middle and the whole chain falls apart
-# coreContent|after|analogy-3.png|Illustration of Immutability|Trying to change every copy of a book in every library in the world, all at once, without anyone noticing—practically impossible
-# coreContent|after|analogy-4.png|Illustration of Consensus Mechanism|A classroom where everyone must agree on an answer before it's written on the board—majority rules, and cheaters are caught
-# coreContent|after|analogy-5.png|Illustration of Decentralization|Instead of one powerful king, thousands of equal citizens all watching each other and sharing responsibility
-# coreContent|after|analogy-6.png|Illustration of Smart Contract|A promise that keeps itself—like a vending machine that automatically gives you a snack when you put in money, no trust required
+coreContent|after|analogy-0.png|Illustration of Blockchain|A glass notebook that everyone can see, no one can erase, with thousands of identical copies around the world that all update together
+coreContent|after|analogy-1.png|Illustration of Cryptographic Hash|A magical fingerprint machine that turns any information into a unique code—change even one letter, and the fingerprint is completely different
+coreContent|after|analogy-2.png|Illustration of Chain Structure|Paper clips hooked through each other—remove one from the middle and the whole chain falls apart
+coreContent|after|analogy-3.png|Illustration of Immutability|Trying to change every copy of a book in every library in the world, all at once, without anyone noticing—practically impossible
+coreContent|after|analogy-4.png|Illustration of Consensus Mechanism|A classroom where everyone must agree on an answer before it's written on the board—majority rules, and cheaters are caught
+coreContent|after|analogy-5.png|Illustration of Decentralization|Instead of one powerful king, thousands of equal citizens all watching each other and sharing responsibility
+coreContent|after|analogy-6.png|Illustration of Smart Contract|A promise that keeps itself—like a vending machine that automatically gives you a snack when you put in money, no trust required
 
 # === SUGGESTED IMAGES FROM KEY CONCEPTS ===
 
-# coreContent|inline|concept-0.png|Illustration of: Blockchain is like a glass notebook—everyone can see it, no one can erase it, and thousands of co...|Blockchain is like a glass notebook—everyone can see it, no one can erase it, and thousands of copies exist worldwide
-# coreContent|inline|concept-1.png|Illustration of: Cryptographic hashing creates unique fingerprints for each block, making any tampering immediatel...|Cryptographic hashing creates unique fingerprints for each block, making any tampering immediately detectable
-# coreContent|inline|concept-2.png|Illustration of: The chain structure means changing one block would require changing all subsequent blocks across ...|The chain structure means changing one block would require changing all subsequent blocks across thousands of computers
-# coreContent|inline|concept-3.png|Illustration of: Decentralization means no single person or company controls the blockchain—power is spread among ...|Decentralization means no single person or company controls the blockchain—power is spread among all participants
-# coreContent|inline|concept-4.png|Illustration of: Consensus mechanisms let thousands of computers agree on truth without needing a central authority|Consensus mechanisms let thousands of computers agree on truth without needing a central authority
-# coreContent|inline|concept-5.png|Illustration of: Blockchain enables trust between strangers through verification rather than faith in institutions|Blockchain enables trust between strangers through verification rather than faith in institutions
+coreContent|inline|concept-0.png|Illustration of: Blockchain is like a glass notebook—everyone can see it, no one can erase it, and thousands of co...|Blockchain is like a glass notebook—everyone can see it, no one can erase it, and thousands of copies exist worldwide
+coreContent|inline|concept-1.png|Illustration of: Cryptographic hashing creates unique fingerprints for each block, making any tampering immediatel...|Cryptographic hashing creates unique fingerprints for each block, making any tampering immediately detectable
+coreContent|inline|concept-2.png|Illustration of: The chain structure means changing one block would require changing all subsequent blocks across ...|The chain structure means changing one block would require changing all subsequent blocks across thousands of computers
+coreContent|inline|concept-3.png|Illustration of: Decentralization means no single person or company controls the blockchain—power is spread among ...|Decentralization means no single person or company controls the blockchain—power is spread among all participants
+coreContent|inline|concept-4.png|Illustration of: Consensus mechanisms let thousands of computers agree on truth without needing a central authority|Consensus mechanisms let thousands of computers agree on truth without needing a central authority
+coreContent|inline|concept-5.png|Illustration of: Blockchain enables trust between strangers through verification rather than faith in institutions|Blockchain enables trust between strangers through verification rather than faith in institutions
 
 # === SECTION-SPECIFIC IMAGES ===
 
-# introduction|before|intro-img0.png|[Add alt text for introduction image]|[Optional caption]
+introduction|before|intro-img0.png|[Add alt text for introduction image]|[Optional caption]
 # coreContent|before|core-img0.png|[Add alt text for coreContent image]|[Optional caption]
 # interactiveSection|before|interactive-img0.png|[Add alt text for interactiveSection image]|[Optional caption]
 # integration|before|integration-img0.png|[Add alt text for integration image]|[Optional caption]

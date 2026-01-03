@@ -3,6 +3,7 @@ import type { Story, Category, Trimester } from '../types';
 import { useTheme } from '../contexts/ThemeContext';
 import { getTotalReadingTime, formatReadingTime } from '../utils/readingTime';
 import { AudioNarrationBadge } from './AudioNarrationBadge';
+import { IllustrationBadge } from './IllustrationBadge';
 
 /**
  * Trimester badge colors and labels
@@ -217,6 +218,9 @@ export const StoryCard: React.FC<StoryCardProps> = ({
         <div className="flex flex-wrap gap-2 mb-4">
           {/* Audio Narration Badge */}
           <AudioNarrationBadge storyId={story.id} />
+          
+          {/* Illustration Badge */}
+          <IllustrationBadge storyId={story.id} />
 
           {/* Trimester Badge - Requirements 1.4: Display trimester badge on story cards */}
           <TrimesterBadge trimester={story.recommendedTrimester} isDark={isDark} />

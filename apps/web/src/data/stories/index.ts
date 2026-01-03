@@ -132,6 +132,18 @@ export { democracyExercises, getDemocracyExercisesByType, getDemocracyTotalExerc
 export { artStory } from './art-story';
 export { artExercises, getArtExercisesByType, getArtTotalExerciseDuration, getArtRecommendedSequence } from './art-exercises';
 
+// Network Journey Story (Technology & AI - Story 33) - "What Happens When You Type a URL"
+export { networkJourneyStory } from './network-journey-story';
+export { networkJourneyExercises, getNetworkJourneyExercisesByType, getNetworkJourneyTotalExerciseDuration, getNetworkJourneyRecommendedSequence } from './network-journey-exercises';
+
+// Subconscious Mind Story (Psychology & Mind - Story 34) - "The Inner Garden"
+export { subconsciousMindStory } from './subconscious-mind-story';
+export { subconsciousMindExercises, getSubconsciousMindExercisesByType, getSubconsciousMindTotalExerciseDuration, getSubconsciousMindRecommendedSequence } from './subconscious-mind-exercises';
+
+// LLM Story (Technology & AI - Story 35) - "The Word Weavers"
+export { llmStory } from './llm-story';
+export { llmExercises, getLLMExercisesByType, getLLMTotalExerciseDuration, getLLMRecommendedSequence } from './llm-exercises';
+
 // Story collection for easy access
 import { bigBangStory } from './big-bang-story';
 import { gravityStory } from './gravity-story';
@@ -165,6 +177,9 @@ import { diversityStory } from './diversity-story';
 import { ethicsStory } from './ethics-story';
 import { democracyStory } from './democracy-story';
 import { artStory } from './art-story';
+import { networkJourneyStory } from './network-journey-story';
+import { subconsciousMindStory } from './subconscious-mind-story';
+import { llmStory } from './llm-story';
 
 export const storyContents = {
   1: bigBangStory,
@@ -199,7 +214,9 @@ export const storyContents = {
   30: ethicsStory,
   31: democracyStory,
   32: artStory,
-  // Additional stories will be added here as they are created
+  33: networkJourneyStory,
+  34: subconsciousMindStory,
+  35: llmStory,
 };
 
 /**

@@ -14,26 +14,26 @@
 
 # === SUGGESTED IMAGES FROM ANALOGIES ===
 
-# coreContent|after|analogy-0.png|Illustration of Sanskrit vs. Other Languages|LEGO bricks vs. clay—Sanskrit has precise, interlocking pieces while other languages are more fluid and shapeable but less exact
-# coreContent|after|analogy-1.png|Illustration of Panini's Grammar|A complete blueprint—4,000 rules that can generate any valid Sanskrit word or sentence, like architectural plans for language
-# coreContent|after|analogy-2.png|Illustration of Root Words (Dhatus)|Basic LEGO bricks—simple pieces that combine according to rules to build complex structures of meaning
-# coreContent|after|analogy-3.png|Illustration of Sandhi Rules|A choreographed dance—sounds transform when they meet according to precise patterns, creating harmonious flow
-# coreContent|after|analogy-4.png|Illustration of Grammatical Cases|Built-in instruction manuals—each word carries information about its role, so meaning is clear regardless of word order
-# coreContent|after|analogy-5.png|Illustration of Sanskrit and Computers|Ancient programming language—structured so precisely that modern AI researchers study it to improve machine understanding of language
+coreContent|after|analogy-0.png|Illustration of Sanskrit vs. Other Languages|LEGO bricks vs. clay—Sanskrit has precise, interlocking pieces while other languages are more fluid and shapeable but less exact
+coreContent|after|analogy-1.png|Illustration of Panini's Grammar|A complete blueprint—4,000 rules that can generate any valid Sanskrit word or sentence, like architectural plans for language
+coreContent|after|analogy-2.png|Illustration of Root Words (Dhatus)|Basic LEGO bricks—simple pieces that combine according to rules to build complex structures of meaning
+coreContent|after|analogy-3.png|Illustration of Sandhi Rules|A choreographed dance—sounds transform when they meet according to precise patterns, creating harmonious flow
+coreContent|after|analogy-4.png|Illustration of Grammatical Cases|Built-in instruction manuals—each word carries information about its role, so meaning is clear regardless of word order
+coreContent|after|analogy-5.png|Illustration of Sanskrit and Computers|Ancient programming language—structured so precisely that modern AI researchers study it to improve machine understanding of language
 
 # === SUGGESTED IMAGES FROM KEY CONCEPTS ===
 
-# coreContent|inline|concept-0.png|Illustration of: Sanskrit is one of the most precisely structured languages ever created, with systematic grammar ...|Sanskrit is one of the most precisely structured languages ever created, with systematic grammar rules that minimize ambiguity
-# coreContent|inline|concept-1.png|Illustration of: Panini's Ashtadhyayi (circa 400 BCE) contains about 4,000 rules that completely describe Sanskrit...|Panini's Ashtadhyayi (circa 400 BCE) contains about 4,000 rules that completely describe Sanskrit grammar—an early example of algorithmic thinking
-# coreContent|inline|concept-2.png|Illustration of: Sanskrit uses a root-based word formation system where about 2,000 root words (dhatus) combine wi...|Sanskrit uses a root-based word formation system where about 2,000 root words (dhatus) combine with precise rules to create all vocabulary
-# coreContent|inline|concept-3.png|Illustration of: NASA researcher Rick Briggs noted Sanskrit's suitability for artificial intelligence and natural ...|NASA researcher Rick Briggs noted Sanskrit's suitability for artificial intelligence and natural language processing due to its logical structure
-# coreContent|inline|concept-4.png|Illustration of: Sanskrit's eight grammatical cases attach meaning to words themselves, allowing flexible word ord...|Sanskrit's eight grammatical cases attach meaning to words themselves, allowing flexible word order without ambiguity
-# coreContent|inline|concept-5.png|Illustration of: The Sanskrit alphabet is organized scientifically based on phonetic principles—where and how soun...|The Sanskrit alphabet is organized scientifically based on phonetic principles—where and how sounds are produced in the mouth
-# coreContent|inline|concept-6.png|Illustration of: Sanskrit demonstrates that precision and creativity are partners, not opposites—structure enables...|Sanskrit demonstrates that precision and creativity are partners, not opposites—structure enables rather than limits expression
+coreContent|inline|concept-0.png|Illustration of: Sanskrit is one of the most precisely structured languages ever created, with systematic grammar ...|Sanskrit is one of the most precisely structured languages ever created, with systematic grammar rules that minimize ambiguity
+coreContent|inline|concept-1.png|Illustration of: Panini's Ashtadhyayi (circa 400 BCE) contains about 4,000 rules that completely describe Sanskrit...|Panini's Ashtadhyayi (circa 400 BCE) contains about 4,000 rules that completely describe Sanskrit grammar—an early example of algorithmic thinking
+coreContent|inline|concept-2.png|Illustration of: Sanskrit uses a root-based word formation system where about 2,000 root words (dhatus) combine wi...|Sanskrit uses a root-based word formation system where about 2,000 root words (dhatus) combine with precise rules to create all vocabulary
+coreContent|inline|concept-3.png|Illustration of: NASA researcher Rick Briggs noted Sanskrit's suitability for artificial intelligence and natural ...|NASA researcher Rick Briggs noted Sanskrit's suitability for artificial intelligence and natural language processing due to its logical structure
+coreContent|inline|concept-4.png|Illustration of: Sanskrit's eight grammatical cases attach meaning to words themselves, allowing flexible word ord...|Sanskrit's eight grammatical cases attach meaning to words themselves, allowing flexible word order without ambiguity
+coreContent|inline|concept-5.png|Illustration of: The Sanskrit alphabet is organized scientifically based on phonetic principles—where and how soun...|The Sanskrit alphabet is organized scientifically based on phonetic principles—where and how sounds are produced in the mouth
+coreContent|inline|concept-6.png|Illustration of: Sanskrit demonstrates that precision and creativity are partners, not opposites—structure enables...|Sanskrit demonstrates that precision and creativity are partners, not opposites—structure enables rather than limits expression
 
 # === SECTION-SPECIFIC IMAGES ===
 
-# introduction|before|intro-img0.png|[Add alt text for introduction image]|[Optional caption]
+introduction|before|intro-img0.png|Illustration of Sanskrit Structure|An ancient temple architecture that emerges into a futuristic city skyline, representing the timeless structure and logic of the language
 # coreContent|before|core-img0.png|[Add alt text for coreContent image]|[Optional caption]
 # interactiveSection|before|interactive-img0.png|[Add alt text for interactiveSection image]|[Optional caption]
 # integration|before|integration-img0.png|[Add alt text for integration image]|[Optional caption]

@@ -5,6 +5,7 @@ import { MiniAudioPlayer } from './MiniAudioPlayer';
 import { useTheme } from '../contexts/ThemeContext';
 import { useAuth } from '../contexts/AuthContext';
 import { useTrimester } from '../contexts/TrimesterContext';
+import { useReadingMode } from '../contexts/ReadingModeContext';
 import { useModal } from '../contexts';
 
 /**
@@ -615,6 +616,7 @@ const UserMenu: React.FC<UserMenuProps> = ({ onLogout, onOpenAccountSettings }) 
 export const Header: React.FC<HeaderProps> = () => {
   const { currentTheme } = useTheme();
   const { isAuthenticated, isLoading: authLoading, logout } = useAuth();
+  const { settings } = useReadingMode();
   const { openLogin, openRegister, openSettings } = useModal();
   
   /**
@@ -665,12 +667,14 @@ export const Header: React.FC<HeaderProps> = () => {
               </span>
             </Link>
 
-            {/* Center: Mini Audio Player (absolutely centered, appears when audio is playing) */}
-            <div className="absolute left-1/2 -translate-x-1/2 flex items-center justify-center pointer-events-none">
-              <div className="pointer-events-auto">
-                <MiniAudioPlayer />
+            {/* Center: Mini Audio Player (fixed at bottom centered, appears when audio is playing) - hidden in reading mode */}
+            {!settings?.readingModeEnabled && (
+              <div className="fixed bottom-8 left-1/2 -translate-x-1/2 z-[100] flex items-center justify-center pointer-events-none">
+                <div className="pointer-events-auto">
+                  <MiniAudioPlayer />
+                </div>
               </div>
-            </div>
+            )}
 
             {/* Right: View Toggle and Auth */}
             <div className="flex items-center gap-2">

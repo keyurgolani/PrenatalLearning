@@ -62,6 +62,10 @@ export const availableTopics: TopicData[] = [
   { id: 30, title: 'Right and Wrong: The Journey of Ethics' },
   { id: 31, title: 'The Voice of the People: Understanding Democracy' },
   { id: 32, title: 'The Human Spirit: Art and Creativity' },
+  
+  // New Deep Dive Topics (Content Revamp)
+  { id: 33, title: 'The Journey of a Signal: What Happens When You Type a URL' },
+  { id: 34, title: 'The Silent Architect: Unlocking Your Subconscious Mind' },
 ];
 
 /**

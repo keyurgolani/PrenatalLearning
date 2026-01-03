@@ -14,25 +14,25 @@
 
 # === SUGGESTED IMAGES FROM ANALOGIES ===
 
-# coreContent|after|analogy-0.png|Illustration of Fibonacci Sequence|The Fibonacci sequence is like nature's favorite recipe—the same ingredients (1, 1, 2, 3, 5, 8...) appear in sunflowers, pinecones, and seashells, creating beauty through simple addition
-# coreContent|after|analogy-1.png|Illustration of Golden Ratio|The Golden Ratio is like nature's measuring tape—a proportion so pleasing that artists, architects, and evolution itself keep using it to create beauty
-# coreContent|after|analogy-2.png|Illustration of Fractals|A fractal is like a hall of mirrors where each reflection contains smaller reflections, which contain even smaller reflections, going on forever
-# coreContent|after|analogy-3.png|Illustration of Self-Similarity|Self-similarity is like Russian nesting dolls—open one and find a smaller version inside, open that and find an even smaller one, each looking like the original
-# coreContent|after|analogy-4.png|Illustration of Koch Snowflake|The Koch snowflake is like a coastline you could walk forever—infinite length folded into finite space, complexity without end
-# coreContent|after|analogy-5.png|Illustration of Fractal Branching|Your lungs are like an upside-down tree—branching and branching until a tennis court of surface area fits inside your chest
+coreContent|after|analogy-0.png|Illustration of Fibonacci Sequence|The Fibonacci sequence is like nature's favorite recipe—the same ingredients (1, 1, 2, 3, 5, 8...) appear in sunflowers, pinecones, and seashells, creating beauty through simple addition
+coreContent|after|analogy-1.png|Illustration of Golden Ratio|The Golden Ratio is like nature's measuring tape—a proportion so pleasing that artists, architects, and evolution itself keep using it to create beauty
+coreContent|after|analogy-2.png|Illustration of Fractals|A fractal is like a hall of mirrors where each reflection contains smaller reflections, which contain even smaller reflections, going on forever
+coreContent|after|analogy-3.png|Illustration of Self-Similarity|Self-similarity is like Russian nesting dolls—open one and find a smaller version inside, open that and find an even smaller one, each looking like the original
+coreContent|after|analogy-4.png|Illustration of Koch Snowflake|The Koch snowflake is like a coastline you could walk forever—infinite length folded into finite space, complexity without end
+coreContent|after|analogy-5.png|Illustration of Fractal Branching|Your lungs are like an upside-down tree—branching and branching until a tennis court of surface area fits inside your chest
 
 # === SUGGESTED IMAGES FROM KEY CONCEPTS ===
 
-# coreContent|inline|concept-0.png|Illustration of: The Fibonacci sequence (1, 1, 2, 3, 5, 8, 13, 21...) appears throughout nature in flower petals, ...|The Fibonacci sequence (1, 1, 2, 3, 5, 8, 13, 21...) appears throughout nature in flower petals, seed spirals, and pinecone scales
-# coreContent|inline|concept-1.png|Illustration of: The Golden Ratio (approximately 1.618) emerges from Fibonacci numbers and creates naturally pleas...|The Golden Ratio (approximately 1.618) emerges from Fibonacci numbers and creates naturally pleasing proportions
-# coreContent|inline|concept-2.png|Illustration of: Fractals are patterns that repeat at every scale—small parts look like the whole|Fractals are patterns that repeat at every scale—small parts look like the whole
-# coreContent|inline|concept-3.png|Illustration of: Nature uses these patterns because they are efficient: Fibonacci spirals pack seeds optimally, fr...|Nature uses these patterns because they are efficient: Fibonacci spirals pack seeds optimally, fractal branching maximizes surface area
-# coreContent|inline|concept-4.png|Illustration of: Self-similarity appears everywhere: in trees, rivers, lightning, blood vessels, and coastlines|Self-similarity appears everywhere: in trees, rivers, lightning, blood vessels, and coastlines
-# coreContent|inline|concept-5.png|Illustration of: Complex beauty emerges from simple rules repeated over and over|Complex beauty emerges from simple rules repeated over and over
+coreContent|inline|concept-0.png|Illustration of: The Fibonacci sequence (1, 1, 2, 3, 5, 8, 13, 21...) appears throughout nature in flower petals, ...|The Fibonacci sequence (1, 1, 2, 3, 5, 8, 13, 21...) appears throughout nature in flower petals, seed spirals, and pinecone scales
+coreContent|inline|concept-1.png|Illustration of: The Golden Ratio (approximately 1.618) emerges from Fibonacci numbers and creates naturally pleas...|The Golden Ratio (approximately 1.618) emerges from Fibonacci numbers and creates naturally pleasing proportions
+coreContent|inline|concept-2.png|Illustration of: Fractals are patterns that repeat at every scale—small parts look like the whole|Fractals are patterns that repeat at every scale—small parts look like the whole
+coreContent|inline|concept-3.png|Illustration of: Nature uses these patterns because they are efficient: Fibonacci spirals pack seeds optimally, fr...|Nature uses these patterns because they are efficient: Fibonacci spirals pack seeds optimally, fractal branching maximizes surface area
+coreContent|inline|concept-4.png|Illustration of: Self-similarity appears everywhere: in trees, rivers, lightning, blood vessels, and coastlines|Self-similarity appears everywhere: in trees, rivers, lightning, blood vessels, and coastlines
+coreContent|inline|concept-5.png|Illustration of: Complex beauty emerges from simple rules repeated over and over|Complex beauty emerges from simple rules repeated over and over
 
 # === SECTION-SPECIFIC IMAGES ===
 
-# introduction|before|intro-img0.png|[Add alt text for introduction image]|[Optional caption]
+introduction|before|intro-img0.png|[Add alt text for introduction image]|[Optional caption]
 # coreContent|before|core-img0.png|[Add alt text for coreContent image]|[Optional caption]
 # interactiveSection|before|interactive-img0.png|[Add alt text for interactiveSection image]|[Optional caption]
 # integration|before|integration-img0.png|[Add alt text for integration image]|[Optional caption]

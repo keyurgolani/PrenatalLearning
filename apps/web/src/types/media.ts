@@ -44,6 +44,10 @@ export interface AudioManifestEntry {
   filename: string;
   /** Full transcript with formatting hints for audio generation */
   transcript?: string;
+  /** Style instructions for Google TTS (e.g., "Calm, soothing") */
+  styleInstructions?: string;
+  /** Temperature setting for Google TTS generation (0.0 to 1.0) */
+  temperature?: number;
 }
 
 /**

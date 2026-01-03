@@ -3,14 +3,6 @@ import type { Category, CategoryId, DifficultyLevel } from '../types';
 import { LayoutToggle } from './LayoutToggle';
 import type { LearningPath } from '../data/learningPaths';
 import { useTheme } from '../contexts/ThemeContext';
-import { SearchSuggestions } from './SearchSuggestions';
-import {
-  getSuggestions,
-  getRecentSearches,
-  addRecentSearch,
-  clearRecentSearches,
-  type SearchSuggestion,
-} from '../services/searchService';
 
 interface FilterSectionProps {
   categories: Category[];
@@ -43,27 +35,16 @@ export const FilterSection: React.FC<FilterSectionProps> = ({
   isJourneyMode = false,
 }) => {
   const searchInputRef = useRef<HTMLInputElement>(null);
-  const searchContainerRef = useRef<HTMLDivElement>(null);
   const { currentTheme } = useTheme();
   const isDark = currentTheme.isDark ?? false;
 
-  // Search suggestions state
   const [localSearchTerm, setLocalSearchTerm] = useState(searchTerm);
-  const [suggestions, setSuggestions] = useState<SearchSuggestion[]>([]);
-  const [recentSearches, setRecentSearches] = useState<string[]>([]);
-  const [showSuggestions, setShowSuggestions] = useState(false);
-  const [selectedIndex, setSelectedIndex] = useState(-1);
   const debounceRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   // Sync local search term with prop
   useEffect(() => {
     setLocalSearchTerm(searchTerm);
   }, [searchTerm]);
-
-  // Load recent searches on mount
-  useEffect(() => {
-    setRecentSearches(getRecentSearches());
-  }, []);
 
   // Debounced search - 300ms delay (Requirement 1.4)
   useEffect(() => {
@@ -73,14 +54,6 @@ export const FilterSection: React.FC<FilterSectionProps> = ({
 
     debounceRef.current = setTimeout(() => {
       onSearchChange(localSearchTerm);
-      
-      // Update suggestions
-      if (localSearchTerm.trim()) {
-        const newSuggestions = getSuggestions(localSearchTerm);
-        setSuggestions(newSuggestions);
-      } else {
-        setSuggestions([]);
-      }
     }, 300);
 
     return () => {
@@ -90,120 +63,9 @@ export const FilterSection: React.FC<FilterSectionProps> = ({
     };
   }, [localSearchTerm, onSearchChange]);
 
-  // Handle click outside to close suggestions
-  useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
-      if (
-        searchContainerRef.current &&
-        !searchContainerRef.current.contains(event.target as Node)
-      ) {
-        setShowSuggestions(false);
-      }
-    };
-
-    document.addEventListener('mousedown', handleClickOutside);
-    return () => document.removeEventListener('mousedown', handleClickOutside);
-  }, []);
-
-  // Calculate total items for keyboard navigation
-  const getTotalItems = useCallback(() => {
-    if (suggestions.length > 0) {
-      return suggestions.length;
-    }
-    if (localSearchTerm.trim() === '' && recentSearches.length > 0) {
-      return recentSearches.length;
-    }
-    return 0;
-  }, [suggestions.length, recentSearches.length, localSearchTerm]);
-
-  // Handle suggestion selection (Requirement 2.4)
-  const handleSelectSuggestion = useCallback(
-    (suggestion: SearchSuggestion) => {
-      setLocalSearchTerm(suggestion.text);
-      onSearchChange(suggestion.text);
-      addRecentSearch(suggestion.text);
-      setRecentSearches(getRecentSearches());
-      setShowSuggestions(false);
-      setSelectedIndex(-1);
-      setSuggestions([]);
-
-      // If it's a category, also update the category filter
-      if (suggestion.type === 'category' && suggestion.categoryId) {
-        onCategoryChange(suggestion.categoryId as CategoryId);
-      }
-    },
-    [onSearchChange, onCategoryChange]
-  );
-
-  // Handle recent search selection
-  const handleSelectRecent = useCallback(
-    (search: string) => {
-      setLocalSearchTerm(search);
-      onSearchChange(search);
-      setShowSuggestions(false);
-      setSelectedIndex(-1);
-    },
-    [onSearchChange]
-  );
-
-  // Handle keyboard navigation (Requirement 2.3)
-  const handleKeyDown = useCallback(
-    (e: React.KeyboardEvent<HTMLInputElement>) => {
-      const totalItems = getTotalItems();
-
-      switch (e.key) {
-        case 'ArrowDown':
-          e.preventDefault();
-          setSelectedIndex((prev) => (prev < totalItems - 1 ? prev + 1 : 0));
-          setShowSuggestions(true);
-          break;
-        case 'ArrowUp':
-          e.preventDefault();
-          setSelectedIndex((prev) => (prev > 0 ? prev - 1 : totalItems - 1));
-          setShowSuggestions(true);
-          break;
-        case 'Enter':
-          e.preventDefault();
-          if (selectedIndex >= 0 && showSuggestions) {
-            if (suggestions.length > 0) {
-              handleSelectSuggestion(suggestions[selectedIndex]);
-            } else if (recentSearches.length > 0) {
-              handleSelectRecent(recentSearches[selectedIndex]);
-            }
-          } else if (localSearchTerm.trim()) {
-            // Add to recent searches when pressing Enter
-            addRecentSearch(localSearchTerm);
-            setRecentSearches(getRecentSearches());
-            setShowSuggestions(false);
-          }
-          break;
-        case 'Escape':
-          setShowSuggestions(false);
-          setSelectedIndex(-1);
-          break;
-      }
-    },
-    [getTotalItems, selectedIndex, showSuggestions, suggestions, recentSearches, localSearchTerm, handleSelectSuggestion, handleSelectRecent]
-  );
-
-  // Handle clear recent searches
-  const handleClearRecent = useCallback(() => {
-    clearRecentSearches();
-    setRecentSearches([]);
-  }, []);
-
-  // Handle input focus
-  const handleFocus = useCallback(() => {
-    setShowSuggestions(true);
-    setRecentSearches(getRecentSearches());
-  }, []);
-
   // Handle input change
   const handleInputChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
-    const value = e.target.value;
-    setLocalSearchTerm(value);
-    setSelectedIndex(-1);
-    setShowSuggestions(true);
+    setLocalSearchTerm(e.target.value);
   }, []);
 
   // Auto-focus search input (only in Explore mode when search bar is visible)
@@ -238,8 +100,8 @@ export const FilterSection: React.FC<FilterSectionProps> = ({
       <div className="w-full space-y-4">
         {/* Top Row: Search Input and Layout Toggle */}
         <div className="flex items-center gap-3">
-          {/* Search Input - Full width with suggestions */}
-          <div className="relative flex-1" ref={searchContainerRef}>
+          {/* Search Input - Full width */}
+          <div className="relative flex-1">
             <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
               <svg
                 className="h-5 w-5"
@@ -265,8 +127,6 @@ export const FilterSection: React.FC<FilterSectionProps> = ({
               placeholder="Search all topics..."
               value={localSearchTerm}
               onChange={handleInputChange}
-              onFocus={handleFocus}
-              onKeyDown={handleKeyDown}
               className="w-full pl-12 pr-4 py-2.5 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-400 focus:ring-offset-1 focus:border-transparent focus:shadow-lg focus:shadow-purple-100 transition-all duration-200 text-sm"
               style={{ 
                 backgroundColor: isDark ? currentTheme.colors.surface : 'rgba(255, 255, 255, 0.9)',
@@ -276,24 +136,6 @@ export const FilterSection: React.FC<FilterSectionProps> = ({
                 color: isDark ? currentTheme.colors.text : 'inherit'
               }}
               aria-label="Search stories"
-              aria-expanded={showSuggestions}
-              aria-haspopup="listbox"
-              aria-autocomplete="list"
-              aria-controls="search-suggestions-listbox"
-              role="combobox"
-            />
-            
-            {/* Search Suggestions Dropdown */}
-            <SearchSuggestions
-              suggestions={suggestions}
-              recentSearches={recentSearches}
-              isVisible={showSuggestions}
-              selectedIndex={selectedIndex}
-              onSelect={handleSelectSuggestion}
-              onSelectRecent={handleSelectRecent}
-              onClearRecent={handleClearRecent}
-              showRecent={localSearchTerm.trim() === ''}
-              listboxId="search-suggestions-listbox"
             />
           </div>
 

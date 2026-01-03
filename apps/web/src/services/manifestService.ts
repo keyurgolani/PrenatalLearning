@@ -66,15 +66,49 @@ export function parseAudioManifest(content: string): AudioManifestEntry[] {
     }
 
     const parts = trimmedLine.split('|');
+    const partsCount = parts.length;
 
     // Audio manifest requires at least 3 parts: sectionName|partNumber|filename
-    // Fourth part (transcript) is optional
-    if (parts.length < 3) {
+    if (partsCount < 3) {
       console.warn(`Invalid audio manifest line (expected at least 3 parts): ${trimmedLine}`);
       continue;
     }
 
-    const [sectionName, partNumberStr, filename, transcript] = parts;
+    let sectionName: string;
+    let partNumberStr: string;
+    let filename: string;
+    let transcript: string | undefined;
+    // We can extract style/temp but currently the AudioManifestEntry interface doesn't strictly require them 
+    // to be returned unless we update the interface. Given the prompt didn't ask to update the interface to USE them, 
+    // just to support parsing the file without erroring or mis-assigning transcript.
+    // However, it's safer to just ignore them for the entry object if the interface isn't updated, 
+    // or we should update the interface too? 
+    // "Make sure to generate manifest in a way that still works with the application's current setup"
+    // implies minimal changes. I will just parse correctly to get the correct generic fields.
+
+    // Check for Google TTS format (6+ columns): section|part|file|style|temp|transcript
+    // We differentiate by count. Legacy has 3 or 4. New has 6 (or more if transcript has pipes).
+    // To be safe, if we have >= 6, we assume the new format.
+    
+    let styleInstructions: string | undefined;
+    let temperature: number | undefined;
+
+    if (partsCount >= 6) {
+       sectionName = parts[0];
+       partNumberStr = parts[1];
+       filename = parts[2];
+       styleInstructions = parts[3];
+       temperature = parseFloat(parts[4]);
+       transcript = parts.slice(5).join('|');
+    } else {
+       // Legacy format: section|part|file|transcript
+       sectionName = parts[0];
+       partNumberStr = parts[1];
+       filename = parts[2];
+       if (partsCount >= 4) {
+         transcript = parts.slice(3).join('|');
+       }
+    }
 
     // Validate section name
     if (!isValidSectionName(sectionName)) {
@@ -96,7 +130,7 @@ export function parseAudioManifest(content: string): AudioManifestEntry[] {
     }
 
     const entry: AudioManifestEntry = {
-      sectionName,
+      sectionName: sectionName as SectionName,
       partNumber,
       filename: filename.trim(),
     };
@@ -104,6 +138,15 @@ export function parseAudioManifest(content: string): AudioManifestEntry[] {
     // Add transcript if provided
     if (transcript && transcript.trim()) {
       entry.transcript = transcript.trim();
+    }
+    
+    // Add Google TTS fields if provided
+    if (styleInstructions && styleInstructions.trim()) {
+      entry.styleInstructions = styleInstructions.trim();
+    }
+    
+    if (temperature !== undefined && !isNaN(temperature)) {
+      entry.temperature = temperature;
     }
 
     entries.push(entry);
@@ -194,6 +237,14 @@ export function parseImageManifest(content: string): ImageManifestEntry[] {
  * @returns Formatted manifest line
  */
 export function serializeAudioManifestEntry(entry: AudioManifestEntry): string {
+  // If we have style/temp, use new format: section|part|file|style|temp|transcript
+  if (entry.styleInstructions !== undefined || entry.temperature !== undefined) {
+     const style = entry.styleInstructions || '';
+     const temp = entry.temperature !== undefined ? entry.temperature.toString() : '';
+     return `${entry.sectionName}|${entry.partNumber}|${entry.filename}|${style}|${temp}|${entry.transcript || ''}`;
+  }
+
+  // Fallback to legacy format: section|part|file|transcript
   const parts = [entry.sectionName, entry.partNumber.toString(), entry.filename];
   if (entry.transcript) {
     parts.push(entry.transcript);

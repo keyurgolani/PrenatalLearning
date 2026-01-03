@@ -9,7 +9,16 @@ import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAudio } from '../contexts/AudioContext';
 
-export const MiniAudioPlayer: React.FC = () => {
+interface MiniAudioPlayerProps {
+  /**
+   * Display variant
+   * - floating: Fixed bottom-center with rich styling (default)
+   * - embedded: Clean styling for integration into other bars like ReadingModeBar
+   */
+  variant?: 'floating' | 'embedded';
+}
+
+export const MiniAudioPlayer: React.FC<MiniAudioPlayerProps> = ({ variant = 'floating' }) => {
   const { audioState, togglePlayPause, seekTo, stopAudio } = useAudio();
   const navigate = useNavigate();
   const [isVisible, setIsVisible] = useState(false);
@@ -141,34 +150,52 @@ export const MiniAudioPlayer: React.FC = () => {
     ? Math.min(100, Math.max(0, (currentTime / duration) * 100))
     : 0;
 
+  // Variant-specific styles
+  const isFloating = variant === 'floating';
+  const containerClasses = isFloating
+    ? `
+      mini-audio-player
+      flex items-center gap-2 h-14 px-6 rounded-full
+      backdrop-blur-md border
+      transition-all ease-out cursor-default
+      ${isExiting ? 'mini-player-exit' : 'mini-player-enter'}
+    `
+    : `
+      flex items-center gap-2 h-full cursor-default
+      transition-opacity duration-300
+      ${isExiting ? 'opacity-0' : 'opacity-100'}
+    `;
+
+  const playButtonClasses = isFloating
+      ? "w-7 h-7 flex items-center justify-center rounded-full bg-purple-500/40 hover:bg-purple-500/60 transition-colors"
+      : "w-7 h-7 flex items-center justify-center rounded-full bg-purple-100 dark:bg-purple-900/30 text-purple-600 dark:text-purple-400 hover:bg-purple-200 dark:hover:bg-purple-900/50 transition-colors";
+
+  const textColorMain = isFloating ? "text-white/90" : "text-gray-900 dark:text-white/90";
+  const textColorSub = isFloating ? "text-white/60" : "text-gray-500 dark:text-white/60";
+  const progressBarBg = isFloating ? "bg-white/20" : "bg-gray-200 dark:bg-gray-700";
+  const iconColor = isFloating ? "text-white" : "currentColor";
+  const closeIconColor = isFloating ? "text-white/70" : "text-gray-400 hover:text-gray-600 dark:text-gray-500 dark:hover:text-gray-300";
+
   return (
-    <div
-      className={`
-        mini-audio-player
-        flex items-center gap-2 h-11 px-3 rounded-xl
-        backdrop-blur-md border
-        transition-all ease-out cursor-default
-        ${isExiting ? 'mini-player-exit' : 'mini-player-enter'}
-      `}
-    >
+    <div className={containerClasses}>
       {/* Play/Pause Button - pausing navigates to topic */}
       <button
         onClick={handlePlayPause}
-        className="w-7 h-7 flex items-center justify-center rounded-full bg-purple-500/40 hover:bg-purple-500/60 transition-colors"
+        className={playButtonClasses}
         aria-label={isPlaying ? 'Pause and go to topic' : 'Play'}
       >
         {isLoading ? (
-          <svg className="w-3.5 h-3.5 text-white animate-spin" viewBox="0 0 24 24" fill="none">
+          <svg className={`w-3.5 h-3.5 ${iconColor} animate-spin`} viewBox="0 0 24 24" fill="none">
             <circle cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="2.5" strokeOpacity="0.3" />
             <path d="M12 2a10 10 0 0 1 10 10" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" />
           </svg>
         ) : isPlaying ? (
-          <svg className="w-3.5 h-3.5 text-white" viewBox="0 0 24 24" fill="currentColor">
+          <svg className={`w-3.5 h-3.5 ${iconColor}`} viewBox="0 0 24 24" fill="currentColor">
             <rect x="6" y="5" width="4" height="14" rx="1" />
             <rect x="14" y="5" width="4" height="14" rx="1" />
           </svg>
         ) : (
-          <svg className="w-3.5 h-3.5 text-white" viewBox="0 0 24 24" fill="currentColor">
+          <svg className={`w-3.5 h-3.5 ${iconColor}`} viewBox="0 0 24 24" fill="currentColor">
             <path d="M6 4l15 8-15 8V4z" />
           </svg>
         )}
@@ -181,10 +208,10 @@ export const MiniAudioPlayer: React.FC = () => {
         title={`Go to ${storyTitle}`}
       >
         <div className="flex items-center gap-2">
-          <span className="text-white/90 text-xs font-medium truncate max-w-[100px]">
+          <span className={`${textColorMain} text-xs font-medium truncate max-w-[100px]`}>
             🎧 {sectionName}
           </span>
-          <span className="text-white/60 text-[10px] tabular-nums whitespace-nowrap">
+          <span className={`${textColorSub} text-[10px] tabular-nums whitespace-nowrap`}>
             {formatTime(currentTime)}
           </span>
         </div>
@@ -193,7 +220,7 @@ export const MiniAudioPlayer: React.FC = () => {
       {/* Progress Bar */}
       <div
         ref={progressBarRef}
-        className="progress-bar w-24 h-2.5 bg-white/20 rounded-full cursor-pointer overflow-hidden relative"
+        className={`progress-bar w-24 h-2.5 ${progressBarBg} rounded-full cursor-pointer overflow-hidden relative`}
         onClick={handleSeek}
         onKeyDown={handleKeyDown}
         role="slider"
@@ -221,70 +248,72 @@ export const MiniAudioPlayer: React.FC = () => {
         className="p-2 rounded-full hover:bg-white/10 icon-interactive"
         aria-label="Stop audio"
       >
-        <svg className="w-3 h-3 text-white/70" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+        <svg className={`w-3 h-3 ${closeIconColor}`} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
           <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
         </svg>
       </button>
 
-      <style>{`
-        .mini-audio-player {
-          background: linear-gradient(135deg, rgba(88, 28, 135, 0.9) 0%, rgba(124, 58, 237, 0.85) 100%);
-          border-color: rgba(192, 132, 252, 0.3);
-          box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
-          transition: all 0.3s ease;
-        }
-        
-        .mini-audio-player:hover {
-          border-color: rgba(192, 132, 252, 0.6);
-          box-shadow: 
-            0 0 20px rgba(168, 85, 247, 0.4),
-            0 0 40px rgba(168, 85, 247, 0.2),
-            0 4px 12px rgba(0, 0, 0, 0.3);
-          transform: scale(1.02);
-        }
-        
-        .mini-player-enter {
-          animation: slideInRight 0.3s ease-out forwards;
-        }
-        
-        .mini-player-exit {
-          animation: fadeOutRight 0.6s ease-out forwards;
-        }
-        
-        @keyframes slideInRight {
-          from {
-            opacity: 0;
-            transform: translateX(20px) scale(0.95);
+      {isFloating && (
+        <style>{`
+          .mini-audio-player {
+            background: linear-gradient(135deg, rgba(88, 28, 135, 0.9) 0%, rgba(124, 58, 237, 0.85) 100%);
+            border-color: rgba(192, 132, 252, 0.3);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease;
           }
-          to {
+          
+          .mini-audio-player:hover {
+            border-color: rgba(192, 132, 252, 0.6);
+            box-shadow: 
+              0 0 20px rgba(168, 85, 247, 0.4),
+              0 0 40px rgba(168, 85, 247, 0.2),
+              0 4px 12px rgba(0, 0, 0, 0.3);
+            transform: scale(1.02);
+          }
+          
+          .mini-player-enter {
+            animation: slideInUp 0.3s ease-out forwards;
+          }
+          
+          .mini-player-exit {
+            animation: fadeOutDown 0.6s ease-out forwards;
+          }
+          
+          @keyframes slideInUp {
+            from {
+              opacity: 0;
+              transform: translateY(20px) scale(0.95);
+            }
+            to {
+              opacity: 1;
+              transform: translateY(0) scale(1);
+            }
+          }
+          
+          @keyframes fadeOutDown {
+            from {
+              opacity: 1;
+              transform: translateY(0) scale(1);
+            }
+            to {
+              opacity: 0;
+              transform: translateY(20px) scale(0.95);
+            }
+          }
+          
+          .progress-bar:hover .hover-show {
             opacity: 1;
-            transform: translateX(0) scale(1);
           }
-        }
-        
-        @keyframes fadeOutRight {
-          from {
-            opacity: 1;
-            transform: translateX(0) scale(1);
+          
+          .progress-bar {
+            transition: transform 0.15s ease;
           }
-          to {
-            opacity: 0;
-            transform: translateX(10px) scale(0.95);
+          
+          .progress-bar:hover {
+            transform: scaleY(1.2);
           }
-        }
-        
-        .progress-bar:hover .hover-show {
-          opacity: 1;
-        }
-        
-        .progress-bar {
-          transition: transform 0.15s ease;
-        }
-        
-        .progress-bar:hover {
-          transform: scaleY(1.2);
-        }
-      `}</style>
+        `}</style>
+      )}
     </div>
   );
 };

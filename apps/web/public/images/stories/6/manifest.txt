@@ -14,26 +14,26 @@
 
 # === SUGGESTED IMAGES FROM ANALOGIES ===
 
-# coreContent|after|analogy-0.png|Illustration of Machine Learning|A robot who learned to paint not by following rules, but by studying millions of paintings and noticing patterns
-# coreContent|after|analogy-1.png|Illustration of Neural Networks|A team of friends passing messages—each layer receives information, processes it, and passes refined messages forward
-# coreContent|after|analogy-2.png|Illustration of Training Process|Like learning from mistakes—guess, get feedback, adjust, try again, millions of times until you get it right
-# coreContent|after|analogy-3.png|Illustration of Supervised Learning|Learning with a teacher who shows you examples with correct answers: "This is a cat. This is a dog."
-# coreContent|after|analogy-4.png|Illustration of Reinforcement Learning|Learning through play—try something, see what happens, do more of what works, like learning a game
-# coreContent|after|analogy-5.png|Illustration of Pattern Recognition|A super-powered pattern finder that can spot connections in millions of examples that would take humans years to discover
-# coreContent|after|analogy-6.png|Illustration of Deep Learning|Neural networks with hundreds of layers, like a very tall building where each floor refines the understanding further
+coreContent|after|analogy-0.png|Illustration of Machine Learning|A robot who learned to paint not by following rules, but by studying millions of paintings and noticing patterns
+coreContent|after|analogy-1.png|Illustration of Neural Networks|A team of friends passing messages—each layer receives information, processes it, and passes refined messages forward
+coreContent|after|analogy-2.png|Illustration of Training Process|Like learning from mistakes—guess, get feedback, adjust, try again, millions of times until you get it right
+coreContent|after|analogy-3.png|Illustration of Supervised Learning|Learning with a teacher who shows you examples with correct answers: "This is a cat. This is a dog."
+coreContent|after|analogy-4.png|Illustration of Reinforcement Learning|Learning through play—try something, see what happens, do more of what works, like learning a game
+coreContent|after|analogy-5.png|Illustration of Pattern Recognition|A super-powered pattern finder that can spot connections in millions of examples that would take humans years to discover
+coreContent|after|analogy-6.png|Illustration of Deep Learning|Neural networks with hundreds of layers, like a very tall building where each floor refines the understanding further
 
 # === SUGGESTED IMAGES FROM KEY CONCEPTS ===
 
-# coreContent|inline|concept-0.png|Illustration of: AI learns from examples rather than following programmed rules—like a child learning from experience|AI learns from examples rather than following programmed rules—like a child learning from experience
-# coreContent|inline|concept-1.png|Illustration of: Neural networks are inspired by the human brain, with layers of connected "neurons" that adjust a...|Neural networks are inspired by the human brain, with layers of connected "neurons" that adjust as they learn
-# coreContent|inline|concept-2.png|Illustration of: Training data is like a textbook for AI—millions of labeled examples that teach patterns|Training data is like a textbook for AI—millions of labeled examples that teach patterns
-# coreContent|inline|concept-3.png|Illustration of: Pattern recognition is AI's superpower—finding meaningful patterns in vast amounts of data|Pattern recognition is AI's superpower—finding meaningful patterns in vast amounts of data
-# coreContent|inline|concept-4.png|Illustration of: Deep learning uses many layers to learn complex, subtle patterns|Deep learning uses many layers to learn complex, subtle patterns
-# coreContent|inline|concept-5.png|Illustration of: AI is a powerful tool, but it doesn't understand, feel, or experience like humans do|AI is a powerful tool, but it doesn't understand, feel, or experience like humans do
+coreContent|inline|concept-0.png|Illustration of: AI learns from examples rather than following programmed rules—like a child learning from experience|AI learns from examples rather than following programmed rules—like a child learning from experience
+coreContent|inline|concept-1.png|Illustration of: Neural networks are inspired by the human brain, with layers of connected "neurons" that adjust a...|Neural networks are inspired by the human brain, with layers of connected "neurons" that adjust as they learn
+coreContent|inline|concept-2.png|Illustration of: Training data is like a textbook for AI—millions of labeled examples that teach patterns|Training data is like a textbook for AI—millions of labeled examples that teach patterns
+coreContent|inline|concept-3.png|Illustration of: Pattern recognition is AI's superpower—finding meaningful patterns in vast amounts of data|Pattern recognition is AI's superpower—finding meaningful patterns in vast amounts of data
+coreContent|inline|concept-4.png|Illustration of: Deep learning uses many layers to learn complex, subtle patterns|Deep learning uses many layers to learn complex, subtle patterns
+coreContent|inline|concept-5.png|Illustration of: AI is a powerful tool, but it doesn't understand, feel, or experience like humans do|AI is a powerful tool, but it doesn't understand, feel, or experience like humans do
 
 # === SECTION-SPECIFIC IMAGES ===
 
-# introduction|before|intro-img0.png|[Add alt text for introduction image]|[Optional caption]
+introduction|before|intro-img0.png|[Add alt text for introduction image]|[Optional caption]
 # coreContent|before|core-img0.png|[Add alt text for coreContent image]|[Optional caption]
 # interactiveSection|before|interactive-img0.png|[Add alt text for interactiveSection image]|[Optional caption]
 # integration|before|integration-img0.png|[Add alt text for integration image]|[Optional caption]

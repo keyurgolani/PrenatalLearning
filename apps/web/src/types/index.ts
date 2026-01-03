@@ -167,3 +167,6 @@ export * from './media';
 
 // Re-export auth types
 export * from './auth';
+
+// Re-export daily content types
+export * from './daily';

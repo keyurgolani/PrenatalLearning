@@ -17,7 +17,8 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 // Constants
-const CHAR_LIMIT = 2000; // Speechma's character limit
+const DEFAULT_STYLE = "Calm, soothing, educational narration";
+const DEFAULT_TEMP = 1;
 const PROJECT_ROOT = path.resolve(__dirname, '..');
 const AUDIO_BASE_DIR = path.join(PROJECT_ROOT, 'apps', 'web', 'public', 'audio', 'stories');
 const IMAGE_BASE_DIR = path.join(PROJECT_ROOT, 'apps', 'web', 'public', 'images', 'stories');
@@ -92,97 +93,32 @@ const STORY_IMPORTS = [
   { key: 'ethicsStory', file: '../apps/web/src/data/stories/ethics-story.ts' },
   { key: 'democracyStory', file: '../apps/web/src/data/stories/democracy-story.ts' },
   { key: 'artStory', file: '../apps/web/src/data/stories/art-story.ts' },
+  { key: 'networkJourneyStory', file: '../apps/web/src/data/stories/network-journey-story.ts' },
+  { key: 'subconsciousMindStory', file: '../apps/web/src/data/stories/subconscious-mind-story.ts' },
+  { key: 'llmStory', file: '../apps/web/src/data/stories/llm-story.ts' },
 ];
 
 /**
- * Format text for Speechma TTS
+ * Format text for Google TTS (single line)
  */
-function formatForSpeechma(text: string): string {
+function formatForTTS(text: string): string {
   return text
     .replace(/\*\*(.+?)\*\*/g, '$1')  // Remove markdown bold
     .replace(/—/g, ';')               // Em-dashes to semicolons
-    .replace(/\n\n+/g, '! ')          // Paragraph breaks to longer pauses
-    .replace(/\n/g, ' ')              // Single newlines to spaces
+    .replace(/\n+/g, ' ')             // Newlines to spaces
     .replace(/\s+/g, ' ')             // Multiple spaces to single
-    .replace(/\s+([.,;!?])/g, '$1')   // Clean punctuation spacing
-    .replace(/([.,;!?])([A-Za-z])/g, '$1 $2')  // Space after punctuation
-    .replace(/[""]/g, '"')            // Normalize quotes
-    .replace(/['']/g, "'")
     .trim();
 }
 
 /**
- * Split text into chunks respecting Speechma's character limit
+ * Check if a file exists
  */
-function splitIntoChunks(text: string, maxChars: number): string[] {
-  if (text.length <= maxChars) {
-    return [text];
-  }
-
-  const chunks: string[] = [];
-  let remaining = text;
-
-  while (remaining.length > 0) {
-    if (remaining.length <= maxChars) {
-      chunks.push(remaining.trim());
-      break;
-    }
-
-    // Find best break point at sentence endings
-    const searchArea = remaining.substring(0, maxChars);
-    const lastExclamation = searchArea.lastIndexOf('!');
-    const lastPeriod = searchArea.lastIndexOf('.');
-    const lastSemicolon = searchArea.lastIndexOf(';');
-    
-    const candidates = [lastExclamation, lastPeriod, lastSemicolon].filter(i => i > maxChars * 0.5);
-    let breakPoint = maxChars;
-    
-    if (candidates.length > 0) {
-      breakPoint = Math.max(...candidates) + 1;
-    } else {
-      const anyBreak = Math.max(lastExclamation, lastPeriod, lastSemicolon);
-      if (anyBreak > maxChars * 0.3) {
-        breakPoint = anyBreak + 1;
-      }
-    }
-
-    chunks.push(remaining.substring(0, breakPoint).trim());
-    remaining = remaining.substring(breakPoint).trim();
-  }
-
-  return chunks;
+function fileExists(dir: string, filename: string): boolean {
+  return fs.existsSync(path.join(dir, filename));
 }
 
-
-/**
- * Check if an audio file exists, trying multiple naming conventions
- */
-function findAudioFile(storyDir: string, sectionName: string, partNum: number, totalParts: number): { exists: boolean; filename: string } {
-  if (totalParts === 1) {
-    // Try simple name first, then part1 name
-    const simpleFilename = `${sectionName}.mp3`;
-    const partFilename = `${sectionName}-part1.mp3`;
-    
-    if (fs.existsSync(path.join(storyDir, simpleFilename))) {
-      return { exists: true, filename: simpleFilename };
-    }
-    if (fs.existsSync(path.join(storyDir, partFilename))) {
-      return { exists: true, filename: partFilename };
-    }
-    return { exists: false, filename: simpleFilename };
-  }
-  
-  const filename = `${sectionName}-part${partNum}.mp3`;
-  const exists = fs.existsSync(path.join(storyDir, filename));
-  return { exists, filename };
-}
-
-/**
- * Check if an image file exists
- */
-function imageFileExists(storyDir: string, filename: string): boolean {
-  return fs.existsSync(path.join(storyDir, filename));
-}
+// Keep imageFileExists for backward compatibility with generateImageManifest
+const imageFileExists = fileExists;
 
 /**
  * Generate audio manifest for a story
@@ -191,15 +127,10 @@ function generateAudioManifest(story: StoryContent, storyDir: string): string {
   const lines: string[] = [];
   
   lines.push(`# Audio Manifest for Story ${story.id}: ${story.title}`);
-  lines.push(`# Format: sectionName|partNumber|filename|transcript`);
+  lines.push(`# Format: sectionName|partNumber|filename|styleInstructions|temperature|transcript`);
   lines.push(`#`);
-  lines.push(`# Due to Speechma's 2000 character limit, long sections are split into multiple parts.`);
-  lines.push(`# Parts are numbered starting from 1 and played sequentially.`);
-  lines.push(`#`);
-  lines.push(`# Pauses controlled by punctuation (Speechma):`);
-  lines.push(`# - Comma (,) = short pause (~0.5s)`);
-  lines.push(`# - Semicolon (;) = medium pause (~1s)`);
-  lines.push(`# - Exclamation mark (!) = longer pause (~1.5s)`);
+  lines.push(`# Google TTS Manifest`);
+  lines.push(`# All audio parts for a section are merged into a single file/entry.`);
   lines.push(`#`);
   lines.push(`# IMPORTANT: Entries are commented out by default.`);
   lines.push(`# Uncomment an entry (remove the leading #) ONLY when the audio file exists.`);
@@ -213,26 +144,17 @@ function generateAudioManifest(story: StoryContent, storyDir: string): string {
   ];
 
   for (const section of sections) {
-    const transcript = formatForSpeechma(section.content);
-    const chunks = splitIntoChunks(transcript, CHAR_LIMIT);
+    const transcript = formatForTTS(section.content);
+    const filename = `${section.name}.mp3`;
     const label = SECTION_LABELS[section.name];
     
+    // Check if file exists
+    const exists = fileExists(storyDir, filename);
+    const prefix = exists ? '' : '# ';
+
     lines.push('');
     lines.push(`# === ${label} ===`);
-    
-    if (chunks.length === 1) {
-      const { exists, filename } = findAudioFile(storyDir, section.name, 1, 1);
-      const prefix = exists ? '' : '# ';
-      lines.push(`${prefix}${section.name}|1|${filename}|${chunks[0]}`);
-    } else {
-      chunks.forEach((chunk, index) => {
-        const partNum = index + 1;
-        const { exists, filename } = findAudioFile(storyDir, section.name, partNum, chunks.length);
-        const prefix = exists ? '' : '# ';
-        lines.push(`# Part ${partNum} (~${chunk.length} chars)`);
-        lines.push(`${prefix}${section.name}|${partNum}|${filename}|${chunk}`);
-      });
-    }
+    lines.push(`${prefix}${section.name}|1|${filename}|${DEFAULT_STYLE}|${DEFAULT_TEMP}|${transcript}`);
   }
 
   return lines.join('\n');

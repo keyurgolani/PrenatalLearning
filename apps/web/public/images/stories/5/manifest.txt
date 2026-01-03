@@ -14,26 +14,26 @@
 
 # === SUGGESTED IMAGES FROM ANALOGIES ===
 
-# coreContent|after|analogy-0.png|Illustration of Binary System|A kingdom where there are only two things: light and darkness, on and off—every message is made from just these two simple things
-# coreContent|after|analogy-1.png|Illustration of Transistors|Microscopic light switches so tiny that billions fit on a chip smaller than your thumbnail
-# coreContent|after|analogy-2.png|Illustration of AND Gate|A gate that only opens when two friends knock together—both must knock for it to open
-# coreContent|after|analogy-3.png|Illustration of OR Gate|A gate that opens if either friend knocks—one knock or the other will open it
-# coreContent|after|analogy-4.png|Illustration of NOT Gate|A silly gate that does the opposite of what you tell it—say open, it closes; say close, it opens
-# coreContent|after|analogy-5.png|Illustration of CPU|A very fast, very organized chef reading recipes (programs), gathering ingredients (data), and creating wonderful dishes (output)
-# coreContent|after|analogy-6.png|Illustration of Computer Evolution|From ENIAC weighing as much as several elephants to smartphones with more power than existed in the entire world when grandparents were born
+coreContent|after|analogy-0.png|Illustration of Binary System|A kingdom where there are only two things: light and darkness, on and off—every message is made from just these two simple things
+coreContent|after|analogy-1.png|Illustration of Transistors|Microscopic light switches so tiny that billions fit on a chip smaller than your thumbnail
+coreContent|after|analogy-2.png|Illustration of AND Gate|A gate that only opens when two friends knock together—both must knock for it to open
+coreContent|after|analogy-3.png|Illustration of OR Gate|A gate that opens if either friend knocks—one knock or the other will open it
+coreContent|after|analogy-4.png|Illustration of NOT Gate|A silly gate that does the opposite of what you tell it—say open, it closes; say close, it opens
+coreContent|after|analogy-5.png|Illustration of CPU|A very fast, very organized chef reading recipes (programs), gathering ingredients (data), and creating wonderful dishes (output)
+coreContent|after|analogy-6.png|Illustration of Computer Evolution|From ENIAC weighing as much as several elephants to smartphones with more power than existed in the entire world when grandparents were born
 
 # === SUGGESTED IMAGES FROM KEY CONCEPTS ===
 
-# coreContent|inline|concept-0.png|Illustration of: Computers work using binary—just two states: on (1) and off (0)|Computers work using binary—just two states: on (1) and off (0)
-# coreContent|inline|concept-1.png|Illustration of: Transistors are tiny switches that can turn on and off billions of times per second|Transistors are tiny switches that can turn on and off billions of times per second
-# coreContent|inline|concept-2.png|Illustration of: Logic gates (AND, OR, NOT) combine simple switches to make decisions|Logic gates (AND, OR, NOT) combine simple switches to make decisions
-# coreContent|inline|concept-3.png|Illustration of: The CPU is the brain of the computer, processing billions of instructions per second|The CPU is the brain of the computer, processing billions of instructions per second
-# coreContent|inline|concept-4.png|Illustration of: Computers evolved from room-sized machines to pocket-sized devices in just decades|Computers evolved from room-sized machines to pocket-sized devices in just decades
-# coreContent|inline|concept-5.png|Illustration of: Everything a computer does—games, music, pictures—comes from patterns of ones and zeros|Everything a computer does—games, music, pictures—comes from patterns of ones and zeros
+coreContent|inline|concept-0.png|Illustration of: Computers work using binary—just two states: on (1) and off (0)|Computers work using binary—just two states: on (1) and off (0)
+coreContent|inline|concept-1.png|Illustration of: Transistors are tiny switches that can turn on and off billions of times per second|Transistors are tiny switches that can turn on and off billions of times per second
+coreContent|inline|concept-2.png|Illustration of: Logic gates (AND, OR, NOT) combine simple switches to make decisions|Logic gates (AND, OR, NOT) combine simple switches to make decisions
+coreContent|inline|concept-3.png|Illustration of: The CPU is the brain of the computer, processing billions of instructions per second|The CPU is the brain of the computer, processing billions of instructions per second
+coreContent|inline|concept-4.png|Illustration of: Computers evolved from room-sized machines to pocket-sized devices in just decades|Computers evolved from room-sized machines to pocket-sized devices in just decades
+coreContent|inline|concept-5.png|Illustration of: Everything a computer does—games, music, pictures—comes from patterns of ones and zeros|Everything a computer does—games, music, pictures—comes from patterns of ones and zeros
 
 # === SECTION-SPECIFIC IMAGES ===
 
-# introduction|before|intro-img0.png|[Add alt text for introduction image]|[Optional caption]
+introduction|before|intro-img0.png|[Add alt text for introduction image]|[Optional caption]
 # coreContent|before|core-img0.png|[Add alt text for coreContent image]|[Optional caption]
 # interactiveSection|before|interactive-img0.png|[Add alt text for interactiveSection image]|[Optional caption]
 # integration|before|integration-img0.png|[Add alt text for integration image]|[Optional caption]

@@ -19,6 +19,11 @@ import { FillBlankExercise } from './FillBlankExercise';
 import { ScenarioExercise } from './ScenarioExercise';
 import { ReflectionExercise } from './ReflectionExercise';
 import { BreathingExercise } from './BreathingExercise';
+import { InteractiveSimulation } from './InteractiveSimulation';
+import { LogicPuzzle } from './LogicPuzzle';
+import { BuilderExercise } from './BuilderExercise';
+import { PatternAnalysis } from './PatternAnalysis';
+import { GuidedPractice } from './GuidedPractice';
 
 /**
  * Props for the ExerciseEngine component
@@ -376,6 +381,46 @@ export const ExerciseEngine: React.FC<ExerciseEngineProps> = ({
               </button>
             </div>
           </div>
+        );
+
+      case 'interactive-simulation':
+        return (
+          <InteractiveSimulation
+            exercise={exercise}
+            onComplete={onNext}
+          />
+        );
+
+      case 'logic-puzzle':
+        return (
+          <LogicPuzzle
+            exercise={exercise}
+            onComplete={onNext}
+          />
+        );
+
+      case 'builder':
+        return (
+          <BuilderExercise
+            exercise={exercise}
+            onComplete={onNext}
+          />
+        );
+
+      case 'pattern-analysis':
+        return (
+          <PatternAnalysis
+            exercise={exercise}
+            onComplete={onNext}
+          />
+        );
+
+      case 'guided-practice':
+        return (
+          <GuidedPractice
+            exercise={exercise}
+            onComplete={onNext}
+          />
         );
 
       default:

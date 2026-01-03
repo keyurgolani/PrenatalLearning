@@ -14,26 +14,26 @@
 
 # === SUGGESTED IMAGES FROM ANALOGIES ===
 
-# coreContent|after|analogy-0.png|Illustration of Consciousness|A light inside—while a robot might process information in the dark, conscious beings have the lights on, experiencing from the inside
-# coreContent|after|analogy-1.png|Illustration of Global Workspace Theory|A theater where the spotlight of attention illuminates the stage of consciousness, while countless processes work in the dark audience
-# coreContent|after|analogy-2.png|Illustration of The Hard Problem|Building a perfect copy of a brain atom by atom—would the lights be on inside, or would it be dark?
-# coreContent|after|analogy-3.png|Illustration of Qualia|The specific redness of red, the particular feeling of joy—the private qualities of experience that can never be fully shared
-# coreContent|after|analogy-4.png|Illustration of Self-Awareness|Looking in a mirror and recognizing yourself—not just seeing, but knowing that you are the one seeing
-# coreContent|after|analogy-5.png|Illustration of Consciousness and the Universe|The universe opening its eyes—matter organizing itself to experience itself
+coreContent|after|analogy-0.png|Illustration of Consciousness|A light inside—while a robot might process information in the dark, conscious beings have the lights on, experiencing from the inside
+coreContent|after|analogy-1.png|Illustration of Global Workspace Theory|A theater where the spotlight of attention illuminates the stage of consciousness, while countless processes work in the dark audience
+coreContent|after|analogy-2.png|Illustration of The Hard Problem|Building a perfect copy of a brain atom by atom—would the lights be on inside, or would it be dark?
+coreContent|after|analogy-3.png|Illustration of Qualia|The specific redness of red, the particular feeling of joy—the private qualities of experience that can never be fully shared
+coreContent|after|analogy-4.png|Illustration of Self-Awareness|Looking in a mirror and recognizing yourself—not just seeing, but knowing that you are the one seeing
+coreContent|after|analogy-5.png|Illustration of Consciousness and the Universe|The universe opening its eyes—matter organizing itself to experience itself
 
 # === SUGGESTED IMAGES FROM KEY CONCEPTS ===
 
-# coreContent|inline|concept-0.png|Illustration of: Consciousness is the inner experience of being aware—the "light inside" that makes you more than ...|Consciousness is the inner experience of being aware—the "light inside" that makes you more than just a biological machine
-# coreContent|inline|concept-1.png|Illustration of: The "hard problem" of consciousness asks why physical brain processes create subjective experienc...|The "hard problem" of consciousness asks why physical brain processes create subjective experience at all
-# coreContent|inline|concept-2.png|Illustration of: The brain can be thought of as a theater, with consciousness as the spotlight illuminating what w...|The brain can be thought of as a theater, with consciousness as the spotlight illuminating what we pay attention to
-# coreContent|inline|concept-3.png|Illustration of: Self-awareness is a special form of consciousness—being aware that you are aware|Self-awareness is a special form of consciousness—being aware that you are aware
-# coreContent|inline|concept-4.png|Illustration of: Consciousness develops gradually, with basic awareness emerging around 30 weeks of pregnancy|Consciousness develops gradually, with basic awareness emerging around 30 weeks of pregnancy
-# coreContent|inline|concept-5.png|Illustration of: Qualia are the felt qualities of experience—the specific way colors look and emotions feel to you|Qualia are the felt qualities of experience—the specific way colors look and emotions feel to you
-# coreContent|inline|concept-6.png|Illustration of: Consciousness connects us to each other and allows the universe to experience itself through us|Consciousness connects us to each other and allows the universe to experience itself through us
+coreContent|inline|concept-0.png|Illustration of: Consciousness is the inner experience of being aware—the "light inside" that makes you more than ...|Consciousness is the inner experience of being aware—the "light inside" that makes you more than just a biological machine
+coreContent|inline|concept-1.png|Illustration of: The "hard problem" of consciousness asks why physical brain processes create subjective experienc...|The "hard problem" of consciousness asks why physical brain processes create subjective experience at all
+coreContent|inline|concept-2.png|Illustration of: The brain can be thought of as a theater, with consciousness as the spotlight illuminating what w...|The brain can be thought of as a theater, with consciousness as the spotlight illuminating what we pay attention to
+coreContent|inline|concept-3.png|Illustration of: Self-awareness is a special form of consciousness—being aware that you are aware|Self-awareness is a special form of consciousness—being aware that you are aware
+coreContent|inline|concept-4.png|Illustration of: Consciousness develops gradually, with basic awareness emerging around 30 weeks of pregnancy|Consciousness develops gradually, with basic awareness emerging around 30 weeks of pregnancy
+coreContent|inline|concept-5.png|Illustration of: Qualia are the felt qualities of experience—the specific way colors look and emotions feel to you|Qualia are the felt qualities of experience—the specific way colors look and emotions feel to you
+coreContent|inline|concept-6.png|Illustration of: Consciousness connects us to each other and allows the universe to experience itself through us|Consciousness connects us to each other and allows the universe to experience itself through us
 
 # === SECTION-SPECIFIC IMAGES ===
 
-# introduction|before|intro-img0.png|[Add alt text for introduction image]|[Optional caption]
+introduction|before|intro-img0.png|[Add alt text for introduction image]|[Optional caption]
 # coreContent|before|core-img0.png|[Add alt text for coreContent image]|[Optional caption]
 # interactiveSection|before|interactive-img0.png|[Add alt text for interactiveSection image]|[Optional caption]
 # integration|before|integration-img0.png|[Add alt text for integration image]|[Optional caption]

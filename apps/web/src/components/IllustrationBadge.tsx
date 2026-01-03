@@ -41,7 +41,7 @@ const badgeConfig: Record<Exclude<ImageStatus, 'none'>, {
 
 export const IllustrationBadge: React.FC<IllustrationBadgeProps> = ({
   storyId,
-  fullOnly = true,
+  fullOnly = false,
 }) => {
   const { status, isLoading } = useStoryImageStatus(storyId);
   const { currentTheme } = useTheme();

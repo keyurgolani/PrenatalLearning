@@ -9,6 +9,7 @@ import { ThemeSelector } from './ThemeSelector';
 import { FontSizeControl } from './FontSizeControl';
 import { kickService, generateSessionId } from '../services/kickService';
 import { BabyKickIcon } from './icons/BabyKickIcon';
+import { MiniAudioPlayer } from './MiniAudioPlayer';
 
 /**
  * ReadingModeBar - Floating semi-transparent bar shown during reading mode
@@ -139,6 +140,16 @@ export const ReadingModeBar: React.FC<ReadingModeBarProps> = ({
             : 'rgba(0, 0, 0, 0.1)',
         }}
       >
+        {/* Embedded Audio Player */}
+        <div className="h-full flex items-center">
+          <MiniAudioPlayer variant="embedded" />
+        </div>
+
+        <div 
+          className="w-px h-5 mx-1"
+          style={{ backgroundColor: currentTheme.isDark ? currentTheme.colors.border : '#e5e7eb' }}
+        />
+
         {/* Theme Selector */}
         <div className="flex items-center gap-1">
           <ThemeSelector variant="dropdown" />

@@ -1,0 +1,39 @@
+# Image Manifest for Story 35: The Word Weavers: How Large Language Models Write
+# Format: sectionName|position|filename|altText|caption
+#
+# Instructions:
+# 1. Create images based on the suggested descriptions below
+# 2. Save image files with the suggested filenames (or update the filename field)
+# 3. Place image files in public/images/stories/35/
+# 4. Remove the # prefix from lines you have created images for to activate them
+# 5. Position options: before, after, inline
+#
+# IMPORTANT: Entries are commented out by default.
+# Uncomment an entry (remove the leading #) ONLY when the image file exists.
+#
+
+# === SUGGESTED IMAGES FROM ANALOGIES ===
+
+# coreContent|after|analogy-0.png|Illustration of Autoregressive Generation|Like an incredibly powerful autocomplete that considers the entire conversation, not just the last word
+# coreContent|after|analogy-1.png|Illustration of Tokenization|Breaking text into numbered pieces, like entries in a giant dictionary where every word fragment has its own number
+# coreContent|after|analogy-2.png|Illustration of Logits and Softmax|Raw confidence scores that get squished into clean percentages adding up to 100%
+# coreContent|after|analogy-3.png|Illustration of Temperature|A creativity dial—turn it down for focused, predictable answers; turn it up for creative, surprising responses
+# coreContent|after|analogy-4.png|Illustration of Top-p Sampling|A probability budget—only consider words until you've covered 90% of the likelihood, ignoring the unlikely tail
+# coreContent|after|analogy-5.png|Illustration of Greedy vs Beam Search|A GPS that takes the most direct route vs one that calculates multiple promising routes simultaneously
+# coreContent|after|analogy-6.png|Illustration of KV Cache|Taking notes while reading so you don't have to re-read everything each time you add a new thought
+
+# === SUGGESTED IMAGES FROM KEY CONCEPTS ===
+
+# coreContent|inline|concept-0.png|Illustration of: LLMs generate text one token at a time, using all previous tokens as context—an autoregressive pr...|LLMs generate text one token at a time, using all previous tokens as context—an autoregressive process
+# coreContent|inline|concept-1.png|Illustration of: Tokenization breaks text into pieces (tokens) that the model can process as numbers|Tokenization breaks text into pieces (tokens) that the model can process as numbers
+# coreContent|inline|concept-2.png|Illustration of: The transformer architecture uses attention mechanisms to understand relationships between words|The transformer architecture uses attention mechanisms to understand relationships between words
+# coreContent|inline|concept-3.png|Illustration of: Temperature controls creativity: low for predictable output, high for creative output|Temperature controls creativity: low for predictable output, high for creative output
+# coreContent|inline|concept-4.png|Illustration of: Top-p sampling adaptively limits word choices based on cumulative probability|Top-p sampling adaptively limits word choices based on cumulative probability
+# coreContent|inline|concept-5.png|Illustration of: LLMs find patterns in language but don't truly understand meaning like humans do|LLMs find patterns in language but don't truly understand meaning like humans do
+
+# === SECTION-SPECIFIC IMAGES ===
+
+# introduction|before|intro-img0.png|[Add alt text for introduction image]|[Optional caption]
+# coreContent|before|core-img0.png|[Add alt text for coreContent image]|[Optional caption]
+# interactiveSection|before|interactive-img0.png|[Add alt text for interactiveSection image]|[Optional caption]
+# integration|before|integration-img0.png|[Add alt text for integration image]|[Optional caption]

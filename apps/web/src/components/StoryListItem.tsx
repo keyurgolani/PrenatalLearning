@@ -2,6 +2,8 @@ import React from 'react';
 import type { Story, Category, Trimester } from '../types';
 import { useTheme } from '../contexts/ThemeContext';
 import { getTotalReadingTime, formatReadingTime } from '../utils/readingTime';
+import { AudioNarrationBadge } from './AudioNarrationBadge';
+import { IllustrationBadge } from './IllustrationBadge';
 
 /**
  * Trimester badge colors and labels
@@ -155,6 +157,10 @@ export const StoryListItem: React.FC<StoryListItemProps> = ({
 
         {/* Metadata Badges */}
         <div className="flex flex-wrap sm:flex-nowrap items-center gap-2 flex-shrink-0">
+          {/* Media Badges */}
+          <AudioNarrationBadge storyId={story.id} />
+          <IllustrationBadge storyId={story.id} />
+
           {/* Trimester Badge - Requirements 1.4: Display trimester badge on story cards */}
           <span
             className={`inline-flex items-center px-2 py-1 rounded text-xs font-medium whitespace-nowrap ${isDark ? '' : trimesterConfig[story.recommendedTrimester].lightClass}`}

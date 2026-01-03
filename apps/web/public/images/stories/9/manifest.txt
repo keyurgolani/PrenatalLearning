@@ -14,26 +14,26 @@
 
 # === SUGGESTED IMAGES FROM ANALOGIES ===
 
-# coreContent|after|analogy-0.png|Illustration of DNA Structure|A twisted ladder or spiral staircase, with the sides made of sugar and phosphate, and the rungs made of paired letters holding hands
-# coreContent|after|analogy-1.png|Illustration of Genetic Code|A recipe scroll written in a four-letter alphabet, containing all the instructions for building and running your body
-# coreContent|after|analogy-2.png|Illustration of Base Pairing|Best friends who always want to be together—A always holds hands with T, and C always holds hands with G
-# coreContent|after|analogy-3.png|Illustration of Genes|Chapters in a recipe book, each containing instructions for making one specific thing
-# coreContent|after|analogy-4.png|Illustration of Protein Synthesis|A cellular kitchen where workers read recipes three letters at a time and string ingredients (amino acids) together like beads on a necklace
-# coreContent|after|analogy-5.png|Illustration of DNA Replication|Unzipping a zipper and using each half as a template to build a new partner, making perfect photocopies
-# coreContent|after|analogy-6.png|Illustration of Genetic Uniqueness|A symphony using the same notes as everyone else, but arranged in a pattern that is yours alone—a melody never played before
+coreContent|after|analogy-0.png|Illustration of DNA Structure|A twisted ladder or spiral staircase, with the sides made of sugar and phosphate, and the rungs made of paired letters holding hands
+coreContent|after|analogy-1.png|Illustration of Genetic Code|A recipe scroll written in a four-letter alphabet, containing all the instructions for building and running your body
+coreContent|after|analogy-2.png|Illustration of Base Pairing|Best friends who always want to be together—A always holds hands with T, and C always holds hands with G
+coreContent|after|analogy-3.png|Illustration of Genes|Chapters in a recipe book, each containing instructions for making one specific thing
+coreContent|after|analogy-4.png|Illustration of Protein Synthesis|A cellular kitchen where workers read recipes three letters at a time and string ingredients (amino acids) together like beads on a necklace
+coreContent|after|analogy-5.png|Illustration of DNA Replication|Unzipping a zipper and using each half as a template to build a new partner, making perfect photocopies
+coreContent|after|analogy-6.png|Illustration of Genetic Uniqueness|A symphony using the same notes as everyone else, but arranged in a pattern that is yours alone—a melody never played before
 
 # === SUGGESTED IMAGES FROM KEY CONCEPTS ===
 
-# coreContent|inline|concept-0.png|Illustration of: DNA is shaped like a twisted ladder (double helix) and contains the instructions for building eve...|DNA is shaped like a twisted ladder (double helix) and contains the instructions for building every living thing
-# coreContent|inline|concept-1.png|Illustration of: The genetic code uses only four letters: A, T, C, and G, which pair up (A-T and C-G) to form the ...|The genetic code uses only four letters: A, T, C, and G, which pair up (A-T and C-G) to form the rungs of the ladder
-# coreContent|inline|concept-2.png|Illustration of: Genes are sections of DNA that contain recipes for making proteins, the workers of the body|Genes are sections of DNA that contain recipes for making proteins, the workers of the body
-# coreContent|inline|concept-3.png|Illustration of: DNA is copied faithfully every time a cell divides, passing the same instructions to new cells|DNA is copied faithfully every time a cell divides, passing the same instructions to new cells
-# coreContent|inline|concept-4.png|Illustration of: All living things share the same genetic language, connecting us to every organism on Earth|All living things share the same genetic language, connecting us to every organism on Earth
-# coreContent|inline|concept-5.png|Illustration of: Each person's DNA is unique, a one-of-a-kind combination inherited from parents and ancestors|Each person's DNA is unique, a one-of-a-kind combination inherited from parents and ancestors
+coreContent|inline|concept-0.png|Illustration of: DNA is shaped like a twisted ladder (double helix) and contains the instructions for building eve...|DNA is shaped like a twisted ladder (double helix) and contains the instructions for building every living thing
+coreContent|inline|concept-1.png|Illustration of: The genetic code uses only four letters: A, T, C, and G, which pair up (A-T and C-G) to form the ...|The genetic code uses only four letters: A, T, C, and G, which pair up (A-T and C-G) to form the rungs of the ladder
+coreContent|inline|concept-2.png|Illustration of: Genes are sections of DNA that contain recipes for making proteins, the workers of the body|Genes are sections of DNA that contain recipes for making proteins, the workers of the body
+coreContent|inline|concept-3.png|Illustration of: DNA is copied faithfully every time a cell divides, passing the same instructions to new cells|DNA is copied faithfully every time a cell divides, passing the same instructions to new cells
+coreContent|inline|concept-4.png|Illustration of: All living things share the same genetic language, connecting us to every organism on Earth|All living things share the same genetic language, connecting us to every organism on Earth
+coreContent|inline|concept-5.png|Illustration of: Each person's DNA is unique, a one-of-a-kind combination inherited from parents and ancestors|Each person's DNA is unique, a one-of-a-kind combination inherited from parents and ancestors
 
 # === SECTION-SPECIFIC IMAGES ===
 
-# introduction|before|intro-img0.png|[Add alt text for introduction image]|[Optional caption]
+introduction|before|intro-img0.png|[Add alt text for introduction image]|[Optional caption]
 # coreContent|before|core-img0.png|[Add alt text for coreContent image]|[Optional caption]
 # interactiveSection|before|interactive-img0.png|[Add alt text for interactiveSection image]|[Optional caption]
 # integration|before|integration-img0.png|[Add alt text for integration image]|[Optional caption]

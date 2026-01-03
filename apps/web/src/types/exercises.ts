@@ -18,7 +18,12 @@ export type InteractiveExerciseType =
   | 'scenario'
   | 'reflection'
   | 'breathing'
-  | 'visualization';
+  | 'visualization'
+  | 'interactive-simulation'
+  | 'logic-puzzle'
+  | 'builder'
+  | 'pattern-analysis'
+  | 'guided-practice';
 
 // ============================================
 // Base Exercise Interface
@@ -159,6 +164,154 @@ export interface VisualizationExercise extends BaseExercise {
 }
 
 // ============================================
+// Interactive Simulation Exercise (NEW)
+// ============================================
+
+export interface SimulationVariable {
+  name: string;
+  label: string;
+  type: 'slider' | 'toggle' | 'select';
+  defaultValue: number | string | boolean;
+  min?: number;
+  max?: number;
+  step?: number;
+  options?: { value: string; label: string }[];
+}
+
+export interface SimulationExplanation {
+  condition: string;
+  text: string;
+}
+
+export interface InteractiveSimulationExercise extends BaseExercise {
+  type: 'interactive-simulation';
+  simulationType: 'physics' | 'network' | 'neural' | 'probability' | 'wave';
+  variables: SimulationVariable[];
+  explanations: SimulationExplanation[];
+  canvasWidth?: number;
+  canvasHeight?: number;
+}
+
+// ============================================
+// Logic Puzzle Exercise (NEW)
+// ============================================
+
+export interface LogicClue {
+  id: string;
+  text: string;
+  hint?: string;
+}
+
+export interface LogicPuzzleExercise extends BaseExercise {
+  type: 'logic-puzzle';
+  puzzleType: 'grid' | 'sequence' | 'elimination' | 'lateral';
+  scenario: string;
+  clues: LogicClue[];
+  grid?: {
+    rows: string[];
+    columns: string[];
+    categories?: string[];
+  };
+  solution: Record<string, string>;
+  difficulty: 'easy' | 'medium' | 'hard';
+  successMessage: string;
+}
+
+// ============================================
+// Builder Exercise (NEW)
+// ============================================
+
+export interface BuilderComponent {
+  id: string;
+  label: string;
+  type: 'input' | 'select' | 'textarea' | 'drag-drop';
+  placeholder?: string;
+  options?: { value: string; label: string }[];
+  validation?: {
+    required?: boolean;
+    pattern?: string;
+    minLength?: number;
+    maxLength?: number;
+  };
+  helpText?: string;
+}
+
+export interface BuilderExample {
+  inputs: Record<string, string>;
+  output: string;
+  explanation: string;
+}
+
+export interface BuilderExercise extends BaseExercise {
+  type: 'builder';
+  builderType: 'text' | 'visual' | 'code' | 'diagram';
+  instructions: string;
+  components: BuilderComponent[];
+  template: string;
+  examples: BuilderExample[];
+  previewEnabled: boolean;
+  successCriteria: string[];
+}
+
+// ============================================
+// Pattern Analysis Exercise (NEW)
+// ============================================
+
+export interface PatternDataItem {
+  value: string | number;
+  image?: string;
+  metadata?: Record<string, string>;
+}
+
+export interface AnalysisStep {
+  prompt: string;
+  expectedInsight: string;
+  hint?: string;
+  inputType: 'text' | 'select' | 'multiple-choice';
+  options?: string[];
+}
+
+export interface PatternAnalysisExercise extends BaseExercise {
+  type: 'pattern-analysis';
+  dataType: 'numerical' | 'visual' | 'behavioral' | 'textual';
+  dataset: PatternDataItem[];
+  hiddenPattern: string;
+  analysisSteps: AnalysisStep[];
+  patternTypes: ('sequence' | 'grouping' | 'relationship' | 'anomaly')[];
+  reflection: string;
+  revealAnimation?: boolean;
+}
+
+// ============================================
+// Guided Practice Exercise (NEW)
+// ============================================
+
+export interface PracticeStep {
+  id: string;
+  instruction: string;
+  duration: number;
+  audioUrl?: string;
+  visualGuide?: 'breathing-circle' | 'progress-bar' | 'timer' | 'none';
+  checkpoint?: {
+    question: string;
+    options: string[];
+    feedback: Record<string, string>;
+  };
+  transitionText?: string;
+}
+
+export interface GuidedPracticeExercise extends BaseExercise {
+  type: 'guided-practice';
+  practiceType: 'meditation' | 'breathing' | 'visualization' | 'physical' | 'mental';
+  totalDuration: number;
+  steps: PracticeStep[];
+  backgroundAudioUrl?: string;
+  completionReflection: string[];
+  canPause: boolean;
+  canSkip: boolean;
+}
+
+// ============================================
 // Union Type for All Exercises
 // ============================================
 
@@ -170,7 +323,12 @@ export type InteractiveExercise =
   | ScenarioExercise
   | ReflectionExercise
   | BreathingExercise
-  | VisualizationExercise;
+  | VisualizationExercise
+  | InteractiveSimulationExercise
+  | LogicPuzzleExercise
+  | BuilderExercise
+  | PatternAnalysisExercise
+  | GuidedPracticeExercise;
 
 
 // ============================================
@@ -252,6 +410,52 @@ export interface VisualizationResponseData {
 }
 
 /**
+ * Interactive Simulation response data (NEW)
+ */
+export interface InteractiveSimulationResponseData {
+  variableChanges: { name: string; value: number | string | boolean }[];
+  totalDuration: number;
+  explanationsViewed: string[];
+}
+
+/**
+ * Logic Puzzle response data (NEW)
+ */
+export interface LogicPuzzleResponseData {
+  attempts: number;
+  hintsUsed: number;
+  solved: boolean;
+  solutionTime: number;
+}
+
+/**
+ * Builder response data (NEW)
+ */
+export interface BuilderResponseData {
+  inputs: Record<string, string>;
+  output: string;
+  criteriaMatched: string[];
+}
+
+/**
+ * Pattern Analysis response data (NEW)
+ */
+export interface PatternAnalysisResponseData {
+  stepResponses: { stepIndex: number; response: string; correct: boolean }[];
+  patternIdentified: boolean;
+}
+
+/**
+ * Guided Practice response data (NEW)
+ */
+export interface GuidedPracticeResponseData {
+  stepsCompleted: number;
+  totalSteps: number;
+  checkpointResponses: { stepId: string; response: string }[];
+  totalDuration: number;
+}
+
+/**
  * Union type for all response data variants
  */
 export type ExerciseResponseData =
@@ -262,7 +466,12 @@ export type ExerciseResponseData =
   | ScenarioResponseData
   | ReflectionResponseData
   | BreathingResponseData
-  | VisualizationResponseData;
+  | VisualizationResponseData
+  | InteractiveSimulationResponseData
+  | LogicPuzzleResponseData
+  | BuilderResponseData
+  | PatternAnalysisResponseData
+  | GuidedPracticeResponseData;
 
 
 // ============================================

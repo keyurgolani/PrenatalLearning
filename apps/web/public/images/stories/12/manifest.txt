@@ -14,26 +14,26 @@
 
 # === SUGGESTED IMAGES FROM ANALOGIES ===
 
-# coreContent|after|analogy-0.png|Illustration of Tree of Life|A vast family tree where every living thing is a branch or leaf, all connected to the same trunk and roots
-# coreContent|after|analogy-1.png|Illustration of Natural Selection|Like a filter that lets through the creatures best suited to their environment, allowing helpful traits to become more common over generations
-# coreContent|after|analogy-2.png|Illustration of Common Ancestry|All life is like a huge extended family reunion—every creature is a cousin, some close and some very distant
-# coreContent|after|analogy-3.png|Illustration of Adaptation|Like how a family might develop different skills depending on where they live—mountain families become good climbers, coastal families become good swimmers
-# coreContent|after|analogy-4.png|Illustration of Fossil Record|A photo album of life's history, showing snapshots of how creatures looked at different times in the past
-# coreContent|after|analogy-5.png|Illustration of Shared DNA|Like finding the same family recipes in the cookbooks of distant relatives—proof that you share ancestors
-# coreContent|after|analogy-6.png|Illustration of Vestigial Structures|Like old family heirlooms that no longer serve their original purpose but remind us of our ancestors
+coreContent|after|analogy-0.png|Illustration of Tree of Life|A vast family tree where every living thing is a branch or leaf, all connected to the same trunk and roots
+coreContent|after|analogy-1.png|Illustration of Natural Selection|Like a filter that lets through the creatures best suited to their environment, allowing helpful traits to become more common over generations
+coreContent|after|analogy-2.png|Illustration of Common Ancestry|All life is like a huge extended family reunion—every creature is a cousin, some close and some very distant
+coreContent|after|analogy-3.png|Illustration of Adaptation|Like how a family might develop different skills depending on where they live—mountain families become good climbers, coastal families become good swimmers
+coreContent|after|analogy-4.png|Illustration of Fossil Record|A photo album of life's history, showing snapshots of how creatures looked at different times in the past
+coreContent|after|analogy-5.png|Illustration of Shared DNA|Like finding the same family recipes in the cookbooks of distant relatives—proof that you share ancestors
+coreContent|after|analogy-6.png|Illustration of Vestigial Structures|Like old family heirlooms that no longer serve their original purpose but remind us of our ancestors
 
 # === SUGGESTED IMAGES FROM KEY CONCEPTS ===
 
-# coreContent|inline|concept-0.png|Illustration of: All living things are connected through the Tree of Life, descended from a common ancestor called...|All living things are connected through the Tree of Life, descended from a common ancestor called LUCA that lived about 3.5-4 billion years ago
-# coreContent|inline|concept-1.png|Illustration of: Evolution happens through natural selection: organisms with helpful traits survive and pass those...|Evolution happens through natural selection: organisms with helpful traits survive and pass those traits to their offspring
-# coreContent|inline|concept-2.png|Illustration of: Evidence for evolution includes fossils, shared DNA across species, and vestigial structures in o...|Evidence for evolution includes fossils, shared DNA across species, and vestigial structures in our bodies
-# coreContent|inline|concept-3.png|Illustration of: Life has evolved through major milestones: first cells, complex cells, multicellular life, fish, ...|Life has evolved through major milestones: first cells, complex cells, multicellular life, fish, land animals, mammals, and humans
-# coreContent|inline|concept-4.png|Illustration of: We share DNA with all living things—60% with bananas, 85% with mice, 98% with chimpanzees—proving...|We share DNA with all living things—60% with bananas, 85% with mice, 98% with chimpanzees—proving our common ancestry
-# coreContent|inline|concept-5.png|Illustration of: Evolution is ongoing; life continues to adapt and change in response to the environment|Evolution is ongoing; life continues to adapt and change in response to the environment
+coreContent|inline|concept-0.png|Illustration of: All living things are connected through the Tree of Life, descended from a common ancestor called...|All living things are connected through the Tree of Life, descended from a common ancestor called LUCA that lived about 3.5-4 billion years ago
+coreContent|inline|concept-1.png|Illustration of: Evolution happens through natural selection: organisms with helpful traits survive and pass those...|Evolution happens through natural selection: organisms with helpful traits survive and pass those traits to their offspring
+coreContent|inline|concept-2.png|Illustration of: Evidence for evolution includes fossils, shared DNA across species, and vestigial structures in o...|Evidence for evolution includes fossils, shared DNA across species, and vestigial structures in our bodies
+coreContent|inline|concept-3.png|Illustration of: Life has evolved through major milestones: first cells, complex cells, multicellular life, fish, ...|Life has evolved through major milestones: first cells, complex cells, multicellular life, fish, land animals, mammals, and humans
+coreContent|inline|concept-4.png|Illustration of: We share DNA with all living things—60% with bananas, 85% with mice, 98% with chimpanzees—proving...|We share DNA with all living things—60% with bananas, 85% with mice, 98% with chimpanzees—proving our common ancestry
+coreContent|inline|concept-5.png|Illustration of: Evolution is ongoing; life continues to adapt and change in response to the environment|Evolution is ongoing; life continues to adapt and change in response to the environment
 
 # === SECTION-SPECIFIC IMAGES ===
 
-# introduction|before|intro-img0.png|[Add alt text for introduction image]|[Optional caption]
+introduction|before|intro-img0.png|[Add alt text for introduction image]|[Optional caption]
 # coreContent|before|core-img0.png|[Add alt text for coreContent image]|[Optional caption]
 # interactiveSection|before|interactive-img0.png|[Add alt text for interactiveSection image]|[Optional caption]
 # integration|before|integration-img0.png|[Add alt text for integration image]|[Optional caption]

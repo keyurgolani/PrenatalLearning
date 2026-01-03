@@ -14,26 +14,26 @@
 
 # === SUGGESTED IMAGES FROM ANALOGIES ===
 
-# coreContent|after|analogy-0.png|Illustration of Emotions|Weather inside our heads—sometimes sunny, sometimes stormy, always changing, with the sun always there behind the clouds
-# coreContent|after|analogy-1.png|Illustration of Basic Emotions|Primary colors that mix to create the full rainbow of human feeling
-# coreContent|after|analogy-2.png|Illustration of The Amygdala|A watchful guardian, always scanning for anything important and sounding the alarm when needed
-# coreContent|after|analogy-3.png|Illustration of Emotions as Guides|Advisors to a wise ruler—they bring important information, but the ruler decides what to do
-# coreContent|after|analogy-4.png|Illustration of Emotional Regulation|Surfing waves—you can't stop the waves from coming, but you can learn to ride them
-# coreContent|after|analogy-5.png|Illustration of Mother-Baby Connection|A rainbow bridge between two inner skies, with feelings flowing across
+coreContent|after|analogy-0.png|Illustration of Emotions|Weather inside our heads—sometimes sunny, sometimes stormy, always changing, with the sun always there behind the clouds
+coreContent|after|analogy-1.png|Illustration of Basic Emotions|Primary colors that mix to create the full rainbow of human feeling
+coreContent|after|analogy-2.png|Illustration of The Amygdala|A watchful guardian, always scanning for anything important and sounding the alarm when needed
+coreContent|after|analogy-3.png|Illustration of Emotions as Guides|Advisors to a wise ruler—they bring important information, but the ruler decides what to do
+coreContent|after|analogy-4.png|Illustration of Emotional Regulation|Surfing waves—you can't stop the waves from coming, but you can learn to ride them
+coreContent|after|analogy-5.png|Illustration of Mother-Baby Connection|A rainbow bridge between two inner skies, with feelings flowing across
 
 # === SUGGESTED IMAGES FROM KEY CONCEPTS ===
 
-# coreContent|inline|concept-0.png|Illustration of: Emotions are like weather inside our heads—always changing, never permanent, and all part of the ...|Emotions are like weather inside our heads—always changing, never permanent, and all part of the natural rhythm of life
-# coreContent|inline|concept-1.png|Illustration of: Six basic emotions (happiness, sadness, fear, anger, surprise, disgust) are universal across all ...|Six basic emotions (happiness, sadness, fear, anger, surprise, disgust) are universal across all human cultures
-# coreContent|inline|concept-2.png|Illustration of: The limbic system, especially the amygdala, is the brain's emotion center, processing feelings fa...|The limbic system, especially the amygdala, is the brain's emotion center, processing feelings faster than conscious thought
-# coreContent|inline|concept-3.png|Illustration of: Emotions are messengers carrying important information about our world and ourselves|Emotions are messengers carrying important information about our world and ourselves
-# coreContent|inline|concept-4.png|Illustration of: Emotional intelligence includes self-awareness, self-regulation, empathy, and social skills|Emotional intelligence includes self-awareness, self-regulation, empathy, and social skills
-# coreContent|inline|concept-5.png|Illustration of: Emotions should be our guides, not our masters—we can feel fully while choosing how to respond|Emotions should be our guides, not our masters—we can feel fully while choosing how to respond
-# coreContent|inline|concept-6.png|Illustration of: Babies sense their mother's emotions in the womb, learning about feelings before birth|Babies sense their mother's emotions in the womb, learning about feelings before birth
+coreContent|inline|concept-0.png|Illustration of: Emotions are like weather inside our heads—always changing, never permanent, and all part of the ...|Emotions are like weather inside our heads—always changing, never permanent, and all part of the natural rhythm of life
+coreContent|inline|concept-1.png|Illustration of: Six basic emotions (happiness, sadness, fear, anger, surprise, disgust) are universal across all ...|Six basic emotions (happiness, sadness, fear, anger, surprise, disgust) are universal across all human cultures
+coreContent|inline|concept-2.png|Illustration of: The limbic system, especially the amygdala, is the brain's emotion center, processing feelings fa...|The limbic system, especially the amygdala, is the brain's emotion center, processing feelings faster than conscious thought
+coreContent|inline|concept-3.png|Illustration of: Emotions are messengers carrying important information about our world and ourselves|Emotions are messengers carrying important information about our world and ourselves
+coreContent|inline|concept-4.png|Illustration of: Emotional intelligence includes self-awareness, self-regulation, empathy, and social skills|Emotional intelligence includes self-awareness, self-regulation, empathy, and social skills
+coreContent|inline|concept-5.png|Illustration of: Emotions should be our guides, not our masters—we can feel fully while choosing how to respond|Emotions should be our guides, not our masters—we can feel fully while choosing how to respond
+coreContent|inline|concept-6.png|Illustration of: Babies sense their mother's emotions in the womb, learning about feelings before birth|Babies sense their mother's emotions in the womb, learning about feelings before birth
 
 # === SECTION-SPECIFIC IMAGES ===
 
-# introduction|before|intro-img0.png|[Add alt text for introduction image]|[Optional caption]
+introduction|before|intro-img0.png|[Add alt text for introduction image]|[Optional caption]
 # coreContent|before|core-img0.png|[Add alt text for coreContent image]|[Optional caption]
 # interactiveSection|before|interactive-img0.png|[Add alt text for interactiveSection image]|[Optional caption]
 # integration|before|integration-img0.png|[Add alt text for integration image]|[Optional caption]

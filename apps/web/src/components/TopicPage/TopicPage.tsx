@@ -297,8 +297,9 @@ const TopicPageInner: React.FC<TopicPageInnerProps> = ({
 
               {showCompletionSummary ? (
                 /* Completion Summary - Requirements 7.9 */
-                <div className="p-8 animate-fade-in flex-1 overflow-y-auto relative" ref={completionScrollRef}>
+                <div className="flex-1 relative min-h-0">
                   <ScrollIndicators containerRef={completionScrollRef} />
+                  <div className="absolute inset-0 p-8 animate-fade-in overflow-y-auto" ref={completionScrollRef}>
                   <div className="text-center py-8">
                     <div className="w-24 h-24 mx-auto mb-6 rounded-full bg-gradient-to-r from-green-400 to-emerald-500 flex items-center justify-center animate-bounce-in">
                       <svg className="w-12 h-12 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -364,6 +365,7 @@ const TopicPageInner: React.FC<TopicPageInnerProps> = ({
                       Back to Topics
                     </button>
                   </div>
+                  </div>
                 </div>
               ) : (
                 <>
@@ -391,13 +393,14 @@ const TopicPageInner: React.FC<TopicPageInnerProps> = ({
                     onExit={exitReadingMode}
                     scrollContainerRef={readingModeScrollRef}
                   >
-                    <div 
-                      ref={contentContainerRef}
-                      className={`${readingSettings.readingModeEnabled ? 'min-h-[50vh]' : 'p-6 md:p-8 flex-1 overflow-y-auto scrollbar-hidden'} content-scalable relative`}
-                      style={{ scrollBehavior: 'smooth' }}
-                    >
-                      <ScrollIndicators containerRef={contentContainerRef} />
-                      <h2 id="topic-page-title" className="sr-only">{story.title}</h2>
+                    <div className="relative w-full h-full flex flex-col min-h-0">
+                      {!readingSettings.readingModeEnabled && <ScrollIndicators containerRef={contentContainerRef} />}
+                      <div 
+                        ref={contentContainerRef}
+                        className={`${readingSettings.readingModeEnabled ? 'min-h-[50vh]' : 'absolute inset-0 p-6 md:p-8 overflow-y-auto scrollbar-hidden'} content-scalable`}
+                        style={{ scrollBehavior: 'smooth' }}
+                      >
+                        <h2 id="topic-page-title" className="sr-only">{story.title}</h2>
                       <ErrorBoundary
                         resetKey={currentStep}
                         fallback={
@@ -417,6 +420,8 @@ const TopicPageInner: React.FC<TopicPageInnerProps> = ({
                         </StepTransition>
                       </ErrorBoundary>
                     </div>
+                    </div>
+
                   </ReadingMode>
 
                   {/* Footer Actions - Requirements 7.4, 7.5 */}
