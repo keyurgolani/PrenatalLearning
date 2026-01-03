@@ -12,15 +12,15 @@ Prenatal Learning Hub is a gentle, nurturing platform that helps expectant paren
 
 ## Features
 
-### 📚 32 Educational Topics
+### 📚 35 Educational Topics
 
 Explore a rich library of topics across 8 categories, each designed to be engaging, calming, and educational:
 
 - **Science & Universe** - From the Big Bang to quantum physics
-- **Technology & AI** - How computers, the internet, and AI work
+- **Technology & AI** - How computers, the internet, AI, and large language models work
 - **Biology & Life** - DNA, the human body, and evolution
 - **Mathematics** - Numbers, infinity, and nature's patterns
-- **Psychology & Mind** - Emotions, memory, and consciousness
+- **Psychology & Mind** - Emotions, memory, consciousness, and the subconscious
 - **Language & Communication** - Words, music, and body language
 - **Finance & Economics** - Money, markets, and wealth building
 - **Society & Culture** - Diversity, ethics, and democracy

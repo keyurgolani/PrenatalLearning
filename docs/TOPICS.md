@@ -1,6 +1,6 @@
 # Learning Topics
 
-Prenatal Learning Hub offers 33 educational topics across 8 categories, designed to help expectant parents bond with their baby through gentle, engaging content.
+Prenatal Learning Hub offers 35 educational topics across 8 categories, designed to help expectant parents bond with their baby through gentle, engaging content.
 
 ## Categories
 
@@ -18,6 +18,7 @@ Prenatal Learning Hub offers 33 educational topics across 8 categories, designed
 - **Teaching Machines to Learn: The AI Story** - Discover the magical world of artificial intelligence, where machines learn to see, hear, and understand.
 - **The Great Chain of Trust: Blockchain Unveiled** - Discover the revolutionary way of keeping records that no one can change or cheat.
 - **The Word Weavers: How Large Language Models Write** - Discover how AI systems write essays and answer questions by predicting words one at a time, turning mathematics into magic.
+- **The Network Journey: What Happens When You Type a URL** - Follow the incredible journey of a web request from your browser through the internet's infrastructure and back.
 
 ### 🧬 Biology & Life
 
@@ -39,6 +40,7 @@ Prenatal Learning Hub offers 33 educational topics across 8 categories, designed
 - **The Wonder of Consciousness: Your Amazing Mind** - Explore the greatest mystery of all—consciousness itself.
 - **The Library of Memory: How We Remember** - Journey into the magnificent library of your mind where memories are stored.
 - **Growing Your Mind: The Power of Learning** - Discover the amazing truth about your brain—it can grow and change throughout your entire life.
+- **The Inner Garden: Your Subconscious Mind** - Explore the hidden depths of your mind where dreams, intuition, and creativity flourish beneath conscious awareness.
 
 ### 🗣️ Language & Communication
 
