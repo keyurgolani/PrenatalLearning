@@ -14,8 +14,8 @@
 
 # === SUGGESTED IMAGES FROM ANALOGIES ===
 
-# coreContent|after|analogy-0.png|Illustration of Subconscious Mind|A fertile garden that grows whatever seeds (thoughts) are planted, without judgment
-# coreContent|after|analogy-1.png|Illustration of Conscious Mind|The gardener who chooses what to plant
+coreContent|after|analogy-0.png|Illustration of Subconscious Mind|A fertile garden that grows whatever seeds (thoughts) are planted, without judgment
+coreContent|after|analogy-1.png|Illustration of Conscious Mind|The gardener who chooses what to plant
 # coreContent|after|analogy-2.png|Illustration of RAS Filter|A spotlight that illuminates what you believe is important
 # coreContent|after|analogy-3.png|Illustration of Twilight State|An open door to the garden, when the gatekeeper (conscious mind) is drowsy
 # coreContent|after|analogy-4.png|Illustration of Affirmations|Seeds planted through repetition until they take root
