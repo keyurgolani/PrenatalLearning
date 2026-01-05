@@ -64,44 +64,50 @@ export const LearningPathView: React.FC<LearningPathViewProps> = ({
 
   return (
     <div className="space-y-6">
-      {/* Progress Header */}
+      {/* Progress Header - Compact on mobile */}
       <div 
-        className="rounded-2xl shadow-sm p-6 animate-fade-in"
+        className="rounded-2xl shadow-sm p-2 sm:p-6 animate-fade-in"
         style={{ backgroundColor: isDark ? currentTheme.colors.surface : '#ffffff' }}
       >
-        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
-          <div>
+        <div className="flex items-center justify-between gap-3">
+          {/* Left: Title and description */}
+          <div className="flex-1 min-w-0">
             <h2 
-              className="text-xl font-semibold"
+              className="text-base sm:text-xl font-semibold truncate"
               style={{ color: isDark ? currentTheme.colors.text : '#1f2937' }}
             >
               {selectedPath.name}
             </h2>
             <p 
-              className="text-sm mt-1"
+              className="text-xs sm:text-sm mt-0.5 line-clamp-2"
               style={{ color: isDark ? currentTheme.colors.textMuted : '#4b5563' }}
             >
               {selectedPath.description}
             </p>
           </div>
-          <div className="flex items-center gap-4">
-            <div className="text-center">
-              <div className="text-2xl font-bold text-purple-600">
+          
+          {/* Right: Compact progress */}
+          <div className="flex items-center gap-2 sm:gap-4 flex-shrink-0">
+            {/* Text progress - hidden on very small screens */}
+            <div className="text-center hidden xs:block">
+              <div className="text-lg sm:text-2xl font-bold text-purple-600">
                 {stats.completed}/{stats.total}
               </div>
               <div 
-                className="text-xs"
+                className="text-xs hidden sm:block"
                 style={{ color: isDark ? currentTheme.colors.textMuted : '#6b7280' }}
               >
                 Topics Completed
               </div>
             </div>
-            <div className="relative w-16 h-16">
-              <svg className="w-16 h-16 transform -rotate-90">
+            
+            {/* Progress ring - smaller on mobile */}
+            <div className="relative w-10 h-10 sm:w-16 sm:h-16">
+              <svg className="w-10 h-10 sm:w-16 sm:h-16 transform -rotate-90">
                 <circle
-                  cx="32"
-                  cy="32"
-                  r="28"
+                  cx="50%"
+                  cy="50%"
+                  r="40%"
                   stroke="currentColor"
                   strokeWidth="4"
                   fill="none"
@@ -109,9 +115,9 @@ export const LearningPathView: React.FC<LearningPathViewProps> = ({
                   style={isDark ? { color: currentTheme.colors.border } : undefined}
                 />
                 <circle
-                  cx="32"
-                  cy="32"
-                  r="28"
+                  cx="50%"
+                  cy="50%"
+                  r="40%"
                   stroke="currentColor"
                   strokeWidth="4"
                   fill="none"
@@ -123,7 +129,7 @@ export const LearningPathView: React.FC<LearningPathViewProps> = ({
               </svg>
               <div className="absolute inset-0 flex items-center justify-center">
                 <span 
-                  className="text-sm font-semibold"
+                  className="text-xs sm:text-sm font-semibold"
                   style={{ color: isDark ? currentTheme.colors.text : '#374151' }}
                 >
                   {stats.percentage}%
@@ -249,7 +255,7 @@ export const LearningPathView: React.FC<LearningPathViewProps> = ({
                   />
 
                   <div className="p-4">
-                    <div className="flex items-start justify-between gap-3">
+                    <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-4 sm:gap-3">
                       <div className="flex-1 min-w-0">
                         {/* Status badges */}
                         <div className="flex items-center gap-2 mb-1.5">
@@ -281,7 +287,7 @@ export const LearningPathView: React.FC<LearningPathViewProps> = ({
 
                         {/* Title */}
                         <h3 
-                          className="text-base font-semibold leading-tight"
+                          className="text-base sm:text-xl font-semibold leading-tight"
                           style={{ color: isDark ? currentTheme.colors.text : '#1f2937' }}
                         >
                           {story.title}
@@ -290,7 +296,7 @@ export const LearningPathView: React.FC<LearningPathViewProps> = ({
                         {/* Description - show for current/next topics */}
                         {isCurrentOrNext && (
                           <p 
-                            className="text-sm mt-1.5 line-clamp-2"
+                            className="text-xs sm:text-sm mt-1 sm:mt-1.5 line-clamp-2"
                             style={{ color: isDark ? currentTheme.colors.textMuted : '#4b5563' }}
                           >
                             {story.description}

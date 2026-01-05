@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useCallback, useRef } from 'react';
+import { createPortal } from 'react-dom';
 import { useTheme } from '../contexts/ThemeContext';
 import type { Theme } from '../types/theme';
 
@@ -201,77 +202,167 @@ export const ThemeSelector: React.FC<ThemeSelectorProps> = ({ variant = 'icon' }
 
       {/* Popup Grid */}
       {isOpen && (
-        <div
-          ref={popupRef}
-          className={`absolute right-0 top-full mt-2 z-[100] bg-white rounded-xl shadow-xl border border-gray-200 overflow-hidden transition-all duration-150 ${
-            isClosing ? 'opacity-0 scale-95' : 'opacity-100 scale-100 animate-pop-in'
-          }`}
-          style={{ 
-            minWidth: '280px',
-            backgroundColor: currentTheme.isDark ? currentTheme.colors.surface : '#ffffff',
-            borderColor: currentTheme.isDark ? currentTheme.colors.border : '#e5e7eb',
-          }}
-          role="dialog"
-          aria-label="Theme selector"
-        >
-          {/* Header */}
-          <div 
-            className="px-3 py-2 border-b"
-            style={{ borderColor: currentTheme.isDark ? currentTheme.colors.border : '#f3f4f6' }}
+        <>
+          {/* Mobile Popup - Rendered via Portal to avoid clipping */}
+          <div className="sm:hidden">
+            {createPortal(
+              <div className="relative z-[9999]">
+                {/* Mobile Backdrop */}
+                <div 
+                  className="fixed inset-0 bg-black/20 backdrop-blur-[1px]" 
+                  onClick={() => setIsOpen(false)} 
+                />
+                
+                {/* Mobile Grid */}
+                <div
+                  ref={popupRef}
+                  className={`fixed left-4 right-4 top-[50%] -translate-y-1/2 bg-white rounded-xl shadow-xl border border-gray-200 overflow-hidden transition-all duration-150 ${
+                    isClosing ? 'opacity-0 scale-95' : 'opacity-100 scale-100 animate-pop-in'
+                  }`}
+                  style={{ 
+                    minWidth: '280px',
+                    backgroundColor: currentTheme.isDark ? currentTheme.colors.surface : '#ffffff',
+                    borderColor: currentTheme.isDark ? currentTheme.colors.border : '#e5e7eb',
+                  }}
+                  role="dialog"
+                  aria-label="Theme selector"
+                >
+                  {/* Header */}
+                  <div 
+                    className="px-3 py-2 border-b"
+                    style={{ borderColor: currentTheme.isDark ? currentTheme.colors.border : '#f3f4f6' }}
+                  >
+                    <h3 
+                      className="text-sm font-semibold"
+                      style={{ color: currentTheme.isDark ? currentTheme.colors.text : '#111827' }}
+                    >
+                      Choose Theme
+                    </h3>
+                  </div>
+
+                  {/* Theme Grid */}
+                  <div className="p-3 space-y-3">
+                    {/* Light Themes */}
+                    <div>
+                      <p 
+                        className="text-xs font-medium uppercase tracking-wide mb-2"
+                        style={{ color: currentTheme.isDark ? currentTheme.colors.textMuted : '#6b7280' }}
+                      >
+                        Light
+                      </p>
+                      <div className="grid grid-cols-4 gap-2">
+                        {lightThemes.map((theme: Theme) => (
+                          <ThemeGridItem
+                            key={theme.id}
+                            theme={theme}
+                            isSelected={theme.id === currentTheme.id}
+                            onSelect={handleThemeSelect}
+                            isDark={currentTheme.isDark}
+                          />
+                        ))}
+                      </div>
+                    </div>
+
+                    {/* Dark Themes */}
+                    <div>
+                      <p 
+                        className="text-xs font-medium uppercase tracking-wide mb-2"
+                        style={{ color: currentTheme.isDark ? currentTheme.colors.textMuted : '#6b7280' }}
+                      >
+                        Dark
+                      </p>
+                      <div className="grid grid-cols-4 gap-2">
+                        {darkThemes.map((theme: Theme) => (
+                          <ThemeGridItem
+                            key={theme.id}
+                            theme={theme}
+                            isSelected={theme.id === currentTheme.id}
+                            onSelect={handleThemeSelect}
+                            isDark={currentTheme.isDark}
+                          />
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>,
+              document.body
+            )}
+          </div>
+
+          {/* Desktop Popup - Rendered Inline */}
+          <div
+            ref={popupRef}
+            className={`hidden sm:block absolute right-0 top-full mt-2 z-[100] bg-white rounded-xl shadow-xl border border-gray-200 overflow-hidden transition-all duration-150 ${
+              isClosing ? 'opacity-0 scale-95' : 'opacity-100 scale-100 animate-pop-in'
+            }`}
+            style={{ 
+              minWidth: '280px',
+              backgroundColor: currentTheme.isDark ? currentTheme.colors.surface : '#ffffff',
+              borderColor: currentTheme.isDark ? currentTheme.colors.border : '#e5e7eb',
+            }}
+            role="dialog"
+            aria-label="Theme selector"
           >
-            <h3 
-              className="text-sm font-semibold"
-              style={{ color: currentTheme.isDark ? currentTheme.colors.text : '#111827' }}
+            {/* Header */}
+            <div 
+              className="px-3 py-2 border-b"
+              style={{ borderColor: currentTheme.isDark ? currentTheme.colors.border : '#f3f4f6' }}
             >
-              Choose Theme
-            </h3>
-          </div>
-
-          {/* Theme Grid */}
-          <div className="p-3 space-y-3">
-            {/* Light Themes */}
-            <div>
-              <p 
-                className="text-xs font-medium uppercase tracking-wide mb-2"
-                style={{ color: currentTheme.isDark ? currentTheme.colors.textMuted : '#6b7280' }}
+              <h3 
+                className="text-sm font-semibold"
+                style={{ color: currentTheme.isDark ? currentTheme.colors.text : '#111827' }}
               >
-                Light
-              </p>
-              <div className="grid grid-cols-4 gap-2">
-                {lightThemes.map((theme: Theme) => (
-                  <ThemeGridItem
-                    key={theme.id}
-                    theme={theme}
-                    isSelected={theme.id === currentTheme.id}
-                    onSelect={handleThemeSelect}
-                    isDark={currentTheme.isDark}
-                  />
-                ))}
-              </div>
+                Choose Theme
+              </h3>
             </div>
 
-            {/* Dark Themes */}
-            <div>
-              <p 
-                className="text-xs font-medium uppercase tracking-wide mb-2"
-                style={{ color: currentTheme.isDark ? currentTheme.colors.textMuted : '#6b7280' }}
-              >
-                Dark
-              </p>
-              <div className="grid grid-cols-4 gap-2">
-                {darkThemes.map((theme: Theme) => (
-                  <ThemeGridItem
-                    key={theme.id}
-                    theme={theme}
-                    isSelected={theme.id === currentTheme.id}
-                    onSelect={handleThemeSelect}
-                    isDark={currentTheme.isDark}
-                  />
-                ))}
+            {/* Theme Grid */}
+            <div className="p-3 space-y-3">
+              {/* Light Themes */}
+              <div>
+                <p 
+                  className="text-xs font-medium uppercase tracking-wide mb-2"
+                  style={{ color: currentTheme.isDark ? currentTheme.colors.textMuted : '#6b7280' }}
+                >
+                  Light
+                </p>
+                <div className="grid grid-cols-4 gap-2">
+                  {lightThemes.map((theme: Theme) => (
+                    <ThemeGridItem
+                      key={theme.id}
+                      theme={theme}
+                      isSelected={theme.id === currentTheme.id}
+                      onSelect={handleThemeSelect}
+                      isDark={currentTheme.isDark}
+                    />
+                  ))}
+                </div>
+              </div>
+
+              {/* Dark Themes */}
+              <div>
+                <p 
+                  className="text-xs font-medium uppercase tracking-wide mb-2"
+                  style={{ color: currentTheme.isDark ? currentTheme.colors.textMuted : '#6b7280' }}
+                >
+                  Dark
+                </p>
+                <div className="grid grid-cols-4 gap-2">
+                  {darkThemes.map((theme: Theme) => (
+                    <ThemeGridItem
+                      key={theme.id}
+                      theme={theme}
+                      isSelected={theme.id === currentTheme.id}
+                      onSelect={handleThemeSelect}
+                      isDark={currentTheme.isDark}
+                    />
+                  ))}
+                </div>
               </div>
             </div>
           </div>
-        </div>
+        </>
       )}
     </div>
   );

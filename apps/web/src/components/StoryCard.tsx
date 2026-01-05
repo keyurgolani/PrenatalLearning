@@ -37,15 +37,16 @@ const trimesterConfig: Record<Trimester, { label: string; lightClass: string; da
  */
 const TrimesterBadge: React.FC<{ trimester: Trimester; isDark: boolean }> = ({ trimester, isDark }) => {
   const config = trimesterConfig[trimester];
+  const shortLabel = trimester === 'any' ? 'All' : config.label.replace(' Tri', '');
   
   return (
     <span
-      className={`inline-flex items-center px-2.5 py-1 rounded-full text-xs font-medium ${isDark ? '' : config.lightClass}`}
+      className={`inline-flex items-center px-2 py-0.5 sm:px-2.5 sm:py-1 rounded-full text-xs sm:text-sm font-medium ${isDark ? '' : config.lightClass}`}
       style={isDark ? config.darkStyle : {}}
       title={`Recommended for ${trimester === 'any' ? 'all trimesters' : `${trimester} trimester`}`}
     >
       <svg
-        className="w-3.5 h-3.5 mr-1"
+        className="w-3 h-3 sm:w-3.5 sm:h-3.5 mr-0.5 sm:mr-1"
         fill="none"
         stroke="currentColor"
         viewBox="0 0 24 24"
@@ -58,7 +59,8 @@ const TrimesterBadge: React.FC<{ trimester: Trimester; isDark: boolean }> = ({ t
           d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
         />
       </svg>
-      {config.label}
+      <span className="hidden sm:inline">{config.label}</span>
+      <span className="sm:hidden">{shortLabel}</span>
     </span>
   );
 };
@@ -114,9 +116,9 @@ export const StoryCard: React.FC<StoryCardProps> = ({
   };
 
   const difficultyLabels = {
-    foundational: 'Foundational',
-    intermediate: 'Intermediate',
-    advanced: 'Advanced',
+    foundational: { full: 'Foundational', short: 'Found.' },
+    intermediate: { full: 'Intermediate', short: 'Intermed.' },
+    advanced: { full: 'Advanced', short: 'Adv.' },
   };
 
   // Theme-aware card styles
@@ -208,7 +210,7 @@ export const StoryCard: React.FC<StoryCardProps> = ({
 
         {/* Description */}
         <p
-          className={`text-sm mb-4 line-clamp-2 transition-theme ${isDark ? '' : 'text-gray-600'}`}
+          className={`text-sm mb-4 line-clamp-2 transition-theme ${isDark ? '' : 'text-gray-700'}`}
           style={isDark ? { color: currentTheme.colors.textMuted } : {}}
         >
           {story.description}
@@ -227,12 +229,12 @@ export const StoryCard: React.FC<StoryCardProps> = ({
 
           {/* Reading Time Badge - Requirements 9.3: Display total story reading time on story cards */}
           <span
-            className={`inline-flex items-center px-2.5 py-1 rounded-full text-xs font-medium ${isDark ? '' : 'bg-purple-100 text-purple-700'}`}
+            className={`inline-flex items-center px-2 py-0.5 sm:px-2.5 sm:py-1 rounded-full text-xs sm:text-sm font-medium ${isDark ? '' : 'bg-purple-100 text-purple-700'}`}
             style={isDark ? { backgroundColor: 'rgba(168, 85, 247, 0.2)', color: '#C084FC' } : {}}
             title={`Estimated reading time: ${formatReadingTime(getTotalReadingTime(story))}`}
           >
             <svg
-              className="w-3.5 h-3.5 mr-1"
+              className="w-3 h-3 sm:w-3.5 sm:h-3.5 mr-0.5 sm:mr-1"
               fill="none"
               stroke="currentColor"
               viewBox="0 0 24 24"
@@ -244,21 +246,24 @@ export const StoryCard: React.FC<StoryCardProps> = ({
                 d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
               />
             </svg>
-            {formatReadingTime(getTotalReadingTime(story))} read
+            <span className="hidden sm:inline">{formatReadingTime(getTotalReadingTime(story))} read</span>
+            <span className="sm:hidden">{formatReadingTime(getTotalReadingTime(story))}</span>
           </span>
 
           {/* Difficulty Badge */}
           <span
-            className={`inline-flex items-center px-2.5 py-1 rounded-full text-xs font-medium ${difficultyColors[story.difficulty]}`}
+            className={`inline-flex items-center px-2 py-0.5 sm:px-2.5 sm:py-1 rounded-full text-xs sm:text-sm font-medium ${difficultyColors[story.difficulty]}`}
             style={isDark ? darkDifficultyStyles[story.difficulty] : {}}
           >
-            {difficultyLabels[story.difficulty]}
+            <span className="hidden sm:inline">{difficultyLabels[story.difficulty].full}</span>
+            <span className="sm:hidden">{difficultyLabels[story.difficulty].short}</span>
           </span>
 
           {/* Category Badge */}
           <span
-            className={`inline-flex items-center px-2.5 py-1 rounded-full text-xs font-medium ${isDark ? '' : 'bg-gray-100 text-gray-600'}`}
+            className={`inline-flex items-center px-2 py-0.5 sm:px-2.5 sm:py-1 rounded-full text-xs sm:text-sm font-medium ${isDark ? '' : 'bg-gray-100 text-gray-700'}`}
             style={isDark ? { backgroundColor: 'rgba(148, 163, 184, 0.2)', color: currentTheme.colors.textMuted } : {}}
+            title={category?.name || 'Unknown'}
           >
             {category?.name || 'Unknown'}
           </span>

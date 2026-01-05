@@ -283,7 +283,7 @@ const ExerciseCard: React.FC<ExerciseCardProps> = ({ exercise, onStart }) => {
         border: `1px solid ${isDark ? currentTheme.colors.border : '#e5e7eb'}`,
       }}
     >
-      <div className="p-4">
+      <div className="p-3 sm:p-4">
         {/* Header */}
         <div className="flex items-start justify-between gap-3 mb-3">
           <div className="flex items-center gap-2">

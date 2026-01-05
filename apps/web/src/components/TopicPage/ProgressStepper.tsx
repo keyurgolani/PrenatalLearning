@@ -23,6 +23,8 @@ interface ProgressStepperProps {
   /** Optional: Progress within current section (0-100) for enhanced highlighting */
   /** Requirements: 11.4 - Highlight the current section in the progress stepper */
   sectionProgress?: number;
+  /** When true, renders a compact horizontal row for mobile header */
+  mobileCompact?: boolean;
 }
 
 // Instead of emoji icons, we'll use SVG icons directly in the component
@@ -35,6 +37,7 @@ export const ProgressStepper: React.FC<ProgressStepperProps> = ({
   sidebarMode = false,
   iconOnly = false,
   sectionProgress = 0,
+  mobileCompact = false,
 }) => {
   const { currentTheme } = useTheme();
   const isDark = currentTheme.isDark ?? false;
@@ -302,17 +305,55 @@ export const ProgressStepper: React.FC<ProgressStepperProps> = ({
       </ol>
 
       {/* Mobile view - vertical stepper */}
-      <ol className="md:hidden space-y-4">
+      {/* Mobile Compact Header Mode - Icon only, horizontal, tight spacing */}
+      {mobileCompact ? (
+        <div className="flex items-center justify-center gap-2">
+          {LEARNING_STEPS.map((step) => {
+            const isCompleted = completedSteps.includes(step);
+            const isCurrent = step === currentStep;
+            
+            return (
+              <button
+                key={step}
+                onClick={() => onStepClick(step)}
+                className={`
+                  relative flex items-center justify-center w-8 h-8 rounded-full
+                  transition-all duration-200
+                  ${isCompleted 
+                    ? 'bg-green-500 text-white' 
+                    : isCurrent 
+                      ? 'bg-purple-500 text-white ring-2 ring-purple-200 ring-offset-1' 
+                      : (isDark ? 'bg-gray-800 text-gray-400' : 'bg-gray-100 text-gray-400')
+                  }
+                `}
+                aria-label={`${STEP_LABELS[step]}`}
+              >
+                {/* Show number instead of icon for extreme compactness if desired, or icon */}
+                {/* User asked for "step numbers and their icons". At 8x8 (32px), both is hard. Let's do Number. Requirements say "step numbers and their icons". Let's try Icon. */}
+                 {isCompleted ? (
+                    <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                      <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                    </svg>
+                  ) : (
+                    <span className="text-xs font-bold">{LEARNING_STEPS.indexOf(step) + 1}</span>
+                  )}
+              </button>
+            );
+          })}
+        </div>
+      ) : (
+      /* Mobile standard view - horizontal scrollable stepper */
+      <ol className="md:hidden flex overflow-x-auto whitespace-nowrap gap-3 pb-2 -mx-4 px-4 scrollbar-hidden">
         {LEARNING_STEPS.map((step, index) => {
           const isCompleted = completedSteps.includes(step);
           const isCurrent = step === currentStep;
           
           return (
-            <li key={step} className="relative">
+            <li key={step} className="flex-shrink-0">
               <button
                 onClick={() => onStepClick(step)}
                 className={`
-                  w-full flex items-center gap-4 p-3 rounded-xl
+                  flex flex-col items-center gap-2 p-2 rounded-xl min-w-[80px]
                   focus:outline-none focus:ring-2 focus:ring-purple-500
                   transition-all duration-200
                   ${isCurrent 
@@ -326,7 +367,7 @@ export const ProgressStepper: React.FC<ProgressStepperProps> = ({
               >
                 {/* Step number/icon */}
                 <div className={`
-                  flex items-center justify-center w-10 h-10 rounded-full flex-shrink-0
+                  flex items-center justify-center w-8 h-8 rounded-full flex-shrink-0
                   ${isCompleted 
                     ? 'bg-green-500 text-white' 
                     : isCurrent 
@@ -335,18 +376,18 @@ export const ProgressStepper: React.FC<ProgressStepperProps> = ({
                   }
                 `}>
                   {isCompleted ? (
-                    <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                    <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
                       <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
                     </svg>
                   ) : (
-                    <span className="text-sm font-bold">{index + 1}</span>
+                    <span className="text-xs font-bold">{index + 1}</span>
                   )}
                 </div>
                 
                 {/* Step info */}
-                <div className="flex-1 text-left">
+                <div className="text-center">
                   <span className={`
-                    font-medium
+                    text-xs font-medium block
                     ${isCompleted 
                       ? 'text-green-700' 
                       : isCurrent 
@@ -356,37 +397,24 @@ export const ProgressStepper: React.FC<ProgressStepperProps> = ({
                   `}>
                     {STEP_LABELS[step]}
                   </span>
-                  {isCurrent && (
-                    <>
-                      <span className="block text-xs text-purple-500 mt-0.5">Current step</span>
-                      {/* Section progress indicator - Requirements 11.4 */}
-                      {sectionProgress > 0 && (
-                        <div className="mt-1 h-1 w-full rounded-full overflow-hidden bg-purple-100">
-                          <div 
-                            className="h-full rounded-full transition-all duration-150"
-                            style={{ 
-                              width: `${Math.min(100, sectionProgress)}%`,
-                              background: 'linear-gradient(90deg, #a855f7, #ec4899)'
-                            }}
-                          />
-                        </div>
-                      )}
-                    </>
+                  {isCurrent && sectionProgress > 0 && (
+                    <div className="mt-1 h-1 w-full rounded-full overflow-hidden bg-purple-100">
+                      <div 
+                        className="h-full rounded-full transition-all duration-150"
+                        style={{ 
+                          width: `${Math.min(100, sectionProgress)}%`,
+                          background: 'linear-gradient(90deg, #a855f7, #ec4899)'
+                        }}
+                      />
+                    </div>
                   )}
                 </div>
-                
-                {/* Arrow indicator */}
-                <svg className={`
-                  w-5 h-5 flex-shrink-0
-                  ${isCurrent ? 'text-purple-400' : 'text-gray-400'}
-                `} fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                </svg>
               </button>
             </li>
           );
         })}
       </ol>
+      )}
     </nav>
   );
 };

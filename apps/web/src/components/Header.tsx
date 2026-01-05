@@ -1,11 +1,11 @@
 import React, { useState, useCallback, useRef, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { ViewModeToggle } from './ViewModeToggle';
-import { MiniAudioPlayer } from './MiniAudioPlayer';
+
 import { useTheme } from '../contexts/ThemeContext';
 import { useAuth } from '../contexts/AuthContext';
 import { useTrimester } from '../contexts/TrimesterContext';
-import { useReadingMode } from '../contexts/ReadingModeContext';
+
 import { useModal } from '../contexts';
 
 /**
@@ -217,9 +217,8 @@ const BrandLogo: React.FC<{ primaryColor?: string; secondaryColor?: string }> = 
   secondaryColor = '#a855f7' 
 }) => (
   <div className="relative flex-shrink-0">
-    {/* White background circle for contrast */}
     <div className="absolute inset-0 bg-white rounded-full shadow-md" />
-    <svg viewBox="0 0 48 48" className="w-11 h-11 relative" aria-hidden="true">
+    <svg viewBox="0 0 48 48" className="w-9 h-9 sm:w-11 sm:h-11 relative" aria-hidden="true">
       {/* Outer ring with theme color */}
       <circle cx="24" cy="24" r="23" fill="none" stroke={primaryColor} strokeWidth="2.5" opacity="0.5" />
       {/* Main background - theme gradient */}
@@ -616,7 +615,7 @@ const UserMenu: React.FC<UserMenuProps> = ({ onLogout, onOpenAccountSettings }) 
 export const Header: React.FC<HeaderProps> = () => {
   const { currentTheme } = useTheme();
   const { isAuthenticated, isLoading: authLoading, logout } = useAuth();
-  const { settings } = useReadingMode();
+
   const { openLogin, openRegister, openSettings } = useModal();
   
   /**
@@ -648,7 +647,7 @@ export const Header: React.FC<HeaderProps> = () => {
       </div>
 
       {/* Content */}
-      <div className="relative text-white py-3 px-4 lg:px-6 xl:px-8 2xl:px-12">
+      <div className="relative text-white py-2 sm:py-3 px-2 sm:px-4 lg:px-6 xl:px-8 2xl:px-12">
         <div className="w-full">
           {/* Main header row: Logo left, ViewToggle right, MiniPlayer absolutely centered */}
           <div className="relative flex items-center justify-between gap-3">
@@ -667,18 +666,19 @@ export const Header: React.FC<HeaderProps> = () => {
               </span>
             </Link>
 
-            {/* Center: Mini Audio Player (fixed at bottom centered, appears when audio is playing) - hidden in reading mode */}
-            {!settings?.readingModeEnabled && (
-              <div className="fixed bottom-8 left-1/2 -translate-x-1/2 z-[100] flex items-center justify-center pointer-events-none">
-                <div className="pointer-events-auto">
-                  <MiniAudioPlayer />
-                </div>
-              </div>
-            )}
+            {/* Center: Navigation (ViewModeToggle) */}
+            <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 hidden md:block">
+              <ViewModeToggle variant="header" />
+            </div>
+
+            {/* Mobile Navigation (Centered) */}
+            <div className="md:hidden absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
+               <ViewModeToggle variant="header" />
+            </div>
 
             {/* Right: View Toggle and Auth */}
             <div className="flex items-center gap-2">
-              <ViewModeToggle variant="header" />
+
               
               {/* Auth Section */}
               {authLoading ? (

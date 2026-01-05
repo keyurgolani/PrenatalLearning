@@ -147,9 +147,9 @@ export const CompactStoryCard: React.FC<CompactStoryCardProps> = ({
         </div>
 
         {/* Header with Title and Completion Status */}
-        <div className="flex items-start justify-between gap-3 mb-3 pr-16">
+        <div className="flex items-start justify-between gap-3 mb-2 sm:mb-3 pr-16 bg-transparent">
           <h3
-            className={`text-base font-semibold leading-snug transition-theme ${isDark ? '' : 'text-gray-800'}`}
+            className={`text-sm sm:text-base font-semibold leading-snug transition-theme ${isDark ? '' : 'text-gray-800'}`}
             style={isDark ? { color: currentTheme.colors.text } : {}}
             data-testid="story-title"
           >
@@ -174,17 +174,17 @@ export const CompactStoryCard: React.FC<CompactStoryCardProps> = ({
 
         {/* Full Description */}
         <p
-          className={`text-sm mb-4 leading-relaxed transition-theme ${isDark ? '' : 'text-gray-600'}`}
+          className={`text-xs sm:text-sm mb-3 sm:mb-4 leading-relaxed transition-theme ${isDark ? '' : 'text-gray-700'}`}
           style={isDark ? { color: currentTheme.colors.textMuted } : {}}
         >
           {story.description}
         </p>
 
         {/* Metadata Row */}
-        <div className="flex flex-wrap items-center gap-2">
+        <div className="flex flex-nowrap overflow-x-auto scrollbar-hidden items-center gap-2 pb-1 -mx-2 px-2 pr-4">
           {/* Trimester Badge - Requirements 1.4: Display trimester badge on story cards */}
           <span
-            className={`inline-flex items-center px-2.5 py-1 rounded-full text-xs font-medium ${isDark ? '' : trimesterConfig[story.recommendedTrimester].lightClass}`}
+            className={`inline-flex items-center px-2.5 py-1 rounded-full text-sm font-medium whitespace-nowrap flex-shrink-0 ${isDark ? '' : trimesterConfig[story.recommendedTrimester].lightClass}`}
             style={isDark ? trimesterConfig[story.recommendedTrimester].darkStyle : {}}
             title={`Recommended for ${story.recommendedTrimester === 'any' ? 'all trimesters' : `${story.recommendedTrimester} trimester`}`}
             data-testid="trimester-badge"
@@ -208,7 +208,7 @@ export const CompactStoryCard: React.FC<CompactStoryCardProps> = ({
 
           {/* Reading Time Badge - Requirements 9.3: Display total story reading time on story cards */}
           <span
-            className={`inline-flex items-center px-2.5 py-1 rounded-full text-xs font-medium ${isDark ? '' : 'bg-purple-100 text-purple-700'}`}
+            className={`inline-flex items-center px-2.5 py-1 rounded-full text-sm font-medium whitespace-nowrap flex-shrink-0 ${isDark ? '' : 'bg-purple-100 text-purple-700'}`}
             style={isDark ? { backgroundColor: 'rgba(168, 85, 247, 0.2)', color: '#C084FC' } : {}}
             data-testid="duration-badge"
             title={`Estimated reading time: ${formatReadingTime(getTotalReadingTime(story))}`}
@@ -231,7 +231,7 @@ export const CompactStoryCard: React.FC<CompactStoryCardProps> = ({
 
           {/* Difficulty Badge */}
           <span
-            className={`inline-flex items-center px-2.5 py-1 rounded-full text-xs font-medium ${difficultyColors[story.difficulty]}`}
+            className={`inline-flex items-center px-2.5 py-1 rounded-full text-sm font-medium whitespace-nowrap flex-shrink-0 ${difficultyColors[story.difficulty]}`}
             style={isDark ? darkDifficultyStyles[story.difficulty] : {}}
             data-testid="difficulty-badge"
           >
@@ -240,7 +240,7 @@ export const CompactStoryCard: React.FC<CompactStoryCardProps> = ({
 
           {/* Category Badge */}
           <span
-            className={`inline-flex items-center px-2.5 py-1 rounded-full text-xs font-medium ${isDark ? '' : 'bg-gray-100 text-gray-600'}`}
+            className={`inline-flex items-center px-2.5 py-1 rounded-full text-sm font-medium whitespace-nowrap flex-shrink-0 ${isDark ? '' : 'bg-gray-100 text-gray-700'}`}
             style={isDark ? { backgroundColor: 'rgba(148, 163, 184, 0.2)', color: currentTheme.colors.textMuted } : {}}
             data-testid="category-badge"
           >

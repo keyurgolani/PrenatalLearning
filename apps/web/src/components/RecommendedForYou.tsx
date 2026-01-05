@@ -115,63 +115,71 @@ const CalendarPopup: React.FC<CalendarPopupProps> = ({ selectedDate, onSelectDat
   }
 
   return (
-    <div
-      ref={popupRef}
-      className="absolute right-0 top-full mt-2 rounded-xl shadow-xl border overflow-hidden animate-pop-in"
-      style={{
-        backgroundColor: currentTheme.isDark ? currentTheme.colors.surface : '#ffffff',
-        borderColor: currentTheme.isDark ? currentTheme.colors.border : '#e5e7eb',
-        minWidth: '320px',
-        zIndex: 9999,
-      }}
-    >
-      {/* Header */}
+    <>
+      {/* Mobile Backdrop */}
       <div 
-        className="flex items-center justify-between px-4 py-3 border-b"
-        style={{ 
-          background: `linear-gradient(135deg, ${currentTheme.colors.primary}, ${currentTheme.colors.secondary})`,
-          borderColor: currentTheme.isDark ? currentTheme.colors.border : '#f3f4f6',
+        className="fixed inset-0 z-[9998] bg-black/20 backdrop-blur-[1px] sm:hidden" 
+        onClick={onClose}
+      />
+      
+      <div
+        ref={popupRef}
+        className="fixed sm:absolute left-1/2 sm:right-0 sm:left-auto top-1/2 sm:top-full mt-0 sm:mt-2 -translate-x-1/2 sm:translate-x-0 -translate-y-1/2 sm:translate-y-0 rounded-xl shadow-xl border overflow-hidden animate-pop-in"
+        style={{
+          backgroundColor: currentTheme.isDark ? currentTheme.colors.surface : '#ffffff',
+          borderColor: currentTheme.isDark ? currentTheme.colors.border : '#e5e7eb',
+          minWidth: '320px',
+          zIndex: 9999,
         }}
       >
-        <button
-          onClick={prevMonth}
-          className="p-1.5 rounded-full hover:bg-white/20 transition-colors text-white"
-          aria-label="Previous month"
+        {/* Header */}
+        <div 
+          className="flex items-center justify-between px-4 py-3 border-b"
+          style={{ 
+            background: `linear-gradient(135deg, ${currentTheme.colors.primary}, ${currentTheme.colors.secondary})`,
+            borderColor: currentTheme.isDark ? currentTheme.colors.border : '#f3f4f6',
+          }}
         >
-          <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
-          </svg>
-        </button>
-        <span className="text-base font-semibold text-white">{monthName}</span>
-        <button
-          onClick={nextMonth}
-          className="p-1.5 rounded-full hover:bg-white/20 transition-colors text-white"
-          aria-label="Next month"
-        >
-          <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-          </svg>
-        </button>
-      </div>
-
-      {/* Day names */}
-      <div className="grid grid-cols-7 gap-1 px-3 pt-3">
-        {['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa'].map(d => (
-          <div 
-            key={d} 
-            className="w-10 h-8 flex items-center justify-center text-xs font-semibold uppercase"
-            style={{ color: currentTheme.isDark ? currentTheme.colors.textMuted : '#9ca3af' }}
+          <button
+            onClick={prevMonth}
+            className="p-1.5 rounded-full hover:bg-white/20 transition-colors text-white"
+            aria-label="Previous month"
           >
-            {d}
-          </div>
-        ))}
-      </div>
+            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+            </svg>
+          </button>
+          <span className="text-base font-semibold text-white">{monthName}</span>
+          <button
+            onClick={nextMonth}
+            className="p-1.5 rounded-full hover:bg-white/20 transition-colors text-white"
+            aria-label="Next month"
+          >
+            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+            </svg>
+          </button>
+        </div>
 
-      {/* Days grid */}
-      <div className="grid grid-cols-7 gap-1 p-3">
-        {days}
+        {/* Day names */}
+        <div className="grid grid-cols-7 gap-1 px-3 pt-3">
+          {['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa'].map(d => (
+            <div 
+              key={d} 
+              className="w-10 h-8 flex items-center justify-center text-xs font-semibold uppercase"
+              style={{ color: currentTheme.isDark ? currentTheme.colors.textMuted : '#9ca3af' }}
+            >
+              {d}
+            </div>
+          ))}
+        </div>
+
+        {/* Days grid */}
+        <div className="grid grid-cols-7 gap-1 p-3">
+          {days}
+        </div>
       </div>
-    </div>
+    </>
   );
 };
 
@@ -193,6 +201,8 @@ export const RecommendedForYou: React.FC<RecommendedForYouProps> = ({
   const { currentTheme } = useTheme();
   const isDark = currentTheme.isDark ?? false;
   const [showDatePicker, setShowDatePicker] = useState(false);
+  // Default to false first to match server, then update on mount
+  const [isCollapsed, setIsCollapsed] = useState(() => typeof window !== 'undefined' ? window.innerWidth < 768 : false);
 
   const trimesterLabels: Record<string, string> = {
     first: 'First Trimester',
@@ -271,8 +281,19 @@ export const RecommendedForYou: React.FC<RecommendedForYouProps> = ({
   }
 
   return (
-    <div className="mb-8">
-      <div className="flex items-center justify-between mb-4">
+    <div className="mb-6">
+      <div 
+        className={`flex items-center justify-between mb-4 transition-all duration-300 ${
+          isCollapsed 
+            ? 'p-3 rounded-xl border cursor-pointer hover:shadow-sm' 
+            : ''
+        }`}
+        style={isCollapsed ? {
+          backgroundColor: isDark ? currentTheme.colors.surface : '#ffffff',
+          borderColor: isDark ? currentTheme.colors.border : '#e5e7eb'
+        } : {}}
+        onClick={() => setIsCollapsed(!isCollapsed)}
+      >
         <div className="flex items-center gap-3">
           <h2 
             className="text-xl font-semibold"
@@ -290,9 +311,30 @@ export const RecommendedForYou: React.FC<RecommendedForYouProps> = ({
             {trimesterLabels[currentTrimester!]}
           </span>
         </div>
+
+        {/* Requirements 3.5 - Collapsible section (New mobile optimization) */}
+        <button
+          onClick={(e) => {
+            e.stopPropagation();
+            setIsCollapsed(!isCollapsed);
+          }}
+          className="p-2 rounded-lg transition-colors hover:bg-gray-100 dark:hover:bg-gray-800"
+          aria-label={isCollapsed ? "Show recommended stories" : "Hide recommended stories"}
+          aria-expanded={!isCollapsed}
+        >
+          <svg 
+            className={`w-5 h-5 transition-transform duration-200 ${isCollapsed ? '' : 'rotate-180'}`}
+            fill="none" 
+            stroke="currentColor" 
+            viewBox="0 0 24 24"
+            style={{ color: isDark ? currentTheme.colors.textMuted : '#6b7280' }}
+          >
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+          </svg>
+        </button>
       </div>
       
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+      <div className={`grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 transition-all duration-300 ${isCollapsed ? 'hidden' : 'block'}`}>
         {recommendedStories.map((story) => {
           const category = getCategoryById(story.category);
           

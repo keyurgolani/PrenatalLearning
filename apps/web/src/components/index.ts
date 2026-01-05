@@ -18,6 +18,14 @@ export * from './TopicPage';
 // Exercise components
 export * from './exercises';
 
+// Enrichment components
+export { DailyMix } from './enrichment/DailyMix';
+export { Vocabulary } from './enrichment/Vocabulary';
+export { Puzzles } from './enrichment/Puzzles';
+export { Facts } from './enrichment/Facts';
+export { BrainTeasers } from './enrichment/BrainTeasers';
+export { Mindfulness } from './enrichment/Mindfulness';
+
 // Search components
 export { HighlightedText, type HighlightedTextProps } from './HighlightedText';
 export { SearchSuggestions } from './SearchSuggestions';

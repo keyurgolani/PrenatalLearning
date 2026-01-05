@@ -103,7 +103,7 @@ export const ScrollIndicators: React.FC<ScrollIndicatorsProps> = ({
           bg-white/90 backdrop-blur-sm
           shadow-lg hover:shadow-xl
           border border-gray-200
-          flex items-center justify-center
+          hidden md:flex items-center justify-center
           transition-all duration-300 ease-out
           hover:scale-110 hover:bg-purple-50
           ${showTopIndicator ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-2 pointer-events-none'}
@@ -126,7 +126,7 @@ export const ScrollIndicators: React.FC<ScrollIndicatorsProps> = ({
           bg-white/90 backdrop-blur-sm
           shadow-lg hover:shadow-xl
           border border-gray-200
-          flex items-center justify-center
+          hidden md:flex items-center justify-center
           transition-all duration-300 ease-out
           hover:scale-110 hover:bg-purple-50
           ${showBottomIndicator ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-2 pointer-events-none'}

@@ -150,7 +150,7 @@ export const CoreContentStep: React.FC<CoreContentStepProps> = ({ story }) => {
   const isReadingMode = readingSettings.readingModeEnabled;
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-4 md:space-y-6">
       {/* Section Header - smaller in reading mode, expands on hover */}
       <div 
         className={`group text-center transition-all duration-300 ${

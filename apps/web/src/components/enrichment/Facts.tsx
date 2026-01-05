@@ -75,7 +75,7 @@ const FactCard: React.FC<FactCardProps> = ({ fact }) => {
         border: `1px solid ${isDark ? currentTheme.colors.border : '#e5e7eb'}`,
       }}
     >
-      <div className="p-4">
+      <div className="p-3 sm:p-4">
         {/* Category badge */}
         <div className="flex items-center gap-2 mb-3">
           <span 

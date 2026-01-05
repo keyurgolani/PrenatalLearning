@@ -76,7 +76,7 @@ const WordCard: React.FC<WordCardProps> = ({ word, expanded, onToggle }) => {
       }}
     >
       <div 
-        className="p-4 cursor-pointer"
+        className="p-3 sm:p-4 cursor-pointer"
         onClick={onToggle}
         role="button"
         tabIndex={0}
@@ -244,7 +244,7 @@ const ConceptCard: React.FC<ConceptCardProps> = ({ concept, expanded, onToggle }
 
   return (
     <div className="rounded-2xl overflow-hidden transition-all" style={{ backgroundColor: isDark ? currentTheme.colors.surface : 'white', border: `1px solid ${isDark ? currentTheme.colors.border : '#e5e7eb'}` }}>
-      <div className="p-4 cursor-pointer" onClick={onToggle} role="button" tabIndex={0} onKeyDown={(e) => e.key === 'Enter' && onToggle()} aria-expanded={expanded}>
+      <div className="p-3 sm:p-4 cursor-pointer" onClick={onToggle} role="button" tabIndex={0} onKeyDown={(e) => e.key === 'Enter' && onToggle()} aria-expanded={expanded}>
         <div className="flex items-start justify-between gap-3">
           <div className="flex-1">
             <div className="flex items-center gap-2 mb-2">
@@ -373,14 +373,18 @@ export const Vocabulary: React.FC<{ compact?: boolean; refreshKey?: number }> = 
       {/* Content */}
       {viewMode === 'concepts' ? (
         <div className="grid gap-4">
-          {displayConcepts.map((concept) => (
-            <ConceptCard key={concept.id} concept={concept} expanded={expandedId === concept.id} onToggle={() => setExpandedId(expandedId === concept.id ? null : concept.id)} />
+          {displayConcepts.map((concept, index) => (
+            <div key={concept.id} className={`animate-card-enter stagger-${Math.min(index + 1, 10)}`}>
+              <ConceptCard concept={concept} expanded={expandedId === concept.id} onToggle={() => setExpandedId(expandedId === concept.id ? null : concept.id)} />
+            </div>
           ))}
         </div>
       ) : (
         <div className="grid gap-4 md:grid-cols-2">
-          {displayWords.map((word) => (
-            <WordCard key={word.id} word={word} expanded={expandedId === word.id} onToggle={() => setExpandedId(expandedId === word.id ? null : word.id)} />
+          {displayWords.map((word, index) => (
+            <div key={word.id} className={`animate-card-enter stagger-${Math.min(index + 1, 10)}`}>
+              <WordCard word={word} expanded={expandedId === word.id} onToggle={() => setExpandedId(expandedId === word.id ? null : word.id)} />
+            </div>
           ))}
         </div>
       )}

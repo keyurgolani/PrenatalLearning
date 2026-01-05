@@ -1,7 +1,7 @@
 import React, { useRef, useEffect, useState, useCallback } from 'react';
 import type { Category, CategoryId, DifficultyLevel } from '../types';
 import { LayoutToggle } from './LayoutToggle';
-import type { LearningPath } from '../data/learningPaths';
+import { type LearningPath, learningPaths } from '../data/learningPaths';
 import { useTheme } from '../contexts/ThemeContext';
 
 interface FilterSectionProps {
@@ -31,7 +31,8 @@ export const FilterSection: React.FC<FilterSectionProps> = ({
   onDifficultyChange,
   onSearchChange,
   autoFocusSearch = true,
-  // selectedPath and onPathChange are kept for API compatibility but not used in Explore mode
+  selectedPath,
+  onPathChange,
   isJourneyMode = false,
 }) => {
   const searchInputRef = useRef<HTMLInputElement>(null);
@@ -40,6 +41,9 @@ export const FilterSection: React.FC<FilterSectionProps> = ({
 
   const [localSearchTerm, setLocalSearchTerm] = useState(searchTerm);
   const debounceRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  // Collapsible state for mobile (Requirement: Distraction-free controls)
+  const [isExpanded, setIsExpanded] = useState(false);
 
   // Sync local search term with prop
   useEffect(() => {
@@ -85,19 +89,41 @@ export const FilterSection: React.FC<FilterSectionProps> = ({
     { value: 'advanced', label: 'Advanced' },
   ];
 
-  // In Journey mode, don't render the filter section (view toggle is in header, paths in sidebar)
-  if (isJourneyMode) {
-    return null;
-  }
+
 
   return (
     <section 
-      className="backdrop-blur-sm py-3 px-4 lg:px-6 xl:px-8 2xl:px-12 shadow-sm sticky top-0 z-10 transition-theme"
+      className="backdrop-blur-sm py-1 px-4 lg:px-6 xl:px-8 2xl:px-12 shadow-sm sticky top-0 z-10 transition-theme md:py-3"
       style={{ backgroundColor: isDark ? currentTheme.colors.surface : 'rgba(255, 255, 255, 0.8)' }}
-      role="search"
-      aria-label="Filter and search stories"
     >
-      <div className="w-full space-y-4">
+      {/* Mobile Toggle Button */}
+      <button
+        onClick={() => setIsExpanded(!isExpanded)}
+        className={`md:hidden w-full flex items-center justify-between py-1.5 text-sm font-medium transition-colors ${isExpanded ? 'mb-2' : 'mb-0'}`}
+        style={{ color: isDark ? currentTheme.colors.textMuted : '#6b7280' }}
+        aria-expanded={isExpanded}
+        aria-controls="filter-controls"
+      >
+        <span className="flex items-center gap-2">
+          <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z" />
+          </svg>
+          Search & Filters
+        </span>
+        <svg 
+          className={`w-5 h-5 transition-transform duration-200 ${isExpanded ? 'rotate-180' : ''}`} 
+          fill="none" 
+          stroke="currentColor" 
+          viewBox="0 0 24 24"
+        >
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+        </svg>
+      </button>
+
+      <div 
+        id="filter-controls"
+        className={`w-full space-y-4 ${isExpanded ? 'block animate-slide-down' : 'hidden'} md:block`}
+      >
         {/* Top Row: Search Input and Layout Toggle */}
         <div className="flex items-center gap-3">
           {/* Search Input - Full width */}
@@ -143,104 +169,157 @@ export const FilterSection: React.FC<FilterSectionProps> = ({
           <LayoutToggle />
         </div>
 
-        {/* Category Filters - Hide on XL screens (shown in sidebar) */}
-        <div className="xl:hidden space-y-2">
-          <span 
-            id="category-filter-label"
-            className="text-sm font-medium block"
-            style={{ color: isDark ? currentTheme.colors.textMuted : '#4b5563' }}
-          >
-            Categories
-          </span>
-          <div 
-            className="flex flex-wrap gap-2" 
-            role="group" 
-            aria-labelledby="category-filter-label"
-          >
-            {categories.map((category) => {
-              const isActive = selectedCategory === category.id;
-              return (
-                <button
-                  key={category.id}
-                  onClick={() => onCategoryChange(category.id)}
-                  className={`
-                    px-3 py-1.5 rounded-full text-sm font-medium button-interactive focus-ring
-                    ${
-                      isActive
-                        ? `${category.color} text-white shadow-md scale-105`
-                        : ''
+        {/* Journey Mode: Learning Path Selector - Hide on XL screens (shown in sidebar) */}
+        {isJourneyMode && (
+          <div className="xl:hidden space-y-2">
+            <span 
+              id="path-filter-label"
+              className="text-sm font-medium block"
+              style={{ color: isDark ? currentTheme.colors.textMuted : '#4b5563' }}
+            >
+              Learning Paths
+            </span>
+            <div 
+              className="flex flex-wrap gap-2 pb-2 px-1" 
+              role="group" 
+              aria-labelledby="path-filter-label"
+            >
+              {learningPaths.map((path) => {
+                const isActive = selectedPath?.id === path.id;
+                return (
+                  <button
+                    key={path.id}
+                    onClick={() => onPathChange?.(path)}
+                    className={`
+                      px-3 py-1.5 rounded-full text-sm font-medium button-interactive focus-ring flex-shrink-0
+                      ${
+                        isActive
+                          ? 'bg-purple-600 text-white shadow-md scale-105'
+                          : ''
+                      }
+                    `}
+                    style={
+                      !isActive
+                        ? { 
+                            backgroundColor: isDark ? currentTheme.colors.surface : '#f3f4f6',
+                            color: isDark ? currentTheme.colors.text : '#4b5563',
+                            border: `1px solid ${isDark ? currentTheme.colors.border : '#e5e7eb'}`
+                          }
+                        : undefined
                     }
-                  `}
-                  style={
-                    !isActive
-                      ? { 
-                          backgroundColor: isDark ? currentTheme.colors.surface : '#f3f4f6',
-                          color: isDark ? currentTheme.colors.text : '#4b5563'
-                        }
-                      : undefined
-                  }
-                  aria-pressed={isActive}
-                  aria-label={`Filter by ${category.name} category`}
-                >
-                  {category.name}
-                </button>
-              );
-            })}
+                    aria-pressed={isActive}
+                    aria-label={`Select ${path.name} learning path`}
+                  >
+                    {path.name}
+                  </button>
+                );
+              })}
+            </div>
           </div>
-        </div>
+        )}
+
+        {/* Category Filters - Hide on XL screens (shown in sidebar) */}
+        {!isJourneyMode && (
+          <div className="xl:hidden space-y-2">
+            <span 
+              id="category-filter-label"
+              className="text-sm font-medium block"
+              style={{ color: isDark ? currentTheme.colors.textMuted : '#4b5563' }}
+            >
+              Categories
+            </span>
+            <div 
+              className="flex flex-wrap gap-2 pb-2 px-1" 
+              role="group" 
+              aria-labelledby="category-filter-label"
+            >
+              {categories.map((category) => {
+                const isActive = selectedCategory === category.id;
+                return (
+                  <button
+                    key={category.id}
+                    onClick={() => onCategoryChange(category.id)}
+                    className={`
+                      px-3 py-1.5 rounded-full text-sm font-medium button-interactive focus-ring flex-shrink-0
+                      ${
+                        isActive
+                          ? `${category.color} text-white shadow-md scale-105`
+                          : ''
+                      }
+                    `}
+                    style={
+                      !isActive
+                        ? { 
+                            backgroundColor: isDark ? currentTheme.colors.surface : '#f3f4f6',
+                            color: isDark ? currentTheme.colors.text : '#4b5563'
+                          }
+                        : undefined
+                    }
+                    aria-pressed={isActive}
+                    aria-label={`Filter by ${category.name} category`}
+                  >
+                    {category.name}
+                  </button>
+                );
+              })}
+            </div>
+          </div>
+        )}
 
         {/* Difficulty Filters - Hide on XL screens (shown in sidebar) */}
-        <div className="xl:hidden space-y-2">
-          <span 
-            id="difficulty-filter-label"
-            className="text-sm font-medium block"
-            style={{ color: isDark ? currentTheme.colors.textMuted : '#4b5563' }}
-          >
-            Difficulty Level
-          </span>
-          <div 
-            className="flex flex-wrap gap-2" 
-            role="group" 
-            aria-labelledby="difficulty-filter-label"
-          >
-            {difficulties.map(({ value, label }) => {
-              const isActive = selectedDifficulty === value;
-              const colorClass = {
-                all: 'bg-gray-500',
-                foundational: 'bg-green-500',
-                intermediate: 'bg-yellow-500',
-                advanced: 'bg-red-500',
-              }[value];
+        {!isJourneyMode && (
+          <div className="xl:hidden space-y-2">
+            <span 
+              id="difficulty-filter-label"
+              className="text-sm font-medium block"
+              style={{ color: isDark ? currentTheme.colors.textMuted : '#4b5563' }}
+            >
+              Difficulty Level
+            </span>
+            <div 
+              className="flex flex-wrap gap-2 pb-2 px-1" 
+              role="group" 
+              aria-labelledby="difficulty-filter-label"
+            >
+              {difficulties.map(({ value, label }) => {
+                const isActive = selectedDifficulty === value;
+                const colorClass = {
+                  all: 'bg-gray-500',
+                  foundational: 'bg-green-500',
+                  intermediate: 'bg-yellow-500',
+                  advanced: 'bg-red-500',
+                }[value];
 
-              return (
-                <button
-                  key={value}
-                  onClick={() => onDifficultyChange(value)}
-                  className={`
-                    px-3 py-1.5 rounded-full text-sm font-medium transition-all duration-200 animate-gentle-bounce animate-click focus-ring
-                    ${
-                      isActive
-                        ? `${colorClass} text-white shadow-md scale-105`
-                        : ''
+                return (
+                  <button
+                    key={value}
+                    onClick={() => onDifficultyChange(value)}
+                    className={`
+                      px-3 py-1.5 rounded-full text-sm font-medium transition-all duration-200 animate-gentle-bounce animate-click focus-ring flex-shrink-0
+                      ${
+                        isActive
+                          ? `${colorClass} text-white shadow-md scale-105`
+                          : ''
+                      }
+                    `}
+                    style={
+                      !isActive
+                        ? { 
+                            backgroundColor: isDark ? currentTheme.colors.surface : '#f3f4f6',
+                            color: isDark ? currentTheme.colors.text : '#4b5563'
+                          }
+                        : undefined
                     }
-                  `}
-                  style={
-                    !isActive
-                      ? { 
-                          backgroundColor: isDark ? currentTheme.colors.surface : '#f3f4f6',
-                          color: isDark ? currentTheme.colors.text : '#4b5563'
-                        }
-                      : undefined
-                  }
-                  aria-pressed={isActive}
-                  aria-label={`Filter by ${label} difficulty`}
-                >
-                  {label}
-                </button>
-              );
-            })}
+                    aria-pressed={isActive}
+                    aria-label={`Filter by ${label} difficulty`}
+                  >
+                    {label}
+                  </button>
+                );
+              })}
+            </div>
           </div>
-        </div>
+        )}
       </div>
     </section>
   );

@@ -82,7 +82,7 @@ export const OverviewStep: React.FC<OverviewStepProps> = ({ story, category }) =
   );
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-4 md:space-y-6">
       {/* Topic Header */}
       <div className="text-center">
         <span
@@ -91,13 +91,13 @@ export const OverviewStep: React.FC<OverviewStepProps> = ({ story, category }) =
           {category?.name || 'Unknown Category'}
         </span>
         <h2
-          className="text-2xl md:text-3xl font-bold mb-3"
+          className="text-xl md:text-3xl font-bold mb-3"
           style={{ color: isDark ? currentTheme.colors.text : '#1f2937' }}
         >
           {story.title}
         </h2>
         <p
-          className="text-lg max-w-2xl mx-auto"
+          className="text-base md:text-lg max-w-2xl mx-auto"
           style={{ color: isDark ? currentTheme.colors.textMuted : '#4b5563' }}
         >
           {story.description}

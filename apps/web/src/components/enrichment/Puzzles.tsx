@@ -47,7 +47,7 @@ const PuzzleCard: React.FC<PuzzleCardProps> = ({ puzzle }) => {
       }}
     >
       {/* Header */}
-      <div className="p-4">
+      <div className="p-3 sm:p-4">
         <div className="flex items-start justify-between gap-3 mb-3">
           <div>
             <h3 
@@ -88,7 +88,7 @@ const PuzzleCard: React.FC<PuzzleCardProps> = ({ puzzle }) => {
 
       {/* Hints section */}
       <div 
-        className="px-4 py-3"
+        className="px-3 sm:px-4 py-3"
         style={{ 
           backgroundColor: isDark ? currentTheme.colors.surfaceHover : '#f9fafb',
           borderTop: `1px solid ${isDark ? currentTheme.colors.border : '#f3f4f6'}`,
@@ -137,7 +137,7 @@ const PuzzleCard: React.FC<PuzzleCardProps> = ({ puzzle }) => {
 
       {/* Solution section */}
       <div 
-        className="px-4 py-3"
+        className="px-3 sm:px-4 py-3"
         style={{ borderTop: `1px solid ${isDark ? currentTheme.colors.border : '#f3f4f6'}` }}
       >
         {!showSolution ? (

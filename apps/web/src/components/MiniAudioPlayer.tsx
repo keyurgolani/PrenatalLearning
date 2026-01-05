@@ -8,6 +8,7 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAudio } from '../contexts/AudioContext';
+import { useReadingMode } from '../contexts/ReadingModeContext';
 
 interface MiniAudioPlayerProps {
   /**
@@ -19,7 +20,8 @@ interface MiniAudioPlayerProps {
 }
 
 export const MiniAudioPlayer: React.FC<MiniAudioPlayerProps> = ({ variant = 'floating' }) => {
-  const { audioState, togglePlayPause, seekTo, stopAudio } = useAudio();
+  const { audioState, togglePlayPause, seekTo, stopAudio, shouldShowMiniPlayer } = useAudio();
+  const { settings } = useReadingMode();
   const navigate = useNavigate();
   const [isVisible, setIsVisible] = useState(false);
   const [isExiting, setIsExiting] = useState(false);
@@ -44,8 +46,8 @@ export const MiniAudioPlayer: React.FC<MiniAudioPlayerProps> = ({ variant = 'flo
     storyTitle: '' 
   };
 
-  // Show mini player only when audio is actively playing or loading
-  const shouldShow = storyId !== null && (isPlaying || isLoading);
+  // Show mini player based on context logic (e.g. valid audio AND navigated away from source)
+  const shouldShow = shouldShowMiniPlayer();
 
   // Handle visibility based on shouldShow
   useEffect(() => {
@@ -142,6 +144,11 @@ export const MiniAudioPlayer: React.FC<MiniAudioPlayerProps> = ({ variant = 'flo
     return `${minutes}:${seconds.toString().padStart(2, '0')}`;
   };
 
+  // Don't show in reading mode
+  if (settings.readingModeEnabled) {
+    return null;
+  }
+
   if (!isVisible && !shouldShow && !isExiting) {
     return null;
   }
@@ -155,9 +162,11 @@ export const MiniAudioPlayer: React.FC<MiniAudioPlayerProps> = ({ variant = 'flo
   const containerClasses = isFloating
     ? `
       mini-audio-player
-      flex items-center gap-2 h-14 px-6 rounded-full
-      backdrop-blur-md border
-      transition-all ease-out cursor-default
+      fixed bottom-8 z-50
+      left-4 right-28 sm:left-1/2 sm:right-auto sm:-translate-x-1/2
+      flex items-center gap-2 h-14 px-4 sm:px-6 rounded-full
+      backdrop-blur-md border sm:max-w-md w-auto
+      transition-all ease-out cursor-default shadow-xl
       ${isExiting ? 'mini-player-exit' : 'mini-player-enter'}
     `
     : `
@@ -208,7 +217,7 @@ export const MiniAudioPlayer: React.FC<MiniAudioPlayerProps> = ({ variant = 'flo
         title={`Go to ${storyTitle}`}
       >
         <div className="flex items-center gap-2">
-          <span className={`${textColorMain} text-xs font-medium truncate max-w-[100px]`}>
+          <span className={`${textColorMain} text-xs font-medium truncate`}>
             🎧 {sectionName}
           </span>
           <span className={`${textColorSub} text-[10px] tabular-nums whitespace-nowrap`}>
@@ -217,10 +226,10 @@ export const MiniAudioPlayer: React.FC<MiniAudioPlayerProps> = ({ variant = 'flo
         </div>
       </button>
 
-      {/* Progress Bar */}
+      {/* Progress Bar - Hidden on mobile to reduce cramping */}
       <div
         ref={progressBarRef}
-        className={`progress-bar w-24 h-2.5 ${progressBarBg} rounded-full cursor-pointer overflow-hidden relative`}
+        className={`progress-bar hidden sm:block w-24 h-2.5 ${progressBarBg} rounded-full cursor-pointer overflow-hidden relative`}
         onClick={handleSeek}
         onKeyDown={handleKeyDown}
         role="slider"

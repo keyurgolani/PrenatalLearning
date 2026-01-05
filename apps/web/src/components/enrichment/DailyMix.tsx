@@ -4,6 +4,7 @@
  */
 
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useTheme } from '../../contexts/ThemeContext';
 import { Vocabulary } from './Vocabulary';
 import { Puzzles } from './Puzzles';
@@ -12,10 +13,6 @@ import { BrainTeasers } from './BrainTeasers';
 import { Mindfulness } from './Mindfulness';
 
 export type DailySection = 'daily' | 'words' | 'puzzles' | 'facts' | 'teasers' | 'mindfulness';
-
-interface DailyMixProps {
-  onNavigate: (section: DailySection) => void;
-}
 
 const SectionHeader: React.FC<{
   title: string;
@@ -76,9 +73,10 @@ const SectionHeader: React.FC<{
   );
 };
 
-export const DailyMix: React.FC<DailyMixProps> = ({ onNavigate }) => {
+export const DailyMix: React.FC = () => {
   const { currentTheme } = useTheme();
   const isDark = currentTheme.isDark;
+  const navigate = useNavigate();
   const [refreshKeys, setRefreshKeys] = React.useState<Record<string, number>>({});
 
   const handleRefresh = (section: string) => {
@@ -91,11 +89,11 @@ export const DailyMix: React.FC<DailyMixProps> = ({ onNavigate }) => {
   return (
     <div className="columns-1 md:columns-2 xl:columns-3 gap-6 animate-fade-in mx-auto pb-6">
       {/* Word of the Day */}
-      <section className="break-inside-avoid mb-6 rounded-2xl p-4 border transition-colors" style={{ backgroundColor: isDark ? 'rgba(168, 85, 247, 0.1)' : 'rgba(168, 85, 247, 0.05)', borderColor: isDark ? 'rgba(168, 85, 247, 0.3)' : 'rgba(168, 85, 247, 0.2)' }}>
+      <section className="break-inside-avoid mb-4 sm:mb-6 rounded-xl sm:rounded-2xl p-2 sm:p-4 border transition-colors animate-card-enter stagger-1" style={{ backgroundColor: isDark ? 'rgba(168, 85, 247, 0.1)' : 'rgba(168, 85, 247, 0.05)', borderColor: isDark ? 'rgba(168, 85, 247, 0.3)' : 'rgba(168, 85, 247, 0.2)' }}>
         <SectionHeader 
           title="Word of the Day" 
           subtitle="Expand your vocabulary"
-          onSeeMore={() => onNavigate('words')}
+          onSeeMore={() => navigate('/daily/words')}
           onRefresh={() => handleRefresh('words')}
           icon={(
             <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -103,35 +101,31 @@ export const DailyMix: React.FC<DailyMixProps> = ({ onNavigate }) => {
             </svg>
           )}
         />
-        <div className="mt-4">
-            <Vocabulary compact refreshKey={refreshKeys['words'] || 0} />
-        </div>
+        <Vocabulary compact refreshKey={refreshKeys['words'] || 0} />
       </section>
 
       {/* Mindfulness Moment */}
-      <section className="break-inside-avoid mb-6 rounded-2xl p-4 border transition-colors" style={{ backgroundColor: isDark ? 'rgba(20, 184, 166, 0.1)' : 'rgba(20, 184, 166, 0.05)', borderColor: isDark ? 'rgba(20, 184, 166, 0.3)' : 'rgba(20, 184, 166, 0.2)' }}>
+      <section className="break-inside-avoid mb-4 sm:mb-6 rounded-xl sm:rounded-2xl p-2 sm:p-4 border transition-colors animate-card-enter stagger-2" style={{ backgroundColor: isDark ? 'rgba(20, 184, 166, 0.1)' : 'rgba(20, 184, 166, 0.05)', borderColor: isDark ? 'rgba(20, 184, 166, 0.3)' : 'rgba(20, 184, 166, 0.2)' }}>
         <SectionHeader 
           title="Mindfulness Moment" 
           subtitle="Connect with your baby"
-          onSeeMore={() => onNavigate('mindfulness')}
+          onSeeMore={() => navigate('/daily/mindfulness')}
           onRefresh={() => handleRefresh('mindfulness')}
           icon={(
-            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+             <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
             </svg>
           )}
         />
-         <div className="mt-4">
-            <Mindfulness compact refreshKey={refreshKeys['mindfulness'] || 0} />
-        </div>
+        <Mindfulness compact refreshKey={refreshKeys['mindfulness'] || 0} />
       </section>
 
       {/* Brain Teaser */}
-      <section className="break-inside-avoid mb-6 rounded-2xl p-4 border transition-colors" style={{ backgroundColor: isDark ? 'rgba(249, 115, 22, 0.1)' : 'rgba(249, 115, 22, 0.05)', borderColor: isDark ? 'rgba(249, 115, 22, 0.3)' : 'rgba(249, 115, 22, 0.2)' }}>
+      <section className="break-inside-avoid mb-4 sm:mb-6 rounded-xl sm:rounded-2xl p-2 sm:p-4 border transition-colors animate-card-enter stagger-3" style={{ backgroundColor: isDark ? 'rgba(249, 115, 22, 0.1)' : 'rgba(249, 115, 22, 0.05)', borderColor: isDark ? 'rgba(249, 115, 22, 0.3)' : 'rgba(249, 115, 22, 0.2)' }}>
         <SectionHeader 
           title="Brain Teaser" 
           subtitle="Quick mental exercise"
-          onSeeMore={() => onNavigate('teasers')}
+          onSeeMore={() => navigate('/daily/teasers')}
           onRefresh={() => handleRefresh('teasers')}
           icon={(
              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -139,17 +133,15 @@ export const DailyMix: React.FC<DailyMixProps> = ({ onNavigate }) => {
              </svg>
           )}
         />
-         <div className="mt-4">
-            <BrainTeasers compact refreshKey={refreshKeys['teasers'] || 0} />
-         </div>
+        <BrainTeasers compact refreshKey={refreshKeys['teasers'] || 0} />
       </section>
 
       {/* Daily Puzzle */}
-      <section className="break-inside-avoid mb-6 rounded-2xl p-4 border transition-colors" style={{ backgroundColor: isDark ? 'rgba(34, 197, 94, 0.1)' : 'rgba(34, 197, 94, 0.05)', borderColor: isDark ? 'rgba(34, 197, 94, 0.3)' : 'rgba(34, 197, 94, 0.2)' }}>
+      <section className="break-inside-avoid mb-4 sm:mb-6 rounded-xl sm:rounded-2xl p-2 sm:p-4 border transition-colors animate-card-enter stagger-4" style={{ backgroundColor: isDark ? 'rgba(34, 197, 94, 0.1)' : 'rgba(34, 197, 94, 0.05)', borderColor: isDark ? 'rgba(34, 197, 94, 0.3)' : 'rgba(34, 197, 94, 0.2)' }}>
         <SectionHeader 
           title="Daily Puzzle" 
           subtitle="Challenge your mind"
-          onSeeMore={() => onNavigate('puzzles')}
+          onSeeMore={() => navigate('/daily/puzzles')}
           onRefresh={() => handleRefresh('puzzles')}
           icon={(
             <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -157,17 +149,15 @@ export const DailyMix: React.FC<DailyMixProps> = ({ onNavigate }) => {
             </svg>
           )}
         />
-         <div className="mt-4">
-            <Puzzles compact refreshKey={refreshKeys['puzzles'] || 0} />
-         </div>
+        <Puzzles compact refreshKey={refreshKeys['puzzles'] || 0} />
       </section>
 
       {/* Daily Facts */}
-      <section className="break-inside-avoid mb-6 rounded-2xl p-4 border transition-colors" style={{ backgroundColor: isDark ? 'rgba(59, 130, 246, 0.1)' : 'rgba(59, 130, 246, 0.05)', borderColor: isDark ? 'rgba(59, 130, 246, 0.3)' : 'rgba(59, 130, 246, 0.2)' }}>
+      <section className="break-inside-avoid mb-4 sm:mb-6 rounded-xl sm:rounded-2xl p-2 sm:p-4 border transition-colors animate-card-enter stagger-5" style={{ backgroundColor: isDark ? 'rgba(59, 130, 246, 0.1)' : 'rgba(59, 130, 246, 0.05)', borderColor: isDark ? 'rgba(59, 130, 246, 0.3)' : 'rgba(59, 130, 246, 0.2)' }}>
         <SectionHeader 
           title="Did You Know?" 
           subtitle="Daily dose of knowledge"
-          onSeeMore={() => onNavigate('facts')}
+          onSeeMore={() => navigate('/daily/facts')}
           onRefresh={() => handleRefresh('facts')}
            icon={(
             <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -175,9 +165,7 @@ export const DailyMix: React.FC<DailyMixProps> = ({ onNavigate }) => {
             </svg>
            )}
         />
-         <div className="mt-4">
-            <Facts compact refreshKey={refreshKeys['facts'] || 0} />
-         </div>
+        <Facts compact refreshKey={refreshKeys['facts'] || 0} />
       </section>
     </div>
   );

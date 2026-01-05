@@ -3,15 +3,11 @@
  * Central hub for daily learning activities: words, puzzles, facts, brain teasers, mindfulness
  */
 
-import React, { useState } from 'react';
+import React from 'react';
+import { useLocation, useNavigate, Outlet, NavLink } from 'react-router-dom';
 import { useTheme } from '../contexts/ThemeContext';
 import { Header, Footer, SecondaryHeader } from '../components';
-import { Vocabulary } from '../components/enrichment/Vocabulary';
-import { Puzzles } from '../components/enrichment/Puzzles';
-import { Facts } from '../components/enrichment/Facts';
-import { BrainTeasers } from '../components/enrichment/BrainTeasers';
-import { Mindfulness } from '../components/enrichment/Mindfulness';
-import { DailyMix, type DailySection } from '../components/enrichment/DailyMix';
+import { type DailySection } from '../components/enrichment/DailyMix';
 import { EnrichmentSidebar, type DailySectionConfig } from '../components/enrichment/EnrichmentSidebar';
 import { useCompletedStories } from '../contexts/CompletedStoriesContext';
 import { stories } from '../data/stories';
@@ -54,19 +50,28 @@ const MixIcon: React.FC<{ className?: string }> = ({ className }) => (
 );
 
 const sections: DailySectionConfig[] = [
-  { id: 'daily', label: 'Daily Mix', icon: MixIcon, description: 'Your daily plan' },
-  { id: 'words', label: 'Words', icon: BookIcon, description: 'Expand your vocabulary' },
-  { id: 'puzzles', label: 'Puzzles', icon: PuzzleIcon, description: 'Challenge your mind' },
-  { id: 'facts', label: 'Facts', icon: LightbulbIcon, description: 'Discover something new' },
-  { id: 'teasers', label: 'Brain Teasers', icon: BrainIcon, description: 'Sharpen your thinking' },
-  { id: 'mindfulness', label: 'Mindfulness', icon: HeartIcon, description: 'Connect with your baby' },
+  { id: 'daily', label: 'Daily Mix', icon: MixIcon, description: 'Your daily plan', path: 'mix' },
+  { id: 'words', label: 'Words', icon: BookIcon, description: 'Expand your vocabulary', path: 'words' },
+  { id: 'puzzles', label: 'Puzzles', icon: PuzzleIcon, description: 'Challenge your mind', path: 'puzzles' },
+  { id: 'facts', label: 'Facts', icon: LightbulbIcon, description: 'Discover something new', path: 'facts' },
+  { id: 'teasers', label: 'Brain Teasers', icon: BrainIcon, description: 'Sharpen your thinking', path: 'teasers' },
+  { id: 'mindfulness', label: 'Mindfulness', icon: HeartIcon, description: 'Connect with your baby', path: 'mindfulness' },
 ];
 
 export const DailyEnrichmentPage: React.FC = () => {
   const { currentTheme } = useTheme();
-  const [activeSection, setActiveSection] = useState<DailySection>('daily');
   const { completedStories } = useCompletedStories();
   const isDark = currentTheme.isDark;
+  const location = useLocation();
+  const navigate = useNavigate();
+
+  // Derive active section from URL
+  const activeSection = React.useMemo(() => {
+    const path = location.pathname.split('/').pop();
+    // Map path 'mix' to id 'daily' for backward compatibility of ID usage
+    const matched = sections.find(s => s.path === path);
+    return (matched ? matched.id : 'daily') as DailySection; 
+  }, [location.pathname]);
 
   const progressPercentage = Math.round(
     (completedStories.length / stories.length) * 100
@@ -74,22 +79,10 @@ export const DailyEnrichmentPage: React.FC = () => {
 
   const backgroundClass = isDark ? 'from-gray-900 via-purple-950 to-gray-900' : 'from-purple-50 via-white to-pink-50';
 
-  const renderSectionContent = () => {
-    switch (activeSection) {
-      case 'daily':
-        return <DailyMix onNavigate={setActiveSection} />;
-      case 'words':
-        return <Vocabulary />;
-      case 'puzzles':
-        return <Puzzles />;
-      case 'facts':
-        return <Facts />;
-      case 'teasers':
-        return <BrainTeasers />;
-      case 'mindfulness':
-        return <Mindfulness />;
-      default:
-        return <DailyMix onNavigate={setActiveSection} />;
+  const handleSectionChange = (id: string) => {
+    const section = sections.find(s => s.id === id);
+    if (section) {
+       navigate(section.path || 'mix');
     }
   };
 
@@ -112,67 +105,27 @@ export const DailyEnrichmentPage: React.FC = () => {
           <aside className="hidden xl:block w-72 2xl:w-80 flex-shrink-0 overflow-y-auto scrollbar-hidden">
             <EnrichmentSidebar 
               activeSection={activeSection}
-              onSectionChange={(id) => setActiveSection(id as DailySection)}
+              onSectionChange={handleSectionChange}
               sections={sections}
             />
           </aside>
 
           {/* Main Content */}
           <main className="flex-1 min-w-0 flex flex-col overflow-hidden">
-            {/* Dynamic Page Header - Fixed */}
-            <div className="flex-shrink-0 mb-6">
-              {activeSection === 'daily' ? (
-                /* Daily Mix Banner Style */
-                <div 
-                  className="p-6 rounded-2xl relative overflow-hidden shadow-sm transition-all duration-300"
-                  style={{ 
-                    background: `linear-gradient(135deg, ${currentTheme.colors.primary}, ${currentTheme.colors.secondary})`,
-                  }}
-                >
-                  <div className="relative z-10 text-white">
-                    <h1 className="text-2xl font-bold mb-2">Your Daily Mix</h1>
-                    <p className="opacity-90 max-w-lg text-sm sm:text-base">
-                      A curated selection of today's best activities to stimulate your mind and bond with your baby.
-                    </p>
-                  </div>
-                  {/* Decorative Elements */}
-                  <div className="absolute right-0 top-0 bottom-0 w-1/3 bg-white/10 skew-x-12 transform translate-x-8 mix-blend-overlay" />
-                  <div className="absolute right-20 bottom-0 top-0 w-20 bg-white/5 skew-x-12 mix-blend-overlay" />
-                </div>
-              ) : (
-                /* Standard Section Header */
-                <div>
-                  <h1 
-                    className="text-2xl font-bold mb-2 flex items-center gap-3"
-                    style={{ color: currentTheme.colors.text }}
-                  >
-                    {sections.find(s => s.id === activeSection)?.label}
-                  </h1>
-                  <p 
-                    className="text-sm"
-                    style={{ color: isDark ? currentTheme.colors.textMuted : '#6b7280' }}
-                  >
-                    {sections.find(s => s.id === activeSection)?.description}
-                  </p>
-                </div>
-              )}
-            </div>
-
-            {/* Mobile/Tablet Tab Navigation (Hidden on XL+) - Fixed */}
+            {/* Mobile/Tablet Tab Navigation (Hidden on XL+) */}
             <div className="xl:hidden flex gap-2 mb-6 overflow-x-auto pb-2 scrollbar-hidden flex-shrink-0">
               {sections.map((section) => {
-                const isActive = activeSection === section.id;
                 const IconComponent = section.icon;
                 
                 return (
-                  <button
+                  <NavLink
                     key={section.id}
-                    onClick={() => setActiveSection(section.id as DailySection)}
-                    className={`flex items-center gap-2 px-4 py-2.5 rounded-xl text-sm font-medium 
+                    to={section.path || 'mix'}
+                    className={({ isActive }) => `flex items-center gap-2 px-4 py-2.5 rounded-xl text-sm font-medium 
                               transition-all whitespace-nowrap focus-ring ${
                                 isActive ? 'shadow-md' : ''
                               }`}
-                    style={{
+                    style={({ isActive }) => ({
                       backgroundColor: isActive
                         ? currentTheme.colors.primary
                         : isDark
@@ -184,21 +137,58 @@ export const DailyEnrichmentPage: React.FC = () => {
                       border: isActive 
                         ? 'none' 
                         : `1px solid ${isDark ? currentTheme.colors.border : '#e5e7eb'}`,
-                    }}
-                    aria-pressed={isActive}
+                    })}
                     aria-label={`${section.label}: ${section.description}`}
                   >
                     <IconComponent className="w-4 h-4" />
                     <span className="hidden sm:inline">{section.label}</span>
-                  </button>
+                  </NavLink>
                 );
               })}
             </div>
 
             {/* Scrollable Content Area */}
             <div className="flex-1 overflow-y-auto scrollbar-hidden content-scalable relative">
-              <div className="animate-fade-in pb-8">
-                {renderSectionContent()}
+              
+              {/* Dynamic Page Header - Now inside scrollable area */}
+              <div className="flex-shrink-0 mb-6 px-1 pt-4">
+                {/* Unified Header Style for ALL sections */}
+                {(() => {
+                   const currentSection = sections.find(s => s.id === activeSection);
+                   const Icon = currentSection?.icon;
+                   
+                   return currentSection ? (
+                     <div>
+                       <h1 
+                         className="text-2xl font-bold mb-2 flex items-center gap-3"
+                         style={{ color: currentTheme.colors.text }}
+                       >
+                         <span 
+                          className="p-2 rounded-lg flex items-center justify-center shadow-sm"
+                          style={{ 
+                            backgroundColor: isDark ? `${currentTheme.colors.primary}20` : '#f3f4f6', // Consistent light background
+                            color: currentTheme.colors.primary
+                          }}
+                         >
+                           {Icon && <Icon className="w-6 h-6" />}
+                         </span>
+                         {currentSection.label}
+                       </h1>
+                       <p 
+                         className="text-sm ml-1"
+                         style={{ color: isDark ? currentTheme.colors.textMuted : '#6b7280' }}
+                       >
+                         {currentSection.id === 'daily' 
+                           ? "A curated selection of today's best activities to stimulate your mind and bond with your baby."
+                           : currentSection.description}
+                       </p>
+                     </div>
+                   ) : null;
+                })()}
+              </div>
+
+              <div className="animate-fade-in pb-28">
+                <Outlet />
               </div>
               
               <div className="xl:hidden mt-8">

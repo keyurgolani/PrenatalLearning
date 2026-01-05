@@ -184,6 +184,10 @@ export const JournalModal: React.FC<JournalModalProps> = ({ className = '' }) =>
   const [pendingVoiceNote, setPendingVoiceNote] = useState<{ blob: Blob; duration: number } | null>(null);
   const [entryKickCount, setEntryKickCount] = useState(0);
 
+  // Mobile UI logic
+  const [showMobileCalendar, setShowMobileCalendar] = useState(false);
+  const [showMobileKickGraph, setShowMobileKickGraph] = useState(false);
+
   // Autocomplete state
   const [showSuggestions, setShowSuggestions] = useState(false);
   const [suggestionFilter, setSuggestionFilter] = useState('');
@@ -291,13 +295,20 @@ export const JournalModal: React.FC<JournalModalProps> = ({ className = '' }) =>
     setEditingEntryId(null);
     setEditContent('');
     setEditMood(undefined);
-    setShowNewEntryForm(selectedDateEntries.length === 0);
+    // Mobile: Reset to closed when date/entries change. Desktop: Open if empty.
+    const isMobile = typeof window !== 'undefined' ? window.innerWidth < 768 : false;
+    if (isMobile) {
+       setShowNewEntryForm(false);
+    } else {
+       setShowNewEntryForm(selectedDateEntries.length === 0);
+    }
     setActiveSuggestionField(null);
   }, [selectedDate, selectedDateEntries.length]);
 
   useEffect(() => {
     if (isOpen) {
-      setShowNewEntryForm(true);
+      // Default to open on desktop, closed on mobile
+      setShowNewEntryForm(typeof window !== 'undefined' && window.innerWidth >= 768);
       setEditingEntryId(null);
       setShowVoiceRecorder(false);
     }
@@ -768,7 +779,7 @@ export const JournalModal: React.FC<JournalModalProps> = ({ className = '' }) =>
         {/* Close button (Moved to top-right) */}
         <button
           onClick={handleClose}
-          className="absolute top-6 right-6 z-50 p-2.5 rounded-full transition-all shadow-sm hover:shadow-md"
+          className="hidden md:block absolute top-6 right-6 z-50 p-2.5 rounded-full transition-all shadow-sm hover:shadow-md"
           style={{
             backgroundColor: currentTheme.colors.surface,
             color: currentTheme.colors.textMuted,
@@ -789,7 +800,7 @@ export const JournalModal: React.FC<JournalModalProps> = ({ className = '' }) =>
         </button>
         {/* Left Panel - Calendar */}
         <div 
-          className="md:w-96 lg:w-96 p-6 flex flex-col flex-shrink-0 relative overflow-hidden"
+          className="hidden md:flex md:w-96 lg:w-96 p-6 flex-col flex-shrink-0 relative overflow-hidden"
           style={{ 
             backgroundColor: isDark ? currentTheme.colors.surface : 'rgba(249, 250, 251, 0.8)',
             borderRightWidth: '1px',
@@ -990,6 +1001,91 @@ export const JournalModal: React.FC<JournalModalProps> = ({ className = '' }) =>
           </div>
         </div>
 
+
+        {/* Mobile Header & Controls (Visible only on mobile) */}
+        <div className="md:hidden flex-shrink-0 px-4 py-3 flex items-center justify-between border-b" 
+             style={{ 
+               backgroundColor: currentTheme.colors.surface,
+               borderColor: currentTheme.colors.border 
+             }}>
+          <div className="flex items-center gap-2">
+            {/* Today's Date / Calendar Toggle */}
+            <button
+              onClick={() => {
+                setShowMobileCalendar(!showMobileCalendar);
+                setShowMobileKickGraph(false);
+              }}
+              className="flex items-center gap-2 px-3 py-1.5 rounded-lg transition-colors border"
+              style={{
+                backgroundColor: showMobileCalendar ? `${currentTheme.colors.primary}15` : 'transparent',
+                borderColor: showMobileCalendar ? currentTheme.colors.primary : currentTheme.colors.border,
+                color: showMobileCalendar ? currentTheme.colors.primary : currentTheme.colors.text
+              }}
+            >
+              <span className="font-bold text-sm">{selectedDate.getDate()}</span>
+              <span className="text-xs font-medium opacity-80">{selectedDate.toLocaleDateString('en-US', { month: 'short' })}</span>
+              <ChevronRight className={`w-3 h-3 transition-transform ${showMobileCalendar ? 'rotate-90' : ''}`} />
+            </button>
+
+            {/* Kick Graph Toggle */}
+            {isAuthenticated && (
+              <button
+                onClick={() => {
+                  setShowMobileKickGraph(!showMobileKickGraph);
+                  setShowMobileCalendar(false);
+                }}
+                className="flex items-center gap-2 px-3 py-1.5 rounded-lg transition-colors border"
+                style={{
+                  backgroundColor: showMobileKickGraph ? 'rgba(236, 72, 153, 0.1)' : 'transparent',
+                  borderColor: showMobileKickGraph ? '#ec4899' : currentTheme.colors.border,
+                  color: showMobileKickGraph ? '#ec4899' : currentTheme.colors.textMuted
+                }}
+              >
+                <BabyKickIcon className="w-4 h-4" />
+                {(entryKickCount > 0 || editKickCount > 0) && (
+                   <span className="text-xs font-bold">{Math.max(entryKickCount, editKickCount)}</span>
+                )}
+              </button>
+            )}
+          </div>
+
+          <button
+            onClick={handleClose}
+            className="p-3 rounded-full transition-colors"
+            style={{ color: currentTheme.colors.textMuted }}
+          >
+            <X className="w-6 h-6" />
+          </button>
+        </div>
+
+        {/* Mobile Calendar Overlay */}
+        {showMobileCalendar && (
+           <div className="md:hidden absolute top-[60px] left-0 right-0 bottom-0 z-50 p-4 overflow-y-auto animate-slide-down shadow-xl"
+                style={{ backgroundColor: currentTheme.colors.surface }}>
+               <div className="flex items-center justify-between mb-4">
+                  <button onClick={handlePrevMonth} className="p-2" style={{ color: currentTheme.colors.text }}><ChevronLeft className="w-5 h-5"/></button>
+                  <span className="font-bold" style={{ color: currentTheme.colors.text }}>{MONTH_NAMES[viewMonth]} {viewYear}</span>
+                  <button onClick={handleNextMonth} className="p-2" style={{ color: currentTheme.colors.text }}><ChevronRight className="w-5 h-5"/></button>
+               </div>
+               <div className="grid grid-cols-7 gap-1 mb-2">
+                  {DAY_NAMES.map(d => <div key={d} className="text-center text-xs font-bold" style={{ color: currentTheme.colors.textMuted }}>{d.charAt(0)}</div>)}
+               </div>
+               <div className="grid grid-cols-7 gap-1">
+                  {renderCalendar()}
+               </div>
+           </div>
+        )}
+
+        {/* Mobile Kick Graph Overlay */}
+        {showMobileKickGraph && isAuthenticated && (
+            <div className="md:hidden absolute top-[60px] left-0 right-0 z-50 p-4 animate-slide-down shadow-lg border-b"
+                 style={{ backgroundColor: currentTheme.colors.surface, borderColor: currentTheme.colors.border }}>
+               <h4 className="text-sm font-bold uppercase tracking-wider mb-3 flex items-center gap-2" style={{ color: '#ec4899' }}>
+                 <BabyKickIcon className="w-4 h-4" /> Activity History
+               </h4>
+               <KickGraph days={7} height={200} showMilestones={false} chartType="bar" className="" />
+            </div>
+        )}
 
         {/* Right Panel - Entries */}
         <div 
@@ -1865,7 +1961,7 @@ export const JournalModal: React.FC<JournalModalProps> = ({ className = '' }) =>
                           </span>
                         </div>
                         
-                        <div className="flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
+                        <div className="flex items-center gap-1 transition-opacity">
                           <button
                             onClick={() => handleStartEdit(entry)}
                             className="p-2 rounded-lg transition-colors"
@@ -2003,7 +2099,7 @@ export const JournalModal: React.FC<JournalModalProps> = ({ className = '' }) =>
           {!showNewEntryForm && !editingEntryId && (
              <button
                 onClick={handleShowNewEntryForm}
-                className="absolute bottom-8 right-8 z-40 flex items-center gap-2 pl-4 pr-6 py-4 text-white rounded-full font-bold shadow-2xl hover:-translate-y-1 transition-all group animate-scale-in"
+                className="absolute bottom-4 sm:bottom-8 right-4 sm:right-8 z-40 flex items-center gap-1.5 sm:gap-2 pl-3 sm:pl-4 pr-4 sm:pr-6 py-2.5 sm:py-4 text-white rounded-full font-bold shadow-2xl hover:-translate-y-1 transition-all group animate-scale-in"
                 style={{
                   backgroundColor: isDark ? currentTheme.colors.primary : '#111827',
                   boxShadow: `0 10px 30px ${currentTheme.colors.primary}40`
@@ -2011,10 +2107,10 @@ export const JournalModal: React.FC<JournalModalProps> = ({ className = '' }) =>
                 onMouseEnter={(e) => { e.currentTarget.style.backgroundColor = currentTheme.colors.primary; }}
                 onMouseLeave={(e) => { e.currentTarget.style.backgroundColor = isDark ? currentTheme.colors.primary : '#111827'; }}
               >
-                <div className="w-8 h-8 rounded-full bg-white/20 flex items-center justify-center group-hover:scale-110 transition-transform">
-                  <Plus className="w-5 h-5 text-white" />
+                <div className="w-6 h-6 sm:w-8 sm:h-8 rounded-full bg-white/20 flex items-center justify-center group-hover:scale-110 transition-transform">
+                  <Plus className="w-4 h-4 sm:w-5 sm:h-5 text-white" />
                 </div>
-                <span>New Entry</span>
+                <span className="text-sm sm:text-base">New Entry</span>
               </button>
           )}
         </div>

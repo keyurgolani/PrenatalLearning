@@ -1,4 +1,5 @@
 import React, { useState, useCallback, useEffect, useRef } from 'react';
+import { createPortal } from 'react-dom';
 import { useTheme } from '../contexts/ThemeContext';
 import { useAuth } from '../contexts/AuthContext';
 import { useTrimester } from '../contexts/TrimesterContext';
@@ -134,10 +135,10 @@ const CalendarPopup: React.FC<CalendarPopupProps> = ({ selectedDate, onSelectDat
     );
   }
 
-  return (
+  const DesktopPopup = (
     <div
       ref={popupRef}
-      className="absolute left-0 top-full mt-2 rounded-xl shadow-xl border overflow-hidden animate-pop-in"
+      className={`hidden sm:block absolute sm:left-0 sm:top-full mt-2 sm:translate-x-0 rounded-xl shadow-xl border overflow-hidden animate-pop-in`}
       style={{
         backgroundColor: currentTheme.isDark ? currentTheme.colors.surface : '#ffffff',
         zIndex: 9999,
@@ -215,6 +216,107 @@ const CalendarPopup: React.FC<CalendarPopupProps> = ({ selectedDate, onSelectDat
       )}
     </div>
   );
+
+  return (
+    <>
+      <div className="sm:hidden">
+        {createPortal(
+          <div className="relative z-[9999]">
+            {/* Mobile Backdrop */}
+            <div 
+              className="fixed inset-0 bg-black/20 backdrop-blur-[1px]" 
+              onClick={onClose}
+            />
+            
+            <div
+              ref={popupRef}
+              onClick={(e) => e.stopPropagation()}
+              onMouseDown={(e) => e.stopPropagation()}
+              className="fixed left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 rounded-xl shadow-xl border overflow-hidden animate-pop-in"
+              style={{
+                backgroundColor: currentTheme.isDark ? currentTheme.colors.surface : '#ffffff',
+                zIndex: 9999,
+                borderColor: currentTheme.isDark ? currentTheme.colors.border : '#e5e7eb',
+                minWidth: '320px',
+              }}
+            >
+              {/* Header */}
+              <div 
+                className="flex items-center justify-between px-4 py-3 border-b"
+                style={{ 
+                  background: `linear-gradient(135deg, ${currentTheme.colors.primary}, ${currentTheme.colors.secondary})`,
+                  borderColor: currentTheme.isDark ? currentTheme.colors.border : '#f3f4f6',
+                }}
+              >
+                <button
+                  onClick={prevMonth}
+                  className="p-1.5 rounded-full hover:bg-white/20 transition-colors text-white"
+                  aria-label="Previous month"
+                >
+                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+                  </svg>
+                </button>
+                <span className="text-base font-semibold text-white">{monthName}</span>
+                <button
+                  onClick={nextMonth}
+                  className="p-1.5 rounded-full hover:bg-white/20 transition-colors text-white"
+                  aria-label="Next month"
+                >
+                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                  </svg>
+                </button>
+              </div>
+
+              {/* Day names */}
+              <div className="grid grid-cols-7 gap-1 px-3 pt-3">
+                {['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa'].map(d => (
+                  <div 
+                    key={d} 
+                    className="w-10 h-8 flex items-center justify-center text-xs font-semibold uppercase"
+                    style={{ color: currentTheme.isDark ? currentTheme.colors.textMuted : '#9ca3af' }}
+                  >
+                    {d}
+                  </div>
+                ))}
+              </div>
+
+              {/* Days grid */}
+              <div className="grid grid-cols-7 gap-1 p-3">
+                {days}
+              </div>
+
+              {/* Footer with clear button */}
+              {selectedDate && (
+                <div 
+                  className="px-3 py-3 border-t"
+                  style={{ borderColor: currentTheme.isDark ? currentTheme.colors.border : '#f3f4f6' }}
+                >
+                  <button
+                    onClick={() => { onClear(); onClose(); }}
+                    className="w-full flex items-center justify-center gap-2 px-4 py-2 rounded-lg text-sm font-medium transition-colors hover:opacity-90"
+                    style={{
+                      backgroundColor: currentTheme.isDark ? 'rgba(239, 68, 68, 0.2)' : '#fef2f2',
+                      color: '#ef4444',
+                    }}
+                  >
+                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                    </svg>
+                    Clear Due Date
+                  </button>
+                </div>
+              )}
+            </div>
+          </div>,
+          document.body
+        )}
+      </div>
+
+      {DesktopPopup}
+    </>
+  );
 };
 
 /**
@@ -255,7 +357,7 @@ const DueDateControl: React.FC = () => {
         <button
           ref={buttonRef}
           onClick={() => setShowCalendar(!showCalendar)}
-          className="flex items-center gap-2 px-3 py-1.5 rounded-lg border transition-all hover:shadow-md"
+          className="flex items-center gap-1.5 sm:gap-2 px-2 sm:px-3 py-1.5 rounded-lg border transition-all hover:shadow-md"
           style={{
             backgroundColor: colors.bg,
             borderColor: colors.border,
@@ -264,13 +366,13 @@ const DueDateControl: React.FC = () => {
           <svg className="w-4 h-4" style={{ color: colors.text }} fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
           </svg>
-          <span className="text-sm font-semibold" style={{ color: colors.text }}>
+          <span className="text-sm font-semibold hidden sm:inline" style={{ color: colors.text }}>
             {currentTrimester === 'first' ? '1st' : currentTrimester === 'second' ? '2nd' : '3rd'} Tri
           </span>
           <span className="text-sm opacity-80" style={{ color: colors.text }}>
             Wk {currentWeek}
           </span>
-          <span className="text-xs px-1.5 py-0.5 rounded-full" style={{ backgroundColor: `${colors.text}20`, color: colors.text }}>
+          <span className="text-xs px-1.5 py-0.5 rounded-full hidden md:inline-block" style={{ backgroundColor: `${colors.text}20`, color: colors.text }}>
             {formatDate(dueDate)}
           </span>
         </button>
@@ -292,7 +394,7 @@ const DueDateControl: React.FC = () => {
       <button
         ref={buttonRef}
         onClick={() => setShowCalendar(!showCalendar)}
-        className="flex items-center gap-2 px-3 py-1.5 rounded-lg border transition-all hover:shadow-md"
+        className="flex items-center gap-2 px-2 sm:px-3 py-1.5 rounded-lg border transition-all hover:shadow-md"
         style={{ 
           backgroundColor: currentTheme.isDark ? currentTheme.colors.surface : `${currentTheme.colors.primary}10`,
           borderColor: currentTheme.isDark ? currentTheme.colors.border : `${currentTheme.colors.primary}25`,
@@ -302,7 +404,8 @@ const DueDateControl: React.FC = () => {
         <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
         </svg>
-        <span className="text-sm font-medium">Set Due Date</span>
+        <span className="text-sm font-medium hidden sm:inline">Set Due Date</span>
+        <span className="text-sm font-medium sm:hidden">Set</span>
       </button>
       {showCalendar && (
         <CalendarPopup
@@ -417,82 +520,110 @@ const KickButton: React.FC = () => {
   }, [isAuthenticated]);
 
   return (
-    <div className="relative">
-      <button
-        ref={buttonRef}
-        onClick={handleKick}
-        disabled={isLogging}
-        className={`flex items-center gap-1.5 px-4 py-1.5 rounded-full font-medium button-interactive disabled:opacity-70 ${isKicked ? 'animate-kick-bounce' : ''}`}
+    <div className="relative flex items-center">
+      {/* Unified Kick Button Container */}
+      <div 
+        className={`flex items-center rounded-full shadow-sm transition-transform active:scale-95 ${isKicked ? 'animate-kick-bounce' : ''}`}
         style={{
           background: `linear-gradient(135deg, ${currentTheme.colors.primary}, #ec4899)`,
           color: '#ffffff',
         }}
-        title="Log a kick"
       >
-        <BabyKickIcon 
-          className={`w-4 h-4 ${isKicked ? 'animate-bounce' : ''}`}
-        />
-        <span className="text-sm">Kick</span>
-        {displayKicks > 0 && (
-          <button
-            onClick={handleCountClick}
-            className={`ml-0.5 px-1.5 py-0.5 text-sm font-bold bg-white/20 rounded-full transition-all ${isAuthenticated ? 'hover:bg-white/30 cursor-pointer' : ''}`}
-            title={isAuthenticated ? "View kick activity" : "Today's kicks"}
-          >
-            {displayKicks}
-          </button>
+        {/* Main Kick Action */}
+        <button
+          ref={buttonRef}
+          onClick={handleKick}
+          disabled={isLogging}
+          className="flex items-center gap-1.5 px-3 py-1.5 font-medium disabled:opacity-70 hover:bg-black/5"
+          title="Log a kick"
+        >
+          <BabyKickIcon 
+            className={`w-4 h-4 ${isKicked ? 'animate-bounce' : ''}`}
+          />
+          <span className="text-sm hidden sm:inline">Kick</span>
+          {/* Show count inside main button for guest/unauthenticated users */}
+          {displayKicks > 0 && !isAuthenticated && (
+            <span className="ml-0.5 px-1.5 py-0.5 text-sm font-bold bg-white/20 rounded-full">
+              {displayKicks}
+            </span>
+          )}
+        </button>
+
+        {/* Separator & Graph Trigger for Authenticated Users */}
+        {displayKicks > 0 && isAuthenticated && (
+          <>
+            <div className="w-px h-4 bg-white/20" />
+            <button
+              onClick={handleCountClick}
+              className="px-3 py-1.5 text-sm font-bold hover:bg-black/5 transition-colors"
+              title="View kick activity"
+              aria-label="View kick activity graph"
+            >
+              {displayKicks}
+            </button>
+          </>
         )}
-      </button>
+      </div>
 
       {/* Kick Graph Popup - only for authenticated users */}
-      {showGraph && isAuthenticated && (
-        <div
-          ref={graphRef}
-          className="absolute top-full mt-2 right-0 z-50 w-[400px] animate-pop-in"
-          style={{
-            filter: 'drop-shadow(0 10px 40px rgba(0,0,0,0.15))',
-          }}
-        >
+      {showGraph && isAuthenticated && createPortal(
+        <div className="fixed inset-0 z-[9999] flex items-center justify-center">
+          {/* Backdrop */}
           <div 
-            className="rounded-2xl overflow-hidden border"
+            className="absolute inset-0 bg-black/20 backdrop-blur-[1px]"
+            onClick={() => setShowGraph(false)}
+          />
+          {/* Modal */}
+          <div
+            ref={graphRef}
+            className="relative w-[90%] max-w-[400px] animate-pop-in"
             style={{
-              backgroundColor: currentTheme.isDark ? currentTheme.colors.surface : '#ffffff',
-              borderColor: currentTheme.isDark ? currentTheme.colors.border : '#f3e8ff',
+              filter: 'drop-shadow(0 10px 40px rgba(0,0,0,0.15))',
             }}
           >
-            {/* Header */}
-            <div className="px-4 py-3 border-b flex items-center justify-between"
+            <div 
+              className="rounded-2xl overflow-hidden border"
               style={{
-                background: `linear-gradient(135deg, ${currentTheme.colors.primary}15, #ec489915)`,
+                backgroundColor: currentTheme.isDark ? currentTheme.colors.surface : '#ffffff',
                 borderColor: currentTheme.isDark ? currentTheme.colors.border : '#f3e8ff',
               }}
             >
-              <div className="flex items-center gap-2">
-                <BabyKickIcon className="w-5 h-5 text-pink-500" />
-                <span className="font-semibold text-gray-800">Kick Activity</span>
-              </div>
-              <button
-                onClick={() => setShowGraph(false)}
-                className="p-1.5 rounded-lg hover:bg-gray-100 transition-colors"
-                aria-label="Close"
+              {/* Header */}
+              <div className="px-4 py-3 border-b flex items-center justify-between"
+                style={{
+                  background: `linear-gradient(135deg, ${currentTheme.colors.primary}15, #ec489915)`,
+                  borderColor: currentTheme.isDark ? currentTheme.colors.border : '#f3e8ff',
+                }}
               >
-                <svg className="w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-                </svg>
-              </button>
-            </div>
-            
-            {/* Graph */}
-            <div className="p-2">
-              <KickGraph 
-                days={7} 
-                height={200} 
-                showMilestones={true}
-                chartType="bar"
-              />
+                <div className="flex items-center gap-2">
+                  <BabyKickIcon className="w-5 h-5 text-pink-500" />
+                  <span className="font-semibold" style={{ color: currentTheme.isDark ? currentTheme.colors.text : '#1f2937' }}>Kick Activity</span>
+                </div>
+                <button
+                  onClick={() => setShowGraph(false)}
+                  className="p-1.5 rounded-lg hover:bg-gray-100 transition-colors"
+                  style={{ color: currentTheme.isDark ? currentTheme.colors.textMuted : '#9ca3af' }}
+                  aria-label="Close"
+                >
+                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                  </svg>
+                </button>
+              </div>
+              
+              {/* Graph */}
+              <div className="p-2">
+                <KickGraph 
+                  days={7} 
+                  height={200} 
+                  showMilestones={true}
+                  chartType="bar"
+                />
+              </div>
             </div>
           </div>
-        </div>
+        </div>,
+        document.body
       )}
     </div>
   );
@@ -509,7 +640,7 @@ const ProgressIndicator: React.FC<{ completed: number; total: number; percentage
   return (
     <div className="flex items-center gap-2">
       <div 
-        className="w-16 h-2 rounded-full overflow-hidden"
+        className="w-16 h-2 rounded-full overflow-hidden hidden sm:block"
         style={{ backgroundColor: currentTheme.isDark ? currentTheme.colors.border : '#e5e7eb' }}
       >
         <div
@@ -559,26 +690,28 @@ export const SecondaryHeader: React.FC<SecondaryHeaderProps> = ({
       className="relative z-40 border-b transition-all"
       style={bgStyle}
     >
-      <div className="px-4 lg:px-6 xl:px-8 2xl:px-12 py-3">
-        <div className="flex items-center justify-between gap-3">
+      <div className="px-2 sm:px-4 lg:px-6 xl:px-8 2xl:px-12 py-2 sm:py-3">
+        <div className="flex items-center justify-between gap-2 sm:gap-3 overflow-x-auto scrollbar-hidden">
           {/* Left: Due Date */}
           <div className="flex-shrink-0">
             <DueDateControl />
           </div>
 
           {/* Center: Stats (Streak, Kick, Progress) */}
-          <div className="flex items-center gap-4">
-            <StreakBadge compact />
+          <div className="flex items-center gap-2 sm:gap-4 flex-shrink-0">
+            <div className="hidden xs:block">
+              <StreakBadge compact />
+            </div>
             
             <div 
-              className="w-px h-6"
+              className="w-px h-6 hidden sm:block"
               style={{ backgroundColor: currentTheme.isDark ? currentTheme.colors.border : `${currentTheme.colors.primary}20` }}
             />
             
             <KickButton />
             
             <div 
-              className="w-px h-6"
+              className="w-px h-6 hidden sm:block"
               style={{ backgroundColor: currentTheme.isDark ? currentTheme.colors.border : `${currentTheme.colors.primary}20` }}
             />
             

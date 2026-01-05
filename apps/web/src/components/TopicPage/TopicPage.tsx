@@ -21,6 +21,7 @@ import { useAudio } from '../../contexts/AudioContext';
 import { StepTransition } from '../StepTransition';
 import { ErrorBoundary } from '../ErrorBoundary';
 import { ScrollIndicators } from '../ScrollIndicators';
+import { useSwipe } from '../../hooks/useSwipe';
 
 /**
  * TopicPage component - Unified guided learning experience
@@ -207,6 +208,27 @@ const TopicPageInner: React.FC<TopicPageInnerProps> = ({
     onSectionChange(step);
   }, [story.id, setCurrentStep, onSectionChange]);
 
+  // Swipe handlers for gesture navigation
+  const handleSwipeLeft = useCallback(() => {
+    if (isLastStep) {
+      handleCompleteTopic();
+    } else {
+      handleContinue();
+    }
+  }, [isLastStep, handleCompleteTopic, handleContinue]);
+
+  const handleSwipeRight = useCallback(() => {
+    if (currentStepIndex > 0) {
+      const prevStep = LEARNING_STEPS[currentStepIndex - 1];
+      handleStepClick(prevStep);
+    }
+  }, [currentStepIndex, handleStepClick]);
+
+  const swipeHandlers = useSwipe({
+    onSwipeLeft: handleSwipeLeft,
+    onSwipeRight: handleSwipeRight,
+  });
+
   // Render current step content
   const renderStepContent = () => {
     switch (currentStep) {
@@ -244,12 +266,17 @@ const TopicPageInner: React.FC<TopicPageInnerProps> = ({
       {/* Main content container with responsive max-width */}
       {/* Requirements 6.1: max-width 1400px for viewports > 1280px */}
       {/* Requirements 6.3: single-column for viewports < 1024px */}
-      <div className="flex-1 px-4 lg:px-6 xl:px-8 2xl:px-12 py-4 w-full flex flex-col min-h-0 transition-all duration-300">
-        {/* Back button, focus mode toggle, and completion badge in content area */}
-        <div className="flex items-center justify-between mb-4 animate-fade-in">
+      <div 
+        className="flex-1 px-4 lg:px-6 xl:px-8 2xl:px-12 py-4 w-full flex flex-col min-h-0 transition-all duration-300 pb-4 md:pb-4"
+        {...swipeHandlers}
+      >
+        {/* Mobile Header: Back, Stepper (Center), Reading Mode (Right) */}
+        {/* Requirements 7.1, 8.1 - Unified header with navigation and display controls */}
+        <div className="flex items-center justify-between mb-4 animate-fade-in gap-2">
+          {/* Left: Back Button */}
           <button
             onClick={onClose}
-            className="flex items-center gap-2 px-3 py-2 rounded-lg button-interactive backdrop-blur-sm animate-gentle-bounce"
+            className="flex items-center gap-2 px-3 py-2 rounded-lg button-interactive backdrop-blur-sm animate-gentle-bounce flex-shrink-0"
             style={{ 
               backgroundColor: currentTheme.isDark ? `${currentTheme.colors.surface}cc` : 'rgba(255,255,255,0.8)',
               color: currentTheme.isDark ? currentTheme.colors.text : '#4b5563'
@@ -259,17 +286,29 @@ const TopicPageInner: React.FC<TopicPageInnerProps> = ({
             <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
             </svg>
-            <span className="font-medium">Back</span>
+            <span className="font-medium hidden sm:inline">Back</span>
           </button>
 
-          <div className="flex items-center gap-3">
+          {/* Center: Progress Stepper (Mobile Only) */}
+          <div className="flex-1 md:hidden flex justify-center min-w-0">
+            <ProgressStepper
+              currentStep={currentStep}
+              completedSteps={completedSteps}
+              onStepClick={handleStepClick}
+              sectionProgress={sectionProgress}
+              mobileCompact={true}
+            />
+          </div>
+
+          {/* Right: Reading Mode & Badge */}
+          <div className="flex items-center gap-2 sm:gap-3 flex-shrink-0">
             {/* Reading Mode Toggle - Requirements 8.1 */}
             <ReadingModeToggle />
 
-            {/* Completion Badge */}
+            {/* Completion Badge (Hidden on very small screens to save space if needed, or kept) */}
             {isCompleted && (
               <span 
-                className="inline-flex items-center px-3 py-1.5 rounded-full text-sm font-medium animate-badge-pop"
+                className="hidden sm:inline-flex items-center px-3 py-1.5 rounded-full text-sm font-medium animate-badge-pop"
                 style={currentTheme.isDark 
                   ? { backgroundColor: 'rgba(74, 222, 128, 0.2)', color: '#4ADE80' }
                   : { backgroundColor: '#dcfce7', color: '#15803d' }
@@ -369,9 +408,9 @@ const TopicPageInner: React.FC<TopicPageInnerProps> = ({
                 </div>
               ) : (
                 <>
-                  {/* Progress Stepper - shown inline on smaller screens, hidden on xl */}
+                  {/* Progress Stepper - shown inline on medium screens, hidden on mobile (in header) and xl (sidebar) */}
                   <div 
-                    className="xl:hidden px-6 py-4"
+                    className="hidden md:block xl:hidden px-6 py-4"
                     style={{ 
                       backgroundColor: currentTheme.isDark ? currentTheme.colors.surfaceHover : '#f9fafb',
                       borderBottom: `1px solid ${currentTheme.isDark ? currentTheme.colors.border : '#e5e7eb'}`
@@ -392,6 +431,8 @@ const TopicPageInner: React.FC<TopicPageInnerProps> = ({
                     isEnabled={readingSettings.readingModeEnabled}
                     onExit={exitReadingMode}
                     scrollContainerRef={readingModeScrollRef}
+                    onSwipeLeft={handleSwipeLeft}
+                    onSwipeRight={handleSwipeRight}
                   >
                     <div className="relative w-full h-full flex flex-col min-h-0">
                       {!readingSettings.readingModeEnabled && <ScrollIndicators containerRef={contentContainerRef} />}
@@ -424,9 +465,49 @@ const TopicPageInner: React.FC<TopicPageInnerProps> = ({
 
                   </ReadingMode>
 
-                  {/* Footer Actions - Requirements 7.4, 7.5 */}
+                  {/* Mobile Floating Navigation - Requirements: Floating edge buttons for max space */}
+                  <div className="md:hidden pointer-events-none fixed inset-0 z-30 flex flex-col justify-center">
+                    {/* Previous Button - Float Left Center */}
+                    {currentStepIndex > 0 && (
+                      <button
+                        onClick={() => {
+                          const prevStep = LEARNING_STEPS[currentStepIndex - 1];
+                          handleStepClick(prevStep);
+                        }}
+                        className="pointer-events-auto absolute left-2 w-10 h-10 rounded-full flex items-center justify-center bg-white/40 dark:bg-gray-800/40 shadow-sm border border-gray-200/50 dark:border-gray-700/50 backdrop-blur-[2px] text-gray-600 dark:text-gray-300 transition-all hover:bg-white/90 dark:hover:bg-gray-800/90 active:scale-95"
+                        aria-label="Previous step"
+                      >
+                        <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+                        </svg>
+                      </button>
+                    )}
+
+                    {/* Next/Complete Button - Float Right Center */}
+                    <button
+                      onClick={isLastStep ? handleCompleteTopic : handleContinue}
+                      className={`pointer-events-auto absolute right-2 w-10 h-10 rounded-full flex items-center justify-center shadow-sm backdrop-blur-[2px] transition-all hover:opacity-100 active:scale-95 border opacity-60 ${
+                        isLastStep 
+                          ? 'bg-green-500/80 border-green-600/50 text-white' 
+                          : 'bg-purple-500/80 border-purple-600/50 text-white'
+                      }`}
+                      aria-label={isLastStep ? "Complete topic" : "Next step"}
+                    >
+                      {isLastStep ? (
+                        <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                        </svg>
+                      ) : (
+                        <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                        </svg>
+                      )}
+                    </button>
+                  </div>
+
+                  {/* Desktop Footer Actions - Requirements 7.4, 7.5 */}
                   <div 
-                    className="sticky bottom-0 p-4 md:p-6 flex justify-between items-center animate-fade-in"
+                    className="hidden md:flex sticky bottom-0 p-6 justify-between items-center animate-fade-in"
                     style={{ 
                       backgroundColor: currentTheme.isDark ? currentTheme.colors.surface : '#ffffff',
                       borderTop: `1px solid ${currentTheme.isDark ? currentTheme.colors.border : '#f3f4f6'}`
@@ -441,7 +522,7 @@ const TopicPageInner: React.FC<TopicPageInnerProps> = ({
                         }
                       }}
                       disabled={currentStepIndex === 0}
-                      className="flex items-center gap-2 px-4 py-2 rounded-xl font-medium button-interactive animate-gentle-bounce"
+                      className="flex items-center gap-1.5 sm:gap-2 px-3 py-2 sm:px-4 sm:py-2 rounded-xl font-medium text-sm sm:text-base button-interactive animate-gentle-bounce"
                       style={{ 
                         color: currentStepIndex === 0 
                           ? (currentTheme.isDark ? currentTheme.colors.border : '#9ca3af')
@@ -449,7 +530,7 @@ const TopicPageInner: React.FC<TopicPageInnerProps> = ({
                         cursor: currentStepIndex === 0 ? 'not-allowed' : 'pointer'
                       }}
                     >
-                      <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <svg className="w-4 h-4 sm:w-5 sm:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
                       </svg>
                       Previous
@@ -461,10 +542,10 @@ const TopicPageInner: React.FC<TopicPageInnerProps> = ({
                     {isLastStep ? (
                       <button
                         onClick={handleCompleteTopic}
-                        className="flex items-center gap-2 px-6 py-3 rounded-xl font-medium bg-gradient-to-r from-green-500 to-emerald-500 text-white hover:from-green-600 hover:to-emerald-600 shadow-md hover:shadow-lg button-interactive animate-scale-hover animate-glow"
+                        className="flex items-center gap-1.5 sm:gap-2 px-4 py-2 sm:px-6 sm:py-3 rounded-xl font-medium text-sm sm:text-base bg-gradient-to-r from-green-500 to-emerald-500 text-white hover:from-green-600 hover:to-emerald-600 shadow-md hover:shadow-lg button-interactive animate-scale-hover animate-glow"
                         style={{ '--glow-color': 'rgba(16, 185, 129, 0.5)' } as React.CSSProperties}
                       >
-                        <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                        <svg className="w-4 h-4 sm:w-5 sm:h-5" fill="currentColor" viewBox="0 0 20 20">
                           <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
                         </svg>
                         Complete Topic
@@ -472,11 +553,11 @@ const TopicPageInner: React.FC<TopicPageInnerProps> = ({
                     ) : (
                       <button
                         onClick={handleContinue}
-                        className="flex items-center gap-2 px-6 py-3 rounded-xl font-medium bg-gradient-to-r from-purple-500 to-pink-500 text-white hover:from-purple-600 hover:to-pink-600 shadow-md hover:shadow-lg button-interactive animate-scale-hover animate-glow"
+                        className="flex items-center gap-1.5 sm:gap-2 px-4 py-2 sm:px-6 sm:py-3 rounded-xl font-medium text-sm sm:text-base bg-gradient-to-r from-purple-500 to-pink-500 text-white hover:from-purple-600 hover:to-pink-600 shadow-md hover:shadow-lg button-interactive animate-scale-hover animate-glow"
                         style={{ '--glow-color': 'rgba(168, 85, 247, 0.5)' } as React.CSSProperties}
                       >
                         Continue
-                        <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <svg className="w-4 h-4 sm:w-5 sm:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                         </svg>
                       </button>

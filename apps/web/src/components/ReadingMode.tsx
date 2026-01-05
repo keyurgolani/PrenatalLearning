@@ -41,6 +41,10 @@ export interface ReadingModeProps {
   bottomBarSlot?: React.ReactNode;
   /** Optional ref to expose scroll container for external scroll control */
   scrollContainerRef?: React.RefObject<HTMLDivElement | null>;
+  /** Callback for left swipe gesture (Next) */
+  onSwipeLeft?: () => void;
+  /** Callback for right swipe gesture (Previous) */
+  onSwipeRight?: () => void;
 }
 
 /**
@@ -192,7 +196,7 @@ const ReadingModeBottomBar: React.FC<ReadingModeBottomBarProps> = ({
     <div
       ref={settingsRef}
       data-reading-controls
-      className={`fixed bottom-4 left-1/2 transform -translate-x-1/2 z-50 flex flex-col items-center gap-2 transition-all duration-300 ${
+      className={`fixed bottom-4 left-1/2 transform -translate-x-1/2 z-50 flex flex-col items-center gap-2 transition-all duration-300 w-[90%] sm:w-auto ${
         isVisible ? 'translate-y-0' : 'opacity-0 translate-y-4 pointer-events-none'
       } ${isVisible && !isHovered && !showSettings ? 'opacity-50' : 'opacity-100'}`}
       onMouseEnter={() => setIsHovered(true)}
@@ -333,7 +337,7 @@ const ReadingModeBottomBar: React.FC<ReadingModeBottomBarProps> = ({
           </svg>
         </button>
 
-        <div className="w-px h-4" style={{ backgroundColor: colors.border }} />
+        <div className="hidden sm:block w-px h-4" style={{ backgroundColor: colors.border }} />
 
         {/* Settings toggle button */}
         <button
@@ -350,10 +354,10 @@ const ReadingModeBottomBar: React.FC<ReadingModeBottomBarProps> = ({
           </svg>
         </button>
 
-        <div className="w-px h-4" style={{ backgroundColor: colors.border }} />
+        <div className="hidden sm:block w-px h-4" style={{ backgroundColor: colors.border }} />
 
         {/* Current settings indicators */}
-        <div className="flex items-center gap-1 text-xs" style={{ color: colors.text }}>
+        <div className="hidden sm:flex items-center gap-1 text-xs" style={{ color: colors.text }}>
           <span>{accessibilitySettings.fontSize.toUpperCase()}</span>
           <span>•</span>
           <span>{fontFamilyConfig[accessibilitySettings.fontFamily as FontFamily].label}</span>
@@ -361,7 +365,7 @@ const ReadingModeBottomBar: React.FC<ReadingModeBottomBarProps> = ({
           <span>{currentWidthOption.label}</span>
         </div>
 
-        <div className="w-px h-4" style={{ backgroundColor: colors.border }} />
+        <div className="hidden sm:block w-px h-4" style={{ backgroundColor: colors.border }} />
 
         {/* Auto-scroll controls */}
         <button
@@ -485,8 +489,9 @@ const readingModeColors = {
 
 
 import { ScrollIndicators } from './ScrollIndicators';
+import { useSwipe } from '../hooks/useSwipe';
 
-export const ReadingMode: React.FC<ReadingModeProps> = ({ children, isEnabled, onExit, bottomBarSlot, scrollContainerRef: externalScrollRef }) => {
+export const ReadingMode: React.FC<ReadingModeProps> = ({ children, isEnabled, onExit, bottomBarSlot, scrollContainerRef: externalScrollRef, onSwipeLeft, onSwipeRight }) => {
   const { currentTheme, setTheme, themes } = useTheme();
   const { settings: accessibilitySettings, setFontSize, setFontFamily } = useAccessibility();
   const { settings: readingSettings, toggleAutoScroll, setAutoScrollSpeed, pauseAutoScroll } = useReadingMode();
@@ -496,6 +501,11 @@ export const ReadingMode: React.FC<ReadingModeProps> = ({ children, isEnabled, o
   const isDark = currentTheme.isDark ?? false;
   const colors = isDark ? readingModeColors.dark : readingModeColors.light;
   const [showSettings, setShowSettings] = useState(false);
+
+  const swipeHandlers = useSwipe({
+    onSwipeLeft,
+    onSwipeRight,
+  });
 
   // Load saved width preference from localStorage
   const [contentWidth, setContentWidth] = useState<ContentWidth>(() => {
@@ -663,6 +673,7 @@ export const ReadingMode: React.FC<ReadingModeProps> = ({ children, isEnabled, o
       role="dialog"
       aria-modal="true"
       aria-label="Reading mode view"
+      {...swipeHandlers}
     >
 
       {/* Main Container Wrapper - Relative for ScrollIndicators positioning */}
@@ -675,20 +686,21 @@ export const ReadingMode: React.FC<ReadingModeProps> = ({ children, isEnabled, o
           className="absolute inset-0 overflow-y-auto custom-scrollbar"
           style={{ scrollBehavior: 'smooth' }}
         >
-          {/* Centered content container - Requirements 8.7 */}
-          <div className="min-h-screen flex flex-col items-center px-4 pt-8 pb-20" style={{ color: colors.text }}>
+          {/* Centered content container - Requirements 8.7 - True focus mode with minimal chrome on mobile */}
+          <div className="min-h-screen flex flex-col items-center px-0 sm:px-4 pt-2 sm:pt-8 pb-20 sm:pb-32" style={{ color: colors.text }}>
         <div
-          className="w-full rounded-2xl shadow-lg reading-mode-content transition-all duration-300"
+          className="w-full rounded-none sm:rounded-2xl shadow-none sm:shadow-lg reading-mode-content transition-all duration-300"
           style={{
             maxWidth: currentWidthOption.maxWidth,
             backgroundColor: colors.surface,
-            border: `1px solid ${colors.border}`,
+            border: 'none',
+            borderBottom: 'none',
           }}
         >
           {/* Sticky audio player container */}
           <div className="reading-mode-sticky-wrapper" />
           <div
-            className="p-6 md:p-10 reading-mode-inner"
+            className="px-3 py-2 sm:p-6 md:p-10 reading-mode-inner"
             style={{ fontFamily: fontFamilyConfig[accessibilitySettings.fontFamily].value }}
           >
             {children}
@@ -819,7 +831,7 @@ export const ReadingModeToggle: React.FC<ReadingModeToggleProps> = ({ className 
           />
         )}
       </svg>
-      <span className="text-sm font-medium">{settings.readingModeEnabled ? 'Exit Reading' : 'Reading Mode'}</span>
+      <span className="text-sm font-medium hidden sm:inline">{settings.readingModeEnabled ? 'Exit Reading' : 'Reading Mode'}</span>
     </button>
   );
 };

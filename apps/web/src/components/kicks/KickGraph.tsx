@@ -3,15 +3,7 @@ import { useKick, type DailyKickStats } from '../../contexts/KickContext';
 import { BabyKickIcon } from '../../components/icons/BabyKickIcon';
 import { useAuth } from '../../contexts/AuthContext';
 import { useProfile } from '../../contexts/ProfileContext';
-
-/**
- * KickGraph component - Beautiful visualization of daily kick counts
- * 
- * Requirements:
- * - 14.1: THE System SHALL display a daily kick count graph showing kicks over the past 7 days
- * - 14.4: THE System SHALL use inspiring and calming visual design for graphs
- * - 14.7: THE System SHALL show milestone markers when kick counts reach significant numbers
- */
+import { useTheme } from '../../contexts/ThemeContext';
 
 export interface KickGraphProps {
   /** Number of days to display (default: 7) */
@@ -91,6 +83,8 @@ export const KickGraph: React.FC<KickGraphProps> = ({
   chartType = 'bar',
   compact = false,
 }) => {
+  const { currentTheme } = useTheme();
+  const isDark = currentTheme.isDark ?? false;
   const { isAuthenticated } = useAuth();
   const { activeProfile } = useProfile();
   const { dailyStats, stats, refreshDailyStats, isLoading } = useKick();
@@ -158,13 +152,20 @@ export const KickGraph: React.FC<KickGraphProps> = ({
   return (
     <div className={`relative overflow-hidden rounded-2xl ${className}`}>
       {/* Beautiful gradient background */}
-      <div className="absolute inset-0 bg-gradient-to-br from-rose-50 via-pink-50 to-fuchsia-50" />
+      <div 
+        className="absolute inset-0" 
+        style={{
+          background: isDark 
+            ? `linear-gradient(to bottom right, ${currentTheme.colors.background}, ${currentTheme.colors.surface})`
+            : 'linear-gradient(to bottom right, #fff1f2, #fdf4ff, #fae8ff)'
+        }}
+      />
       
       {/* Subtle pattern overlay */}
       <div 
         className="absolute inset-0 opacity-30"
         style={{
-          backgroundImage: `radial-gradient(circle at 2px 2px, rgba(236, 72, 153, 0.15) 1px, transparent 0)`,
+          backgroundImage: `radial-gradient(circle at 2px 2px, ${isDark ? 'rgba(168, 85, 247, 0.15)' : 'rgba(236, 72, 153, 0.15)'} 1px, transparent 0)`,
           backgroundSize: '24px 24px',
         }}
       />
@@ -178,18 +179,21 @@ export const KickGraph: React.FC<KickGraphProps> = ({
               <BabyKickIcon className="w-4 h-4 text-white" />
             </div>
             <div>
-              <h3 className={`font-semibold text-gray-800 ${compact ? 'text-sm' : 'text-base'}`}>
+              <h3 
+                className={`font-semibold ${compact ? 'text-sm' : 'text-base'}`}
+                style={{ color: isDark ? currentTheme.colors.text : '#1f2937' }}
+              >
                 Daily Kicks
               </h3>
               {!compact && (
-                <p className="text-xs text-gray-500">Past {days} days</p>
+                <p className={`text-xs ${isDark ? 'text-gray-400' : 'text-gray-500'}`}>Past {days} days</p>
               )}
             </div>
           </div>
           
           {/* Total kicks badge */}
           <div className="flex items-center gap-2">
-            {compact && <span className="text-xs text-gray-500">Last {days} days</span>}
+            {compact && <span className={`text-xs ${isDark ? 'text-gray-400' : 'text-gray-500'}`}>Last {days} days</span>}
             <div className="px-3 py-1.5 bg-gradient-to-r from-pink-500 to-rose-500 text-white rounded-full shadow-md shadow-pink-200/50">
               <span className={`font-bold ${compact ? 'text-sm' : 'text-base'}`}>{totalKicks}</span>
               <span className={`ml-1 opacity-90 ${compact ? 'text-xs' : 'text-sm'}`}>kicks</span>
@@ -199,9 +203,18 @@ export const KickGraph: React.FC<KickGraphProps> = ({
 
         {/* Milestone banner */}
         {showMilestones && currentMilestone && !compact && (
-          <div className="mx-4 mb-2 px-3 py-2 bg-gradient-to-r from-amber-100/80 to-yellow-100/80 backdrop-blur-sm rounded-xl border border-amber-200/50 flex items-center justify-center gap-2">
+          <div 
+            className="mx-4 mb-2 px-3 py-2 backdrop-blur-sm rounded-xl border flex items-center justify-center gap-2"
+            style={{
+              background: isDark ? 'rgba(251, 191, 36, 0.1)' : 'linear-gradient(to right, rgba(254, 243, 199, 0.8), rgba(254, 252, 232, 0.8))',
+              borderColor: isDark ? 'rgba(251, 191, 36, 0.2)' : 'rgba(253, 230, 138, 0.5)',
+            }}
+          >
             <span className="text-base" aria-hidden="true">{currentMilestone.icon}</span>
-            <span className="text-sm font-medium text-amber-700">
+            <span 
+              className="text-sm font-medium"
+              style={{ color: isDark ? '#fbbf24' : '#b45309' }}
+            >
               {currentMilestone.label}
             </span>
             <span className="text-base" aria-hidden="true">{currentMilestone.icon}</span>
@@ -217,7 +230,7 @@ export const KickGraph: React.FC<KickGraphProps> = ({
                   <div className="w-12 h-12 rounded-full border-4 border-pink-200 border-t-pink-500 animate-spin" />
                   <BabyKickIcon className="absolute inset-0 m-auto w-5 h-5 text-pink-400" />
                 </div>
-                <span className="text-sm text-gray-500">Loading activity...</span>
+                <span className={`text-sm ${isDark ? 'text-gray-400' : 'text-gray-500'}`}>Loading activity...</span>
               </div>
             </div>
           ) : (
@@ -277,7 +290,7 @@ export const KickGraph: React.FC<KickGraphProps> = ({
                   y={padding.top} 
                   width={400 - padding.left - padding.right} 
                   height={graphHeight}
-                  fill="white"
+                  fill={isDark ? currentTheme.colors.surface : "white"}
                   fillOpacity="0.5"
                   rx="8"
                 />

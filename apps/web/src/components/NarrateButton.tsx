@@ -214,119 +214,123 @@ export const NarrateButton: React.FC<NarrateButtonProps> = ({
 
   return (
     <div
-      className="narrate-button-container flex items-center gap-3 p-3 rounded-xl mb-4 transition-all duration-300"
+      className="narrate-button-container flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-3 p-4 sm:p-5 rounded-xl mb-4 transition-all duration-300"
       style={{
         backgroundColor: isDark ? 'rgba(168, 85, 247, 0.15)' : 'rgba(147, 51, 234, 0.1)',
         border: `1px solid ${isDark ? 'rgba(168, 85, 247, 0.3)' : 'rgba(147, 51, 234, 0.2)'}`,
         boxShadow: isPlaying ? `0 0 20px ${isDark ? 'rgba(168, 85, 247, 0.3)' : 'rgba(147, 51, 234, 0.2)'}` : 'none',
       }}
     >
-      {/* Skip Back 20s */}
-      <button
-        onClick={() => skipBySeconds(-20)}
-        disabled={!isThisAudioPlaying || isLoading}
-        className="skip-btn flex flex-col items-center justify-center w-11 h-11 rounded-full icon-interactive focus-ring disabled:opacity-40"
-        style={{
-          backgroundColor: isDark ? 'rgba(168, 85, 247, 0.3)' : 'rgba(147, 51, 234, 0.15)',
-          color: isDark ? '#C084FC' : '#7c3aed',
-        }}
-        aria-label="Skip back 20 seconds"
-        title="-20s"
-      >
-        <span className="text-lg leading-none">↺</span>
-        <span className="text-[10px] font-bold -mt-1">20</span>
-      </button>
+      {/* Controls Row */}
+      <div className="flex items-center justify-center gap-1 sm:gap-2">
+        {/* Skip Back 20s */}
+        <button
+          onClick={() => skipBySeconds(-20)}
+          disabled={!isThisAudioPlaying || isLoading}
+          className="skip-btn flex flex-col items-center justify-center w-10 h-10 sm:w-11 sm:h-11 rounded-full icon-interactive focus-ring disabled:opacity-40"
+          style={{
+            backgroundColor: isDark ? 'rgba(168, 85, 247, 0.3)' : 'rgba(147, 51, 234, 0.15)',
+            color: isDark ? '#C084FC' : '#7c3aed',
+          }}
+          aria-label="Skip back 20 seconds"
+          title="-20s"
+        >
+          <span className="text-sm sm:text-lg leading-none">↺</span>
+          <span className="text-[8px] sm:text-[10px] font-bold -mt-0.5 sm:-mt-1">20</span>
+        </button>
 
-      {/* Skip Back 5s */}
-      <button
-        onClick={() => skipBySeconds(-5)}
-        disabled={!isThisAudioPlaying || isLoading}
-        className="skip-btn flex flex-col items-center justify-center w-11 h-11 rounded-full transition-all duration-200 hover:scale-110 active:scale-95 focus:outline-none disabled:opacity-40"
-        style={{
-          backgroundColor: isDark ? 'rgba(168, 85, 247, 0.3)' : 'rgba(147, 51, 234, 0.15)',
-          color: isDark ? '#C084FC' : '#7c3aed',
-        }}
-        aria-label="Skip back 5 seconds"
-        title="-5s"
-      >
-        <span className="text-lg leading-none">↺</span>
-        <span className="text-[10px] font-bold -mt-1">5</span>
-      </button>
+        {/* Skip Back 5s */}
+        <button
+          onClick={() => skipBySeconds(-5)}
+          disabled={!isThisAudioPlaying || isLoading}
+          className="skip-btn flex flex-col items-center justify-center w-10 h-10 sm:w-11 sm:h-11 rounded-full transition-all duration-200 hover:scale-110 active:scale-95 focus:outline-none disabled:opacity-40"
+          style={{
+            backgroundColor: isDark ? 'rgba(168, 85, 247, 0.3)' : 'rgba(147, 51, 234, 0.15)',
+            color: isDark ? '#C084FC' : '#7c3aed',
+          }}
+          aria-label="Skip back 5 seconds"
+          title="-5s"
+        >
+          <span className="text-sm sm:text-lg leading-none">↺</span>
+          <span className="text-[8px] sm:text-[10px] font-bold -mt-0.5 sm:-mt-1">5</span>
+        </button>
 
-      {/* Play/Pause Button */}
-      <button
-        onClick={handleTogglePlayPause}
-        disabled={isLoading}
-        className="flex items-center justify-center w-12 h-12 rounded-full button-interactive focus-ring"
-        style={{
-          backgroundColor: isDark ? '#9333ea' : '#7c3aed',
-          color: '#ffffff',
-          boxShadow: isPlaying ? `0 0 12px ${isDark ? 'rgba(168, 85, 247, 0.6)' : 'rgba(147, 51, 234, 0.4)'}` : 'none',
-        }}
-        aria-label={isPlaying ? 'Pause narration' : 'Play narration'}
-      >
-        {isLoading ? (
-          <svg className="w-6 h-6 animate-spin" viewBox="0 0 24 24" fill="none">
-            <circle cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="2.5" strokeOpacity="0.3" />
-            <path d="M12 2a10 10 0 0 1 10 10" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" />
-          </svg>
-        ) : isPlaying ? (
-          <svg className="w-6 h-6" viewBox="0 0 24 24" fill="currentColor">
-            <rect x="6" y="5" width="4" height="14" rx="1" />
-            <rect x="14" y="5" width="4" height="14" rx="1" />
-          </svg>
-        ) : (
-          <svg className="w-6 h-6" viewBox="0 0 24 24" fill="currentColor">
-            <path d="M6 4l15 8-15 8V4z" />
-          </svg>
-        )}
-      </button>
+        {/* Play/Pause Button */}
+        <button
+          onClick={handleTogglePlayPause}
+          disabled={isLoading}
+          className="flex items-center justify-center w-12 h-12 sm:w-12 sm:h-12 rounded-full button-interactive focus-ring"
+          style={{
+            backgroundColor: isDark ? '#9333ea' : '#7c3aed',
+            color: '#ffffff',
+            boxShadow: isPlaying ? `0 0 12px ${isDark ? 'rgba(168, 85, 247, 0.6)' : 'rgba(147, 51, 234, 0.4)'}` : 'none',
+          }}
+          aria-label={isPlaying ? 'Pause narration' : 'Play narration'}
+        >
+          {isLoading ? (
+            <svg className="w-5 h-5 sm:w-6 sm:h-6 animate-spin" viewBox="0 0 24 24" fill="none">
+              <circle cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="2.5" strokeOpacity="0.3" />
+              <path d="M12 2a10 10 0 0 1 10 10" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" />
+            </svg>
+          ) : isPlaying ? (
+            <svg className="w-5 h-5 sm:w-6 sm:h-6" viewBox="0 0 24 24" fill="currentColor">
+              <rect x="6" y="5" width="4" height="14" rx="1" />
+              <rect x="14" y="5" width="4" height="14" rx="1" />
+            </svg>
+          ) : (
+            <svg className="w-5 h-5 sm:w-6 sm:h-6" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M6 4l15 8-15 8V4z" />
+            </svg>
+          )}
+        </button>
 
-      {/* Skip Forward 5s */}
-      <button
-        onClick={() => skipBySeconds(5)}
-        disabled={!isThisAudioPlaying || isLoading}
-        className="skip-btn flex flex-col items-center justify-center w-11 h-11 rounded-full transition-all duration-200 hover:scale-110 active:scale-95 focus:outline-none disabled:opacity-40"
-        style={{
-          backgroundColor: isDark ? 'rgba(168, 85, 247, 0.3)' : 'rgba(147, 51, 234, 0.15)',
-          color: isDark ? '#C084FC' : '#7c3aed',
-        }}
-        aria-label="Skip forward 5 seconds"
-        title="+5s"
-      >
-        <span className="text-lg leading-none">↻</span>
-        <span className="text-[10px] font-bold -mt-1">5</span>
-      </button>
+        {/* Skip Forward 5s */}
+        <button
+          onClick={() => skipBySeconds(5)}
+          disabled={!isThisAudioPlaying || isLoading}
+          className="skip-btn flex flex-col items-center justify-center w-10 h-10 sm:w-11 sm:h-11 rounded-full transition-all duration-200 hover:scale-110 active:scale-95 focus:outline-none disabled:opacity-40"
+          style={{
+            backgroundColor: isDark ? 'rgba(168, 85, 247, 0.3)' : 'rgba(147, 51, 234, 0.15)',
+            color: isDark ? '#C084FC' : '#7c3aed',
+          }}
+          aria-label="Skip forward 5 seconds"
+          title="+5s"
+        >
+          <span className="text-sm sm:text-lg leading-none">↻</span>
+          <span className="text-[8px] sm:text-[10px] font-bold -mt-0.5 sm:-mt-1">5</span>
+        </button>
 
-      {/* Skip Forward 20s */}
-      <button
-        onClick={() => skipBySeconds(20)}
-        disabled={!isThisAudioPlaying || isLoading}
-        className="skip-btn flex flex-col items-center justify-center w-11 h-11 rounded-full transition-all duration-200 hover:scale-110 active:scale-95 focus:outline-none disabled:opacity-40"
-        style={{
-          backgroundColor: isDark ? 'rgba(168, 85, 247, 0.3)' : 'rgba(147, 51, 234, 0.15)',
-          color: isDark ? '#C084FC' : '#7c3aed',
-        }}
-        aria-label="Skip forward 20 seconds"
-        title="+20s"
-      >
-        <span className="text-lg leading-none">↻</span>
-        <span className="text-[10px] font-bold -mt-1">20</span>
-      </button>
+        {/* Skip Forward 20s */}
+        <button
+          onClick={() => skipBySeconds(20)}
+          disabled={!isThisAudioPlaying || isLoading}
+          className="skip-btn flex flex-col items-center justify-center w-10 h-10 sm:w-11 sm:h-11 rounded-full transition-all duration-200 hover:scale-110 active:scale-95 focus:outline-none disabled:opacity-40"
+          style={{
+            backgroundColor: isDark ? 'rgba(168, 85, 247, 0.3)' : 'rgba(147, 51, 234, 0.15)',
+            color: isDark ? '#C084FC' : '#7c3aed',
+          }}
+          aria-label="Skip forward 20 seconds"
+          title="+20s"
+        >
+          <span className="text-sm sm:text-lg leading-none">↻</span>
+          <span className="text-[8px] sm:text-[10px] font-bold -mt-0.5 sm:-mt-1">20</span>
+        </button>
+      </div>
 
-      {/* Label and Progress */}
+      {/* Label and Progress - Full width on mobile */}
       <div className="flex-1 min-w-0">
-        <div className="flex items-center justify-between mb-2">
+        <div className="flex items-center justify-between mb-1 sm:mb-2">
           <span
-            className="text-sm font-medium flex items-center gap-1.5"
+            className="text-xs sm:text-sm font-medium flex items-center gap-1.5"
             style={{ color: isDark ? '#C084FC' : '#7c3aed' }}
           >
             <span className={isPlaying ? 'animate-pulse' : ''}>🎧</span>
-            Narrate{sectionName ? ` - ${sectionName}` : ''}
+            <span className="hidden sm:inline">Narrate{sectionName ? ` - ${sectionName}` : ''}</span>
+            <span className="sm:hidden">{sectionName || 'Narrate'}</span>
           </span>
           {displayDuration > 0 && (
             <span
-              className="text-xs tabular-nums"
+              className="text-[10px] sm:text-xs tabular-nums"
               style={{ color: isDark ? currentTheme.colors.textMuted : '#6b7280' }}
             >
               {formatTime(currentTime)} / {formatTime(displayDuration)}
@@ -337,7 +341,7 @@ export const NarrateButton: React.FC<NarrateButtonProps> = ({
         {/* Progress Bar */}
         {displayDuration > 0 && (
           <div
-            className="relative h-3 rounded-full cursor-pointer group"
+            className="relative h-3 sm:h-3 rounded-full cursor-pointer group"
             style={{
               backgroundColor: isDark ? 'rgba(168, 85, 247, 0.2)' : 'rgba(147, 51, 234, 0.15)',
             }}
@@ -388,9 +392,9 @@ export const NarrateButton: React.FC<NarrateButtonProps> = ({
             {/* Pulse ring when playing */}
             {isPlaying && (
               <div
-                className="absolute top-1/2 w-4 h-4 rounded-full pointer-events-none"
+                className="absolute top-1/2 w-3 h-3 sm:w-4 sm:h-4 rounded-full pointer-events-none"
                 style={{
-                  left: `calc(${Math.min(100, progressPercent)}% - 8px)`,
+                  left: `calc(${Math.min(100, progressPercent)}% - 6px)`,
                   top: '50%',
                   transform: 'translateY(-50%)',
                   backgroundColor: isDark ? '#a855f7' : '#7c3aed',
@@ -401,9 +405,9 @@ export const NarrateButton: React.FC<NarrateButtonProps> = ({
             )}
             {/* Playhead */}
             <div
-              className="playhead-knob absolute w-4 h-4 rounded-full shadow-lg pointer-events-none"
+              className="playhead-knob absolute w-3 h-3 sm:w-4 sm:h-4 rounded-full shadow-lg pointer-events-none"
               style={{
-                left: `calc(${Math.min(100, progressPercent)}% - 8px)`,
+                left: `calc(${Math.min(100, progressPercent)}% - 6px)`,
                 top: '50%',
                 backgroundColor: '#ffffff',
                 border: `2px solid ${isDark ? '#a855f7' : '#7c3aed'}`,

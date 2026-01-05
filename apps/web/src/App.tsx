@@ -11,10 +11,19 @@ import {
   FloatingStatusBar,
   SecondaryHeader,
   OfflineBanner,
+  MiniAudioPlayer,
 } from './components';
 import { JournalModal } from './components/journal';
 import { TopicPage } from './components/TopicPage';
-import { JournalPage, DailyEnrichmentPage } from './pages';
+import { 
+  DailyMix, 
+  Vocabulary, 
+  Puzzles, 
+  Facts, 
+  BrainTeasers, 
+  Mindfulness 
+} from './components';
+import { DailyEnrichmentPage } from './pages';
 import { stories, categories, getCategoryById } from './data';
 import { learningPaths, type LearningPath } from './data/learningPaths';
 import type { Story, CategoryId, DifficultyLevel, DurationFilter, CompletionStatus, AdvancedFilterState } from './types';
@@ -41,6 +50,7 @@ import {
   useTopicProgress,
   useTrimester,
   useCompletedStories,
+  useReadingMode,
 } from './contexts';
 import './index.css';
 
@@ -90,14 +100,18 @@ function TopicPageRoute({
 
   const backgroundClass = currentTheme.colors.background;
 
+  const { settings: readingSettings } = useReadingMode();
+
   if (!story) {
     return (
       <div className={`min-h-screen flex flex-col bg-gradient-to-br ${backgroundClass} transition-theme`}>
-        <Header
-          completedCount={completedStories.length}
-          totalCount={stories.length}
-          progressPercentage={progressPercentage}
-        />
+        {!readingSettings.readingModeEnabled && (
+          <Header
+            completedCount={completedStories.length}
+            totalCount={stories.length}
+            progressPercentage={progressPercentage}
+          />
+        )}
         <div className="flex-1 flex items-center justify-center">
           <div className="text-center">
             <h1 className="text-2xl font-bold text-gray-800 mb-4">Topic Not Found</h1>
@@ -116,16 +130,20 @@ function TopicPageRoute({
 
   return (
     <div className="h-screen flex flex-col overflow-hidden">
-      <Header
-        completedCount={completedStories.length}
-        totalCount={stories.length}
-        progressPercentage={progressPercentage}
-      />
-      <SecondaryHeader
-        completedCount={completedStories.length}
-        totalCount={stories.length}
-        progressPercentage={progressPercentage}
-      />
+      {!readingSettings.readingModeEnabled && (
+        <>
+          <Header
+            completedCount={completedStories.length}
+            totalCount={stories.length}
+            progressPercentage={progressPercentage}
+          />
+          <SecondaryHeader
+            completedCount={completedStories.length}
+            totalCount={stories.length}
+            progressPercentage={progressPercentage}
+          />
+        </>
+      )}
       <div className="flex-1 overflow-hidden">
         <TopicPage
           story={story}
@@ -898,8 +916,8 @@ function JourneyPage({
       />
 
       <div className="flex-1 w-full px-4 lg:px-6 xl:px-8 2xl:px-12 py-4 overflow-hidden">
-        <div className="w-full mx-auto flex gap-6 xl:gap-8 h-full">
-          <aside className="w-72 2xl:w-80 flex-shrink-0 overflow-y-auto scrollbar-hidden">
+        <div className="w-full mx-auto flex flex-col xl:flex-row gap-6 xl:gap-8 h-full">
+          <aside className="hidden xl:block w-72 2xl:w-80 flex-shrink-0 overflow-y-auto scrollbar-hidden">
             <FilterSidebar
               categories={categories}
               selectedCategory="all"
@@ -985,19 +1003,19 @@ function AppContent() {
           />
         } 
       />
-      <Route 
-        path="/journal" 
-        element={
-          <JournalPage 
-            completedCount={completedStories.length}
-            totalCount={stories.length}
-          />
-        } 
-      />
-      <Route 
-        path="/daily" 
-        element={<DailyEnrichmentPage />} 
-      />
+
+      <Route path="/daily" element={<DailyEnrichmentPage />}>
+        {/* Default redirect to mix */}
+        <Route index element={<Navigate to="mix" replace />} />
+        
+        {/* Nested routes for each section */}
+        <Route path="mix" element={<DailyMix />} />
+        <Route path="words" element={<Vocabulary />} />
+        <Route path="puzzles" element={<Puzzles />} />
+        <Route path="facts" element={<Facts />} />
+        <Route path="teasers" element={<BrainTeasers />} />
+        <Route path="mindfulness" element={<Mindfulness />} />
+      </Route>
     </Routes>
       
       {/* Single persistent FloatingStatusBar that morphs based on route
@@ -1013,11 +1031,10 @@ function AppContent() {
       
       <OfflineBanner />
       
-      {/* Journal Modal - opens when journal button is clicked
-          Requirements: 10.2 - Open journal popup/modal
-          Requirements: 10.3 - Calendar view organized by date
-          Requirements: 10.7 - Visual indicator for days with entries
-          Requirements: 11.1, 11.3, 11.4, 11.5 - Mood, content, topic/journey mentions */}
+      {/* Mini Audio Player - Floating */}
+      <MiniAudioPlayer />
+
+      {/* Journal Modal - opens when journal button is clicked */}
       <JournalModal />
     </>
   );
