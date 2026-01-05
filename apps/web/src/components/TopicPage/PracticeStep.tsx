@@ -92,10 +92,10 @@ export const PracticeStep: React.FC<PracticeStepProps> = ({ story }) => {
           elements.push(
             <div
               key={`section-${index}`}
-              className="rounded-xl p-5 mb-4"
+              className="rounded-xl p-5 mb-4 backdrop-blur-[3px]"
               style={{
-                backgroundColor: isDark ? currentTheme.colors.surfaceHover : '#ffffff',
-                border: `1px solid ${isDark ? currentTheme.colors.border : '#e5e7eb'}`,
+                backgroundColor: isDark ? 'rgba(17, 24, 39, 0.85)' : 'rgba(255, 255, 255, 0.7)',
+                border: `1px solid ${isDark ? currentTheme.colors.border : 'rgba(229, 231, 235, 0.5)'}`,
               }}
             >
               <h4
@@ -130,10 +130,13 @@ export const PracticeStep: React.FC<PracticeStepProps> = ({ story }) => {
         elements.push(
           <p
             key={`section-${index}`}
-            className="leading-relaxed pl-4 mb-4"
+            className="leading-relaxed pl-4 mb-4 backdrop-blur-[3px] rounded-r-lg p-2"
             style={{
               color: isDark ? currentTheme.colors.textMuted : '#374151',
               borderLeft: `2px solid ${isDark ? 'rgba(251, 191, 36, 0.4)' : '#fde68a'}`,
+              backgroundColor: isDark ? 'rgba(255, 255, 255, 0.05)' : 'rgba(255, 255, 255, 0.5)',
+              textShadow: isDark ? '0 1px 1px rgba(0,0,0,0.8)' : 'none',
+              fontWeight: 450
             }}
           >
             {section}
@@ -277,14 +280,14 @@ export const PracticeStep: React.FC<PracticeStepProps> = ({ story }) => {
       {/* Helpful Analogies */}
       {story.content.analogies.length > 0 && (
         <div
-          className="rounded-2xl p-6"
+          className="rounded-2xl p-6 backdrop-blur-[3px]"
           style={
             isDark
               ? {
-                  backgroundColor: 'rgba(251, 191, 36, 0.1)',
+                  backgroundColor: 'rgba(251, 191, 36, 0.15)',
                   border: '1px solid rgba(251, 191, 36, 0.2)',
                 }
-              : { background: 'linear-gradient(to bottom right, #fffbeb, #fff7ed)' }
+              : { background: 'linear-gradient(to bottom right, rgba(255, 251, 235, 0.8), rgba(255, 247, 237, 0.8))' }
           }
         >
           <h4

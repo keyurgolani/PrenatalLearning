@@ -41,7 +41,7 @@ const TrimesterBadge: React.FC<{ trimester: Trimester; isDark: boolean }> = ({ t
   
   return (
     <span
-      className={`inline-flex items-center px-2 py-0.5 sm:px-2.5 sm:py-1 rounded-full text-xs sm:text-sm font-medium ${isDark ? '' : config.lightClass}`}
+      className={`inline-flex items-center px-2 py-0.5 sm:px-2.5 sm:py-1 rounded-full text-xs sm:text-sm font-medium whitespace-nowrap flex-shrink-0 ${isDark ? '' : config.lightClass}`}
       style={isDark ? config.darkStyle : {}}
       title={`Recommended for ${trimester === 'any' ? 'all trimesters' : `${trimester} trimester`}`}
     >
@@ -174,7 +174,7 @@ export const StoryCard: React.FC<StoryCardProps> = ({
     >
       {/* Category Color Bar */}
       <div
-        className={`h-2 ${category?.color || 'bg-gray-400'}`}
+        className={`h-1 ${category?.color || 'bg-gray-400'}`}
         aria-label={`Category: ${category?.name || 'Unknown'}`}
       />
 
@@ -229,7 +229,7 @@ export const StoryCard: React.FC<StoryCardProps> = ({
 
           {/* Reading Time Badge - Requirements 9.3: Display total story reading time on story cards */}
           <span
-            className={`inline-flex items-center px-2 py-0.5 sm:px-2.5 sm:py-1 rounded-full text-xs sm:text-sm font-medium ${isDark ? '' : 'bg-purple-100 text-purple-700'}`}
+            className={`inline-flex items-center px-2 py-0.5 sm:px-2.5 sm:py-1 rounded-full text-xs sm:text-sm font-medium whitespace-nowrap flex-shrink-0 ${isDark ? '' : 'bg-purple-100 text-purple-700'}`}
             style={isDark ? { backgroundColor: 'rgba(168, 85, 247, 0.2)', color: '#C084FC' } : {}}
             title={`Estimated reading time: ${formatReadingTime(getTotalReadingTime(story))}`}
           >
@@ -252,7 +252,7 @@ export const StoryCard: React.FC<StoryCardProps> = ({
 
           {/* Difficulty Badge */}
           <span
-            className={`inline-flex items-center px-2 py-0.5 sm:px-2.5 sm:py-1 rounded-full text-xs sm:text-sm font-medium ${difficultyColors[story.difficulty]}`}
+            className={`inline-flex items-center px-2 py-0.5 sm:px-2.5 sm:py-1 rounded-full text-xs sm:text-sm font-medium whitespace-nowrap flex-shrink-0 ${difficultyColors[story.difficulty]}`}
             style={isDark ? darkDifficultyStyles[story.difficulty] : {}}
           >
             <span className="hidden sm:inline">{difficultyLabels[story.difficulty].full}</span>
@@ -261,7 +261,7 @@ export const StoryCard: React.FC<StoryCardProps> = ({
 
           {/* Category Badge */}
           <span
-            className={`inline-flex items-center px-2 py-0.5 sm:px-2.5 sm:py-1 rounded-full text-xs sm:text-sm font-medium ${isDark ? '' : 'bg-gray-100 text-gray-700'}`}
+            className={`inline-flex items-center px-2 py-0.5 sm:px-2.5 sm:py-1 rounded-full text-xs sm:text-sm font-medium whitespace-nowrap flex-shrink-0 ${isDark ? '' : 'bg-gray-100 text-gray-700'}`}
             style={isDark ? { backgroundColor: 'rgba(148, 163, 184, 0.2)', color: currentTheme.colors.textMuted } : {}}
             title={category?.name || 'Unknown'}
           >

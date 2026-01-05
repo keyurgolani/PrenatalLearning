@@ -133,7 +133,7 @@ export const CompactStoryCard: React.FC<CompactStoryCardProps> = ({
     >
       {/* Category Color Bar - with rounded top corners */}
       <div
-        className={`h-2 ${category?.color || 'bg-gray-400'}`}
+        className={`h-1 ${category?.color || 'bg-gray-400'}`}
         style={{ borderRadius: '1.5rem 1.5rem 0 0' }}
         aria-label={`Category: ${category?.name || 'Unknown'}`}
         data-testid="category-indicator"
@@ -181,7 +181,7 @@ export const CompactStoryCard: React.FC<CompactStoryCardProps> = ({
         </p>
 
         {/* Metadata Row */}
-        <div className="flex flex-nowrap overflow-x-auto scrollbar-hidden items-center gap-2 pb-1 -mx-2 px-2 pr-4">
+        <div className="flex flex-wrap items-center gap-2">
           {/* Trimester Badge - Requirements 1.4: Display trimester badge on story cards */}
           <span
             className={`inline-flex items-center px-2.5 py-1 rounded-full text-sm font-medium whitespace-nowrap flex-shrink-0 ${isDark ? '' : trimesterConfig[story.recommendedTrimester].lightClass}`}

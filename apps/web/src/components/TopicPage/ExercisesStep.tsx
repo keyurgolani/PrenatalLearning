@@ -171,10 +171,10 @@ export const ExercisesStep: React.FC<ExercisesStepProps> = ({ story }) => {
       {/* Interactive Exercises Section */}
       {topicHasExercises && (
         <div 
-          className="rounded-2xl p-6"
+          className="rounded-2xl p-6 backdrop-blur-[3px]"
           style={isDark 
-            ? { backgroundColor: 'rgba(251, 191, 36, 0.1)', border: '1px solid rgba(251, 191, 36, 0.2)' }
-            : { background: 'linear-gradient(to bottom right, #fffbeb, #fff7ed)' }
+            ? { backgroundColor: 'rgba(251, 191, 36, 0.15)', border: '1px solid rgba(251, 191, 36, 0.2)' }
+            : { background: 'linear-gradient(to bottom right, rgba(255, 251, 235, 0.8), rgba(255, 247, 237, 0.8))' }
           }
         >
           <div className="flex items-center justify-between mb-4">
@@ -226,10 +226,10 @@ export const ExercisesStep: React.FC<ExercisesStepProps> = ({ story }) => {
       {/* Topic-Specific Exercises */}
       {story.content.exercises.length > 0 && (
         <div 
-          className="rounded-2xl p-6"
+          className="rounded-2xl p-6 backdrop-blur-[3px]"
           style={{ 
-            backgroundColor: isDark ? currentTheme.colors.surfaceHover : '#ffffff',
-            border: `1px solid ${isDark ? currentTheme.colors.border : '#e5e7eb'}`
+            backgroundColor: isDark ? 'rgba(17, 24, 39, 0.85)' : 'rgba(255, 255, 255, 0.7)',
+            border: `1px solid ${isDark ? currentTheme.colors.border : 'rgba(229, 231, 235, 0.5)'}`
           }}
         >
           <h4 

@@ -17,6 +17,7 @@ import type { TopicReference, JourneyReference } from '../models/JournalEntry.js
 export interface TopicData {
   id: number;
   title: string;
+  category: string;
 }
 
 // Journey data structure (mirrors frontend LearningPath)

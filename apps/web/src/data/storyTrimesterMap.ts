@@ -64,6 +64,26 @@ export const storyTrimesterMap: Record<number, Trimester> = {
   33: 'third',   // Network Journey - advanced technical deep dive
   34: 'second',  // Subconscious Mind - valuable for prenatal bonding
   35: 'third',   // LLM Story - advanced AI topic
+  
+  // NATURE & ENGINEERING
+  36: 'second',  // Wood Wide Web - nature's interconnection, relevant to prenatal bonding
+  37: 'first',   // Water Cycle - foundational nature topic
+  38: 'second',  // Flight - intermediate engineering topic
+  
+  // PHILOSOPHY, ART & HISTORY
+  39: 'third',   // Stoicism - advanced philosophical topic
+  40: 'first',   // Color Theory - foundational art topic
+  41: 'second',  // Silk Road - intermediate history topic
+  
+  // INDIAN MYTHOLOGY & SPIRITUALITY
+  42: 'second',  // Nataraja - cosmic dance, intermediate mythology
+  43: 'second',  // Samudra Manthan - churning of ocean, intermediate mythology
+  44: 'third',   // Dashavatara - evolution through avatars, advanced mythology
+  45: 'third',   // Bhagavad Gita - advanced philosophical/spiritual topic
+  46: 'second',  // Ayurveda - science of life, relevant to prenatal health
+  47: 'third',   // Upanishads - advanced philosophical topic
+  48: 'second',  // Ramayana - epic journey, intermediate mythology
+  49: 'any',     // Yoga - union of body and spirit, valuable at any stage
 };
 
 /**

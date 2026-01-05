@@ -50,9 +50,9 @@ export const FloatingJournalBar: React.FC<FloatingJournalBarProps> = ({
 
   // Position classes
   const positionClasses = {
-    'bottom-right': 'right-4 bottom-4',
-    'bottom-left': 'left-4 bottom-4',
-    'bottom-center': 'left-1/2 -translate-x-1/2 bottom-4',
+    'bottom-right': 'right-[11px] bottom-[11px]',
+    'bottom-left': 'left-[11px] bottom-[11px]',
+    'bottom-center': 'left-1/2 -translate-x-1/2 bottom-[11px]',
   };
 
   // Don't render for non-authenticated users

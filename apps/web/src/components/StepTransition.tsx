@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef } from "react";
 
 /**
  * StepTransition component - Provides smooth animated transitions between step content
@@ -20,11 +20,11 @@ export const StepTransition: React.FC<StepTransitionProps> = ({
   stepKey,
   children,
   duration = 450,
-  className = '',
+  className = "",
 }) => {
   const [displayedContent, setDisplayedContent] = useState(children);
   const [displayedKey, setDisplayedKey] = useState(stepKey);
-  const [phase, setPhase] = useState<'idle' | 'exit' | 'enter'>('idle');
+  const [phase, setPhase] = useState<"idle" | "exit" | "enter">("idle");
   const timeoutRef1 = useRef<ReturnType<typeof setTimeout> | null>(null);
   const timeoutRef2 = useRef<ReturnType<typeof setTimeout> | null>(null);
   const pendingChildrenRef = useRef<React.ReactNode>(children);
@@ -43,7 +43,7 @@ export const StepTransition: React.FC<StepTransitionProps> = ({
 
       // Start exit animation
       // eslint-disable-next-line react-hooks/set-state-in-effect
-      setPhase('exit');
+      setPhase("exit");
 
       const exitDuration = duration * 0.35;
       const enterDuration = duration * 0.65;
@@ -52,11 +52,11 @@ export const StepTransition: React.FC<StepTransitionProps> = ({
       timeoutRef1.current = setTimeout(() => {
         setDisplayedContent(pendingChildrenRef.current);
         setDisplayedKey(stepKey);
-        setPhase('enter');
+        setPhase("enter");
 
         // After enter, go idle
         timeoutRef2.current = setTimeout(() => {
-          setPhase('idle');
+          setPhase("idle");
         }, enterDuration);
       }, exitDuration);
     }
@@ -69,7 +69,7 @@ export const StepTransition: React.FC<StepTransitionProps> = ({
 
   // Update content without animation when key hasn't changed
   useEffect(() => {
-    if (stepKey === displayedKey && phase === 'idle') {
+    if (stepKey === displayedKey && phase === "idle") {
       // eslint-disable-next-line react-hooks/set-state-in-effect
       setDisplayedContent(children);
     }
@@ -82,12 +82,12 @@ export const StepTransition: React.FC<StepTransitionProps> = ({
     <>
       <style>{`
         .step-transition-wrapper {
-          will-change: opacity, transform;
+          /* Remove global will-change to prevent stacking context isolation that breaks backdrop-filter */
         }
         
         .step-idle {
           opacity: 1;
-          transform: translateY(0) scale(1);
+          transform: none;
         }
         
         .step-exit {
@@ -144,8 +144,8 @@ export const StepTransition: React.FC<StepTransitionProps> = ({
       `}</style>
       <div
         className={`step-transition-wrapper step-${phase} ${className}`}
-        aria-live={phase !== 'idle' ? 'polite' : 'off'}
-        aria-busy={phase !== 'idle'}
+        aria-live={phase !== "idle" ? "polite" : "off"}
+        aria-busy={phase !== "idle"}
       >
         {displayedContent}
       </div>

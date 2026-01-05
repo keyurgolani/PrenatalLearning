@@ -92,8 +92,11 @@ export const CoreContentStep: React.FC<CoreContentStepProps> = ({ story }) => {
           elements.push(
             <div key={`section-${index}`} className="mb-6">
               <h4
-                className="text-xl font-semibold mb-3 flex items-center"
-                style={{ color: isDark ? currentTheme.colors.text : '#1f2937' }}
+                className="text-xl font-bold mb-3 flex items-center"
+                style={{ 
+                  color: isDark ? currentTheme.colors.text : '#111827',
+                  textShadow: isDark ? '0 1px 2px rgba(0,0,0,0.8)' : '0 1px 1px rgba(255,255,255,0.5)'
+                }}
               >
                 <span className="w-1.5 h-6 bg-purple-500 rounded-full mr-3" />
                 {heading}
@@ -101,7 +104,11 @@ export const CoreContentStep: React.FC<CoreContentStepProps> = ({ story }) => {
               {rest && (
                 <p
                   className="leading-relaxed"
-                  style={{ color: isDark ? currentTheme.colors.textMuted : '#374151' }}
+                  style={{ 
+                    color: isDark ? currentTheme.colors.textMuted : '#374151',
+                    textShadow: isDark ? '0 1px 1px rgba(0,0,0,0.8)' : 'none',
+                    fontWeight: 450
+                  }}
                 >
                   {rest}
                 </p>
@@ -115,7 +122,11 @@ export const CoreContentStep: React.FC<CoreContentStepProps> = ({ story }) => {
           <p
             key={`section-${index}`}
             className="leading-relaxed mb-4"
-            style={{ color: isDark ? currentTheme.colors.textMuted : '#374151' }}
+            style={{ 
+              color: isDark ? currentTheme.colors.textMuted : '#374151',
+              textShadow: isDark ? '0 1px 1px rgba(0,0,0,0.8)' : 'none',
+              fontWeight: 450
+            }}
           >
             {section}
           </p>
@@ -222,10 +233,10 @@ export const CoreContentStep: React.FC<CoreContentStepProps> = ({ story }) => {
 
       {/* Main Content */}
       <div
-        className="rounded-2xl p-6 md:p-8"
+        className="rounded-2xl p-6 md:p-8 backdrop-blur-[3px]"
         style={{
-          backgroundColor: isDark ? currentTheme.colors.surfaceHover : '#ffffff',
-          border: `1px solid ${isDark ? currentTheme.colors.border : '#e5e7eb'}`,
+          backgroundColor: isDark ? 'rgba(17, 24, 39, 0.85)' : 'rgba(255, 255, 255, 0.7)',
+          border: `1px solid ${isDark ? currentTheme.colors.border : 'rgba(229, 231, 235, 0.5)'}`,
         }}
       >
         {/* Narrate Button - plays entire section audio */}
@@ -266,10 +277,10 @@ export const CoreContentStep: React.FC<CoreContentStepProps> = ({ story }) => {
 
       {/* Key Concepts Summary */}
       <div
-        className="rounded-2xl p-6"
+        className="rounded-2xl p-6 backdrop-blur-[3px]"
         style={{
-          backgroundColor: isDark ? currentTheme.colors.surfaceHover : undefined,
-          background: isDark ? undefined : 'linear-gradient(to bottom right, #eef2ff, #faf5ff)',
+          backgroundColor: isDark ? 'rgba(17, 24, 39, 0.8)' : undefined,
+          background: isDark ? undefined : 'linear-gradient(to bottom right, rgba(238, 242, 255, 0.7), rgba(250, 245, 255, 0.7))',
         }}
       >
         <h4

@@ -1,0 +1,51 @@
+# Image Manifest for Story 36: The Wood Wide Web: Forest Whisperers
+# Category: Nature
+# Duration: 60 minutes
+# Difficulty: Intermediate
+
+# Required Images:
+
+concept.webp
+  - Description: Abstract representation of mycelium network
+  - Content: Intricate web of glowing fungal threads (mycelium) spreading underground, 
+    connecting tree roots in a vast network. Bioluminescent quality with soft golden 
+    and silver threads against rich dark soil. Should evoke the feeling of a living 
+    internet beneath the forest floor.
+  - Style: Ethereal, scientific yet magical, warm earth tones with luminous accents
+  - Mood: Wonder, interconnection, hidden complexity
+
+analogy.webp
+  - Description: Visual metaphor - family as root system
+  - Content: A family tree visualization where human figures are connected by 
+    root-like structures underground, mirroring how trees connect through fungal 
+    networks. Could show a mother figure as a central "Mother Tree" with smaller 
+    figures (children) connected to her through glowing root networks.
+  - Style: Warm, nurturing, blend of natural and human elements
+  - Mood: Love, connection, support, belonging
+
+intro.webp
+  - Description: Welcoming forest scene
+  - Content: A serene, ancient forest with towering trees, dappled sunlight filtering 
+    through the canopy, soft moss-covered ground. One magnificent old tree (Mother Tree) 
+    should be prominent. The scene should feel peaceful and inviting, with a hint of 
+    magic in the quality of light. Subtle suggestion of the hidden world below through 
+    gentle glowing at the base of trees.
+  - Style: Photorealistic with dreamy quality, rich greens and golden light
+  - Mood: Peace, wonder, invitation to explore, ancient wisdom
+
+# Optional Supporting Images:
+
+mother-tree.webp
+  - Description: Close-up of a majestic Mother Tree
+  - Content: A grand, ancient tree with massive trunk and spreading roots visible 
+    above ground. Surrounding smaller trees and saplings. Warm, nurturing presence.
+
+underground-network.webp
+  - Description: Cross-section view of forest underground
+  - Content: Cutaway illustration showing tree roots connected by fungal threads, 
+    with nutrients (shown as glowing particles) flowing between trees.
+
+seedling-receiving.webp
+  - Description: A small seedling receiving nutrients
+  - Content: Tender image of a tiny seedling in shade, with visible connection to 
+    larger tree through glowing underground threads. Sugar/nutrients flowing toward it.

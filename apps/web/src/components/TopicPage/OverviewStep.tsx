@@ -1,8 +1,7 @@
 import React, { useMemo } from 'react';
 import type { Story, Category } from '../../types';
 import type { ImageManifestEntry } from '../../types/media';
-import { getExternalResources } from '../../data/externalResources';
-import { ExternalResourceSection } from './ExternalResourceSection';
+
 import { useTheme } from '../../contexts/ThemeContext';
 import { useReadingMode } from '../../contexts/ReadingModeContext';
 import { getReadingTimeForText, formatReadingTime } from '../../utils/readingTime';
@@ -54,11 +53,7 @@ export const OverviewStep: React.FC<OverviewStepProps> = ({ story, category }) =
     );
   }, [story.content.narrative.introduction, sectionImages, story.content.analogies, story.content.keyConcepts]);
   
-  // Get before/after images, excluding those that will be placed inline
-  const beforeImages = useMemo(() => 
-    getPositionedImages(sectionImages, 'before', inlinePlacements),
-    [sectionImages, inlinePlacements]
-  );
+  // Get after images, excluding those that will be placed inline
   const afterImages = useMemo(() => 
     getPositionedImages(sectionImages, 'after', inlinePlacements),
     [sectionImages, inlinePlacements]
@@ -82,7 +77,7 @@ export const OverviewStep: React.FC<OverviewStepProps> = ({ story, category }) =
   );
 
   return (
-    <div className="space-y-4 md:space-y-6">
+    <div className="space-y-6">
       {/* Topic Header */}
       <div className="text-center">
         <span
@@ -91,13 +86,13 @@ export const OverviewStep: React.FC<OverviewStepProps> = ({ story, category }) =
           {category?.name || 'Unknown Category'}
         </span>
         <h2
-          className="text-xl md:text-3xl font-bold mb-3"
+          className="text-2xl md:text-3xl font-bold mb-3"
           style={{ color: isDark ? currentTheme.colors.text : '#1f2937' }}
         >
           {story.title}
         </h2>
         <p
-          className="text-base md:text-lg max-w-2xl mx-auto"
+          className="text-lg max-w-2xl mx-auto"
           style={{ color: isDark ? currentTheme.colors.textMuted : '#4b5563' }}
         >
           {story.description}
@@ -164,14 +159,22 @@ export const OverviewStep: React.FC<OverviewStepProps> = ({ story, category }) =
 
       {/* Introduction Section */}
       <div
-        className="rounded-2xl p-6 md:p-8"
+        className="rounded-2xl p-6 md:p-8 relative overflow-hidden backdrop-blur-[3px]"
         style={{
-          backgroundColor: isDark ? currentTheme.colors.surfaceHover : undefined,
-          background: isDark ? undefined : 'linear-gradient(to bottom right, #faf5ff, #fdf2f8)',
+          backgroundColor: isDark 
+            ? 'rgba(17, 24, 39, 0.85)' 
+            : 'rgba(255, 255, 255, 0.7)',
         }}
       >
+        <div className="relative z-10">
         <div className="flex items-center justify-between mb-4">
-           <h2 className="text-2xl font-bold mb-6 flex items-center gap-2" style={{ color: currentTheme.colors.text }}>
+           <h2 
+             className="text-2xl font-bold mb-6 flex items-center gap-2" 
+             style={{ 
+               color: isDark ? '#f3f4f6' : '#111827',
+               textShadow: isDark ? '0 2px 4px rgba(0,0,0,0.8)' : '0 1px 2px rgba(255,255,255,0.5)',
+             }}
+           >
             <svg className="w-6 h-6 text-purple-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z" />
             </svg>
@@ -206,17 +209,6 @@ export const OverviewStep: React.FC<OverviewStepProps> = ({ story, category }) =
           storyTitle={story.title}
         />
 
-        {/* Before images */}
-        {beforeImages.map((img: ImageManifestEntry, index: number) => (
-          <StoryImage
-            key={`before-${index}`}
-            src={getImageUrl(story.id, img.filename)}
-            alt={img.altText}
-            caption={img.caption}
-            displayMode="full"
-          />
-        ))}
-
         <div className="prose prose-purple max-w-none content-scaled">
           {/* Introduction paragraphs with inline images */}
           {story.content.narrative.introduction.split(/\n\n+/).map((paragraph, index) => {
@@ -225,7 +217,11 @@ export const OverviewStep: React.FC<OverviewStepProps> = ({ story, category }) =
               <React.Fragment key={index}>
                 <p
                   className="leading-relaxed mb-4"
-                  style={{ color: isDark ? currentTheme.colors.textMuted : '#374151' }}
+                  style={{ 
+                    color: isDark ? '#e5e7eb' : '#1f2937',
+                    textShadow: isDark ? '0 1px 2px rgba(0,0,0,0.8)' : 'none',
+                    fontWeight: 450,
+                  }}
                 >
                   {paragraph}
                 </p>
@@ -257,6 +253,7 @@ export const OverviewStep: React.FC<OverviewStepProps> = ({ story, category }) =
             displayMode="full"
           />
         ))}
+        </div>
       </div>
 
       {/* Key Concepts Preview */}
@@ -294,8 +291,7 @@ export const OverviewStep: React.FC<OverviewStepProps> = ({ story, category }) =
         </ul>
       </div>
 
-      {/* External Resources Section */}
-      <ExternalResourceSection resources={getExternalResources(story.id)} />
+
     </div>
   );
 };

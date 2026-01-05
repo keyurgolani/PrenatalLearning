@@ -250,7 +250,7 @@ export const LearningPathView: React.FC<LearningPathViewProps> = ({
                 >
                   {/* Category Color Bar */}
                   <div
-                    className={`h-1.5 ${category?.color || 'bg-gray-400'}`}
+                    className={`h-0.5 ${category?.color || 'bg-gray-400'}`}
                     aria-hidden="true"
                   />
 

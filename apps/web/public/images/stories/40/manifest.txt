@@ -1,0 +1,51 @@
+# Color Theory: Painting with Light - Image Manifest
+# Story ID: 40
+# Category: Art & Design
+
+## Required Images
+
+### concept.webp
+Description: Abstract representation of the color spectrum and prism
+Visual Elements:
+- A crystal prism with white light entering from one side
+- Rainbow spectrum emerging and spreading from the prism
+- Colors should flow smoothly: red, orange, yellow, green, blue, indigo, violet
+- Ethereal, magical quality with soft glowing edges
+- Dark background to make colors pop
+- Subtle sparkles or light particles in the spectrum
+Style: Dreamy, luminous, scientifically inspired but artistically rendered
+
+### analogy.webp
+Description: Visual metaphor of emotions as colors on an artist's palette
+Visual Elements:
+- A heart-shaped or organic artist's palette
+- Pools of vibrant colors representing different emotions
+- Warm colors (red, orange, yellow) on one side
+- Cool colors (blue, green, violet) on the other side
+- Soft brushstrokes suggesting the blending of emotions
+- Gentle, nurturing atmosphere
+- Perhaps a subtle silhouette of mother and baby reflected in the colors
+Style: Warm, emotional, painterly, soft edges
+
+### intro.webp
+Description: Sunrise bringing color to a black and white world
+Visual Elements:
+- Split composition: left side in grayscale, right side in full color
+- Golden sunrise on the horizon as the dividing element
+- Landscape elements (trees, flowers, sky) transitioning from gray to color
+- The color spreading like a wave of warmth
+- Soft, hopeful morning light
+- Sense of awakening and wonder
+Style: Magical realism, transitional, hopeful, dawn atmosphere
+
+## Color Palette Guidelines
+- Primary spectrum colors should be vibrant but not harsh
+- Use soft gradients and glowing effects
+- Maintain a sense of warmth and wonder appropriate for prenatal content
+- Balance scientific accuracy with emotional resonance
+
+## Technical Specifications
+- Format: WebP
+- Recommended dimensions: 1200x800 pixels minimum
+- Aspect ratio: 3:2 preferred
+- File size: Optimize for web (under 200KB each)

@@ -3,6 +3,8 @@ import type { Story } from '../../types';
 import type { ImageManifestEntry } from '../../types/media';
 import { useTheme } from '../../contexts/ThemeContext';
 import { useReadingMode } from '../../contexts/ReadingModeContext';
+import { getExternalResources } from '../../data/externalResources';
+import { ExternalResourceSection } from './ExternalResourceSection';
 import { getReadingTimeForText, formatReadingTime } from '../../utils/readingTime';
 import { useMediaAssets, getImageUrl, getAudioUrl } from '../../hooks/useMediaAssets';
 import { StoryImage } from '../StoryImage';
@@ -221,14 +223,14 @@ export const IntegrationStep: React.FC<IntegrationStepProps> = ({ story }) => {
 
       {/* Integration Content */}
       <div
-        className="rounded-2xl p-6 md:p-8"
+        className="rounded-2xl p-6 md:p-8 backdrop-blur-[3px]"
         style={
           isDark
             ? {
-                backgroundColor: 'rgba(20, 184, 166, 0.1)',
+                backgroundColor: 'rgba(20, 184, 166, 0.15)',
                 border: '1px solid rgba(20, 184, 166, 0.2)',
               }
-            : { background: 'linear-gradient(to bottom right, #f0fdfa, #ecfeff)' }
+            : { background: 'linear-gradient(to bottom right, rgba(240, 253, 250, 0.8), rgba(236, 254, 255, 0.8))' }
         }
       >
         {/* Narrate Button - plays entire section audio */}
@@ -269,10 +271,10 @@ export const IntegrationStep: React.FC<IntegrationStepProps> = ({ story }) => {
 
       {/* Mother Activities */}
       <div
-        className="rounded-2xl p-6"
+        className="rounded-2xl p-6 backdrop-blur-[3px]"
         style={{
-          backgroundColor: isDark ? currentTheme.colors.surfaceHover : '#ffffff',
-          border: `1px solid ${isDark ? currentTheme.colors.border : '#e5e7eb'}`,
+          backgroundColor: isDark ? 'rgba(17, 24, 39, 0.85)' : 'rgba(255, 255, 255, 0.7)',
+          border: `1px solid ${isDark ? currentTheme.colors.border : 'rgba(229, 231, 235, 0.5)'}`,
         }}
       >
         <h4
@@ -283,14 +285,14 @@ export const IntegrationStep: React.FC<IntegrationStepProps> = ({ story }) => {
         </h4>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
           <div
-            className="rounded-xl p-4"
+            className="rounded-xl p-4 backdrop-blur-[2px]"
             style={
               isDark
                 ? {
                     backgroundColor: 'rgba(236, 72, 153, 0.15)',
                     border: '1px solid rgba(236, 72, 153, 0.3)',
                   }
-                : { backgroundColor: '#fdf2f8', border: '1px solid #fbcfe8' }
+                : { backgroundColor: 'rgba(253, 242, 248, 0.8)', border: '1px solid #fbcfe8' }
             }
           >
             <h5 style={{ color: isDark ? '#F472B6' : '#9d174d' }} className="font-medium mb-1">
@@ -301,14 +303,14 @@ export const IntegrationStep: React.FC<IntegrationStepProps> = ({ story }) => {
             </p>
           </div>
           <div
-            className="rounded-xl p-4"
+            className="rounded-xl p-4 backdrop-blur-[2px]"
             style={
               isDark
                 ? {
                     backgroundColor: 'rgba(59, 130, 246, 0.15)',
                     border: '1px solid rgba(59, 130, 246, 0.3)',
                   }
-                : { backgroundColor: '#eff6ff', border: '1px solid #bfdbfe' }
+                : { backgroundColor: 'rgba(239, 246, 255, 0.8)', border: '1px solid #bfdbfe' }
             }
           >
             <h5 style={{ color: isDark ? '#60A5FA' : '#1e40af' }} className="font-medium mb-1">
@@ -319,14 +321,14 @@ export const IntegrationStep: React.FC<IntegrationStepProps> = ({ story }) => {
             </p>
           </div>
           <div
-            className="rounded-xl p-4"
+            className="rounded-xl p-4 backdrop-blur-[2px]"
             style={
               isDark
                 ? {
                     backgroundColor: 'rgba(168, 85, 247, 0.15)',
                     border: '1px solid rgba(168, 85, 247, 0.3)',
                   }
-                : { backgroundColor: '#faf5ff', border: '1px solid #e9d5ff' }
+                : { backgroundColor: 'rgba(250, 245, 255, 0.8)', border: '1px solid #e9d5ff' }
             }
           >
             <h5 style={{ color: isDark ? '#C084FC' : '#6b21a8' }} className="font-medium mb-1">
@@ -337,14 +339,14 @@ export const IntegrationStep: React.FC<IntegrationStepProps> = ({ story }) => {
             </p>
           </div>
           <div
-            className="rounded-xl p-4"
+            className="rounded-xl p-4 backdrop-blur-[2px]"
             style={
               isDark
                 ? {
                     backgroundColor: 'rgba(251, 191, 36, 0.15)',
                     border: '1px solid rgba(251, 191, 36, 0.3)',
                   }
-                : { backgroundColor: '#fffbeb', border: '1px solid #fde68a' }
+                : { backgroundColor: 'rgba(255, 251, 235, 0.8)', border: '1px solid #fde68a' }
             }
           >
             <h5 style={{ color: isDark ? '#FBBF24' : '#92400e' }} className="font-medium mb-1">
@@ -356,6 +358,9 @@ export const IntegrationStep: React.FC<IntegrationStepProps> = ({ story }) => {
           </div>
         </div>
       </div>
+
+      {/* External Resources Section */}
+      <ExternalResourceSection resources={getExternalResources(story.id)} />
     </div>
   );
 };

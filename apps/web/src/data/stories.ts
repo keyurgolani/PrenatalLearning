@@ -37,6 +37,20 @@ import { artStory } from './stories/art-story';
 import { networkJourneyStory } from './stories/network-journey-story';
 import { subconsciousMindStory } from './stories/subconscious-mind-story';
 import { llmStory } from './stories/llm-story';
+import { woodWideWebStory } from './stories/wood-wide-web-story';
+import { waterCycleStory } from './stories/water-cycle-story';
+import { flightStory } from './stories/flight-story';
+import { stoicismStory } from './stories/stoicism-story';
+import { colorTheoryStory } from './stories/color-theory-story';
+import { silkRoadStory } from './stories/silk-road-story';
+import { natarajaStory } from './stories/nataraja-story';
+import { samudraManthanStory } from './stories/samudra-manthan-story';
+import { dashavataraStory } from './stories/dashavatara-story';
+import { bhagavadGitaStory } from './stories/bhagavad-gita-story';
+import { ayurvedaStory } from './stories/ayurveda-story';
+import { upanishadsStory } from './stories/upanishads-story';
+import { ramayanaStory } from './stories/ramayana-story';
+import { yogaStory } from './stories/yoga-story';
 
 /**
  * Story data for the Prenatal Learning Hub
@@ -156,6 +170,26 @@ export const stories: Story[] = [
   convertToStory(networkJourneyStory as StoryFileContent),  // Technology - "What Happens When..."
   convertToStory(subconsciousMindStory as StoryFileContent), // Psychology - Subconscious Mind
   convertToStory(llmStory as StoryFileContent), // Technology - Large Language Models
+  
+  // Nature & Engineering Topics
+  convertToStory(woodWideWebStory as StoryFileContent), // Nature - Wood Wide Web
+  convertToStory(waterCycleStory as StoryFileContent), // Nature - Water Cycle
+  convertToStory(flightStory as StoryFileContent), // Engineering - Flight
+  
+  // Philosophy, Art & History Topics
+  convertToStory(stoicismStory as StoryFileContent), // Philosophy - Stoicism
+  convertToStory(colorTheoryStory as StoryFileContent), // Art - Color Theory
+  convertToStory(silkRoadStory as StoryFileContent), // History - Silk Road
+  
+  // Indian Mythology & Spirituality Topics
+  convertToStory(natarajaStory as StoryFileContent), // Mythology - Nataraja
+  convertToStory(samudraManthanStory as StoryFileContent), // Mythology - Samudra Manthan
+  convertToStory(dashavataraStory as StoryFileContent), // Mythology - Dashavatara
+  convertToStory(bhagavadGitaStory as StoryFileContent), // Mythology - Bhagavad Gita
+  convertToStory(ayurvedaStory as StoryFileContent), // Mythology - Ayurveda
+  convertToStory(upanishadsStory as StoryFileContent), // Mythology - Upanishads
+  convertToStory(ramayanaStory as StoryFileContent), // Mythology - Ramayana
+  convertToStory(yogaStory as StoryFileContent), // Mythology - Yoga
 ];
 
 /**

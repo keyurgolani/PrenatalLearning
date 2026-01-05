@@ -1,0 +1,49 @@
+# Image Manifest for Story 42: The Cosmic Dance: Shiva Nataraja and the Universe
+# Category: Mythology
+# Duration: 60 minutes
+# Difficulty: Intermediate
+
+# Required Images:
+
+concept.webp
+- Description: The Nataraja statue with cosmic symbolism
+- Visual elements: Shiva as Nataraja dancing within a ring of fire (Prabha Mandala), four arms holding drum and flame, one hand raised in blessing, foot raised in liberation, standing on the dwarf Apasmara
+- Colors: Deep cosmic blues and purples, golden fire, bronze/copper tones for the figure, starlight accents
+- Style: Majestic, sacred, cosmic—blending traditional iconography with universal cosmic imagery
+- Mood: Awe, reverence, cosmic wonder, eternal rhythm
+
+analogy.webp
+- Description: Visual metaphor of the dance of creation and transformation
+- Visual elements: A flowing dance between light and shadow, creation and dissolution—perhaps showing a figure dancing with one hand releasing stars and the other hand holding flame, surrounded by swirling cosmic energy
+- Colors: Warm golds and oranges (creation/fire) blending with cool blues and silvers (cosmos/preservation)
+- Style: Ethereal, flowing, dynamic movement captured in stillness
+- Mood: Balance, harmony, the beauty of opposites dancing together
+
+intro.webp
+- Description: Cosmic dance imagery with swirling galaxies and energy
+- Visual elements: Swirling galaxies, nebulae, and cosmic energy forming dance-like patterns; perhaps a subtle suggestion of a dancing figure within the cosmic swirls; stars and light trails suggesting movement and rhythm
+- Colors: Deep space blues and purples, golden starlight, pink and orange nebula colors, white light accents
+- Style: Cosmic, dreamlike, suggesting both vastness and intimacy
+- Mood: Wonder, invitation, the universe as living dance
+
+# Optional Supporting Images:
+
+five-acts.webp
+- Description: Visual representation of the Panchakritya (five cosmic acts)
+- Visual elements: Five interconnected symbols or scenes representing creation (drum/sound waves), preservation (protective hand), transformation (flame), concealment (veiled mystery), and grace (raised foot/liberation)
+- Style: Symbolic, flowing connections between the five elements
+
+drum-flame.webp
+- Description: The damaru drum and sacred flame
+- Visual elements: Close-up of the cosmic drum with sound waves emanating, and the sacred flame with transformative energy
+- Style: Detailed, symbolic, showing the creative and transformative powers
+
+cosmic-cycles.webp
+- Description: The cycles of cosmic time (Yugas and Kalpas)
+- Visual elements: A great wheel or spiral showing the cycles of time, with ages flowing into each other, creation and dissolution in eternal rhythm
+- Style: Mandala-like, cyclical, suggesting eternity
+
+cern-connection.webp
+- Description: The bridge between ancient wisdom and modern physics
+- Visual elements: Split or blended image showing the Nataraja statue alongside particle physics imagery (particle trails, atomic structures, the dance of subatomic particles)
+- Style: Bridging ancient and modern, showing the unity of wisdom across time

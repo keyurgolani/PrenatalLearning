@@ -1,0 +1,42 @@
+# Image Manifest for Story 37: The Water Cycle: The Journey of a Drop
+# Category: Nature
+# Duration: 60 minutes
+# Difficulty: Foundational
+
+## Required Images
+
+### concept.webp
+Abstract representation of the water cycle
+- Visual elements: Circular flow showing evaporation, condensation, precipitation, collection
+- Color palette: Blues, whites, soft greens
+- Style: Ethereal, flowing, interconnected
+- Key imagery: Sun rays lifting water, clouds forming, rain falling, rivers flowing to ocean
+- Mood: Eternal, peaceful, cyclical
+
+### analogy.webp
+Visual metaphor for water's resilience and persistence
+- Visual elements: Water droplets slowly carving through stone, creating a canyon
+- Color palette: Deep earth tones with flowing blue water
+- Style: Powerful yet gentle, showing contrast between soft water and hard stone
+- Key imagery: Grand Canyon-like formation with water flowing through
+- Mood: Patient strength, gentle persistence, transformation over time
+
+### intro.webp
+A raindrop on a leaf - the opening scene
+- Visual elements: Single crystal-clear raindrop resting on a green leaf after rain
+- Color palette: Fresh greens, crystal clear water, soft morning light
+- Style: Intimate, inviting, wonder-inducing
+- Key imagery: Macro view of raindrop with light refracting through it
+- Mood: Peaceful, curious, beginning of a journey
+
+## Image Specifications
+- Format: WebP
+- Recommended dimensions: 1200x800 pixels minimum
+- Aspect ratio: 3:2 preferred
+- File size: Optimize for web (under 200KB each)
+- Alt text should describe the image for accessibility
+
+## Usage Notes
+- concept.webp: Used in the core content section to illustrate the water cycle
+- analogy.webp: Used to reinforce the lesson about water's patient persistence
+- intro.webp: Used at the beginning of the story to set the scene

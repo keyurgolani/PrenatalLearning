@@ -51,6 +51,21 @@ export const categories: Category[] = [
     name: 'Society & Culture',
     color: 'bg-orange-500',
   },
+  {
+    id: 'nature',
+    name: 'Nature & Environment',
+    color: 'bg-teal-500',
+  },
+  {
+    id: 'philosophy',
+    name: 'Philosophy & Wisdom',
+    color: 'bg-slate-500',
+  },
+  {
+    id: 'mythology',
+    name: 'Mythology & Spirituality',
+    color: 'bg-fuchsia-500',
+  },
 ];
 
 /**

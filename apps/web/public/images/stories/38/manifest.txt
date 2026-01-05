@@ -1,0 +1,42 @@
+# Image Manifest for Story 38: The Story of Flight: Escaping Gravity
+# Category: Engineering
+# Duration: 60 minutes
+
+# Required Images:
+
+concept.webp
+- Description: Abstract representation of flight and aerodynamics
+- Visual elements: Wing cross-section showing airflow, lift arrows, curved airfoil shape
+- Style: Scientific yet dreamy, showing air flowing over a wing with visible pressure differences
+- Colors: Sky blues, soft whites, golden sunlight
+- Mood: Wonder, discovery, the physics of flight made beautiful
+
+analogy.webp
+- Description: Visual metaphor of love as lift - a mother lifting a child toward the sky
+- Visual elements: Mother gently lifting child upward, soft clouds in background, sense of weightlessness
+- Style: Warm, emotional, tender moment of connection
+- Colors: Warm golden light, soft pastels, sky blues
+- Mood: Love, support, the emotional lift that carries us through life
+
+intro.webp
+- Description: Birds soaring in the sky, evoking the human dream of flight
+- Visual elements: Eagles or hawks gliding on thermals, vast blue sky, perhaps a person looking up from below
+- Style: Atmospheric, inspiring, capturing the ancient longing to fly
+- Colors: Deep sky blues, white clouds, golden sunlight
+- Mood: Wonder, longing, freedom, the dream that inspired human flight
+
+# Optional Additional Images:
+
+wright-brothers.webp
+- Description: The Wright Flyer at Kitty Hawk, historic first flight
+- Visual elements: The 1903 Wright Flyer lifting off, sandy dunes, figures watching
+- Style: Historical yet warm, capturing the momentous occasion
+- Colors: Sepia tones with touches of sky blue
+- Mood: Triumph, courage, the moment when impossible became possible
+
+four-forces.webp
+- Description: Diagram showing the four forces of flight
+- Visual elements: Airplane with arrows showing lift, weight, thrust, and drag
+- Style: Educational but beautiful, clear and accessible
+- Colors: Soft blues and greens, clear labeling
+- Mood: Understanding, clarity, the elegant physics of flight

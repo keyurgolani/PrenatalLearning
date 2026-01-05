@@ -144,6 +144,62 @@ export { subconsciousMindExercises, getSubconsciousMindExercisesByType, getSubco
 export { llmStory } from './llm-story';
 export { llmExercises, getLLMExercisesByType, getLLMTotalExerciseDuration, getLLMRecommendedSequence } from './llm-exercises';
 
+// Wood Wide Web Story (Nature - Story 36) - "The Wood Wide Web: Forest Whisperers"
+export { woodWideWebStory } from './wood-wide-web-story';
+export { woodWideWebExercises, getWoodWideWebExercisesByType, getWoodWideWebTotalExerciseDuration, getWoodWideWebRecommendedSequence } from './wood-wide-web-exercises';
+
+// Water Cycle Story (Nature - Story 37) - "The Water Cycle: The Journey of a Drop"
+export { waterCycleStory } from './water-cycle-story';
+export { waterCycleExercises, getWaterCycleExercisesByType, getWaterCycleTotalExerciseDuration, getWaterCycleRecommendedSequence } from './water-cycle-exercises';
+
+// Flight Story (Engineering - Story 38) - "The Story of Flight: Escaping Gravity"
+export { flightStory } from './flight-story';
+export { flightExercises, getFlightExercisesByType, getFlightTotalExerciseDuration, getFlightRecommendedSequence } from './flight-exercises';
+
+// Stoicism Story (Philosophy - Story 39) - "Stoicism: The Inner Fortress"
+export { stoicismStory } from './stoicism-story';
+export { stoicismExercises, getStoicismExercisesByType, getStoicismTotalExerciseDuration, getStoicismRecommendedSequence } from './stoicism-exercises';
+
+// Color Theory Story (Art - Story 40) - "Color Theory: Painting with Light"
+export { colorTheoryStory } from './color-theory-story';
+export { colorTheoryExercises, getColorTheoryExercisesByType, getColorTheoryTotalExerciseDuration, getColorTheoryRecommendedSequence } from './color-theory-exercises';
+
+// Silk Road Story (History - Story 41) - "The Silk Road: The World's Ribbon"
+export { silkRoadStory } from './silk-road-story';
+export { silkRoadExercises, getSilkRoadExercisesByType, getSilkRoadTotalExerciseDuration, getSilkRoadRecommendedSequence } from './silk-road-exercises';
+
+// Nataraja Story (Mythology - Story 42) - "The Cosmic Dance: Shiva Nataraja and the Universe"
+export { natarajaStory } from './nataraja-story';
+export { natarajaExercises, getNatarajaExercisesByType, getNatarajaTotalExerciseDuration, getNatarajaRecommendedSequence } from './nataraja-exercises';
+
+// Samudra Manthan Story (Mythology - Story 43) - "The Churning of the Ocean: Samudra Manthan"
+export { samudraManthanStory } from './samudra-manthan-story';
+export { samudraManthanExercises, getSamudraManthanExercisesByType, getSamudraManthanTotalExerciseDuration, getSamudraManthanRecommendedSequence } from './samudra-manthan-exercises';
+
+// Dashavatara Story (Mythology - Story 44) - "The Avatars: Dashavatara and Evolution"
+export { dashavataraStory } from './dashavatara-story';
+export { dashavataraExercises, getDashavataraExercisesByType, getDashavataraTotalExerciseDuration, getDashavataraRecommendedSequence } from './dashavatara-exercises';
+
+// Bhagavad Gita Story (Mythology - Story 45) - "The Bhagavad Gita: The Song of Life"
+export { bhagavadGitaStory } from './bhagavad-gita-story';
+export { bhagavadGitaExercises, getBhagavadGitaExercisesByType, getBhagavadGitaTotalExerciseDuration, getBhagavadGitaRecommendedSequence } from './bhagavad-gita-exercises';
+
+// Ayurveda Story (Mythology - Story 46) - "Ayurveda: The Science of Life"
+export { ayurvedaStory } from './ayurveda-story';
+export { ayurvedaExercises, getAyurvedaExercisesByType, getAyurvedaTotalExerciseDuration, getAyurvedaRecommendedSequence } from './ayurveda-exercises';
+
+// Upanishads Story (Mythology - Story 47) - "The Upanishads: The Inner Universe"
+export { upanishadsStory } from './upanishads-story';
+export { upanishadsExercises, getUpanishadsExercisesByType, getUpanishadsTotalExerciseDuration, getUpanishadsRecommendedSequence } from './upanishads-exercises';
+
+// Ramayana Story (Mythology - Story 48) - "Ramayana: The Journey Home"
+export { ramayanaStory } from './ramayana-story';
+export { ramayanaExercises, getRamayanaExercisesByType, getRamayanaTotalExerciseDuration, getRamayanaRecommendedSequence } from './ramayana-exercises';
+
+// Yoga Story (Mythology - Story 49) - "Yoga: Union of Body and Spirit"
+export { yogaStory } from './yoga-story';
+export { yogaExercises, getYogaExercisesByType, getYogaTotalExerciseDuration, getYogaRecommendedSequence } from './yoga-exercises';
+
 // Story collection for easy access
 import { bigBangStory } from './big-bang-story';
 import { gravityStory } from './gravity-story';
@@ -180,6 +236,20 @@ import { artStory } from './art-story';
 import { networkJourneyStory } from './network-journey-story';
 import { subconsciousMindStory } from './subconscious-mind-story';
 import { llmStory } from './llm-story';
+import { woodWideWebStory } from './wood-wide-web-story';
+import { waterCycleStory } from './water-cycle-story';
+import { flightStory } from './flight-story';
+import { stoicismStory } from './stoicism-story';
+import { colorTheoryStory } from './color-theory-story';
+import { silkRoadStory } from './silk-road-story';
+import { natarajaStory } from './nataraja-story';
+import { samudraManthanStory } from './samudra-manthan-story';
+import { dashavataraStory } from './dashavatara-story';
+import { bhagavadGitaStory } from './bhagavad-gita-story';
+import { ayurvedaStory } from './ayurveda-story';
+import { upanishadsStory } from './upanishads-story';
+import { ramayanaStory } from './ramayana-story';
+import { yogaStory } from './yoga-story';
 
 export const storyContents = {
   1: bigBangStory,
@@ -217,6 +287,20 @@ export const storyContents = {
   33: networkJourneyStory,
   34: subconsciousMindStory,
   35: llmStory,
+  36: woodWideWebStory,
+  37: waterCycleStory,
+  38: flightStory,
+  39: stoicismStory,
+  40: colorTheoryStory,
+  41: silkRoadStory,
+  42: natarajaStory,
+  43: samudraManthanStory,
+  44: dashavataraStory,
+  45: bhagavadGitaStory,
+  46: ayurvedaStory,
+  47: upanishadsStory,
+  48: ramayanaStory,
+  49: yogaStory,
 };
 
 /**

@@ -22,6 +22,7 @@ import { StepTransition } from '../StepTransition';
 import { ErrorBoundary } from '../ErrorBoundary';
 import { ScrollIndicators } from '../ScrollIndicators';
 import { useSwipe } from '../../hooks/useSwipe';
+import { useMediaAssets, getImageUrl } from '../../hooks/useMediaAssets';
 
 /**
  * TopicPage component - Unified guided learning experience
@@ -75,6 +76,16 @@ const TopicPageInner: React.FC<TopicPageInnerProps> = ({
   const { currentTheme } = useTheme();
   const { settings: readingSettings, exitReadingMode, pauseAutoScroll } = useReadingMode();
   const { setCurrentPageStoryId, setCurrentSection } = useAudio();
+  
+  // Load media assets to get introduction image for background
+  const { images } = useMediaAssets(story.id);
+  const introductionImages = useMemo(() => images.get('introduction') || [], [images]);
+  const coverImageUrl = useMemo(() => {
+    if (introductionImages.length > 0) {
+      return getImageUrl(story.id, introductionImages[0].filename);
+    }
+    return null;
+  }, [story.id, introductionImages]);
   
   const [currentStep, setCurrentStepLocal] = useState<LearningStep>(initialStep);
   const [completedSteps, setCompletedSteps] = useState<LearningStep[]>(initialCompletedSteps);
@@ -272,7 +283,7 @@ const TopicPageInner: React.FC<TopicPageInnerProps> = ({
       >
         {/* Mobile Header: Back, Stepper (Center), Reading Mode (Right) */}
         {/* Requirements 7.1, 8.1 - Unified header with navigation and display controls */}
-        <div className="flex items-center justify-between mb-4 animate-fade-in gap-2">
+        <div className="flex items-center justify-between mb-4 animate-fade-in gap-2 relative z-10">
           {/* Left: Back Button */}
           <button
             onClick={onClose}
@@ -328,11 +339,36 @@ const TopicPageInner: React.FC<TopicPageInnerProps> = ({
           {/* Main content area */}
           <div className="flex-1 min-w-0 order-2 xl:order-1 flex flex-col min-h-0">
             <div 
-              className="flex-1 rounded-3xl shadow-xl flex flex-col min-h-0 overflow-hidden animate-slide-up"
-              style={{ backgroundColor: currentTheme.isDark ? currentTheme.colors.surface : '#ffffff' }}
+              className="flex-1 rounded-3xl shadow-xl flex flex-col min-h-0 overflow-hidden animate-slide-up relative"
+              style={{ 
+                backgroundColor: currentTheme.isDark ? currentTheme.colors.surface : 'rgba(255, 255, 255, 0.75)',
+              }}
             >
+              {/* Cover Background Image from Introduction */}
+              {coverImageUrl && (
+                <div 
+                  className="absolute inset-0 rounded-3xl overflow-hidden"
+                  style={{
+                    backgroundImage: `url(${coverImageUrl})`,
+                    backgroundSize: 'cover',
+                    backgroundPosition: 'center',
+                    opacity: currentTheme.isDark ? 0.25 : 0.35,
+                  }}
+                />
+              )}
+              {/* Gradient overlay for better text contrast */}
+              {coverImageUrl && (
+                <div 
+                  className="absolute inset-0 rounded-3xl overflow-hidden"
+                  style={{
+                    background: currentTheme.isDark 
+                      ? 'linear-gradient(to bottom, rgba(0,0,0,0.5) 0%, rgba(0,0,0,0.3) 50%, rgba(0,0,0,0.5) 100%)'
+                      : 'linear-gradient(to bottom, rgba(255,255,255,0.5) 0%, rgba(255,255,255,0.3) 50%, rgba(255,255,255,0.5) 100%)',
+                  }}
+                />
+              )}
               {/* Category Color Header */}
-              <div className={`h-2 ${category?.color || 'bg-gray-400'} rounded-t-3xl`} />
+              <div className={`h-2 ${category?.color || 'bg-gray-400'} rounded-t-3xl relative`} />
 
               {showCompletionSummary ? (
                 /* Completion Summary - Requirements 7.9 */
@@ -345,13 +381,38 @@ const TopicPageInner: React.FC<TopicPageInnerProps> = ({
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z" />
                       </svg>
                     </div>
-                    <h2 id="topic-page-title" className="text-2xl font-bold text-gray-800 mb-2">
+                    <h2 
+                      id="topic-page-title" 
+                      className="text-2xl font-bold mb-2"
+                      style={{ 
+                        color: currentTheme.isDark ? '#f3f4f6' : '#1f2937',
+                        textShadow: coverImageUrl 
+                          ? (currentTheme.isDark ? '0 2px 4px rgba(0,0,0,0.8)' : '0 1px 3px rgba(0,0,0,0.2)')
+                          : 'none',
+                      }}
+                    >
                       Congratulations!
                     </h2>
-                    <p className="text-gray-600 mb-2">
+                    <p 
+                      className="mb-2"
+                      style={{ 
+                        color: currentTheme.isDark ? '#d1d5db' : '#374151',
+                        textShadow: coverImageUrl 
+                          ? (currentTheme.isDark ? '0 1px 3px rgba(0,0,0,0.8)' : '0 1px 2px rgba(0,0,0,0.15)')
+                          : 'none',
+                      }}
+                    >
                       You've completed all sections of
                     </p>
-                    <p className="text-xl font-semibold text-purple-600 mb-6">
+                    <p 
+                      className="text-xl font-semibold mb-6"
+                      style={{ 
+                        color: currentTheme.isDark ? '#c084fc' : '#9333ea',
+                        textShadow: coverImageUrl 
+                          ? (currentTheme.isDark ? '0 2px 4px rgba(0,0,0,0.8)' : '0 1px 2px rgba(0,0,0,0.15)')
+                          : 'none',
+                      }}
+                    >
                       {story.title}
                     </p>
                     
@@ -379,7 +440,15 @@ const TopicPageInner: React.FC<TopicPageInnerProps> = ({
 
                     {/* Review sections */}
                     <div className="mb-8">
-                      <h3 className="text-lg font-semibold text-gray-800 mb-4">
+                      <h3 
+                        className="text-lg font-semibold mb-4"
+                        style={{ 
+                          color: currentTheme.isDark ? '#f3f4f6' : '#1f2937',
+                          textShadow: coverImageUrl 
+                            ? (currentTheme.isDark ? '0 2px 4px rgba(0,0,0,0.8)' : '0 1px 2px rgba(0,0,0,0.15)')
+                            : 'none',
+                        }}
+                      >
                         Want to review any section?
                       </h3>
                       <div className="flex flex-wrap justify-center gap-2">
@@ -410,10 +479,12 @@ const TopicPageInner: React.FC<TopicPageInnerProps> = ({
                 <>
                   {/* Progress Stepper - shown inline on medium screens, hidden on mobile (in header) and xl (sidebar) */}
                   <div 
-                    className="hidden md:block xl:hidden px-6 py-4"
+                    className="hidden md:block xl:hidden px-6 py-4 relative z-10"
                     style={{ 
-                      backgroundColor: currentTheme.isDark ? currentTheme.colors.surfaceHover : '#f9fafb',
-                      borderBottom: `1px solid ${currentTheme.isDark ? currentTheme.colors.border : '#e5e7eb'}`
+                      backgroundColor: currentTheme.isDark ? `${currentTheme.colors.surfaceHover}99` : 'rgba(255, 255, 255, 0.5)',
+                      backdropFilter: 'blur(3px)',
+                      WebkitBackdropFilter: 'blur(3px)',
+                      borderBottom: `1px solid ${currentTheme.isDark ? currentTheme.colors.border : 'rgba(229, 231, 235, 0.5)'}`
                     }}
                   >
                     <ProgressStepper
@@ -439,7 +510,7 @@ const TopicPageInner: React.FC<TopicPageInnerProps> = ({
                       <div 
                         ref={contentContainerRef}
                         className={`${readingSettings.readingModeEnabled ? 'min-h-[50vh]' : 'absolute inset-0 p-6 md:p-8 overflow-y-auto scrollbar-hidden'} content-scalable`}
-                        style={{ scrollBehavior: 'smooth' }}
+                        style={{ scrollBehavior: 'smooth', background: 'transparent' }}
                       >
                         <h2 id="topic-page-title" className="sr-only">{story.title}</h2>
                       <ErrorBoundary
@@ -507,9 +578,11 @@ const TopicPageInner: React.FC<TopicPageInnerProps> = ({
 
                   {/* Desktop Footer Actions - Requirements 7.4, 7.5 */}
                   <div 
-                    className="hidden md:flex sticky bottom-0 p-6 justify-between items-center animate-fade-in"
+                    className="hidden md:flex sticky bottom-0 p-6 justify-between items-center animate-fade-in relative z-10"
                     style={{ 
-                      backgroundColor: currentTheme.isDark ? currentTheme.colors.surface : '#ffffff',
+                      backgroundColor: currentTheme.isDark ? `${currentTheme.colors.surface}cc` : 'rgba(255, 255, 255, 0.8)',
+                      backdropFilter: 'blur(3px)',
+                      WebkitBackdropFilter: 'blur(3px)',
                       borderTop: `1px solid ${currentTheme.isDark ? currentTheme.colors.border : '#f3f4f6'}`
                     }}
                   >

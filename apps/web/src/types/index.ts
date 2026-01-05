@@ -12,7 +12,10 @@ export type CategoryId =
   | 'psychology'
   | 'language'
   | 'finance'
-  | 'society';
+  | 'society'
+  | 'nature'
+  | 'philosophy'
+  | 'mythology';
 
 /**
  * Difficulty level classification for stories

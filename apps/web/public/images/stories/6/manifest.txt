@@ -33,7 +33,7 @@ coreContent|inline|concept-5.png|Illustration of: AI is a powerful tool, but it 
 
 # === SECTION-SPECIFIC IMAGES ===
 
-introduction|before|intro-img0.png|[Add alt text for introduction image]|[Optional caption]
+introduction|before|intro-img0.png|A colorful illustration of AI and machine learning concepts|Colorful raptor
 # coreContent|before|core-img0.png|[Add alt text for coreContent image]|[Optional caption]
 # interactiveSection|before|interactive-img0.png|[Add alt text for interactiveSection image]|[Optional caption]
 # integration|before|integration-img0.png|[Add alt text for integration image]|[Optional caption]

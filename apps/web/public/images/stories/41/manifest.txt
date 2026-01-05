@@ -1,0 +1,44 @@
+# Image Manifest for Story 41: The Silk Road: The World's Ribbon
+# Category: History
+# Duration: 60 minutes
+# Difficulty: Intermediate
+
+# Required Images:
+
+concept.webp
+- Description: Abstract representation of the Silk Road trade routes
+- Visual elements: A network of golden paths stretching across a stylized map, connecting East and West
+- Colors: Warm golds, deep blues, rich reds representing different cultures
+- Style: Artistic, flowing lines suggesting connection and movement
+- Mood: Wonder, connection, ancient wisdom
+
+analogy.webp
+- Description: Visual metaphor of a tapestry woven from many threads
+- Visual elements: A beautiful tapestry being woven, with threads of many colors (gold, blue, green, red, purple) interweaving to create a unified pattern
+- Colors: Rich, diverse palette representing different cultures
+- Style: Warm, artistic, showing both individual threads and the unified whole
+- Mood: Unity in diversity, beauty through collaboration
+
+intro.webp
+- Description: Camel caravan crossing the desert at dawn/dusk
+- Visual elements: Silhouettes of Bactrian camels with riders, bells visible on their harnesses, golden sand dunes, warm sky
+- Colors: Golden sands, warm orange/pink sky, soft shadows
+- Style: Peaceful, evocative, slightly dreamlike
+- Mood: Adventure, journey, the romance of ancient travel
+
+# Optional Supporting Images:
+
+cities.webp
+- Description: Montage of Silk Road cities (Chang'an, Samarkand, Constantinople)
+- Visual elements: Blue-tiled domes, ancient walls, bustling marketplaces
+- Style: Artistic representation of architectural diversity
+
+goods.webp
+- Description: Collection of traded goods
+- Visual elements: Silk fabric, spices in bowls, porcelain, glassware, precious gems
+- Style: Still life arrangement, rich colors and textures
+
+exchange.webp
+- Description: Merchants from different cultures meeting and trading
+- Visual elements: People in diverse traditional clothing, sharing goods and conversation
+- Style: Warm, human connection, cultural diversity
