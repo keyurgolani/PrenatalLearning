@@ -1,49 +1,13 @@
-# Image Manifest for Story 42: The Cosmic Dance: Shiva Nataraja and the Universe
-# Category: Mythology
-# Duration: 60 minutes
-# Difficulty: Intermediate
-
-# Required Images:
-
-concept.webp
-- Description: The Nataraja statue with cosmic symbolism
-- Visual elements: Shiva as Nataraja dancing within a ring of fire (Prabha Mandala), four arms holding drum and flame, one hand raised in blessing, foot raised in liberation, standing on the dwarf Apasmara
-- Colors: Deep cosmic blues and purples, golden fire, bronze/copper tones for the figure, starlight accents
-- Style: Majestic, sacred, cosmic—blending traditional iconography with universal cosmic imagery
-- Mood: Awe, reverence, cosmic wonder, eternal rhythm
-
-analogy.webp
-- Description: Visual metaphor of the dance of creation and transformation
-- Visual elements: A flowing dance between light and shadow, creation and dissolution—perhaps showing a figure dancing with one hand releasing stars and the other hand holding flame, surrounded by swirling cosmic energy
-- Colors: Warm golds and oranges (creation/fire) blending with cool blues and silvers (cosmos/preservation)
-- Style: Ethereal, flowing, dynamic movement captured in stillness
-- Mood: Balance, harmony, the beauty of opposites dancing together
-
-intro.webp
-- Description: Cosmic dance imagery with swirling galaxies and energy
-- Visual elements: Swirling galaxies, nebulae, and cosmic energy forming dance-like patterns; perhaps a subtle suggestion of a dancing figure within the cosmic swirls; stars and light trails suggesting movement and rhythm
-- Colors: Deep space blues and purples, golden starlight, pink and orange nebula colors, white light accents
-- Style: Cosmic, dreamlike, suggesting both vastness and intimacy
-- Mood: Wonder, invitation, the universe as living dance
-
-# Optional Supporting Images:
-
-five-acts.webp
-- Description: Visual representation of the Panchakritya (five cosmic acts)
-- Visual elements: Five interconnected symbols or scenes representing creation (drum/sound waves), preservation (protective hand), transformation (flame), concealment (veiled mystery), and grace (raised foot/liberation)
-- Style: Symbolic, flowing connections between the five elements
-
-drum-flame.webp
-- Description: The damaru drum and sacred flame
-- Visual elements: Close-up of the cosmic drum with sound waves emanating, and the sacred flame with transformative energy
-- Style: Detailed, symbolic, showing the creative and transformative powers
-
-cosmic-cycles.webp
-- Description: The cycles of cosmic time (Yugas and Kalpas)
-- Visual elements: A great wheel or spiral showing the cycles of time, with ages flowing into each other, creation and dissolution in eternal rhythm
-- Style: Mandala-like, cyclical, suggesting eternity
-
-cern-connection.webp
-- Description: The bridge between ancient wisdom and modern physics
-- Visual elements: Split or blended image showing the Nataraja statue alongside particle physics imagery (particle trails, atomic structures, the dance of subatomic particles)
-- Style: Bridging ancient and modern, showing the unity of wisdom across time
+introduction|before|intro-img0.png|Illustration of Cosmic dancer Shiva Nataraja|Artistic representation of Shiva Nataraja dancing in a ring of fire with cosmic background of stars and galaxies
+coreContent|inline|concept-0.png|Illustration of The cosmic drum|Close up of the damaru drum emitting ripples of sound waves that create stars
+coreContent|inline|concept-1.png|Illustration of The sacred fire|A flame in a hand transforming darkness into light representing change and renewal
+coreContent|inline|concept-2.png|Illustration of The hand of protection|A hand raised in Abhaya Mudra gesture radiating calm golden light shielding from fear
+coreContent|inline|concept-3.png|Illustration of The path to freedom|A hand pointing downward to a raised foot symbolizing grace and liberation
+coreContent|after|analogy-0.png|Illustration of The universe as a ballroom|Galaxies and stars swirling in a grand cosmic ballroom dance
+coreContent|after|analogy-1.png|Illustration of Heartbeat as a drum|A visual metaphor of a human heart beating in rhythm with a cosmic drum
+coreContent|after|analogy-2.png|Illustration of Time as a wheel|A giant ornate wheel turning in space with seasons and ages painted on its rim
+coreContent|after|analogy-3.png|Illustration of Breath of life|A figure breathing in starlight and exhaling galaxies representing the cycle of creation
+coreContent|after|analogy-4.png|Illustration of Caterpillar to butterfly|A glowing caterpillar dissolving and reforming into a magnificent butterfly representing transformation
+coreContent|after|analogy-5.png|Illustration of Balancing opposites|A dancer perfectly balanced on one foot holding sun in one hand and moon in the other
+interactiveSection|before|interactive-img0.png|Illustration of Pregnant mother meditating|A mother sitting in meditation visualizing her heartbeat synchronizing with the cosmic rhythm
+integration|before|integration-img0.png|Illustration of Baby joining the dance|A baby reaching out to touch a swirling galaxy joyful and connected to the universe

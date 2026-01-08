@@ -1,10 +1,10 @@
-Matsya the golden fish avatar - a magnificent golden fish with shimmering scales swimming through cosmic waters, saving the Vedas and guiding a boat through the great flood
-Kurma the cosmic tortoise - Lord Vishnu as a giant tortoise beneath the ocean, supporting Mount Mandara on his broad shell during the churning of the cosmic ocean
-Varaha the mighty boar - a powerful boar with tusks like crescent moons, rising from cosmic waters with the Earth goddess balanced on his tusks, rescuing her from the depths
-Narasimha the man-lion - a fierce half-man half-lion figure bursting from a pillar at twilight, eyes blazing with protective love, defeating the demon Hiranyakashipu
-Vamana the dwarf who became cosmic - a small Brahmin dwarf with wooden umbrella transforming into a cosmic giant, his three steps covering Earth, heaven, and the demon king's head
-Parashurama the warrior sage - a fierce Brahmin warrior wielding his divine axe, standing for justice against tyranny, embodying righteous action
-Rama the ideal prince - noble Prince Rama of Ayodhya with his bow, accompanied by Sita and Hanuman, embodying perfect dharma and the triumph of good over evil
-Krishna the divine teacher - Lord Krishna on the battlefield of Kurukshetra, teaching the Bhagavad Gita to Arjuna, radiating wisdom and divine love
-Buddha the enlightened one - the serene Buddha seated under the Bodhi tree, radiating compassion and peace, having attained perfect awakening
-Kalki the future avatar - a majestic figure on a white horse against a dawn sky, sword raised, representing hope and the promise of dharma restored in the future age
+# introduction|before|intro-img0.png|Illustration of Matsya the fish avatar|A magnificent golden fish saving the Vedas in cosmic waters
+# coreContent|inline|concept-0.png|Illustration of Kurma the tortoise|Lord Vishnu as a giant tortoise supporting Mount Mandara
+# coreContent|inline|concept-1.png|Illustration of Varaha the boar|A powerful boar rescuing the Earth goddess from the depths
+# coreContent|inline|concept-2.png|Illustration of Narasimha the man-lion|A fierce half-man half-lion bursting from a pillar
+# coreContent|inline|concept-3.png|Illustration of Vamana the dwarf|A small dwarf transforming into a cosmic giant
+# coreContent|inline|concept-4.png|Illustration of Parashurama|A fierce warrior sage wielding his divine axe
+# coreContent|inline|concept-5.png|Illustration of Rama|Noble Prince Rama with his bow, accompanied by Sita and Hanuman
+# coreContent|inline|concept-6.png|Illustration of Krishna|Lord Krishna teaching the Bhagavad Gita to Arjuna
+# coreContent|inline|concept-7.png|Illustration of Buddha|The serene Buddha seated under the Bodhi tree
+# coreContent|inline|concept-8.png|Illustration of Kalki|A majestic figure on a white horse against a dawn sky

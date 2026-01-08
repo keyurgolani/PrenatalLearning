@@ -38,7 +38,7 @@ router.post('/login', async (req: Request, res: Response) => {
 });
 
 // Admin Stats
-router.get('/stats', requireAdminAuth, async (req: Request, res: Response) => {
+router.get('/stats', requireAdminAuth, async (_req: Request, res: Response) => {
   try {
     const usersCollection = getUsersCollection();
     const kicksCollection = getKickEventsCollection();

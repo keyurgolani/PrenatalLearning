@@ -1,10 +1,10 @@
-1. The golden city of Ayodhya at dawn, with ornate palaces and temples glowing in warm light, representing the sacred home from which Rama's journey begins
-2. Young Prince Rama drawing the great bow of Shiva, with Sita watching in wonder, capturing the moment their destinies intertwined
-3. Rama, Sita, and Lakshmana walking into the forest in simple bark clothes, leaving Ayodhya behind, embodying the grace of accepting exile
-4. Sita in the Ashoka grove, holding a blade of grass, her inner light shining despite captivity, representing unwavering devotion and strength
-5. Hanuman leaping across the ocean toward Lanka, his body expanded to mountainous size, the waters churning below, symbolizing the power of faith
-6. The vanaras building the bridge to Lanka, with stones floating on water bearing Rama's name, squirrels contributing grains of sand, showing collective devotion
-7. The epic battle between Rama and Ravana, divine arrows flying, light clashing with darkness, representing the eternal struggle between good and evil
-8. Rama's triumphant return to Ayodhya in the Pushpaka chariot, the city below blazing with thousands of Diwali lamps, celebrating the homecoming
-9. A mother and baby surrounded by the warm glow of seven sacred lamps, connecting the ancient story to the present journey of birth and new beginnings
-10. A single Diwali diya (oil lamp) glowing in darkness, its flame steady and eternal, representing the inner light that guides every soul home
+# introduction|before|intro-img0.png|Illustration of The golden city of Ayodhya|Ornate palaces and temples glowing in warm light at dawn
+# coreContent|inline|concept-0.png|Illustration of Prince Rama drawing the bow|Young Rama drawing the great bow of Shiva with Sita watching
+# coreContent|inline|concept-1.png|Illustration of Exile into the forest|Rama, Sita, and Lakshmana walking into the forest in simple bark clothes
+# coreContent|inline|concept-2.png|Illustration of Sita in Ashoka grove|Sita holding a blade of grass with inner light shining despite captivity
+# coreContent|inline|concept-3.png|Illustration of Hanuman leaping|Hanuman leaping across the ocean toward Lanka expanded to mountainous size
+# coreContent|inline|concept-4.png|Illustration of Building the bridge|Vanaras building the bridge to Lanka with stones bearing Rama's name
+# coreContent|inline|concept-5.png|Illustration of The epic battle|Rama and Ravana fighting with divine arrows light clashing with darkness
+# coreContent|after|analogy-0.png|Illustration of Rama's triumphant return|Rama returning in the Pushpaka chariot with city blazing with Diwali lamps
+# coreContent|after|analogy-1.png|Illustration of Mother and baby with lamps|A mother and baby surrounded by the warm glow of seven sacred lamps
+# coreContent|after|analogy-2.png|Illustration of A single Diwali diya|A single oil lamp glowing in darkness representing inner light

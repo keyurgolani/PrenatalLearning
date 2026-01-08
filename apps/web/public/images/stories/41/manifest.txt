@@ -1,44 +1,12 @@
-# Image Manifest for Story 41: The Silk Road: The World's Ribbon
-# Category: History
-# Duration: 60 minutes
-# Difficulty: Intermediate
-
-# Required Images:
-
-concept.webp
-- Description: Abstract representation of the Silk Road trade routes
-- Visual elements: A network of golden paths stretching across a stylized map, connecting East and West
-- Colors: Warm golds, deep blues, rich reds representing different cultures
-- Style: Artistic, flowing lines suggesting connection and movement
-- Mood: Wonder, connection, ancient wisdom
-
-analogy.webp
-- Description: Visual metaphor of a tapestry woven from many threads
-- Visual elements: A beautiful tapestry being woven, with threads of many colors (gold, blue, green, red, purple) interweaving to create a unified pattern
-- Colors: Rich, diverse palette representing different cultures
-- Style: Warm, artistic, showing both individual threads and the unified whole
-- Mood: Unity in diversity, beauty through collaboration
-
-intro.webp
-- Description: Camel caravan crossing the desert at dawn/dusk
-- Visual elements: Silhouettes of Bactrian camels with riders, bells visible on their harnesses, golden sand dunes, warm sky
-- Colors: Golden sands, warm orange/pink sky, soft shadows
-- Style: Peaceful, evocative, slightly dreamlike
-- Mood: Adventure, journey, the romance of ancient travel
-
-# Optional Supporting Images:
-
-cities.webp
-- Description: Montage of Silk Road cities (Chang'an, Samarkand, Constantinople)
-- Visual elements: Blue-tiled domes, ancient walls, bustling marketplaces
-- Style: Artistic representation of architectural diversity
-
-goods.webp
-- Description: Collection of traded goods
-- Visual elements: Silk fabric, spices in bowls, porcelain, glassware, precious gems
-- Style: Still life arrangement, rich colors and textures
-
-exchange.webp
-- Description: Merchants from different cultures meeting and trading
-- Visual elements: People in diverse traditional clothing, sharing goods and conversation
-- Style: Warm, human connection, cultural diversity
+introduction|before|intro-img0.png|Illustration of Camel caravan crossing the desert at dawn|Silhouettes of Bactrian camels with riders golden sand dunes and warm sky with rose and gold hues
+coreContent|inline|concept-0.png|Illustration of Abstract representation of the Silk Road trade routes|A network of golden paths stretching across a stylized map connecting East and West
+coreContent|inline|concept-1.png|Illustration of Precious cargo of the Silk Road|Artistic display of shimmering silk rolls spices in colorful mounds and blue pattern porcelain
+coreContent|inline|concept-2.png|Illustration of Bactrian camels|Close up of a gentle Bactrian camel with two humps and long eyelashes smiling
+coreContent|inline|concept-3.png|Illustration of The Jewel of Samarkand|Blue-tiled mosques and domes sparkling in the sun like pieces of sky fallen to earth
+coreContent|after|analogy-0.png|Illustration of Visual metaphor of a tapestry woven from many threads|A beautiful tapestry interweaving threads of many colors representing different cultures
+coreContent|after|analogy-1.png|Illustration of Camels as ships of the desert|Whimsical image of camels with sails gliding across a sea of golden sand dunes
+coreContent|after|analogy-2.png|Illustration of Oasis cities as jewels|Glowing gemstones scattered across golden sand representing oasis cities full of life
+coreContent|after|analogy-3.png|Illustration of Ideas spreading like seeds|Wind blowing glowing seeds that take root and bloom into symbols of thought and philosophy
+coreContent|after|analogy-4.png|Illustration of The garden of diversity|A garden with many different flowers roses lilies orchids blooming together in harmony
+interactiveSection|before|interactive-img0.png|Illustration of Bustling ancient marketplace|Colorful awnings shading stalls with merchants spreading wares of silk and jewels under sunlight
+integration|before|integration-img0.png|Illustration of Global connection|Stylized hands reaching out across a map or globe connecting East and West in friendship

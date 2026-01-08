@@ -1,49 +1,6 @@
-# Image Manifest for Story 39: Stoicism: The Inner Fortress
-# Category: Philosophy
-# Duration: 60 minutes
-
-# Required Images:
-
-concept.webp
-- Description: Abstract representation of the Inner Citadel - a fortress of peace within the mind
-- Visual elements: A luminous fortress or citadel on a hill, surrounded by soft light, with a peaceful garden visible within its walls
-- Style: Ethereal, peaceful, symbolic - representing inner strength and tranquility
-- Colors: Soft golds, warm whites, deep peaceful blues, touches of green for the inner garden
-- Mood: Serenity, strength, sanctuary, the unshakeable peace within
-
-analogy.webp
-- Description: Visual metaphor of a mountain standing still while a storm rages around it
-- Visual elements: A majestic mountain peak, unmoved and serene, while dramatic storm clouds, lightning, and wind swirl around it
-- Style: Dramatic yet peaceful contrast - the chaos of the storm vs. the stillness of the mountain
-- Colors: Dark stormy grays and purples for the storm, solid earth tones for the mountain, perhaps a hint of golden light at the peak
-- Mood: Groundedness, resilience, calm amidst chaos, unshakeable stability
-
-intro.webp
-- Description: Serene scene representing the calm center within chaos - the eye of the storm
-- Visual elements: A figure in meditation or peaceful contemplation, surrounded by swirling elements (wind, leaves, abstract chaos) but in a bubble of perfect stillness
-- Style: Contemplative, warm, showing the contrast between outer turbulence and inner peace
-- Colors: Warm, peaceful tones at the center (golds, soft whites) transitioning to more turbulent colors at the edges
-- Mood: Peace, centeredness, the quiet place within, accessible tranquility
-
-# Optional Additional Images:
-
-three-teachers.webp
-- Description: Artistic representation of the three great Stoic teachers
-- Visual elements: Stylized portraits or silhouettes of Seneca, Epictetus, and Marcus Aurelius, perhaps with symbolic elements (scroll, chains broken, crown)
-- Style: Classical yet accessible, honoring the historical figures while remaining warm
-- Colors: Warm earth tones, classical golds and deep reds
-- Mood: Wisdom, timelessness, the continuity of philosophical insight
-
-dichotomy-of-control.webp
-- Description: Visual representation of the two circles of control
-- Visual elements: Two overlapping or adjacent circles - one containing symbols of internal things (heart, mind, hands choosing), one containing external things (weather, crowds, clocks)
-- Style: Clean, symbolic, educational yet beautiful
-- Colors: Warm colors for the "within control" circle, cooler colors for "outside control"
-- Mood: Clarity, understanding, the freedom that comes from knowing the difference
-
-responding-vs-reacting.webp
-- Description: The space between stimulus and response
-- Visual elements: Abstract representation of a pause - perhaps a wave frozen mid-motion, or a breath held between inhale and exhale
-- Style: Fluid, dynamic yet peaceful, capturing the moment of choice
-- Colors: Flowing blues and whites, with a golden moment of stillness in the center
-- Mood: Freedom, choice, the power of the pause
+introduction|before|intro-img0.png|Illustration of Serene scene representing the calm center within chaos|A bubble of perfect stillness with a figure in meditation surrounded by swirling wind leaves and abstract chaos
+coreContent|inline|concept-0.png|Illustration of Abstract representation of the Inner Citadel|A luminous fortress or citadel on a hill surrounded by soft light with a peaceful garden visible within its walls
+coreContent|after|analogy-0.png|Illustration of Visual metaphor of a mountain standing still while a storm rages|A majestic mountain peak unmoved and serene while dramatic storm clouds lightning and wind swirl around it
+coreContent|after|analogy-1.png|Illustration of The three great Stoic teachers|Stylized portraits or silhouettes of Seneca Epictetus and Marcus Aurelius with symbolic elements
+coreContent|after|analogy-2.png|Illustration of The two circles of control|Two overlapping circles one with internal symbols heart mind hands and one with external symbols weather crowds clocks
+coreContent|after|analogy-3.png|Illustration of The space between stimulus and response|Abstract representation of a pause like a wave frozen mid-motion or a breath held between inhale and exhale

@@ -1,51 +1,11 @@
-# Color Theory: Painting with Light - Image Manifest
-# Story ID: 40
-# Category: Art & Design
-
-## Required Images
-
-### concept.webp
-Description: Abstract representation of the color spectrum and prism
-Visual Elements:
-- A crystal prism with white light entering from one side
-- Rainbow spectrum emerging and spreading from the prism
-- Colors should flow smoothly: red, orange, yellow, green, blue, indigo, violet
-- Ethereal, magical quality with soft glowing edges
-- Dark background to make colors pop
-- Subtle sparkles or light particles in the spectrum
-Style: Dreamy, luminous, scientifically inspired but artistically rendered
-
-### analogy.webp
-Description: Visual metaphor of emotions as colors on an artist's palette
-Visual Elements:
-- A heart-shaped or organic artist's palette
-- Pools of vibrant colors representing different emotions
-- Warm colors (red, orange, yellow) on one side
-- Cool colors (blue, green, violet) on the other side
-- Soft brushstrokes suggesting the blending of emotions
-- Gentle, nurturing atmosphere
-- Perhaps a subtle silhouette of mother and baby reflected in the colors
-Style: Warm, emotional, painterly, soft edges
-
-### intro.webp
-Description: Sunrise bringing color to a black and white world
-Visual Elements:
-- Split composition: left side in grayscale, right side in full color
-- Golden sunrise on the horizon as the dividing element
-- Landscape elements (trees, flowers, sky) transitioning from gray to color
-- The color spreading like a wave of warmth
-- Soft, hopeful morning light
-- Sense of awakening and wonder
-Style: Magical realism, transitional, hopeful, dawn atmosphere
-
-## Color Palette Guidelines
-- Primary spectrum colors should be vibrant but not harsh
-- Use soft gradients and glowing effects
-- Maintain a sense of warmth and wonder appropriate for prenatal content
-- Balance scientific accuracy with emotional resonance
-
-## Technical Specifications
-- Format: WebP
-- Recommended dimensions: 1200x800 pixels minimum
-- Aspect ratio: 3:2 preferred
-- File size: Optimize for web (under 200KB each)
+introduction|before|intro-img0.png|Illustration of Sunrise bringing color to a black and white world|Split composition with grayscale turning into full color at sunrise with a sense of awakening
+coreContent|inline|concept-0.png|Illustration of Newton and the prism|Isaac Newton holding a prism in a dark room separating a beam of white light into a rainbow
+coreContent|inline|concept-1.png|Illustration of The visible spectrum|A beautiful ribbon of colors red orange yellow green blue indigo violet flowing like a wave
+coreContent|inline|concept-2.png|Illustration of The human eye and cones|Artistic representation of the retina with three types of cone cells like tiny colored lights
+coreContent|inline|concept-3.png|Illustration of Baby's first colors|A baby's perspective seeing a bright red toy stand out against a softer background
+coreContent|after|analogy-0.png|Illustration of The peacock's tail|White light passing through a prism spreading out like a magnificent peacock opening its tail
+coreContent|after|analogy-1.png|Illustration of Colored flashlights mixing|Three beams of light red green and blue overlapping to create white light in the center
+coreContent|after|analogy-2.png|Illustration of Flower opening|A flower slowly opening its petals representing the gradual awakening of color vision
+coreContent|after|analogy-3.png|Illustration of The emotional palette|An artist's palette where the colors are emotions sunny yellow deep blue fiery red
+interactiveSection|before|interactive-img0.png|Illustration of Breathing in color|A pregnant mother with hands on belly surrounded by swirling motes of golden and blue light
+integration|before|integration-img0.png|Illustration of Baby's colorful future|A child exploring a vibrant world of rainbows flowers and sunsets with wonder

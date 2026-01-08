@@ -11,10 +11,10 @@ import {
 
 // Test data
 const testTopics: TopicData[] = [
-  { id: 1, title: 'The Story of Everything: From Big Bang to You' },
-  { id: 2, title: 'Dancing with Gravity: The Force That Holds Us' },
-  { id: 5, title: 'The Thinking Machine: How Computers Work' },
-  { id: 9, title: 'The Dance of DNA: Your Genetic Blueprint' },
+  { id: 1, title: 'The Story of Everything: From Big Bang to You', category: 'science' },
+  { id: 2, title: 'Dancing with Gravity: The Force That Holds Us', category: 'science' },
+  { id: 5, title: 'The Thinking Machine: How Computers Work', category: 'technology' },
+  { id: 9, title: 'The Dance of DNA: Your Genetic Blueprint', category: 'biology' },
 ];
 
 const testJourneys: JourneyData[] = [

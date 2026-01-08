@@ -1,10 +1,10 @@
-Ancient forest ashram - students sitting in a circle at the feet of a wise sage in a sunlit forest clearing, the air filled with golden light filtering through leaves, sandalwood fragrance implied, the scene radiating peace and sacred learning
-Brahman the infinite ocean - a vast, luminous ocean of consciousness stretching infinitely in all directions, no shores or boundaries, waves of light arising and dissolving, representing the ground of all being
-Atman the inner light - a radiant point of pure awareness at the center of a human form, surrounded by the five sheaths like translucent layers, the innermost light unchanging and eternal
-Tat Tvam Asi revelation - Uddalaka teaching his son Svetaketu, pointing to a banyan seed and then to the great tree, illustrating that the invisible essence is the Self of all, with the words "You Are That" glowing between them
-The Five Sheaths (Pancha Kosha) - concentric layers of being shown as luminous shells: outermost physical body, then energy/breath, then mind/emotions, then wisdom/intuition, then bliss, with pure awareness at the center
-The Three States of Consciousness - a triptych showing waking (person engaged with world), dreaming (person in a dream landscape of their own creation), and deep sleep (peaceful void), with Turiya represented as the light underlying all three
-Nachiketa and Yama - young Nachiketa standing courageously before the majestic Lord of Death, who is teaching rather than threatening, rays of wisdom passing between them as the secret of the eternal Self is revealed
-The Inner Universe - a meditating figure whose body contains galaxies, stars, and cosmic structures, illustrating "as is the microcosm, so is the macrocosm" - the entire universe dwelling within
-The Witness Consciousness - a serene figure observing thoughts, emotions, and experiences flowing past like clouds, remaining untouched and peaceful, representing the Sakshi or witness that is our true nature
-Mother and baby as one consciousness - a pregnant mother in meditation, her awareness merging with her baby's, both shown as expressions of the same infinite light, illustrating the Upanishadic teaching of unity
+# introduction|before|intro-img0.png|Illustration of Ancient forest ashram|Students sitting in a circle at the feet of a wise sage in a sunlit forest clearing
+# coreContent|inline|concept-0.png|Illustration of Brahman the infinite ocean|A vast, luminous ocean of consciousness stretching infinitely in all directions
+# coreContent|inline|concept-1.png|Illustration of Atman the inner light|A radiant point of pure awareness at the center of a human form
+# coreContent|inline|concept-2.png|Illustration of Tat Tvam Asi|Uddalaka teaching his son Svetaketu illustrating 'You Are That'
+# coreContent|inline|concept-3.png|Illustration of The Five Sheaths|Concentric luminous layers of being: body, breath, mind, wisdom, bliss
+# coreContent|inline|concept-4.png|Illustration of The Three States of Consciousness|A triptych showing waking, dreaming, and deep sleep with Turiya light
+# coreContent|inline|concept-5.png|Illustration of Nachiketa and Yama|Young Nachiketa standing courageously before the majestic Lord of Death
+# coreContent|inline|concept-6.png|Illustration of The Inner Universe|A meditating figure whose body contains galaxies and stars
+# coreContent|inline|concept-7.png|Illustration of The Witness Consciousness|A serene figure observing thoughts flowing past like clouds
+# coreContent|after|analogy-0.png|Illustration of Mother and baby as one consciousness|A pregnant mother in meditation merging awareness with her baby

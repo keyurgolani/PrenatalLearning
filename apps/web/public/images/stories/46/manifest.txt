@@ -1,10 +1,10 @@
-Ancient Indian sages in meditation - wise rishis seated in a peaceful forest ashram, receiving the divine knowledge of Ayurveda, surrounded by medicinal herbs and plants, golden light descending from above
-The Five Great Elements (Pancha Mahabhutas) - a beautiful mandala showing Space (vast emptiness), Air (swirling winds), Fire (sacred flames), Water (flowing rivers), and Earth (mountains and soil) interconnected and flowing into each other
-The Three Doshas in harmony - three interweaving energies: silvery-blue Vata (movement and creativity), golden-red Pitta (transformation and intelligence), and cool white Kapha (structure and nurturing), dancing together in perfect balance
-The Seven Dhatus cascade - a waterfall visualization showing the seven tissues forming in sequence: plasma flowing into blood, blood into muscle, muscle into fat, fat into bone, bone into marrow, marrow into reproductive essence, each pool glowing with vitality
-Agni the sacred digestive fire - a beautiful golden flame burning steadily in a ceremonial vessel, representing the transformative power of digestion, with food being transformed into light and energy
-Ojas the golden essence - a radiant golden honey-like substance glowing in the heart center, spreading throughout the body like liquid light, representing vitality, immunity, and the essence of perfect health
-Garbha Sanskar prenatal care - a pregnant mother in peaceful meditation, surrounded by soft golden light, her baby visible within, both bathed in positive impressions of music, nature, and loving thoughts
-The daily rhythm (Dinacharya) - a circular diagram showing the 24-hour cycle with the doshas: Kapha time (morning and evening), Pitta time (midday and midnight), Vata time (afternoon and pre-dawn), with appropriate activities for each period
-Mother and baby connected through elements - a tender image of a pregnant mother with her hands on her belly, showing the five elements flowing between mother and baby, creating the baby's unique constitution
-The tree of Ayurvedic health - a magnificent tree with roots representing the doshas, trunk representing Agni, branches representing the seven dhatus, leaves representing daily practices, and golden fruit representing Ojas and perfect health
+# introduction|before|intro-img0.png|Illustration of Ancient Indian sages|Wise rishis seated in a peaceful forest ashram receiving Ayurveda knowledge
+# coreContent|inline|concept-0.png|Illustration of The Five Great Elements|A mandala showing Space, Air, Fire, Water, and Earth
+# coreContent|inline|concept-1.png|Illustration of The Three Doshas|Three interweaving energies: Vata, Pitta, and Kapha
+# coreContent|inline|concept-2.png|Illustration of The Seven Dhatus|A waterfall visualization showing the seven tissues forming
+# coreContent|inline|concept-3.png|Illustration of Agni the digestive fire|A beautiful golden flame burning in a ceremonial vessel
+# coreContent|inline|concept-4.png|Illustration of Ojas the essence|A radiant golden substance glowing in the heart center
+# coreContent|inline|concept-5.png|Illustration of Garbha Sanskar|A pregnant mother in peaceful meditation with soft golden light
+# coreContent|inline|concept-6.png|Illustration of Daily rhythm|A circular diagram showing the 24-hour cycle of doshas
+# coreContent|after|analogy-0.png|Illustration of Mother and baby connection|Mother and baby connected through flowing elements
+# coreContent|after|analogy-1.png|Illustration of The tree of health|A magnificent tree representing doshas, dhatus, and ojas
