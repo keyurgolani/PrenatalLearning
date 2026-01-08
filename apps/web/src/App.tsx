@@ -23,7 +23,7 @@ import {
   BrainTeasers, 
   Mindfulness 
 } from './components';
-import { DailyEnrichmentPage } from './pages';
+import { DailyEnrichmentPage, AdminLogin, AdminDashboard } from './pages';
 import { stories, categories, getCategoryById } from './data';
 import { learningPaths, type LearningPath } from './data/learningPaths';
 import type { Story, CategoryId, DifficultyLevel, DurationFilter, CompletionStatus, AdvancedFilterState } from './types';
@@ -1016,18 +1016,25 @@ function AppContent() {
         <Route path="teasers" element={<BrainTeasers />} />
         <Route path="mindfulness" element={<Mindfulness />} />
       </Route>
+
+      {/* Admin Routes */}
+      <Route path="/admin/login" element={<AdminLogin />} />
+      <Route path="/admin/dashboard" element={<AdminDashboard />} />
+
     </Routes>
       
       {/* Single persistent FloatingStatusBar that morphs based on route
           For logged-in users, this bar includes journal and kick buttons
           Requirements: 17.1 - Journal and kick buttons integrated into floating status bar
           Requirements: 17.2 - Journal/kick buttons only shown to authenticated users */}
-      <FloatingStatusBar
-        completedCount={completedStories.length}
-        totalCount={stories.length}
-        progressPercentage={progressPercentage}
-        compact={isTopicPage}
-      />
+      {!location.pathname.startsWith('/admin') && (
+        <FloatingStatusBar
+          completedCount={completedStories.length}
+          totalCount={stories.length}
+          progressPercentage={progressPercentage}
+          compact={isTopicPage}
+        />
+      )}
       
       <OfflineBanner />
       

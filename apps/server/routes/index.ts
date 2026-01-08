@@ -31,4 +31,8 @@ router.use('/voice-notes', voiceNotesRoutes);
 // Kicks routes (protected)
 router.use('/kicks', kicksRoutes);
 
+// Admin routes
+import adminRoutes from './admin.js';
+router.use('/admin', adminRoutes);
+
 export default router;
