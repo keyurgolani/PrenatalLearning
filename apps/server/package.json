@@ -1,6 +1,6 @@
 {
   "name": "@prenatal-learning/server",
-  "version": "1.7.1",
+  "version": "1.7.2",
   "type": "module",
   "main": "dist/index.js",
   "engines": {
@@ -21,7 +21,7 @@
     "db:reset": "tsx scripts/reset-db.ts"
   },
   "dependencies": {
-    "bcrypt": "^5.1.1",
+    "bcryptjs": "^2.4.3",
     "cookie-parser": "^1.4.7",
     "cors": "^2.8.5",
     "dotenv": "^16.4.7",
@@ -34,7 +34,7 @@
   },
   "devDependencies": {
     "@eslint/js": "^9.39.1",
-    "@types/bcrypt": "^5.0.2",
+    "@types/bcryptjs": "^2.4.6",
     "esbuild": "^0.24.0",
     "@types/cookie-parser": "^1.4.8",
     "@types/cors": "^2.8.17",

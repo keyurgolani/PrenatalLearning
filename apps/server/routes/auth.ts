@@ -1,5 +1,5 @@
 import { Router, type Request, type Response, type NextFunction } from 'express';
-import bcrypt from 'bcrypt';
+import bcrypt from 'bcryptjs';
 import crypto from 'crypto';
 import jwt, { type SignOptions } from 'jsonwebtoken';
 import { config } from '../config/index.js';
