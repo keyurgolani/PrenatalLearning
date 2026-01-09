@@ -1,10 +1,17 @@
-# introduction|before|intro-img0.png|Illustration of The battlefield of Kurukshetra|Two vast armies facing each other at dawn with Arjuna's chariot in the center
-# coreContent|before|core-img0.png|Illustration of Arjuna's crisis|The great warrior slumped in his chariot showing deep anguish
-# coreContent|inline|concept-0.png|Illustration of Krishna as charioteer|Lord Krishna holding the reins radiating calm wisdom
-# coreContent|inline|concept-1.png|Illustration of The eternal soul|A luminous form of pure light representing the Atman
-# coreContent|inline|concept-2.png|Illustration of Karma Yoga|Hands offering work to the divine symbolizing selfless action
-# coreContent|inline|concept-3.png|Illustration of The three Gunas|Three interweaving streams of energy: Sattva, Rajas, and Tamas
-# coreContent|inline|concept-4.png|Illustration of Vishvarupa cosmic form|Krishna revealing his universal form containing all of creation
-# coreContent|inline|concept-5.png|Illustration of The paths of yoga|Three intertwining paths: action, devotion, and knowledge
-# coreContent|inline|concept-6.png|Illustration of Equanimity|A serene figure seated in meditation unmoved by storms
-# coreContent|after|analogy-0.png|Illustration of The song of life|Krishna and Arjuna in the chariot as the sun rises, teaching complete
+introduction|before|intro-img0.png|Illustration of The Chariot at Kurukshetra|A magnificent chariot drawn by white horses standing between two vast armies on a battlefield
+coreContent|inline|concept-0.png|Illustration of Krishna and Arjuna|A blue-skinned divine charioteer guiding a noble warrior in a golden chariot
+coreContent|inline|concept-1.png|Illustration of The Eternal Soul|A glowing ball of light moving from an old garment to a new fresh garment symbolizing reincarnation
+coreContent|inline|concept-2.png|Illustration of Karma Yoga|A pair of hands offering a gift of light without trying to hold onto it, symbolizing selfless action
+coreContent|inline|concept-3.png|Illustration of The Three Gunas|Three swirling streams of color - white (sattva), red (rajas), and dark blue (tamas) - weaving together
+coreContent|inline|concept-4.png|Illustration of Bhakti Offering|A simple beautiful offering of a single leaf, a flower, a fruit, and water with unconditional love
+coreContent|inline|concept-5.png|Illustration of The Vishvarupa|A cosmic vision of a divine being containing galaxies, stars, and all of existence within their body
+coreContent|after|analogy-0.png|Illustration of Changing Coats|A silhouette of a person changing from a worn-out coat to a shiny new one
+coreContent|after|analogy-1.png|Illustration of The Body as Chariot|A diagrammatic artistic view of a chariot (body), horses (senses), reins (mind), and driver (intellect)
+coreContent|after|analogy-2.png|Illustration of Ocean Equanimity|Turbulent rivers flowing into a vast, deep, calm ocean that remains undisturbed
+coreContent|after|analogy-3.png|Illustration of Planting a Seed|Hands gently planting a glowing seed in earth, trusting nature for the growth
+coreContent|after|analogy-4.png|Illustration of Three Light Colors|Three beams of light (white, red, dark) blending to create the tapestry of reality
+coreContent|after|analogy-5.png|Illustration of Unique Fingerprint|A glowing golden fingerprint showing unique intricate patterns representing dharma
+coreContent|after|analogy-6.png|Illustration of Drop and Ocean|A water drop containing a reflection of the entire ocean falling into the sea
+coreContent|after|analogy-7.png|Illustration of House to Home|A simple house transforming into a warm, glowing home through the energy of love
+interactiveSection|before|interactive-img0.png|Illustration of Mother Charioteer|A mother meditating, visualizing herself as a wise charioteer guiding her life with peace
+integration|before|integration-img0.png|Illustration of Baby in Divine Chariot|A baby sleeping peacefully in a cradle that resembles a safe, golden chariot guided by divine light

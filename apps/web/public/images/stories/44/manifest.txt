@@ -1,10 +1,17 @@
-# introduction|before|intro-img0.png|Illustration of Matsya the fish avatar|A magnificent golden fish saving the Vedas in cosmic waters
-# coreContent|inline|concept-0.png|Illustration of Kurma the tortoise|Lord Vishnu as a giant tortoise supporting Mount Mandara
-# coreContent|inline|concept-1.png|Illustration of Varaha the boar|A powerful boar rescuing the Earth goddess from the depths
-# coreContent|inline|concept-2.png|Illustration of Narasimha the man-lion|A fierce half-man half-lion bursting from a pillar
-# coreContent|inline|concept-3.png|Illustration of Vamana the dwarf|A small dwarf transforming into a cosmic giant
-# coreContent|inline|concept-4.png|Illustration of Parashurama|A fierce warrior sage wielding his divine axe
-# coreContent|inline|concept-5.png|Illustration of Rama|Noble Prince Rama with his bow, accompanied by Sita and Hanuman
-# coreContent|inline|concept-6.png|Illustration of Krishna|Lord Krishna teaching the Bhagavad Gita to Arjuna
-# coreContent|inline|concept-7.png|Illustration of Buddha|The serene Buddha seated under the Bodhi tree
-# coreContent|inline|concept-8.png|Illustration of Kalki|A majestic figure on a white horse against a dawn sky
+introduction|before|intro-img0.png|Illustration of The Ten Avatars of Vishnu|A circular composition showing the ten avatars of Vishnu evolving from fish to enlightened being
+coreContent|inline|concept-0.png|Illustration of Matsya the Fish|A great golden fish with shimmering scales swimming in cosmic waters pulling a boat
+coreContent|inline|concept-1.png|Illustration of Kurma the Tortoise|A giant tortoise supporting a mountain on its back near the ocean floor
+coreContent|inline|concept-2.png|Illustration of Varaha the Boar|A mighty boar lifting the Earth sphere from dark waters on its tusks
+coreContent|inline|concept-3.png|Illustration of Narasimha the Man-Lion|A fierce half-man half-lion figure protecting a devotee with divine light
+coreContent|inline|concept-4.png|Illustration of Vamana the Dwarf|A small humble figure holding a wooden umbrella with a giant shadow behind him
+coreContent|inline|concept-5.png|Illustration of Krishna the Divine Cowherd|A blue-skinned figure playing a flute surrounded by cows and nature 
+coreContent|after|analogy-0.png|Illustration of Evolution from water to land|A visual timeline showing life moving from ocean to land matching the avatars
+coreContent|after|analogy-1.png|Illustration of Baby as Matsya|A fetus at an early stage with gill-like structures floating in amniotic fluid
+coreContent|after|analogy-2.png|Illustration of Kurma as Foundation|A stylized image of a foundation of a house with a tortoise shell pattern
+coreContent|after|analogy-3.png|Illustration of Varaha as Rescue|A hand lifting a precious gem from deep water into the light
+coreContent|after|analogy-4.png|Illustration of Vamana as Seed|A tiny seed glowing with inner light representing infinite potential
+coreContent|after|analogy-5.png|Illustration of Parashurama as Warrior|A strong arm holding a shield of justice against a dark background
+coreContent|after|analogy-6.png|Illustration of Rama as Prince|A noble figure standing tall with a bow embodying dignity and righteousness
+coreContent|after|analogy-7.png|Illustration of Buddha as Enlightenment|A serene figure meditating under a tree with golden light radiating outward
+interactiveSection|before|interactive-img0.png|Illustration of Mother breathing with avatars|A mother meditating comfortably surrounded by faint outlines of the ten avatars
+integration|before|integration-img0.png|Illustration of Baby as the Ultimate Avatar|A baby sleeping peacefully with a soft divine glow and lotus petals around

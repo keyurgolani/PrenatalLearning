@@ -1,5 +1,5 @@
-# introduction|before|intro-img0.png|Illustration of Birds soaring in the sky|Eagles or hawks gliding on thermals in a vast blue sky evoking the human dream of flight
-# coreContent|inline|concept-0.png|Illustration of Abstract representation of flight|Scientific yet dreamy showing air flowing over a wing with visible pressure differences
-# coreContent|after|analogy-0.png|Illustration of Visual metaphor of love as lift|Mother gently lifting child upward with soft clouds in background and sense of weightlessness
-# coreContent|after|analogy-1.png|Illustration of The Wright Flyer|The 1903 Wright Flyer lifting off at Kitty Hawk with sandy dunes and figures watching
-# coreContent|after|analogy-2.png|Illustration of The four forces of flight|Educational diagram showing airplane with arrows for lift weight thrust and drag
+introduction|before|intro-img0.png|Illustration of Birds soaring in the sky|Eagles or hawks gliding on thermals in a vast blue sky evoking the human dream of flight
+coreContent|inline|concept-0.png|Illustration of Abstract representation of flight|Scientific yet dreamy showing air flowing over a wing with visible pressure differences
+coreContent|after|analogy-0.png|Illustration of Visual metaphor of love as lift|Mother gently lifting child upward with soft clouds in background and sense of weightlessness
+coreContent|after|analogy-1.png|Illustration of The Wright Flyer|The 1903 Wright Flyer lifting off at Kitty Hawk with sandy dunes and figures watching
+coreContent|after|analogy-2.png|Illustration of The four forces of flight|Educational diagram showing airplane with arrows for lift weight thrust and drag

@@ -1,10 +1,15 @@
-# introduction|before|intro-img0.png|Illustration of Ancient forest ashram|Students sitting in a circle at the feet of a wise sage in a sunlit forest clearing
-# coreContent|inline|concept-0.png|Illustration of Brahman the infinite ocean|A vast, luminous ocean of consciousness stretching infinitely in all directions
-# coreContent|inline|concept-1.png|Illustration of Atman the inner light|A radiant point of pure awareness at the center of a human form
-# coreContent|inline|concept-2.png|Illustration of Tat Tvam Asi|Uddalaka teaching his son Svetaketu illustrating 'You Are That'
-# coreContent|inline|concept-3.png|Illustration of The Five Sheaths|Concentric luminous layers of being: body, breath, mind, wisdom, bliss
-# coreContent|inline|concept-4.png|Illustration of The Three States of Consciousness|A triptych showing waking, dreaming, and deep sleep with Turiya light
-# coreContent|inline|concept-5.png|Illustration of Nachiketa and Yama|Young Nachiketa standing courageously before the majestic Lord of Death
-# coreContent|inline|concept-6.png|Illustration of The Inner Universe|A meditating figure whose body contains galaxies and stars
-# coreContent|inline|concept-7.png|Illustration of The Witness Consciousness|A serene figure observing thoughts flowing past like clouds
-# coreContent|after|analogy-0.png|Illustration of Mother and baby as one consciousness|A pregnant mother in meditation merging awareness with her baby
+introduction|before|intro-img0.png|Illustration of Sitting Near the Teacher|A group of students sitting peacefully at the feet of a wise sage in a sunlit ancient forest
+coreContent|inline|concept-0.png|Illustration of The Infinite Ocean|An boundless ocean of awareness made of soft golden light representing Brahman
+coreContent|inline|concept-1.png|Illustration of Tat Tvam Asi|A split image showing a tiny spark (soul) and a great sun (Brahman) being the same fire
+coreContent|inline|concept-2.png|Illustration of The Banyan Seed|A hand holding a tiny seed next to a magnificent giant banyan tree
+coreContent|inline|concept-3.png|Illustration of The Five Sheaths|Artistic visualization of a person with five concentric layers of glowing colored light
+coreContent|inline|concept-4.png|Illustration of Nachiketa and Yama|A young determined boy standing before the majestic and shadowy figure of Death
+coreContent|inline|concept-5.png|Illustration of The Three States|A triptych showing a waking eye, a dreaming mind, and deep sleep darkness, with a light behind all three
+coreContent|after|analogy-0.png|Illustration of Movie Screen|A bright white movie screen with faint images projected on it, representing consciousness
+coreContent|after|analogy-1.png|Illustration of Sky and Clouds|blue sky with white puffy clouds passing through, representing the Witness
+coreContent|after|analogy-2.png|Illustration of Clay and Pots|A lump of raw clay surrounded by various beautiful pots and bowls made from it
+coreContent|after|analogy-3.png|Illustration of Layers of Onion|An artistic glowing onion with layers peeling back to reveal a center of pure light
+coreContent|after|analogy-4.png|Illustration of Drop in Ocean|A single drop of water merging into a vast ocean, becoming one with it
+coreContent|after|analogy-5.png|Illustration of Changing Clothes|A soul represented as light changing from one set of clothes to another
+interactiveSection|before|interactive-img0.png|Illustration of Mother Meditating on Layers|A mother visualizing the layers of her being dissolving into pure light
+integration|before|integration-img0.png|Illustration of Baby as Universal Consciousness|A baby sleeping floating in a cosmic ocean of stars, safe and infinite

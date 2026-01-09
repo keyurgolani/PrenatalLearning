@@ -1,13 +1,13 @@
 introduction|before|intro-img0.png|Illustration of The Cosmic Ocean of Milk|A shimmering silver-white ocean under an ancient sky with soft ethereal light
 coreContent|inline|concept-0.png|Illustration of Mount Mandara as churning rod|A majestic mountain resting in a milk ocean with a giant serpent coiled around it
-# coreContent|inline|concept-1.png|Illustration of Kurma the Cosmic Tortoise|A giant divine tortoise supporting a mountain on its back in the ocean
-# coreContent|inline|concept-2.png|Illustration of Devas and Asuras churning|Radiant gods and powerful demons pulling a serpent rope in a rhythmic tug of war
-# coreContent|inline|concept-3.png|Illustration of Treasures rising from the ocean|Magical items like a wishing cow white horse and elephant rising from the milk ocean
-# coreContent|after|analogy-0.png|Illustration of Womb as cosmic ocean|Artistic representation of a baby floating in a golden cosmic ocean full of stars
-# coreContent|after|analogy-1.png|Illustration of Transformation as churning butter|A simple wooden butter churner in a clay pot symbolizing the process of transformation
-# coreContent|after|analogy-2.png|Illustration of Mother as stable foundation|A stylized image of a mother holding her belly with roots grounding her to the earth
-# coreContent|after|analogy-3.png|Illustration of Shiva drinking poison|A peaceful blue-throated figure holding a dark cloud in his throat turning it into a necklace
-# coreContent|after|analogy-4.png|Illustration of Lakshmi rising|A beautiful goddess of abundance rising on a lotus flower showering golden light
-# coreContent|after|analogy-5.png|Illustration of Baby as Amrita|A glowing golden pot of nectar with a soft light shaped like a baby inside
-# interactiveSection|before|interactive-img0.png|Illustration of Mother breathing with ocean|A mother meditating by a calm silver ocean breathing in rhythm with the waves
-# integration|before|integration-img0.png|Illustration of Baby as the ultimate treasure|A baby sleeping peacefully surrounded by soft glowing jewels and flowers
+coreContent|inline|concept-1.png|Illustration of Kurma the Cosmic Tortoise|A giant divine tortoise supporting a mountain on its back in the ocean
+coreContent|inline|concept-2.png|Illustration of Devas and Asuras churning|Radiant gods and powerful demons pulling a serpent rope in a rhythmic tug of war
+coreContent|inline|concept-3.png|Illustration of Treasures rising from the ocean|Magical items like a wishing cow white horse and elephant rising from the milk ocean
+coreContent|after|analogy-0.png|Illustration of Womb as cosmic ocean|Artistic representation of a baby floating in a golden cosmic ocean full of stars
+coreContent|after|analogy-1.png|Illustration of Transformation as churning butter|A simple wooden butter churner in a clay pot symbolizing the process of transformation
+coreContent|after|analogy-2.png|Illustration of Mother as stable foundation|A stylized image of a mother holding her belly with roots grounding her to the earth
+coreContent|after|analogy-3.png|Illustration of Shiva drinking poison|A peaceful blue-throated figure holding a dark cloud in his throat turning it into a necklace
+coreContent|after|analogy-4.png|Illustration of Lakshmi rising|A beautiful goddess of abundance rising on a lotus flower showering golden light
+coreContent|after|analogy-5.png|Illustration of Baby as Amrita|A glowing golden pot of nectar with a soft light shaped like a baby inside
+interactiveSection|before|interactive-img0.png|Illustration of Mother breathing with ocean|A mother meditating by a calm silver ocean breathing in rhythm with the waves
+integration|before|integration-img0.png|Illustration of Baby as the ultimate treasure|A baby sleeping peacefully surrounded by soft glowing jewels and flowers

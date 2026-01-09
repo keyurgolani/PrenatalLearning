@@ -1,10 +1,14 @@
-# introduction|before|intro-img0.png|Illustration of Ancient yogi|An ancient yogi seated in lotus position on a Himalayan mountaintop at dawn
-# coreContent|inline|concept-0.png|Illustration of Om symbol|The Sanskrit symbol Om glowing with soft golden light above a lotus pond
-# coreContent|inline|concept-1.png|Illustration of Tree of Yoga|A beautiful tree with eight luminous branches rooted in earth reaching stars
-# coreContent|inline|concept-2.png|Illustration of The seven chakras|Glowing wheels of colored light along a meditating figure's spine
-# coreContent|inline|concept-3.png|Illustration of Prenatal yoga|A pregnant mother in a gentle yoga pose with golden prana flowing
-# coreContent|inline|concept-4.png|Illustration of The five paths of yoga|Five rivers flowing from a single mountain source representing different yogas
-# coreContent|inline|concept-5.png|Illustration of Baby yogi|A baby floating peacefully in the womb in a natural yoga-like position
-# coreContent|inline|concept-6.png|Illustration of Breath connection|Mother and baby breathing together with streams of golden light
-# coreContent|inline|concept-7.png|Illustration of Yoga Sutras|An ancient scroll unfurling with Sanskrit text surrounded by lotus flowers
-# coreContent|after|analogy-0.png|Illustration of Ultimate union|Mother with hands on belly with chakras glowing connected by luminous cord
+introduction|before|intro-img0.png|Illustration of Himalayan Yogi|A yogi sitting in deep meditation in the misty snow-capped Himalayas at sunrise
+coreContent|inline|concept-0.png|Illustration of Origin of Yoga|Two oxen yoked together ploughing a field symbolizing the union of work and spirit
+coreContent|inline|concept-1.png|Illustration of Drop and Ocean|A single drop of water merging seamlessly into a vast glowing blue ocean
+coreContent|inline|concept-2.png|Illustration of The Eight Limbs Tree|A magnificent ancient tree with eight distinct flourishing branches reaching to the sky
+coreContent|inline|concept-3.png|Illustration of The Chakras|A silhouette of a meditating figure with seven glowing wheels of colored light along the spine
+coreContent|inline|concept-4.png|Illustration of The Nadis|A human form filled with thousands of glowing rivers of light flowing through the body
+coreContent|inline|concept-5.png|Illustration of Prenatal Union|A mother practicing yoga with a golden light connecting her heart to her baby's heart
+coreContent|after|analogy-0.png|Illustration of The Turtle|A turtle gently drawing its head and limbs into its shell representing Pratyahara
+coreContent|after|analogy-1.png|Illustration of Training the Mind|A gentle hand training a playful puppy to sit representing the practice of focus
+coreContent|after|analogy-2.png|Illustration of Flow of Oil|Golden oil pouring smoothly and unbroken from one vessel to another representing meditation
+coreContent|after|analogy-3.png|Illustration of The Lotus Heart|A beautiful pink lotus flower opening in the center of a chest representing devotion
+coreContent|after|analogy-4.png|Illustration of Steady Flame|A candle flame burning completely steady in a windless space representing concentration
+interactiveSection|before|interactive-img0.png|Illustration of Breath Connection|A visualization of golden breath flowing in an infinity loop between mother and baby
+integration|before|integration-img0.png|Illustration of Little Yogi|A baby sleeping peacefully in a natural comfortable position surrounded by soft lotus light

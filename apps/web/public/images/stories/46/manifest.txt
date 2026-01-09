@@ -1,10 +1,16 @@
-# introduction|before|intro-img0.png|Illustration of Ancient Indian sages|Wise rishis seated in a peaceful forest ashram receiving Ayurveda knowledge
-# coreContent|inline|concept-0.png|Illustration of The Five Great Elements|A mandala showing Space, Air, Fire, Water, and Earth
-# coreContent|inline|concept-1.png|Illustration of The Three Doshas|Three interweaving energies: Vata, Pitta, and Kapha
-# coreContent|inline|concept-2.png|Illustration of The Seven Dhatus|A waterfall visualization showing the seven tissues forming
-# coreContent|inline|concept-3.png|Illustration of Agni the digestive fire|A beautiful golden flame burning in a ceremonial vessel
-# coreContent|inline|concept-4.png|Illustration of Ojas the essence|A radiant golden substance glowing in the heart center
-# coreContent|inline|concept-5.png|Illustration of Garbha Sanskar|A pregnant mother in peaceful meditation with soft golden light
-# coreContent|inline|concept-6.png|Illustration of Daily rhythm|A circular diagram showing the 24-hour cycle of doshas
-# coreContent|after|analogy-0.png|Illustration of Mother and baby connection|Mother and baby connected through flowing elements
-# coreContent|after|analogy-1.png|Illustration of The tree of health|A magnificent tree representing doshas, dhatus, and ojas
+introduction|before|intro-img0.png|Illustration of Ancient Sages|Sages meditating in a lush ancient Indian forest receiving the wisdom of nature
+coreContent|inline|concept-0.png|Illustration of The Five Elements|Artistic arrangement of Space, Air, Fire, Water, and Earth symbols in a circle
+coreContent|inline|concept-1.png|Illustration of The Three Doshas|Three swirling energies: Vata (silvery-blue wind), Pitta (golden-red fire), and Kapha (silvery-white water)
+coreContent|inline|concept-2.png|Illustration of Agni the Digestive Fire|A golden sacred fire burning steadily in the center of a silhouette body
+coreContent|inline|concept-3.png|Illustration of The Seven Dhatus|A beautiful cascade showing nourishment flowing through seven layers of tissue
+coreContent|inline|concept-4.png|Illustration of Ojas|A golden honey-like glow radiating from the heart and filling the body with vitality
+coreContent|after|analogy-0.png|Illustration of Body as Universe|A human silhouette containing stars, galaxies, oceans, and mountains within
+coreContent|after|analogy-1.png|Illustration of Three Musicians|Three abstract musicians (flute, drums, bass) playing in perfect harmony representing doshas
+coreContent|after|analogy-2.png|Illustration of Kitchen Fire|A warm hearth with a pot cooking perfectly over a steady bright fire
+coreContent|after|analogy-3.png|Illustration of Waterfall Cascade|Water overflowing gently from one pool to the next in a sequence of seven pools
+coreContent|after|analogy-4.png|Illustration of Honey from Flowers|Bees collecting essence from many flowers to create a golden glowing honey representing Ojas
+coreContent|after|analogy-5.png|Illustration of Unique Fingerprint|A vibrant colorful fingerprint showing the uniqueness of individual constitution
+coreContent|after|analogy-6.png|Illustration of Three-Legged Stool|A stable stool with three even legs supporting a sphere of health
+coreContent|after|analogy-7.png|Illustration of Surfing the Wave|A surfer gracefully riding a wave of light representing harmony with nature's rhythms
+interactiveSection|before|interactive-img0.png|Illustration of Elemental Breathing|A mother meditating with symbols of the five elements flowing in and out with her breath
+integration|before|integration-img0.png|Illustration of Child of Elements|A baby sleeping peacefully surrounded by protective symbols of earth, water, fire, air, and space
