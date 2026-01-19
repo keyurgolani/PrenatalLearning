@@ -2,7 +2,7 @@
 
 A beautiful, interactive web application designed to help expectant parents bond with their baby through educational stories, activities, and exercises during pregnancy.
 
-**🌐 Live Demo: [prenatal.keyurgolani.photography](https://prenatal.keyurgolani.photography)**
+**🌐 Live Demo: [prenatal.keyurgolani.name](https://prenatal.keyurgolani.name)**
 
 ![Learning Journey](docs/screenshots/learning-journey.png)
 
