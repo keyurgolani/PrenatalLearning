@@ -6,6 +6,8 @@ A beautiful, interactive web application designed to help expectant parents bond
 
 ![Learning Journey](docs/screenshots/learning-journey.png)
 
+> 📸 **[See the full visual showcase »](SHOWCASE.md)** — learning journey, topic content & audio, reading mode, journal, theming, and more.
+
 ## What is Prenatal Learning Hub?
 
 Prenatal Learning Hub is a gentle, nurturing platform that helps expectant parents share knowledge and create meaningful connections with their baby during pregnancy. Through beautifully crafted educational content, audio narration, and interactive features, you can embark on a learning journey that benefits both you and your little one.
